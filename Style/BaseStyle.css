@@ -1,0 +1,19 @@
+﻿body
+{
+    margin: 0;
+    text-wrap: normal;
+}
+
+.MainPageHolder
+{
+    overflow: hidden;
+    margin: 0 auto;
+    width: 90%;
+}
+
+.MainHeader
+{
+    background: #ffb075;
+    width: 100%;
+    float: left;
+}
