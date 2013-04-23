@@ -40,8 +40,8 @@ public partial class GaymerLINQDataContext : System.Data.Linq.DataContext
   partial void DeleteUser(User instance);
   #endregion
 	
-	public GaymerLINQDataContext() :
-      base(global::System.Configuration.ConfigurationManager.ConnectionStrings["gaymerdbConnectionString"].ConnectionString, mappingSource)
+	public GaymerLINQDataContext() : 
+			base(global::System.Configuration.ConfigurationManager.ConnectionStrings["gaymerdbConnectionString"].ConnectionString, mappingSource)
 	{
 		OnCreated();
 	}

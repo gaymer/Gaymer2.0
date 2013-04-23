@@ -29,6 +29,6 @@ public partial class MasterPage : System.Web.UI.MasterPage
     {
         LoginLib login = new LoginLib();
         login.LogOut();
-        Response.Redirect("/");
+        Response.Redirect("/StartPage.aspx");
     }
 }

@@ -15,7 +15,7 @@ public partial class Brukerside : System.Web.UI.Page
             LoginLib login = new LoginLib();
             if (!login.IsUserLoggedIn())
             {
-                Response.Redirect("/");
+                Response.Redirect("/StartPage.aspx");
             }
             else
             {
