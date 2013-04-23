@@ -4,7 +4,7 @@
 
 <html itemscope="itemscope" itemtype="http://schema.org/WebPage">
 <head runat="server">
-    <title></title>
+    <title>Gaymer</title>
     <link rel="stylesheet" href="Style/BaseStyle.css" type="text/css" />
     <asp:ContentPlaceHolder id="head" runat="server">
     </asp:ContentPlaceHolder>
