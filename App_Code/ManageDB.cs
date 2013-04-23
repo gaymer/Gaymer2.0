@@ -10,40 +10,41 @@ using System.Data.SqlClient;
 
 namespace Gaymer.Classes
 {
+
     public class ManageDB
     {
         static string connectionStringName = "gaymerdbConnectionString";
-        static ManageDB theInstance;
-        public static ManageDB Instance
-        {
-            get
-            {
-                if (!isInitialized)
-                    theInstance = new ManageDB();
+        //static ManageDB theInstance;
+        //public static ManageDB Instance
+        //{
+        //    get
+        //    {
+        //        if (!isInitialized)
+        //            theInstance = new ManageDB();
 
-                return theInstance;
-            }
-        }
+        //        return theInstance;
+        //    }
+        //}
 
         static SqlConnection dbConnection;
         static bool isInitialized = false;
 
-        private ManageDB()
-        {
-            dbConnection = new SqlConnection();
-            dbConnection.ConnectionString = global::System.Configuration.ConfigurationManager.ConnectionStrings[connectionStringName].ConnectionString;
-            isInitialized = true;
-        }
+        //private ManageDB()
+        //{
+        //    dbConnection = new SqlConnection();
+        //    dbConnection.ConnectionString = global::System.Configuration.ConfigurationManager.ConnectionStrings[connectionStringName].ConnectionString;
+        //    isInitialized = true;
+        //}
 
 
-        private SqlConnection openConnection()
+        static private SqlConnection openConnection()
         {
             dbConnection.Open();
             return dbConnection;
         }
 
 
-        private void closeConnection()
+        static private void closeConnection()
         {
             dbConnection.Close();
         }
@@ -53,7 +54,7 @@ namespace Gaymer.Classes
         /// </summary>
         /// <param name="sqlString">The SQL</param>
         /// <returns></returns>
-        public DataTable query(string sqlString)
+        static public DataTable query(string sqlString)
         {
             DataTable returnTable = null;
             SqlCommand sqlCommand = null;
@@ -87,7 +88,7 @@ namespace Gaymer.Classes
         /// </summary>
         /// <param name="sqlString">The SQL</param>
         /// <returns></returns>
-        public int nonQuery(string sqlString)
+        static public int nonQuery(string sqlString)
         {
             int numberOfRows = 0;
 
@@ -95,7 +96,7 @@ namespace Gaymer.Classes
 
             try
             {
-                dbConnection.ConnectionString = global::System.Configuration.ConfigurationManager.ConnectionStrings[connectionStringName].ConnectionString;
+                //dbConnection.ConnectionString = global::System.Configuration.ConfigurationManager.ConnectionStrings[connectionStringName].ConnectionString;
                 sqlCommand = new SqlCommand(sqlString, dbConnection);
 
 
