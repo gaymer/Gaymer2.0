@@ -61,7 +61,7 @@ namespace Gaymer.Classes
 
             try
             {
-                //dbConnection.ConnectionString = global::System.Configuration.ConfigurationManager.ConnectionStrings[connectionStringName].ConnectionString;
+                dbConnection.ConnectionString = global::System.Configuration.ConfigurationManager.ConnectionStrings[connectionStringName].ConnectionString;
                 sqlCommand = new SqlCommand(sqlString, dbConnection);
                 returnTable = new DataTable();
            
@@ -96,7 +96,7 @@ namespace Gaymer.Classes
 
             try
             {
-                //dbConnection.ConnectionString = global::System.Configuration.ConfigurationManager.ConnectionStrings[connectionStringName].ConnectionString;
+                dbConnection.ConnectionString = global::System.Configuration.ConfigurationManager.ConnectionStrings[connectionStringName].ConnectionString;
                 sqlCommand = new SqlCommand(sqlString, dbConnection);
 
 
