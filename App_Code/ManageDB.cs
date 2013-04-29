@@ -43,7 +43,7 @@ namespace Gaymer.Classes
             return dbConnection;
         }
 
-        static public void init()
+        static private void init()
         {
             dbConnection = new SqlConnection();
             dbConnection.ConnectionString = global::System.Configuration.ConfigurationManager.ConnectionStrings[connectionStringName].ConnectionString;
