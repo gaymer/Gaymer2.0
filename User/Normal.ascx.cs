@@ -18,7 +18,8 @@ public partial class User_Normal : System.Web.UI.UserControl
                     where a.UID == login.GetUserID()
                     select new
                     {
-                        Uname = a.Username,
+                        Uname = a.Username,   
+                        Role = a.RoleID,
                         Firstname = a.UserAbout.FirstName,
                         Lastname = a.UserAbout.LastName,
                         Avatar = "",
@@ -28,7 +29,15 @@ public partial class User_Normal : System.Web.UI.UserControl
                         Living = ""
                     }).FirstOrDefault();
 
+        var rolle = (from b in db.UserRoles
+                     where b.RoleID == user.Role
+                     select new
+                         {
+                             URole = b.Role
+                         }).FirstOrDefault();
+
         Username.Text = user.Uname;
+        lblRolle.Text = rolle.URole; 
 
         MyAvatar.ImageUrl = "~Style/Avatar/" + user.Avatar;
         MyAvatar.AlternateText = user.Uname + " Avatar";
