@@ -43,6 +43,13 @@ namespace Gaymer.Classes
             return dbConnection;
         }
 
+        static private void init()
+        {
+            dbConnection = new SqlConnection();
+            dbConnection.ConnectionString = global::System.Configuration.ConfigurationManager.ConnectionStrings[connectionStringName].ConnectionString;
+            isInitialized = true;
+        }
+
 
         static private void closeConnection()
         {
@@ -56,11 +63,14 @@ namespace Gaymer.Classes
         /// <returns></returns>
         static public DataTable query(string sqlString)
         {
+            if (sqlString == "") return null;
+
             DataTable returnTable = null;
             SqlCommand sqlCommand = null;
 
             try
             {
+                if (!isInitialized) init();
                 dbConnection.ConnectionString = global::System.Configuration.ConfigurationManager.ConnectionStrings[connectionStringName].ConnectionString;
                 sqlCommand = new SqlCommand(sqlString, dbConnection);
                 returnTable = new DataTable();
@@ -90,13 +100,16 @@ namespace Gaymer.Classes
         /// <returns></returns>
         static public int nonQuery(string sqlString)
         {
+            if (sqlString == "") return 0;
+
             int numberOfRows = 0;
 
             SqlCommand sqlCommand = null;
 
             try
             {
-                dbConnection.ConnectionString = global::System.Configuration.ConfigurationManager.ConnectionStrings[connectionStringName].ConnectionString;
+                if (!isInitialized) init();
+                //dbConnection.ConnectionString = global::System.Configuration.ConfigurationManager.ConnectionStrings[connectionStringName].ConnectionString;
                 sqlCommand = new SqlCommand(sqlString, dbConnection);
 
 
