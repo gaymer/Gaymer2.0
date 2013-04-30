@@ -18,7 +18,7 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Gaymer2.0", ".", "{97796910
 		Release.AspNetCompiler.ForceOverwrite = "true"
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
-		VWDPort = "2559"
+		VWDPort = "8588"
 		VWDVirtualPath = "/"
 	EndProjectSection
 EndProject

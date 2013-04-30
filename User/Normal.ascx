@@ -1,10 +1,21 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="Normal.ascx.cs" Inherits="User_Normal" %>
 
 
-    <h2><asp:Label ID="Username" runat="server"></asp:Label>&nbsp;<asp:Label ID="lblRolle" runat="server"></asp:Label>
-</h2>
-    <asp:Image ID="MyAvatar" runat="server" Height="139px" Width="143px" />
-    <h3>Om meg</h3>
+    <h2><asp:Label ID="Username" runat="server"></asp:Label>&nbsp;(<asp:Label ID="lblRolle" runat="server"></asp:Label>
+        )</h2>
+    <asp:Panel ID="AdminPanel" runat="server" Height="167px" style="margin-top: 0px" Width="568px" Visible="False">
+        &nbsp;&nbsp;&nbsp;
+        <br />
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <asp:Button ID="btnAdmin" runat="server" Text="Admin. brukere" Height="30px" Width="125px" />
+        <br />
+        <br />
+</asp:Panel>
+
+ <br />
+
+ <asp:Image ID="MyAvatar" runat="server" Height="139px" Width="143px" />
+<h3>Om meg</h3>
     <asp:Label ID="AboutMeTxt" runat="server" Text="Om Meg tekst"></asp:Label>
     <br />
     <fieldset>
