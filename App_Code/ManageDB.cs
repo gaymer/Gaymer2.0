@@ -13,6 +13,10 @@ namespace Gaymer.Classes
 
     public class ManageDB
     {
+
+        
+
+
         static string connectionStringName = "gaymerdbConnectionString";
         //static ManageDB theInstance;
         //public static ManageDB Instance
@@ -32,7 +36,7 @@ namespace Gaymer.Classes
         //private ManageDB()
         //{
         //    dbConnection = new SqlConnection();
-        //    dbConnection.ConnectionString = global::System.Configuration.ConfigurationManager.ConnectionStrings[connectionStringName].ConnectionString;
+        //    dbConnection.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings[connectionStringName].ConnectionString;
         //    isInitialized = true;
         //}
 
@@ -46,7 +50,7 @@ namespace Gaymer.Classes
         static private void init()
         {
             dbConnection = new SqlConnection();
-            dbConnection.ConnectionString = global::System.Configuration.ConfigurationManager.ConnectionStrings[connectionStringName].ConnectionString;
+            dbConnection.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings[connectionStringName].ConnectionString;
             isInitialized = true;
         }
 
@@ -71,7 +75,7 @@ namespace Gaymer.Classes
             try
             {
                 if (!isInitialized) init();
-                dbConnection.ConnectionString = global::System.Configuration.ConfigurationManager.ConnectionStrings[connectionStringName].ConnectionString;
+                //dbConnection.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings[connectionStringName].ConnectionString;
                 sqlCommand = new SqlCommand(sqlString, dbConnection);
                 returnTable = new DataTable();
            
@@ -109,7 +113,7 @@ namespace Gaymer.Classes
             try
             {
                 if (!isInitialized) init();
-                //dbConnection.ConnectionString = global::System.Configuration.ConfigurationManager.ConnectionStrings[connectionStringName].ConnectionString;
+                //dbConnection.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings[connectionStringName].ConnectionString;
                 sqlCommand = new SqlCommand(sqlString, dbConnection);
 
 
