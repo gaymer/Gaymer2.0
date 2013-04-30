@@ -29,29 +29,26 @@ public partial class GaymerLINQDataContext : System.Data.Linq.DataContext
 	
   #region Extensibility Method Definitions
   partial void OnCreated();
+  partial void InsertUser(User instance);
+  partial void UpdateUser(User instance);
+  partial void DeleteUser(User instance);
   partial void InsertUserRole(UserRole instance);
   partial void UpdateUserRole(UserRole instance);
   partial void DeleteUserRole(UserRole instance);
   partial void InsertUserAbout(UserAbout instance);
   partial void UpdateUserAbout(UserAbout instance);
   partial void DeleteUserAbout(UserAbout instance);
-  partial void InsertUser(User instance);
-  partial void UpdateUser(User instance);
-  partial void DeleteUser(User instance);
   #endregion
-	
-	public GaymerLINQDataContext() : 
-			base(global::System.Configuration.ConfigurationManager.ConnectionStrings["gaymerdbConnectionString"].ConnectionString, mappingSource)
-	{
-		OnCreated();
-	}
 	
 	public GaymerLINQDataContext(string connection) : 
 			base(connection, mappingSource)
 	{
 		OnCreated();
 	}
-	
+    public GaymerLINQDataContext()
+        : this(@"Data Source=mssql1.cloudsites.gearhost.com;Initial Catalog=gaymerdb;Persist Security Info=True;User ID=gaymerdb;Password=hSyOl042")
+    {
+    }
 	public GaymerLINQDataContext(System.Data.IDbConnection connection) : 
 			base(connection, mappingSource)
 	{
@@ -70,6 +67,14 @@ public partial class GaymerLINQDataContext : System.Data.Linq.DataContext
 		OnCreated();
 	}
 	
+	public System.Data.Linq.Table<User> Users
+	{
+		get
+		{
+			return this.GetTable<User>();
+		}
+	}
+	
 	public System.Data.Linq.Table<UserRole> UserRoles
 	{
 		get
@@ -85,12 +90,316 @@ public partial class GaymerLINQDataContext : System.Data.Linq.DataContext
 			return this.GetTable<UserAbout>();
 		}
 	}
+}
+
+[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.[User]")]
+public partial class User : INotifyPropertyChanging, INotifyPropertyChanged
+{
 	
-	public System.Data.Linq.Table<User> Users
+	private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+	
+	private int _UID;
+	
+	private string _Username;
+	
+	private string _Mail;
+	
+	private string _Password;
+	
+	private System.Nullable<int> _AbID;
+	
+	private int _RoleID;
+	
+	private string _LoginSession;
+	
+	private string _Salt;
+	
+	private EntityRef<UserRole> _UserRole;
+	
+	private EntityRef<UserAbout> _UserAbout;
+	
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnUIDChanging(int value);
+    partial void OnUIDChanged();
+    partial void OnUsernameChanging(string value);
+    partial void OnUsernameChanged();
+    partial void OnMailChanging(string value);
+    partial void OnMailChanged();
+    partial void OnPasswordChanging(string value);
+    partial void OnPasswordChanged();
+    partial void OnAbIDChanging(System.Nullable<int> value);
+    partial void OnAbIDChanged();
+    partial void OnRoleIDChanging(int value);
+    partial void OnRoleIDChanged();
+    partial void OnLoginSessionChanging(string value);
+    partial void OnLoginSessionChanged();
+    partial void OnSaltChanging(string value);
+    partial void OnSaltChanged();
+    #endregion
+	
+	public User()
+	{
+		this._UserRole = default(EntityRef<UserRole>);
+		this._UserAbout = default(EntityRef<UserAbout>);
+		OnCreated();
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+	public int UID
 	{
 		get
 		{
-			return this.GetTable<User>();
+			return this._UID;
+		}
+		set
+		{
+			if ((this._UID != value))
+			{
+				this.OnUIDChanging(value);
+				this.SendPropertyChanging();
+				this._UID = value;
+				this.SendPropertyChanged("UID");
+				this.OnUIDChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Username", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+	public string Username
+	{
+		get
+		{
+			return this._Username;
+		}
+		set
+		{
+			if ((this._Username != value))
+			{
+				this.OnUsernameChanging(value);
+				this.SendPropertyChanging();
+				this._Username = value;
+				this.SendPropertyChanged("Username");
+				this.OnUsernameChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Mail", DbType="VarChar(75) NOT NULL", CanBeNull=false)]
+	public string Mail
+	{
+		get
+		{
+			return this._Mail;
+		}
+		set
+		{
+			if ((this._Mail != value))
+			{
+				this.OnMailChanging(value);
+				this.SendPropertyChanging();
+				this._Mail = value;
+				this.SendPropertyChanged("Mail");
+				this.OnMailChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Password", DbType="VarChar(MAX) NOT NULL", CanBeNull=false)]
+	public string Password
+	{
+		get
+		{
+			return this._Password;
+		}
+		set
+		{
+			if ((this._Password != value))
+			{
+				this.OnPasswordChanging(value);
+				this.SendPropertyChanging();
+				this._Password = value;
+				this.SendPropertyChanged("Password");
+				this.OnPasswordChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AbID", DbType="Int")]
+	public System.Nullable<int> AbID
+	{
+		get
+		{
+			return this._AbID;
+		}
+		set
+		{
+			if ((this._AbID != value))
+			{
+				if (this._UserAbout.HasLoadedOrAssignedValue)
+				{
+					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+				}
+				this.OnAbIDChanging(value);
+				this.SendPropertyChanging();
+				this._AbID = value;
+				this.SendPropertyChanged("AbID");
+				this.OnAbIDChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RoleID", DbType="Int NOT NULL")]
+	public int RoleID
+	{
+		get
+		{
+			return this._RoleID;
+		}
+		set
+		{
+			if ((this._RoleID != value))
+			{
+				if (this._UserRole.HasLoadedOrAssignedValue)
+				{
+					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+				}
+				this.OnRoleIDChanging(value);
+				this.SendPropertyChanging();
+				this._RoleID = value;
+				this.SendPropertyChanged("RoleID");
+				this.OnRoleIDChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LoginSession", DbType="VarChar(MAX)")]
+	public string LoginSession
+	{
+		get
+		{
+			return this._LoginSession;
+		}
+		set
+		{
+			if ((this._LoginSession != value))
+			{
+				this.OnLoginSessionChanging(value);
+				this.SendPropertyChanging();
+				this._LoginSession = value;
+				this.SendPropertyChanged("LoginSession");
+				this.OnLoginSessionChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Salt", DbType="VarChar(MAX)")]
+	public string Salt
+	{
+		get
+		{
+			return this._Salt;
+		}
+		set
+		{
+			if ((this._Salt != value))
+			{
+				this.OnSaltChanging(value);
+				this.SendPropertyChanging();
+				this._Salt = value;
+				this.SendPropertyChanged("Salt");
+				this.OnSaltChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UserRole_User", Storage="_UserRole", ThisKey="RoleID", OtherKey="RoleID", IsForeignKey=true)]
+	public UserRole UserRole
+	{
+		get
+		{
+			return this._UserRole.Entity;
+		}
+		set
+		{
+			UserRole previousValue = this._UserRole.Entity;
+			if (((previousValue != value) 
+						|| (this._UserRole.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._UserRole.Entity = null;
+					previousValue.Users.Remove(this);
+				}
+				this._UserRole.Entity = value;
+				if ((value != null))
+				{
+					value.Users.Add(this);
+					this._RoleID = value.RoleID;
+				}
+				else
+				{
+					this._RoleID = default(int);
+				}
+				this.SendPropertyChanged("UserRole");
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UserAbout_User", Storage="_UserAbout", ThisKey="AbID", OtherKey="AbID", IsForeignKey=true)]
+	public UserAbout UserAbout
+	{
+		get
+		{
+			return this._UserAbout.Entity;
+		}
+		set
+		{
+			UserAbout previousValue = this._UserAbout.Entity;
+			if (((previousValue != value) 
+						|| (this._UserAbout.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._UserAbout.Entity = null;
+					previousValue.Users.Remove(this);
+				}
+				this._UserAbout.Entity = value;
+				if ((value != null))
+				{
+					value.Users.Add(this);
+					this._AbID = value.AbID;
+				}
+				else
+				{
+					this._AbID = default(Nullable<int>);
+				}
+				this.SendPropertyChanged("UserAbout");
+			}
+		}
+	}
+	
+	public event PropertyChangingEventHandler PropertyChanging;
+	
+	public event PropertyChangedEventHandler PropertyChanged;
+	
+	protected virtual void SendPropertyChanging()
+	{
+		if ((this.PropertyChanging != null))
+		{
+			this.PropertyChanging(this, emptyChangingEventArgs);
+		}
+	}
+	
+	protected virtual void SendPropertyChanged(String propertyName)
+	{
+		if ((this.PropertyChanged != null))
+		{
+			this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 		}
 	}
 }
@@ -416,294 +725,6 @@ public partial class UserAbout : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		this.SendPropertyChanging();
 		entity.UserAbout = null;
-	}
-}
-
-[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.[User]")]
-public partial class User : INotifyPropertyChanging, INotifyPropertyChanged
-{
-	
-	private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-	
-	private int _UID;
-	
-	private string _Username;
-	
-	private string _Mail;
-	
-	private string _Password;
-	
-	private System.Nullable<int> _AbID;
-	
-	private int _RoleID;
-	
-	private string _LoginSession;
-	
-	private EntityRef<UserAbout> _UserAbout;
-	
-	private EntityRef<UserRole> _UserRole;
-	
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnUIDChanging(int value);
-    partial void OnUIDChanged();
-    partial void OnUsernameChanging(string value);
-    partial void OnUsernameChanged();
-    partial void OnMailChanging(string value);
-    partial void OnMailChanged();
-    partial void OnPasswordChanging(string value);
-    partial void OnPasswordChanged();
-    partial void OnAbIDChanging(System.Nullable<int> value);
-    partial void OnAbIDChanged();
-    partial void OnRoleIDChanging(int value);
-    partial void OnRoleIDChanged();
-    partial void OnLoginSessionChanging(string value);
-    partial void OnLoginSessionChanged();
-    #endregion
-	
-	public User()
-	{
-		this._UserAbout = default(EntityRef<UserAbout>);
-		this._UserRole = default(EntityRef<UserRole>);
-		OnCreated();
-	}
-	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-	public int UID
-	{
-		get
-		{
-			return this._UID;
-		}
-		set
-		{
-			if ((this._UID != value))
-			{
-				this.OnUIDChanging(value);
-				this.SendPropertyChanging();
-				this._UID = value;
-				this.SendPropertyChanged("UID");
-				this.OnUIDChanged();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Username", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-	public string Username
-	{
-		get
-		{
-			return this._Username;
-		}
-		set
-		{
-			if ((this._Username != value))
-			{
-				this.OnUsernameChanging(value);
-				this.SendPropertyChanging();
-				this._Username = value;
-				this.SendPropertyChanged("Username");
-				this.OnUsernameChanged();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Mail", DbType="VarChar(75) NOT NULL", CanBeNull=false)]
-	public string Mail
-	{
-		get
-		{
-			return this._Mail;
-		}
-		set
-		{
-			if ((this._Mail != value))
-			{
-				this.OnMailChanging(value);
-				this.SendPropertyChanging();
-				this._Mail = value;
-				this.SendPropertyChanged("Mail");
-				this.OnMailChanged();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Password", DbType="VarChar(MAX) NOT NULL", CanBeNull=false)]
-	public string Password
-	{
-		get
-		{
-			return this._Password;
-		}
-		set
-		{
-			if ((this._Password != value))
-			{
-				this.OnPasswordChanging(value);
-				this.SendPropertyChanging();
-				this._Password = value;
-				this.SendPropertyChanged("Password");
-				this.OnPasswordChanged();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AbID", DbType="Int")]
-	public System.Nullable<int> AbID
-	{
-		get
-		{
-			return this._AbID;
-		}
-		set
-		{
-			if ((this._AbID != value))
-			{
-				if (this._UserAbout.HasLoadedOrAssignedValue)
-				{
-					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-				}
-				this.OnAbIDChanging(value);
-				this.SendPropertyChanging();
-				this._AbID = value;
-				this.SendPropertyChanged("AbID");
-				this.OnAbIDChanged();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RoleID", DbType="Int NOT NULL")]
-	public int RoleID
-	{
-		get
-		{
-			return this._RoleID;
-		}
-		set
-		{
-			if ((this._RoleID != value))
-			{
-				if (this._UserRole.HasLoadedOrAssignedValue)
-				{
-					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-				}
-				this.OnRoleIDChanging(value);
-				this.SendPropertyChanging();
-				this._RoleID = value;
-				this.SendPropertyChanged("RoleID");
-				this.OnRoleIDChanged();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LoginSession", DbType="VarChar(MAX)")]
-	public string LoginSession
-	{
-		get
-		{
-			return this._LoginSession;
-		}
-		set
-		{
-			if ((this._LoginSession != value))
-			{
-				this.OnLoginSessionChanging(value);
-				this.SendPropertyChanging();
-				this._LoginSession = value;
-				this.SendPropertyChanged("LoginSession");
-				this.OnLoginSessionChanged();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UserAbout_User", Storage="_UserAbout", ThisKey="AbID", OtherKey="AbID", IsForeignKey=true)]
-	public UserAbout UserAbout
-	{
-		get
-		{
-			return this._UserAbout.Entity;
-		}
-		set
-		{
-			UserAbout previousValue = this._UserAbout.Entity;
-			if (((previousValue != value) 
-						|| (this._UserAbout.HasLoadedOrAssignedValue == false)))
-			{
-				this.SendPropertyChanging();
-				if ((previousValue != null))
-				{
-					this._UserAbout.Entity = null;
-					previousValue.Users.Remove(this);
-				}
-				this._UserAbout.Entity = value;
-				if ((value != null))
-				{
-					value.Users.Add(this);
-					this._AbID = value.AbID;
-				}
-				else
-				{
-					this._AbID = default(Nullable<int>);
-				}
-				this.SendPropertyChanged("UserAbout");
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UserRole_User", Storage="_UserRole", ThisKey="RoleID", OtherKey="RoleID", IsForeignKey=true)]
-	public UserRole UserRole
-	{
-		get
-		{
-			return this._UserRole.Entity;
-		}
-		set
-		{
-			UserRole previousValue = this._UserRole.Entity;
-			if (((previousValue != value) 
-						|| (this._UserRole.HasLoadedOrAssignedValue == false)))
-			{
-				this.SendPropertyChanging();
-				if ((previousValue != null))
-				{
-					this._UserRole.Entity = null;
-					previousValue.Users.Remove(this);
-				}
-				this._UserRole.Entity = value;
-				if ((value != null))
-				{
-					value.Users.Add(this);
-					this._RoleID = value.RoleID;
-				}
-				else
-				{
-					this._RoleID = default(int);
-				}
-				this.SendPropertyChanged("UserRole");
-			}
-		}
-	}
-	
-	public event PropertyChangingEventHandler PropertyChanging;
-	
-	public event PropertyChangedEventHandler PropertyChanged;
-	
-	protected virtual void SendPropertyChanging()
-	{
-		if ((this.PropertyChanging != null))
-		{
-			this.PropertyChanging(this, emptyChangingEventArgs);
-		}
-	}
-	
-	protected virtual void SendPropertyChanged(String propertyName)
-	{
-		if ((this.PropertyChanged != null))
-		{
-			this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-		}
 	}
 }
 #pragma warning restore 1591

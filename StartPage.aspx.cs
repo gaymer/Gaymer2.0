@@ -53,8 +53,8 @@ public partial class _StartPage : System.Web.UI.Page
                                 where a.Username == Username
                                 select a).FirstOrDefault();
             var EmailTest = (from a in db.Users
-                                where a.Mail == Email
-                                select a).FirstOrDefault();
+                             where a.Mail == Email
+                             select a).FirstOrDefault();
 
             if (UsernameTest == null && EmailTest == null)
             {
@@ -62,7 +62,15 @@ public partial class _StartPage : System.Web.UI.Page
                 User use = new User();
                 use.Username = Username;
                 use.Mail = Email;
-                use.Password = Password;
+
+                Random rand = new Random();
+                string salt = rand.Next(10000, 99999).ToString();
+                byte[] bytee = System.Text.Encoding.Default.GetBytes(Password + salt);
+
+                string hash = Convert.ToBase64String(new System.Security.Cryptography.SHA1CryptoServiceProvider().ComputeHash(bytee));
+
+                use.Salt = salt;
+                use.Password = hash;
                 use.RoleID = 2;
 
                 db.Users.InsertOnSubmit(use);

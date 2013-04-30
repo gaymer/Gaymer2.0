@@ -6,15 +6,28 @@ using System.Web;
 public class LoginLib : System.Web.UI.Page
 {
     GaymerLINQDataContext db = new GaymerLINQDataContext();
-    public bool LoginUser(string username, string password)
+    public bool LoginUser(string Username, string Password)
     {
-        //Sjekk at brukernavn og passord er på samme rad
-        var LoginTest = (from a in db.Users
-                         where a.Username == username && a.Password == password
-                         select a).FirstOrDefault();
+        //Thomas magic Labda LINQ fetch
+        string Salt = db.Users.First(k => k.Username == Username).Salt;
+        byte[] bytee = System.Text.Encoding.Default.GetBytes(Password+Salt);
 
+        string hash = Convert.ToBase64String(new System.Security.Cryptography.SHA1CryptoServiceProvider().ComputeHash(bytee));
+
+        var LoginTest = (from a in db.Users
+                         where a.Username == Username && a.Password == hash
+                         select a).FirstOrDefault();
+        
         if (LoginTest != null)
         {
+
+            Random rand = new Random();
+            string s1 = rand.Next(10000, 99999).ToString();
+            byte[] b1 = System.Text.Encoding.Default.GetBytes(Password + s1);
+            string p1 = Convert.ToBase64String(new System.Security.Cryptography.SHA1CryptoServiceProvider().ComputeHash(b1));
+
+            LoginTest.Salt = s1;
+            LoginTest.Password = p1;
             //Bruker finnes, fortsett login
 
             //Make a login session ID to place in cookie so that the user can be verified on every page

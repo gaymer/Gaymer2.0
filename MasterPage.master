@@ -4,7 +4,7 @@
 
 <html itemscope="itemscope" itemtype="http://schema.org/WebPage">
 <head runat="server">
-    <title>Gaymer</title>
+    <title>Gaymer.no</title>
     <link rel="stylesheet" href="Style/BaseStyle.css" type="text/css" />
     <asp:ContentPlaceHolder id="head" runat="server">
     </asp:ContentPlaceHolder>
@@ -18,6 +18,8 @@
             <asp:Button ID="LogOutBtn"  runat="server" Text="Log Out" OnClick="LogOut_Click" />
         </div>
         <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
+        </asp:ContentPlaceHolder>
+        <asp:ContentPlaceHolder id="DebugOutput" runat="server">
         </asp:ContentPlaceHolder>
     </div>
     </form>

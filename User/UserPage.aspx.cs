@@ -26,6 +26,7 @@ public partial class Brukerside : System.Web.UI.Page
         {
             //Async Callback
         }
+        
     }
     protected void ModifySelf_Click(object sender, EventArgs e)
     {
