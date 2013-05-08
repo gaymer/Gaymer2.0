@@ -16,8 +16,24 @@ public partial class CMS_Default : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
 
-        DataTable dt = Gaymer.Classes.ManageDB.query("SELECT * FROM [User]");
-        Output.Text = "Det er " + dt.Rows.Count.ToString() + " brukere i databasen.";
+        string defaultUserID = "1";
+        string defaultRoleID = "1";
+        string userId = Request["userId"];
+        string roleId = Request["roleId"];
+        int userIdInt, roleIdInt;
+
+        userId = (!Int32.TryParse(userId, out userIdInt) || userId == "" || userId == null) ? defaultUserID : userId;
+        roleId = (!Int32.TryParse(roleId, out roleIdInt) || roleId == "" || roleId == null) ? defaultRoleID : roleId;
+
+        if (ManageDB.userHasRole(roleIdInt, userIdInt))
+        {
+            Output.Text = "Brukeren har rollen.";
+        }
+        else
+        {
+            Output.Text = "Brukeren har ikke rollen.";
+        }
+        //Output.Text = numberOfAddedRows + " rader lagt til i tabellen.";
 
     }
 }

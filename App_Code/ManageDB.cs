@@ -133,7 +133,27 @@ namespace Gaymer.Classes
 
         }
 
+        public static bool userHasRole(int roleId, int userId)
+        {
+            bool returnValue = false;
 
+            if (roleId < 1 || userId < 1) return false;
+
+
+            DataTable dt = Gaymer.Classes.ManageDB.query(@"
+            SELECT       Role.Role
+            FROM         UserInRole 
+                         INNER JOIN
+                         Role ON UserInRole.inRoleID = " + roleId + @"
+                         INNER JOIN
+                         [User] ON UserInRole.inUserID = [User].UID AND [User].UID = " + userId + @"
+            ORDER BY [User].UID
+        ");
+
+            returnValue = (dt.Rows.Count < 1) ? false : true;
+
+            return returnValue;
+        }
 
 
     }
