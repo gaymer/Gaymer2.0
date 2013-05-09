@@ -151,7 +151,7 @@ using System.Data.SqlClient;
             if (roleId < 1 || userId < 1) return false;
 
 
-            DataTable dt = Gaymer.Classes.ManageDB.query(@"
+            DataTable dt = query(@"
             SELECT       Role.Role
             FROM         UserInRole 
                          INNER JOIN
