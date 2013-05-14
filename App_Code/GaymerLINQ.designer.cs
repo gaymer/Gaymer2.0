@@ -56,9 +56,6 @@ public partial class GaymerLINQDataContext : System.Data.Linq.DataContext
   partial void InsertForumThread(ForumThread instance);
   partial void UpdateForumThread(ForumThread instance);
   partial void DeleteForumThread(ForumThread instance);
-  partial void InsertFriend(Friend instance);
-  partial void UpdateFriend(Friend instance);
-  partial void DeleteFriend(Friend instance);
   partial void InsertInputElement(InputElement instance);
   partial void UpdateInputElement(InputElement instance);
   partial void DeleteInputElement(InputElement instance);
@@ -107,6 +104,9 @@ public partial class GaymerLINQDataContext : System.Data.Linq.DataContext
   partial void InsertPermissionToRole(PermissionToRole instance);
   partial void UpdatePermissionToRole(PermissionToRole instance);
   partial void DeletePermissionToRole(PermissionToRole instance);
+  partial void InsertUserRelation(UserRelation instance);
+  partial void UpdateUserRelation(UserRelation instance);
+  partial void DeleteUserRelation(UserRelation instance);
   #endregion
 	
 	public GaymerLINQDataContext() : 
@@ -208,14 +208,6 @@ public partial class GaymerLINQDataContext : System.Data.Linq.DataContext
 		get
 		{
 			return this.GetTable<ForumThread>();
-		}
-	}
-	
-	public System.Data.Linq.Table<Friend> Friends
-	{
-		get
-		{
-			return this.GetTable<Friend>();
 		}
 	}
 	
@@ -344,6 +336,14 @@ public partial class GaymerLINQDataContext : System.Data.Linq.DataContext
 		get
 		{
 			return this.GetTable<PermissionToRole>();
+		}
+	}
+	
+	public System.Data.Linq.Table<UserRelation> UserRelations
+	{
+		get
+		{
+			return this.GetTable<UserRelation>();
 		}
 	}
 }
@@ -2249,198 +2249,6 @@ public partial class ForumThread : INotifyPropertyChanging, INotifyPropertyChang
 					this._ForumId = default(int);
 				}
 				this.SendPropertyChanged("Forum");
-			}
-		}
-	}
-	
-	public event PropertyChangingEventHandler PropertyChanging;
-	
-	public event PropertyChangedEventHandler PropertyChanged;
-	
-	protected virtual void SendPropertyChanging()
-	{
-		if ((this.PropertyChanging != null))
-		{
-			this.PropertyChanging(this, emptyChangingEventArgs);
-		}
-	}
-	
-	protected virtual void SendPropertyChanged(String propertyName)
-	{
-		if ((this.PropertyChanged != null))
-		{
-			this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-		}
-	}
-}
-
-[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Friend")]
-public partial class Friend : INotifyPropertyChanging, INotifyPropertyChanged
-{
-	
-	private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-	
-	private int _FriendhipId;
-	
-	private int _UserId;
-	
-	private int _FriendId;
-	
-	private EntityRef<User> _User;
-	
-	private EntityRef<User> _User1;
-	
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnFriendhipIdChanging(int value);
-    partial void OnFriendhipIdChanged();
-    partial void OnUserIdChanging(int value);
-    partial void OnUserIdChanged();
-    partial void OnFriendIdChanging(int value);
-    partial void OnFriendIdChanged();
-    #endregion
-	
-	public Friend()
-	{
-		this._User = default(EntityRef<User>);
-		this._User1 = default(EntityRef<User>);
-		OnCreated();
-	}
-	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FriendhipId", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-	public int FriendhipId
-	{
-		get
-		{
-			return this._FriendhipId;
-		}
-		set
-		{
-			if ((this._FriendhipId != value))
-			{
-				this.OnFriendhipIdChanging(value);
-				this.SendPropertyChanging();
-				this._FriendhipId = value;
-				this.SendPropertyChanged("FriendhipId");
-				this.OnFriendhipIdChanged();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserId", DbType="Int NOT NULL")]
-	public int UserId
-	{
-		get
-		{
-			return this._UserId;
-		}
-		set
-		{
-			if ((this._UserId != value))
-			{
-				if (this._User1.HasLoadedOrAssignedValue)
-				{
-					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-				}
-				this.OnUserIdChanging(value);
-				this.SendPropertyChanging();
-				this._UserId = value;
-				this.SendPropertyChanged("UserId");
-				this.OnUserIdChanged();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FriendId", DbType="Int NOT NULL")]
-	public int FriendId
-	{
-		get
-		{
-			return this._FriendId;
-		}
-		set
-		{
-			if ((this._FriendId != value))
-			{
-				if (this._User.HasLoadedOrAssignedValue)
-				{
-					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-				}
-				this.OnFriendIdChanging(value);
-				this.SendPropertyChanging();
-				this._FriendId = value;
-				this.SendPropertyChanged("FriendId");
-				this.OnFriendIdChanged();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Friend", Storage="_User", ThisKey="FriendId", OtherKey="UID", IsForeignKey=true)]
-	public User User
-	{
-		get
-		{
-			return this._User.Entity;
-		}
-		set
-		{
-			User previousValue = this._User.Entity;
-			if (((previousValue != value) 
-						|| (this._User.HasLoadedOrAssignedValue == false)))
-			{
-				this.SendPropertyChanging();
-				if ((previousValue != null))
-				{
-					this._User.Entity = null;
-					previousValue.Friends.Remove(this);
-				}
-				this._User.Entity = value;
-				if ((value != null))
-				{
-					value.Friends.Add(this);
-					this._FriendId = value.UID;
-				}
-				else
-				{
-					this._FriendId = default(int);
-				}
-				this.SendPropertyChanged("User");
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Friend1", Storage="_User1", ThisKey="UserId", OtherKey="UID", IsForeignKey=true)]
-	public User User1
-	{
-		get
-		{
-			return this._User1.Entity;
-		}
-		set
-		{
-			User previousValue = this._User1.Entity;
-			if (((previousValue != value) 
-						|| (this._User1.HasLoadedOrAssignedValue == false)))
-			{
-				this.SendPropertyChanging();
-				if ((previousValue != null))
-				{
-					this._User1.Entity = null;
-					previousValue.Friends1.Remove(this);
-				}
-				this._User1.Entity = value;
-				if ((value != null))
-				{
-					value.Friends1.Add(this);
-					this._UserId = value.UID;
-				}
-				else
-				{
-					this._UserId = default(int);
-				}
-				this.SendPropertyChanged("User1");
 			}
 		}
 	}
@@ -4615,10 +4423,6 @@ public partial class User : INotifyPropertyChanging, INotifyPropertyChanged
 	
 	private EntitySet<DynamicContent> _DynamicContents;
 	
-	private EntitySet<Friend> _Friends;
-	
-	private EntitySet<Friend> _Friends1;
-	
 	private EntitySet<PrivateMessage> _PrivateMessages;
 	
 	private EntitySet<PrivateMessage> _PrivateMessages1;
@@ -4626,6 +4430,10 @@ public partial class User : INotifyPropertyChanging, INotifyPropertyChanged
 	private EntitySet<StaticContent> _StaticContents;
 	
 	private EntitySet<UserInfo> _UserInfos;
+	
+	private EntitySet<UserRelation> _UserRelations;
+	
+	private EntitySet<UserRelation> _UserRelations1;
 	
 	private EntityRef<UserAbout> _UserAbout;
 	
@@ -4657,12 +4465,12 @@ public partial class User : INotifyPropertyChanging, INotifyPropertyChanged
 		this._UserInRoles = new EntitySet<UserInRole>(new Action<UserInRole>(this.attach_UserInRoles), new Action<UserInRole>(this.detach_UserInRoles));
 		this._ContactInfos = new EntitySet<ContactInfo>(new Action<ContactInfo>(this.attach_ContactInfos), new Action<ContactInfo>(this.detach_ContactInfos));
 		this._DynamicContents = new EntitySet<DynamicContent>(new Action<DynamicContent>(this.attach_DynamicContents), new Action<DynamicContent>(this.detach_DynamicContents));
-		this._Friends = new EntitySet<Friend>(new Action<Friend>(this.attach_Friends), new Action<Friend>(this.detach_Friends));
-		this._Friends1 = new EntitySet<Friend>(new Action<Friend>(this.attach_Friends1), new Action<Friend>(this.detach_Friends1));
 		this._PrivateMessages = new EntitySet<PrivateMessage>(new Action<PrivateMessage>(this.attach_PrivateMessages), new Action<PrivateMessage>(this.detach_PrivateMessages));
 		this._PrivateMessages1 = new EntitySet<PrivateMessage>(new Action<PrivateMessage>(this.attach_PrivateMessages1), new Action<PrivateMessage>(this.detach_PrivateMessages1));
 		this._StaticContents = new EntitySet<StaticContent>(new Action<StaticContent>(this.attach_StaticContents), new Action<StaticContent>(this.detach_StaticContents));
 		this._UserInfos = new EntitySet<UserInfo>(new Action<UserInfo>(this.attach_UserInfos), new Action<UserInfo>(this.detach_UserInfos));
+		this._UserRelations = new EntitySet<UserRelation>(new Action<UserRelation>(this.attach_UserRelations), new Action<UserRelation>(this.detach_UserRelations));
+		this._UserRelations1 = new EntitySet<UserRelation>(new Action<UserRelation>(this.attach_UserRelations1), new Action<UserRelation>(this.detach_UserRelations1));
 		this._UserAbout = default(EntityRef<UserAbout>);
 		OnCreated();
 	}
@@ -4883,32 +4691,6 @@ public partial class User : INotifyPropertyChanging, INotifyPropertyChanged
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Friend", Storage="_Friends", ThisKey="UID", OtherKey="FriendId")]
-	public EntitySet<Friend> Friends
-	{
-		get
-		{
-			return this._Friends;
-		}
-		set
-		{
-			this._Friends.Assign(value);
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Friend1", Storage="_Friends1", ThisKey="UID", OtherKey="UserId")]
-	public EntitySet<Friend> Friends1
-	{
-		get
-		{
-			return this._Friends1;
-		}
-		set
-		{
-			this._Friends1.Assign(value);
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_PrivateMessage", Storage="_PrivateMessages", ThisKey="UID", OtherKey="From")]
 	public EntitySet<PrivateMessage> PrivateMessages
 	{
@@ -4958,6 +4740,32 @@ public partial class User : INotifyPropertyChanging, INotifyPropertyChanged
 		set
 		{
 			this._UserInfos.Assign(value);
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_UserRelation", Storage="_UserRelations", ThisKey="UID", OtherKey="RelatedUserId")]
+	public EntitySet<UserRelation> UserRelations
+	{
+		get
+		{
+			return this._UserRelations;
+		}
+		set
+		{
+			this._UserRelations.Assign(value);
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_UserRelation1", Storage="_UserRelations1", ThisKey="UID", OtherKey="UserId")]
+	public EntitySet<UserRelation> UserRelations1
+	{
+		get
+		{
+			return this._UserRelations1;
+		}
+		set
+		{
+			this._UserRelations1.Assign(value);
 		}
 	}
 	
@@ -5063,30 +4871,6 @@ public partial class User : INotifyPropertyChanging, INotifyPropertyChanged
 		entity.User = null;
 	}
 	
-	private void attach_Friends(Friend entity)
-	{
-		this.SendPropertyChanging();
-		entity.User = this;
-	}
-	
-	private void detach_Friends(Friend entity)
-	{
-		this.SendPropertyChanging();
-		entity.User = null;
-	}
-	
-	private void attach_Friends1(Friend entity)
-	{
-		this.SendPropertyChanging();
-		entity.User1 = this;
-	}
-	
-	private void detach_Friends1(Friend entity)
-	{
-		this.SendPropertyChanging();
-		entity.User1 = null;
-	}
-	
 	private void attach_PrivateMessages(PrivateMessage entity)
 	{
 		this.SendPropertyChanging();
@@ -5130,6 +4914,30 @@ public partial class User : INotifyPropertyChanging, INotifyPropertyChanged
 	}
 	
 	private void detach_UserInfos(UserInfo entity)
+	{
+		this.SendPropertyChanging();
+		entity.User1 = null;
+	}
+	
+	private void attach_UserRelations(UserRelation entity)
+	{
+		this.SendPropertyChanging();
+		entity.User = this;
+	}
+	
+	private void detach_UserRelations(UserRelation entity)
+	{
+		this.SendPropertyChanging();
+		entity.User = null;
+	}
+	
+	private void attach_UserRelations1(UserRelation entity)
+	{
+		this.SendPropertyChanging();
+		entity.User1 = this;
+	}
+	
+	private void detach_UserRelations1(UserRelation entity)
 	{
 		this.SendPropertyChanging();
 		entity.User1 = null;
@@ -5839,6 +5647,222 @@ public partial class PermissionToRole : INotifyPropertyChanging, INotifyProperty
 					this._RoleId = default(int);
 				}
 				this.SendPropertyChanged("Role");
+			}
+		}
+	}
+	
+	public event PropertyChangingEventHandler PropertyChanging;
+	
+	public event PropertyChangedEventHandler PropertyChanged;
+	
+	protected virtual void SendPropertyChanging()
+	{
+		if ((this.PropertyChanging != null))
+		{
+			this.PropertyChanging(this, emptyChangingEventArgs);
+		}
+	}
+	
+	protected virtual void SendPropertyChanged(String propertyName)
+	{
+		if ((this.PropertyChanged != null))
+		{
+			this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+		}
+	}
+}
+
+[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.UserRelation")]
+public partial class UserRelation : INotifyPropertyChanging, INotifyPropertyChanged
+{
+	
+	private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+	
+	private int _RelationId;
+	
+	private int _UserId;
+	
+	private int _RelatedUserId;
+	
+	private System.Nullable<int> _RelationType;
+	
+	private EntityRef<User> _User;
+	
+	private EntityRef<User> _User1;
+	
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnRelationIdChanging(int value);
+    partial void OnRelationIdChanged();
+    partial void OnUserIdChanging(int value);
+    partial void OnUserIdChanged();
+    partial void OnRelatedUserIdChanging(int value);
+    partial void OnRelatedUserIdChanged();
+    partial void OnRelationTypeChanging(System.Nullable<int> value);
+    partial void OnRelationTypeChanged();
+    #endregion
+	
+	public UserRelation()
+	{
+		this._User = default(EntityRef<User>);
+		this._User1 = default(EntityRef<User>);
+		OnCreated();
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RelationId", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+	public int RelationId
+	{
+		get
+		{
+			return this._RelationId;
+		}
+		set
+		{
+			if ((this._RelationId != value))
+			{
+				this.OnRelationIdChanging(value);
+				this.SendPropertyChanging();
+				this._RelationId = value;
+				this.SendPropertyChanged("RelationId");
+				this.OnRelationIdChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserId", DbType="Int NOT NULL")]
+	public int UserId
+	{
+		get
+		{
+			return this._UserId;
+		}
+		set
+		{
+			if ((this._UserId != value))
+			{
+				if (this._User1.HasLoadedOrAssignedValue)
+				{
+					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+				}
+				this.OnUserIdChanging(value);
+				this.SendPropertyChanging();
+				this._UserId = value;
+				this.SendPropertyChanged("UserId");
+				this.OnUserIdChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RelatedUserId", DbType="Int NOT NULL")]
+	public int RelatedUserId
+	{
+		get
+		{
+			return this._RelatedUserId;
+		}
+		set
+		{
+			if ((this._RelatedUserId != value))
+			{
+				if (this._User.HasLoadedOrAssignedValue)
+				{
+					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+				}
+				this.OnRelatedUserIdChanging(value);
+				this.SendPropertyChanging();
+				this._RelatedUserId = value;
+				this.SendPropertyChanged("RelatedUserId");
+				this.OnRelatedUserIdChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RelationType", DbType="Int")]
+	public System.Nullable<int> RelationType
+	{
+		get
+		{
+			return this._RelationType;
+		}
+		set
+		{
+			if ((this._RelationType != value))
+			{
+				this.OnRelationTypeChanging(value);
+				this.SendPropertyChanging();
+				this._RelationType = value;
+				this.SendPropertyChanged("RelationType");
+				this.OnRelationTypeChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_UserRelation", Storage="_User", ThisKey="RelatedUserId", OtherKey="UID", IsForeignKey=true)]
+	public User User
+	{
+		get
+		{
+			return this._User.Entity;
+		}
+		set
+		{
+			User previousValue = this._User.Entity;
+			if (((previousValue != value) 
+						|| (this._User.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._User.Entity = null;
+					previousValue.UserRelations.Remove(this);
+				}
+				this._User.Entity = value;
+				if ((value != null))
+				{
+					value.UserRelations.Add(this);
+					this._RelatedUserId = value.UID;
+				}
+				else
+				{
+					this._RelatedUserId = default(int);
+				}
+				this.SendPropertyChanged("User");
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_UserRelation1", Storage="_User1", ThisKey="UserId", OtherKey="UID", IsForeignKey=true)]
+	public User User1
+	{
+		get
+		{
+			return this._User1.Entity;
+		}
+		set
+		{
+			User previousValue = this._User1.Entity;
+			if (((previousValue != value) 
+						|| (this._User1.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._User1.Entity = null;
+					previousValue.UserRelations1.Remove(this);
+				}
+				this._User1.Entity = value;
+				if ((value != null))
+				{
+					value.UserRelations1.Add(this);
+					this._UserId = value.UID;
+				}
+				else
+				{
+					this._UserId = default(int);
+				}
+				this.SendPropertyChanged("User1");
 			}
 		}
 	}
