@@ -62,9 +62,10 @@ using System.Data.SqlClient;
         /// Remember to put brackets around table names (e.g. "SELECT * FROM [tableName]")
         /// </summary>
         /// <param name="sqlString">The SQL</param>
+        /// <param name="parameterList">Pass a List of SqlParameters to use in SQL-string. Will be added through the SqlCommand.Parameters.Add()-method</param>
         /// <param name="readOnly">The returned DataTable will be read-only or not. Default value is true</param>
         /// <returns></returns>
-        static public DataTable query(string sqlString, bool readOnly=true, bool debug=false)
+        static public DataTable query(string sqlString, List<SqlParameter> parameterList = null, bool readOnly = true, bool debug = false)
         {
             if (sqlString == "") return null;
 
@@ -75,6 +76,15 @@ using System.Data.SqlClient;
             {
                 if (!isInitialized) init();
                 sqlCommand = new SqlCommand(sqlString, dbConnection);
+
+                if (parameterList != null)         // If parameters: add them
+                {
+                    foreach (SqlParameter sqlParameter in parameterList)
+                    {
+                        sqlCommand.Parameters.Add(sqlParameter);
+                    }
+                }
+
                 returnTable = new DataTable();
                 openConnection();
 
@@ -111,8 +121,9 @@ using System.Data.SqlClient;
         /// Returns the number of affected rows from the Non-Query (UPDATE-, INSERT- or DELETE-statement only)
         /// </summary>
         /// <param name="sqlString">The SQL</param>
+        /// <param name="parameterList">Pass a List of SqlParameters to use in SQL-string. Will be added through the SqlCommand.Parameters.Add()-method</param>
         /// <returns></returns>
-        static public int nonQuery(string sqlString, bool debug=false)
+        static public int nonQuery(string sqlString, List<SqlParameter> parameterList = null, bool debug = false)
         {
             if (sqlString == "") return 0;
 
@@ -124,6 +135,14 @@ using System.Data.SqlClient;
             {
                 if (!isInitialized) init();
                 sqlCommand = new SqlCommand(sqlString, dbConnection);
+
+                if (parameterList != null)         // If parameters: add them
+                {
+                    foreach (SqlParameter sqlParameter in parameterList)
+                    {
+                        sqlCommand.Parameters.Add(sqlParameter);
+                    }
+                }
                 openConnection();
 
                 numberOfRows = sqlCommand.ExecuteNonQuery();
@@ -150,20 +169,24 @@ using System.Data.SqlClient;
 
             if (roleId < 1 || userId < 1) return false;
 
+            List<SqlParameter> parameters = new List<SqlParameter>();
+            parameters.Add(new SqlParameter("@roleId", roleId));
+            parameters.Add(new SqlParameter("@userId", userId));
 
             DataTable dt = query(@"
                 SELECT       Role.Role
                 FROM         UserInRole 
                              INNER JOIN
-                             Role ON UserInRole.inRoleID = " + roleId + @"
+                             Role ON UserInRole.inRoleID = @roleId
                              INNER JOIN
-                             [User] ON UserInRole.inUserID = [User].UID AND [User].UID = " + userId + @"
-                ");
+                             [User] ON UserInRole.inUserID = [User].UID AND [User].UID = @userId
+                ", parameters);
 
             returnValue = (dt.Rows.Count < 1) ? false : true;
 
             return returnValue;
         }
 
-
     }
+
+

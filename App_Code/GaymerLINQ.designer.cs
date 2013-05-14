@@ -56,9 +56,9 @@ public partial class GaymerLINQDataContext : System.Data.Linq.DataContext
   partial void InsertForumThread(ForumThread instance);
   partial void UpdateForumThread(ForumThread instance);
   partial void DeleteForumThread(ForumThread instance);
-  partial void InsertInputElement(InputElement instance);
-  partial void UpdateInputElement(InputElement instance);
-  partial void DeleteInputElement(InputElement instance);
+  partial void InsertInputElement(InputElementBaseClass instance);
+  partial void UpdateInputElement(InputElementBaseClass instance);
+  partial void DeleteInputElement(InputElementBaseClass instance);
   partial void InsertPermission(Permission instance);
   partial void UpdatePermission(Permission instance);
   partial void DeletePermission(Permission instance);
@@ -211,11 +211,11 @@ public partial class GaymerLINQDataContext : System.Data.Linq.DataContext
 		}
 	}
 	
-	public System.Data.Linq.Table<InputElement> InputElements
+	public System.Data.Linq.Table<InputElementBaseClass> InputElements
 	{
 		get
 		{
-			return this.GetTable<InputElement>();
+			return this.GetTable<InputElementBaseClass>();
 		}
 	}
 	
@@ -1698,7 +1698,7 @@ public partial class ElementInContent : INotifyPropertyChanging, INotifyProperty
 	
 	private EntityRef<DynamicContentType> _DynamicContentType;
 	
-	private EntityRef<InputElement> _InputElement;
+	private EntityRef<InputElementBaseClass> _InputElement;
 	
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -1719,7 +1719,7 @@ public partial class ElementInContent : INotifyPropertyChanging, INotifyProperty
 	public ElementInContent()
 	{
 		this._DynamicContentType = default(EntityRef<DynamicContentType>);
-		this._InputElement = default(EntityRef<InputElement>);
+		this._InputElement = default(EntityRef<InputElementBaseClass>);
 		OnCreated();
 	}
 	
@@ -1866,7 +1866,7 @@ public partial class ElementInContent : INotifyPropertyChanging, INotifyProperty
 	}
 	
 	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="InputElement_ElementInContent", Storage="_InputElement", ThisKey="InputElementId", OtherKey="InputElementId", IsForeignKey=true)]
-	public InputElement InputElement
+	public InputElementBaseClass InputElement
 	{
 		get
 		{
@@ -1874,7 +1874,7 @@ public partial class ElementInContent : INotifyPropertyChanging, INotifyProperty
 		}
 		set
 		{
-			InputElement previousValue = this._InputElement.Entity;
+			InputElementBaseClass previousValue = this._InputElement.Entity;
 			if (((previousValue != value) 
 						|| (this._InputElement.HasLoadedOrAssignedValue == false)))
 			{
@@ -2275,7 +2275,7 @@ public partial class ForumThread : INotifyPropertyChanging, INotifyPropertyChang
 }
 
 [global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.InputElement")]
-public partial class InputElement : INotifyPropertyChanging, INotifyPropertyChanged
+public partial class InputElementBaseClass : INotifyPropertyChanging, INotifyPropertyChanged
 {
 	
 	private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
@@ -2304,7 +2304,7 @@ public partial class InputElement : INotifyPropertyChanging, INotifyPropertyChan
     partial void OnCodePathChanged();
     #endregion
 	
-	public InputElement()
+	public InputElementBaseClass()
 	{
 		this._ElementInContents = new EntitySet<ElementInContent>(new Action<ElementInContent>(this.attach_ElementInContents), new Action<ElementInContent>(this.detach_ElementInContents));
 		OnCreated();

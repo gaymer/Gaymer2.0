@@ -30,15 +30,15 @@ public partial class User_Normal : System.Web.UI.UserControl
                         Living = ""
                     }).FirstOrDefault();
 
-        var rolle = (from b in db.UserRoles        // Henter ut brukerens rolle fra databasen. 
-                     where b.RoleID == user.Role
-                     select new
-                         {
-                             URole = b.Role
-                         }).FirstOrDefault();
+        //var rolle = (from b in db.UserRoles        // Henter ut brukerens rolle fra databasen. 
+        //             where b.RoleID == user.Role
+        //             select new
+        //                 {
+        //                     URole = b.Role
+        //                 }).FirstOrDefault();
 
         Username.Text = user.Uname;
-        lblRolle.Text = rolle.URole; 
+        //lblRolle.Text = rolle.URole; 
 
         MyAvatar.ImageUrl = "~Style/Avatar/" + user.Avatar;
         MyAvatar.AlternateText = user.Uname + " Avatar";
