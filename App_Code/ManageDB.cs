@@ -57,6 +57,78 @@ using System.Data.SqlClient;
             dbConnection.Close();
         }
 
+
+
+        ///// <summary>
+        ///// Returns a DataTable containing the results of the query (SELECT-statement only)
+        ///// Remember to put brackets around table names (e.g. "SELECT * FROM [tableName]")
+        ///// </summary>
+        ///// <param name="sqlString">The SQL</param>
+        ///// <param name="parameterList">Pass a Dictionary of parameters to use in SQL-string. Will be added through the SqlCommand.Parameters.Add()-method</param>
+        ///// <param name="readOnly">The returned DataTable will be read-only or not. Default value is true</param>
+        ///// <returns></returns>
+        //static public DataTable query(string sqlString, List<SqlParameter> parameterList = null, bool readOnly = true, bool debug = false)
+        //{
+        //    if (sqlString == "") return null;
+
+        //    DataTable returnTable = null;
+        //    SqlCommand sqlCommand = null;
+
+        //    try
+        //    {
+        //        if (!isInitialized) init();
+        //        sqlCommand = new SqlCommand(sqlString, dbConnection);
+
+        //        if (parameterList != null)         // If parameters: add them
+        //        {
+        //            foreach (SqlParameter sqlParameter in parameterList)
+        //            {
+        //                sqlCommand.Parameters.Add(sqlParameter);
+        //            }
+        //        }
+
+        //        returnTable = new DataTable();
+        //        openConnection();
+
+        //        if (readOnly)   // DataTable's Load()-method adds read-only values: TODO: is this correct?
+        //        {
+        //            SqlDataReader reader = sqlCommand.ExecuteReader();
+        //            returnTable.Load(reader);       // Adds rows. Result: read-only
+        //            reader.Close();
+        //        }
+        //        else            // SqlDataAdapter's Fill()-method executes query and fill values.
+        //        {
+        //            SqlDataAdapter adapter = new SqlDataAdapter(sqlCommand);
+        //            adapter.Fill(returnTable);      // Fill table from start. Result: NOT read-only
+        //            adapter.Dispose();
+        //        }
+
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        if (debug)
+        //            throw new Exception("Database error (Query): " + e.ToString());
+        //        else
+        //            return null;
+        //    }
+        //    finally
+        //    {
+        //        closeConnection();
+        //        sqlCommand.Dispose();
+        //    }
+        //    return returnTable;
+        //}
+
+
+
+        /// <summary>
+        /// Returns a DataTable containing the results of the query (SELECT-statement only)
+        /// Remember to put brackets around table names (e.g. "SELECT * FROM [tableName]")
+        /// </summary>
+        /// <param name="sqlString">The SQL</param>
+        /// <param name="parameterList">Pass a Dictionary of parameters to use in SQL-string. Will be added through the SqlCommand.Parameters.Add()-method</param>
+        /// <param name="readOnly">The returned DataTable will be read-only or not. Default value is true</param>
+        /// <returns></returns>
         private static DataTable query(string sqlString, Dictionary<string, object> parameterList, bool readOnly = true, bool debug = false)
         {
             if (sqlString == string.Empty) return null;
@@ -109,72 +181,12 @@ using System.Data.SqlClient;
         }
 
         /// <summary>
-        /// Returns a DataTable containing the results of the query (SELECT-statement only)
-        /// Remember to put brackets around table names (e.g. "SELECT * FROM [tableName]")
-        /// </summary>
-        /// <param name="sqlString">The SQL</param>
-        /// <param name="parameterList">Pass a List of SqlParameters to use in SQL-string. Will be added through the SqlCommand.Parameters.Add()-method</param>
-        /// <param name="readOnly">The returned DataTable will be read-only or not. Default value is true</param>
-        /// <returns></returns>
-        static public DataTable query(string sqlString, List<SqlParameter> parameterList = null, bool readOnly = true, bool debug = false)
-        {
-            if (sqlString == "") return null;
-
-            DataTable returnTable = null;
-            SqlCommand sqlCommand = null;
-
-            try
-            {
-                if (!isInitialized) init();
-                sqlCommand = new SqlCommand(sqlString, dbConnection);
-
-                if (parameterList != null)         // If parameters: add them
-                {
-                    foreach (SqlParameter sqlParameter in parameterList)
-                    {
-                        sqlCommand.Parameters.Add(sqlParameter);
-                    }
-                }
-
-                returnTable = new DataTable();
-                openConnection();
-
-                if (readOnly)   // DataTable's Load()-method adds read-only values: TODO: is this correct?
-                {
-                    SqlDataReader reader = sqlCommand.ExecuteReader();
-                    returnTable.Load(reader);       // Adds rows. Result: read-only
-                    reader.Close();
-                }
-                else            // SqlDataAdapter's Fill()-method executes query and fill values.
-                {
-                    SqlDataAdapter adapter = new SqlDataAdapter(sqlCommand);
-                    adapter.Fill(returnTable);      // Fill table from start. Result: NOT read-only
-                    adapter.Dispose();
-                }
-
-            }
-            catch (Exception e)
-            {
-                if (debug)
-                    throw new Exception("Database error (Query): " + e.ToString());
-                else
-                    return null;
-            }
-            finally
-            {
-                closeConnection();
-                sqlCommand.Dispose();
-            }
-            return returnTable;
-        }
-
-        /// <summary>
         /// Returns the number of affected rows from the Non-Query (UPDATE-, INSERT- or DELETE-statement only)
         /// </summary>
         /// <param name="sqlString">The SQL</param>
         /// <param name="parameterList">Pass a List of SqlParameters to use in SQL-string. Will be added through the SqlCommand.Parameters.Add()-method</param>
         /// <returns></returns>
-        static public int nonQuery(string sqlString, List<SqlParameter> parameterList = null, bool debug = false)
+        static public int nonQuery(string sqlString, Dictionary<string, object> parameterList, bool debug = false)
         {
             if (sqlString == "") return 0;
 
@@ -189,10 +201,8 @@ using System.Data.SqlClient;
 
                 if (parameterList != null)         // If parameters: add them
                 {
-                    foreach (SqlParameter sqlParameter in parameterList)
-                    {
-                        sqlCommand.Parameters.Add(sqlParameter);
-                    }
+                    foreach (KeyValuePair<string, object> parameter in parameterList)
+                        sqlCommand.Parameters.AddWithValue(parameter.Key.StartsWith("@") ? parameter.Key : "@" + parameter.Key, parameter.Value);
                 }
                 openConnection();
 
@@ -223,23 +233,14 @@ using System.Data.SqlClient;
         public static bool userHasRole(int roleId, int userId)
         {
 
-
-
-            ost norvegia = new ost();
-            norvegia["KeyName"] = 123;
-
             bool returnValue = false;
 
             if (roleId < 1 || userId < 1) return false;
 
-            Dictionary<string,object> dic = new Dictionary<string,object>();
+            Dictionary<string, object> parameters = new Dictionary<string, object>();
 
-            dic.Add("test", 3);
-            query("blah", dic);
-
-            List<SqlParameter> parameters = new List<SqlParameter>();
-            parameters.Add(new SqlParameter("@roleId", roleId));
-            parameters.Add(new SqlParameter("@userId", userId));
+            parameters.Add("@roleId", roleId);
+            parameters.Add("@userId", userId);
 
             DataTable dt = query(@"
                 SELECT       Role.Role
