@@ -57,6 +57,57 @@ using System.Data.SqlClient;
             dbConnection.Close();
         }
 
+        private static DataTable query(string sqlString, Dictionary<string, object> parameterList, bool readOnly = true, bool debug = false)
+        {
+            if (sqlString == string.Empty) return null;
+
+            DataTable returnTable = null;
+            SqlCommand sqlCommand = null;
+
+            try
+            {
+                if (!isInitialized) init();
+                sqlCommand = new SqlCommand(sqlString, dbConnection);
+
+                if (parameterList != null)         // If parameters: add them
+                {
+                    foreach (KeyValuePair<string,object> parameter in parameterList)                    
+                        sqlCommand.Parameters.AddWithValue(parameter.Key.StartsWith("@")? parameter.Key : "@" + parameter.Key, parameter.Value);
+                    
+                }
+
+                returnTable = new DataTable();
+                openConnection();
+
+                if (readOnly)   // DataTable's Load()-method adds read-only values: TODO: is this correct?
+                {
+                    SqlDataReader reader = sqlCommand.ExecuteReader();
+                    returnTable.Load(reader);       // Adds rows. Result: read-only
+                    reader.Close();
+                }
+                else            // SqlDataAdapter's Fill()-method executes query and fill values.
+                {
+                    SqlDataAdapter adapter = new SqlDataAdapter(sqlCommand);
+                    adapter.Fill(returnTable);      // Fill table from start. Result: NOT read-only
+                    adapter.Dispose();
+                }
+
+            }
+            catch (Exception e)
+            {
+                if (debug)
+                    throw new Exception("Database error (Query): " + e.ToString());
+                else
+                    return null;
+            }
+            finally
+            {
+                closeConnection();
+                sqlCommand.Dispose();
+            }
+            return returnTable;
+        }
+
         /// <summary>
         /// Returns a DataTable containing the results of the query (SELECT-statement only)
         /// Remember to put brackets around table names (e.g. "SELECT * FROM [tableName]")
@@ -163,11 +214,28 @@ using System.Data.SqlClient;
 
         }
 
+        /// <summary>
+        /// Returns a boolean true or false on whether or not the user has the role.
+        /// </summary>
+        /// <param name="roleId">Role to test for</param>
+        /// <param name="userId">User to test on</param>
+        /// <returns></returns>
         public static bool userHasRole(int roleId, int userId)
         {
+
+
+
+            ost norvegia = new ost();
+            norvegia["KeyName"] = 123;
+
             bool returnValue = false;
 
             if (roleId < 1 || userId < 1) return false;
+
+            Dictionary<string,object> dic = new Dictionary<string,object>();
+
+            dic.Add("test", 3);
+            query("blah", dic);
 
             List<SqlParameter> parameters = new List<SqlParameter>();
             parameters.Add(new SqlParameter("@roleId", roleId));
@@ -186,6 +254,22 @@ using System.Data.SqlClient;
 
             return returnValue;
         }
+
+        public class ost : Dictionary<string,object>
+        {
+            public List<int> myList { get; set; }
+
+            public ost()
+            {
+
+            }
+            public void increase(int value)
+            {
+                myList.Add(value);
+
+            }
+        }
+
 
     }
 
