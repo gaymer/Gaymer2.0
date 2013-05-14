@@ -104,6 +104,9 @@ public partial class GaymerLINQDataContext : System.Data.Linq.DataContext
   partial void InsertUserInfoType(UserInfoType instance);
   partial void UpdateUserInfoType(UserInfoType instance);
   partial void DeleteUserInfoType(UserInfoType instance);
+  partial void InsertPermissionToRole(PermissionToRole instance);
+  partial void UpdatePermissionToRole(PermissionToRole instance);
+  partial void DeletePermissionToRole(PermissionToRole instance);
   #endregion
 	
 	public GaymerLINQDataContext() : 
@@ -240,14 +243,6 @@ public partial class GaymerLINQDataContext : System.Data.Linq.DataContext
 		}
 	}
 	
-	public System.Data.Linq.Table<PermissionToRole> PermissionToRoles
-	{
-		get
-		{
-			return this.GetTable<PermissionToRole>();
-		}
-	}
-	
 	public System.Data.Linq.Table<PrivateMessage> PrivateMessages
 	{
 		get
@@ -341,6 +336,14 @@ public partial class GaymerLINQDataContext : System.Data.Linq.DataContext
 		get
 		{
 			return this.GetTable<UserInfoType>();
+		}
+	}
+	
+	public System.Data.Linq.Table<PermissionToRole> PermissionToRoles
+	{
+		get
+		{
+			return this.GetTable<PermissionToRole>();
 		}
 	}
 }
@@ -2637,6 +2640,8 @@ public partial class Permission : INotifyPropertyChanging, INotifyPropertyChange
 	
 	private EntityRef<PermissionInContent> _PermissionInContent;
 	
+	private EntitySet<PermissionToRole> _PermissionToRoles;
+	
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -2650,6 +2655,7 @@ public partial class Permission : INotifyPropertyChanging, INotifyPropertyChange
 	public Permission()
 	{
 		this._PermissionInContent = default(EntityRef<PermissionInContent>);
+		this._PermissionToRoles = new EntitySet<PermissionToRole>(new Action<PermissionToRole>(this.attach_PermissionToRoles), new Action<PermissionToRole>(this.detach_PermissionToRoles));
 		OnCreated();
 	}
 	
@@ -2722,6 +2728,19 @@ public partial class Permission : INotifyPropertyChanging, INotifyPropertyChange
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Permission_PermissionToRole", Storage="_PermissionToRoles", ThisKey="PermissionId", OtherKey="PermissionId")]
+	public EntitySet<PermissionToRole> PermissionToRoles
+	{
+		get
+		{
+			return this._PermissionToRoles;
+		}
+		set
+		{
+			this._PermissionToRoles.Assign(value);
+		}
+	}
+	
 	public event PropertyChangingEventHandler PropertyChanging;
 	
 	public event PropertyChangedEventHandler PropertyChanged;
@@ -2740,6 +2759,18 @@ public partial class Permission : INotifyPropertyChanging, INotifyPropertyChange
 		{
 			this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 		}
+	}
+	
+	private void attach_PermissionToRoles(PermissionToRole entity)
+	{
+		this.SendPropertyChanging();
+		entity.Permission = this;
+	}
+	
+	private void detach_PermissionToRoles(PermissionToRole entity)
+	{
+		this.SendPropertyChanging();
+		entity.Permission = null;
 	}
 }
 
@@ -2907,51 +2938,6 @@ public partial class PermissionInContent : INotifyPropertyChanging, INotifyPrope
 		if ((this.PropertyChanged != null))
 		{
 			this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-		}
-	}
-}
-
-[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.PermissionToRole")]
-public partial class PermissionToRole
-{
-	
-	private int _PermissionId;
-	
-	private int _RoleId;
-	
-	public PermissionToRole()
-	{
-	}
-	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PermissionId", DbType="Int NOT NULL")]
-	public int PermissionId
-	{
-		get
-		{
-			return this._PermissionId;
-		}
-		set
-		{
-			if ((this._PermissionId != value))
-			{
-				this._PermissionId = value;
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RoleId", DbType="Int NOT NULL")]
-	public int RoleId
-	{
-		get
-		{
-			return this._RoleId;
-		}
-		set
-		{
-			if ((this._RoleId != value))
-			{
-				this._RoleId = value;
-			}
 		}
 	}
 }
@@ -3224,6 +3210,8 @@ public partial class Role : INotifyPropertyChanging, INotifyPropertyChanged
 	
 	private EntitySet<UserInRole> _UserInRoles;
 	
+	private EntitySet<PermissionToRole> _PermissionToRoles;
+	
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -3237,6 +3225,7 @@ public partial class Role : INotifyPropertyChanging, INotifyPropertyChanged
 	public Role()
 	{
 		this._UserInRoles = new EntitySet<UserInRole>(new Action<UserInRole>(this.attach_UserInRoles), new Action<UserInRole>(this.detach_UserInRoles));
+		this._PermissionToRoles = new EntitySet<PermissionToRole>(new Action<PermissionToRole>(this.attach_PermissionToRoles), new Action<PermissionToRole>(this.detach_PermissionToRoles));
 		OnCreated();
 	}
 	
@@ -3293,6 +3282,19 @@ public partial class Role : INotifyPropertyChanging, INotifyPropertyChanged
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Role_PermissionToRole", Storage="_PermissionToRoles", ThisKey="RoleID", OtherKey="RoleId")]
+	public EntitySet<PermissionToRole> PermissionToRoles
+	{
+		get
+		{
+			return this._PermissionToRoles;
+		}
+		set
+		{
+			this._PermissionToRoles.Assign(value);
+		}
+	}
+	
 	public event PropertyChangingEventHandler PropertyChanging;
 	
 	public event PropertyChangedEventHandler PropertyChanged;
@@ -3320,6 +3322,18 @@ public partial class Role : INotifyPropertyChanging, INotifyPropertyChanged
 	}
 	
 	private void detach_UserInRoles(UserInRole entity)
+	{
+		this.SendPropertyChanging();
+		entity.Role = null;
+	}
+	
+	private void attach_PermissionToRoles(PermissionToRole entity)
+	{
+		this.SendPropertyChanging();
+		entity.Role = this;
+	}
+	
+	private void detach_PermissionToRoles(PermissionToRole entity)
 	{
 		this.SendPropertyChanging();
 		entity.Role = null;
@@ -5655,6 +5669,198 @@ public partial class UserInfoType : INotifyPropertyChanging, INotifyPropertyChan
 	{
 		this.SendPropertyChanging();
 		entity.UserInfoType = null;
+	}
+}
+
+[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.PermissionToRole")]
+public partial class PermissionToRole : INotifyPropertyChanging, INotifyPropertyChanged
+{
+	
+	private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+	
+	private int _relationId;
+	
+	private int _PermissionId;
+	
+	private int _RoleId;
+	
+	private EntityRef<Permission> _Permission;
+	
+	private EntityRef<Role> _Role;
+	
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnrelationIdChanging(int value);
+    partial void OnrelationIdChanged();
+    partial void OnPermissionIdChanging(int value);
+    partial void OnPermissionIdChanged();
+    partial void OnRoleIdChanging(int value);
+    partial void OnRoleIdChanged();
+    #endregion
+	
+	public PermissionToRole()
+	{
+		this._Permission = default(EntityRef<Permission>);
+		this._Role = default(EntityRef<Role>);
+		OnCreated();
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_relationId", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+	public int relationId
+	{
+		get
+		{
+			return this._relationId;
+		}
+		set
+		{
+			if ((this._relationId != value))
+			{
+				this.OnrelationIdChanging(value);
+				this.SendPropertyChanging();
+				this._relationId = value;
+				this.SendPropertyChanged("relationId");
+				this.OnrelationIdChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PermissionId", DbType="Int NOT NULL")]
+	public int PermissionId
+	{
+		get
+		{
+			return this._PermissionId;
+		}
+		set
+		{
+			if ((this._PermissionId != value))
+			{
+				if (this._Permission.HasLoadedOrAssignedValue)
+				{
+					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+				}
+				this.OnPermissionIdChanging(value);
+				this.SendPropertyChanging();
+				this._PermissionId = value;
+				this.SendPropertyChanged("PermissionId");
+				this.OnPermissionIdChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RoleId", DbType="Int NOT NULL")]
+	public int RoleId
+	{
+		get
+		{
+			return this._RoleId;
+		}
+		set
+		{
+			if ((this._RoleId != value))
+			{
+				if (this._Role.HasLoadedOrAssignedValue)
+				{
+					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+				}
+				this.OnRoleIdChanging(value);
+				this.SendPropertyChanging();
+				this._RoleId = value;
+				this.SendPropertyChanged("RoleId");
+				this.OnRoleIdChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Permission_PermissionToRole", Storage="_Permission", ThisKey="PermissionId", OtherKey="PermissionId", IsForeignKey=true)]
+	public Permission Permission
+	{
+		get
+		{
+			return this._Permission.Entity;
+		}
+		set
+		{
+			Permission previousValue = this._Permission.Entity;
+			if (((previousValue != value) 
+						|| (this._Permission.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._Permission.Entity = null;
+					previousValue.PermissionToRoles.Remove(this);
+				}
+				this._Permission.Entity = value;
+				if ((value != null))
+				{
+					value.PermissionToRoles.Add(this);
+					this._PermissionId = value.PermissionId;
+				}
+				else
+				{
+					this._PermissionId = default(int);
+				}
+				this.SendPropertyChanged("Permission");
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Role_PermissionToRole", Storage="_Role", ThisKey="RoleId", OtherKey="RoleID", IsForeignKey=true)]
+	public Role Role
+	{
+		get
+		{
+			return this._Role.Entity;
+		}
+		set
+		{
+			Role previousValue = this._Role.Entity;
+			if (((previousValue != value) 
+						|| (this._Role.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._Role.Entity = null;
+					previousValue.PermissionToRoles.Remove(this);
+				}
+				this._Role.Entity = value;
+				if ((value != null))
+				{
+					value.PermissionToRoles.Add(this);
+					this._RoleId = value.RoleID;
+				}
+				else
+				{
+					this._RoleId = default(int);
+				}
+				this.SendPropertyChanged("Role");
+			}
+		}
+	}
+	
+	public event PropertyChangingEventHandler PropertyChanging;
+	
+	public event PropertyChangedEventHandler PropertyChanged;
+	
+	protected virtual void SendPropertyChanging()
+	{
+		if ((this.PropertyChanging != null))
+		{
+			this.PropertyChanging(this, emptyChangingEventArgs);
+		}
+	}
+	
+	protected virtual void SendPropertyChanged(String propertyName)
+	{
+		if ((this.PropertyChanged != null))
+		{
+			this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+		}
 	}
 }
 #pragma warning restore 1591

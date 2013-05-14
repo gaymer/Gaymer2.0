@@ -126,14 +126,6 @@
       <Association Name="Permission_PermissionInContent" Member="Permission" ThisKey="PermissionId" OtherKey="PermissionId" Type="Permission" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.PermissionToRole" Member="PermissionToRoles">
-    <Type Name="PermissionToRole">
-      <Column Name="PermissionId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="RoleId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="Permission_PermissionToRole" Member="Permission" ThisKey="PermissionId" OtherKey="PermissionId" Type="Permission" IsForeignKey="true" />
-      <Association Name="Role_PermissionToRole" Member="Role" ThisKey="RoleId" OtherKey="RoleID" Type="Role" IsForeignKey="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.PrivateMessage" Member="PrivateMessages">
     <Type Name="PrivateMessage">
       <Column Name="PMessageId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -262,6 +254,15 @@
       <Column Name="UserInfoTypeId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Label" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
       <Association Name="UserInfoType_UserInfo" Member="UserInfos" ThisKey="UserInfoTypeId" OtherKey="InfoType" Type="UserInfo" />
+    </Type>
+  </Table>
+  <Table Name="dbo.PermissionToRole" Member="PermissionToRoles">
+    <Type Name="PermissionToRole">
+      <Column Name="relationId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="PermissionId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="RoleId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Permission_PermissionToRole" Member="Permission" ThisKey="PermissionId" OtherKey="PermissionId" Type="Permission" IsForeignKey="true" />
+      <Association Name="Role_PermissionToRole" Member="Role" ThisKey="RoleId" OtherKey="RoleID" Type="Role" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>
