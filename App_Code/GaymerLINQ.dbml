@@ -1,4 +1,218 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="gaymerdb" Class="GaymerLINQDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=mssql1.cloudsites.gearhost.com;Initial Catalog=gaymerdb;Persist Security Info=True;User ID=gaymerdb" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="gaymerdbConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Comment" Member="Comments">
+    <Type Name="Comment">
+      <Column Name="CommentId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Post" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Author" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CreateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="UpdateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Title" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Text" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Association Name="Comment_ForumThread" Member="ForumThreads" ThisKey="CommentId" OtherKey="CommentId" Type="ForumThread" />
+      <Association Name="Comment_TagOnComment" Member="TagOnComments" ThisKey="CommentId" OtherKey="CommentId" Type="TagOnComment" />
+      <Association Name="DynamicContent_Comment" Member="DynamicContent" ThisKey="Post" OtherKey="DynamicContentId" Type="DynamicContent" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="User_Comment" Member="User" ThisKey="Author" OtherKey="UID" Type="User" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.UserInRole" Member="UserInRoles">
+    <Type Name="UserInRole">
+      <Column Name="UserRole" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="inUserID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="inRoleID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Role_UserInRole" Member="Role" ThisKey="inRoleID" OtherKey="RoleID" Type="Role" IsForeignKey="true" />
+      <Association Name="User_UserInRole" Member="User" ThisKey="inUserID" OtherKey="UID" Type="User" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ContactInfo" Member="ContactInfos">
+    <Type Name="ContactInfo">
+      <Column Name="ContactInfoId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ContactInfoType" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ContactName" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="[User]" Member="User" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="ContactInfoType_ContactInfo" Member="ContactInfoType1" ThisKey="ContactInfoType" OtherKey="ContactInfoTypeId" Type="ContactInfoType" IsForeignKey="true" />
+      <Association Name="User_ContactInfo" Member="User1" ThisKey="User" OtherKey="UID" Type="User" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ContactInfoType" Member="ContactInfoTypes">
+    <Type Name="ContactInfoType">
+      <Column Name="ContactInfoTypeId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Label" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="ContactInfoType_ContactInfo" Member="ContactInfos" ThisKey="ContactInfoTypeId" OtherKey="ContactInfoType" Type="ContactInfo" />
+    </Type>
+  </Table>
+  <Table Name="dbo.DynamicContent" Member="DynamicContents">
+    <Type Name="DynamicContent">
+      <Column Name="DynamicContentId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ContentType" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CreateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="UpdateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Author" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="DynamicContent_Comment" Member="Comments" ThisKey="DynamicContentId" OtherKey="Post" Type="Comment" />
+      <Association Name="DynamicContent_TagOnDynamicContent" Member="TagOnDynamicContents" ThisKey="DynamicContentId" OtherKey="DynamicContentId" Type="TagOnDynamicContent" />
+      <Association Name="DynamicContentType_DynamicContent" Member="DynamicContentType" ThisKey="ContentType" OtherKey="DynamicContentTypeId" Type="DynamicContentType" IsForeignKey="true" />
+      <Association Name="User_DynamicContent" Member="User" ThisKey="Author" OtherKey="UID" Type="User" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.DynamicContentType" Member="DynamicContentTypes">
+    <Type Name="DynamicContentType">
+      <Column Name="DynamicContentTypeId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="DynamicContentType_DynamicContent" Member="DynamicContents" ThisKey="DynamicContentTypeId" OtherKey="ContentType" Type="DynamicContent" />
+      <Association Name="DynamicContentType_ElementInContent" Member="ElementInContent" ThisKey="DynamicContentTypeId" OtherKey="ContentTypeId" Type="ElementInContent" Cardinality="One" />
+      <Association Name="DynamicContentType_PermissionInContent" Member="PermissionInContents" ThisKey="DynamicContentTypeId" OtherKey="ContentTypeId" Type="PermissionInContent" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ElementInContent" Member="ElementInContents">
+    <Type Name="ElementInContent">
+      <Column Name="ContentTypeId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="InputElementId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Weight" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CSSclass" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="HelpText" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="DynamicContentType_ElementInContent" Member="DynamicContentType" ThisKey="ContentTypeId" OtherKey="DynamicContentTypeId" Type="DynamicContentType" IsForeignKey="true" />
+      <Association Name="InputElement_ElementInContent" Member="InputElement" ThisKey="InputElementId" OtherKey="InputElementId" Type="InputElement" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Forum" Member="Forums">
+    <Type Name="Forum">
+      <Column Name="ForumId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Label" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Association Name="Forum_ForumThread" Member="ForumThreads" ThisKey="ForumId" OtherKey="ForumId" Type="ForumThread" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ForumThread" Member="ForumThreads">
+    <Type Name="ForumThread">
+      <Column Name="ForumThreadPostId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ForumThreadId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Text" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="CommentId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ForumId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Comment_ForumThread" Member="Comment" ThisKey="CommentId" OtherKey="CommentId" Type="Comment" IsForeignKey="true" />
+      <Association Name="Forum_ForumThread" Member="Forum" ThisKey="ForumId" OtherKey="ForumId" Type="Forum" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Friend" Member="Friends">
+    <Type Name="Friend">
+      <Column Name="FriendhipId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UserId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="FriendId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="User_Friend" Member="User" ThisKey="FriendId" OtherKey="UID" Type="User" IsForeignKey="true" />
+      <Association Name="User_Friend1" Member="User1" ThisKey="UserId" OtherKey="UID" Type="User" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.InputElement" Member="InputElements">
+    <Type Name="InputElement">
+      <Column Name="InputElementId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Label" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="CodePath" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Association Name="InputElement_ElementInContent" Member="ElementInContents" ThisKey="InputElementId" OtherKey="InputElementId" Type="ElementInContent" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Permission" Member="Permissions">
+    <Type Name="Permission">
+      <Column Name="PermissionId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Label" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="Permission_PermissionInContent" Member="PermissionInContent" ThisKey="PermissionId" OtherKey="PermissionId" Type="PermissionInContent" Cardinality="One" />
+      <Association Name="Permission_PermissionToRole" Member="PermissionToRoles" ThisKey="PermissionId" OtherKey="PermissionId" Type="PermissionToRole" />
+    </Type>
+  </Table>
+  <Table Name="dbo.PermissionInContent" Member="PermissionInContents">
+    <Type Name="PermissionInContent">
+      <Column Name="PermissionId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ContentTypeId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="DynamicContentType_PermissionInContent" Member="DynamicContentType" ThisKey="ContentTypeId" OtherKey="DynamicContentTypeId" Type="DynamicContentType" IsForeignKey="true" />
+      <Association Name="Permission_PermissionInContent" Member="Permission" ThisKey="PermissionId" OtherKey="PermissionId" Type="Permission" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.PermissionToRole" Member="PermissionToRoles">
+    <Type Name="PermissionToRole">
+      <Column Name="PermissionId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="RoleId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Permission_PermissionToRole" Member="Permission" ThisKey="PermissionId" OtherKey="PermissionId" Type="Permission" IsForeignKey="true" />
+      <Association Name="Role_PermissionToRole" Member="Role" ThisKey="RoleId" OtherKey="RoleID" Type="Role" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.PrivateMessage" Member="PrivateMessages">
+    <Type Name="PrivateMessage">
+      <Column Name="PMessageId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="[To]" Member="To" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="[From]" Member="From" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="[Read]" Member="Read" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Text" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="Time" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="User_PrivateMessage" Member="User" ThisKey="From" OtherKey="UID" Type="User" IsForeignKey="true" />
+      <Association Name="User_PrivateMessage1" Member="User1" ThisKey="To" OtherKey="UID" Type="User" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Role" Member="Roles">
+    <Type Name="Role">
+      <Column Name="RoleID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Role" Member="Role1" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="Role_UserInRole" Member="UserInRoles" ThisKey="RoleID" OtherKey="inRoleID" Type="UserInRole" />
+      <Association Name="Role_PermissionToRole" Member="PermissionToRoles" ThisKey="RoleID" OtherKey="RoleId" Type="PermissionToRole" />
+    </Type>
+  </Table>
+  <Table Name="dbo.StaticContent" Member="StaticContents">
+    <Type Name="StaticContent">
+      <Column Name="StaticContentId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CreateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="UpdateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Author" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Content" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Association Name="StaticContent_TagOnStaticContent" Member="TagOnStaticContents" ThisKey="StaticContentId" OtherKey="StaticContentId" Type="TagOnStaticContent" />
+      <Association Name="User_StaticContent" Member="User" ThisKey="Author" OtherKey="UID" Type="User" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Tag" Member="Tags">
+    <Type Name="Tag">
+      <Column Name="TagId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Text" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Association Name="Tag_TagOnComment" Member="TagOnComments" ThisKey="TagId" OtherKey="TagId" Type="TagOnComment" />
+      <Association Name="Tag_TagOnDynamicContent" Member="TagOnDynamicContents" ThisKey="TagId" OtherKey="TagId" Type="TagOnDynamicContent" />
+      <Association Name="Tag_TagOnStaticContent" Member="TagOnStaticContents" ThisKey="TagId" OtherKey="TagId" Type="TagOnStaticContent" />
+      <Association Name="Tag_TagRelation" Member="TagRelations" ThisKey="TagId" OtherKey="SubTag" Type="TagRelation" />
+      <Association Name="Tag_TagRelation1" Member="TagRelations1" ThisKey="TagId" OtherKey="SuperTag" Type="TagRelation" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TagOnComment" Member="TagOnComments">
+    <Type Name="TagOnComment">
+      <Column Name="TagOnCommentId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TagId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CommentId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Comment_TagOnComment" Member="Comment" ThisKey="CommentId" OtherKey="CommentId" Type="Comment" IsForeignKey="true" />
+      <Association Name="Tag_TagOnComment" Member="Tag" ThisKey="TagId" OtherKey="TagId" Type="Tag" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TagOnDynamicContent" Member="TagOnDynamicContents">
+    <Type Name="TagOnDynamicContent">
+      <Column Name="TagOnDynamicContentId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TagId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="DynamicContentId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="DynamicContent_TagOnDynamicContent" Member="DynamicContent" ThisKey="DynamicContentId" OtherKey="DynamicContentId" Type="DynamicContent" IsForeignKey="true" />
+      <Association Name="Tag_TagOnDynamicContent" Member="Tag" ThisKey="TagId" OtherKey="TagId" Type="Tag" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TagOnStaticContent" Member="TagOnStaticContents">
+    <Type Name="TagOnStaticContent">
+      <Column Name="TagOnStaticContentId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TagId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="StaticContentId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="StaticContent_TagOnStaticContent" Member="StaticContent" ThisKey="StaticContentId" OtherKey="StaticContentId" Type="StaticContent" IsForeignKey="true" />
+      <Association Name="Tag_TagOnStaticContent" Member="Tag" ThisKey="TagId" OtherKey="TagId" Type="Tag" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TagRelation" Member="TagRelations">
+    <Type Name="TagRelation">
+      <Column Name="TagRelationId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="SuperTag" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="SubTag" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Relation" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Tag_TagRelation" Member="Tag" ThisKey="SubTag" OtherKey="TagId" Type="Tag" IsForeignKey="true" />
+      <Association Name="Tag_TagRelation1" Member="Tag1" ThisKey="SuperTag" OtherKey="TagId" Type="Tag" IsForeignKey="true" />
+    </Type>
+  </Table>
   <Table Name="dbo.[User]" Member="Users">
     <Type Name="User">
       <Column Name="UID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -9,15 +223,17 @@
       <Column Name="RoleID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="LoginSession" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
       <Column Name="Salt" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-      <Association Name="UserRole_User" Member="UserRole" ThisKey="RoleID" OtherKey="RoleID" Type="UserRole" IsForeignKey="true" />
+      <Association Name="User_Comment" Member="Comments" ThisKey="UID" OtherKey="Author" Type="Comment" />
+      <Association Name="User_UserInRole" Member="UserInRoles" ThisKey="UID" OtherKey="inUserID" Type="UserInRole" />
+      <Association Name="User_ContactInfo" Member="ContactInfos" ThisKey="UID" OtherKey="User" Type="ContactInfo" />
+      <Association Name="User_DynamicContent" Member="DynamicContents" ThisKey="UID" OtherKey="Author" Type="DynamicContent" />
+      <Association Name="User_Friend" Member="Friends" ThisKey="UID" OtherKey="FriendId" Type="Friend" />
+      <Association Name="User_Friend1" Member="Friends1" ThisKey="UID" OtherKey="UserId" Type="Friend" />
+      <Association Name="User_PrivateMessage" Member="PrivateMessages" ThisKey="UID" OtherKey="From" Type="PrivateMessage" />
+      <Association Name="User_PrivateMessage1" Member="PrivateMessages1" ThisKey="UID" OtherKey="To" Type="PrivateMessage" />
+      <Association Name="User_StaticContent" Member="StaticContents" ThisKey="UID" OtherKey="Author" Type="StaticContent" />
+      <Association Name="User_UserInfo" Member="UserInfos" ThisKey="UID" OtherKey="User" Type="UserInfo" />
       <Association Name="UserAbout_User" Member="UserAbout" ThisKey="AbID" OtherKey="AbID" Type="UserAbout" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.UserRole" Member="UserRoles">
-    <Type Name="UserRole">
-      <Column Name="RoleID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Role" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Association Name="UserRole_User" Member="Users" ThisKey="RoleID" OtherKey="RoleID" Type="User" />
     </Type>
   </Table>
   <Table Name="dbo.UserAbout" Member="UserAbouts">
@@ -29,6 +245,23 @@
       <Column Name="Location" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
       <Column Name="Gender" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Association Name="UserAbout_User" Member="Users" ThisKey="AbID" OtherKey="AbID" Type="User" />
+    </Type>
+  </Table>
+  <Table Name="dbo.UserInfo" Member="UserInfos">
+    <Type Name="UserInfo">
+      <Column Name="UserInfoId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="InfoType" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Text" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="[User]" Member="User" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="User_UserInfo" Member="User1" ThisKey="User" OtherKey="UID" Type="User" IsForeignKey="true" />
+      <Association Name="UserInfoType_UserInfo" Member="UserInfoType" ThisKey="InfoType" OtherKey="UserInfoTypeId" Type="UserInfoType" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.UserInfoType" Member="UserInfoTypes">
+    <Type Name="UserInfoType">
+      <Column Name="UserInfoTypeId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Label" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="UserInfoType_UserInfo" Member="UserInfos" ThisKey="UserInfoTypeId" OtherKey="InfoType" Type="UserInfo" />
     </Type>
   </Table>
 </Database>
