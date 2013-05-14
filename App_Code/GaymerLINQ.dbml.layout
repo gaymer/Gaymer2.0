@@ -86,10 +86,10 @@
         <elementListCompartment Id="990891ea-d3a4-4f2f-8bf9-77ff8ad1ce0a" absoluteBounds="4.89, 11.71, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="e83f99b7-82e1-4500-85fb-ed24f73135af" absoluteBounds="8.75, 0.875, 2, 1.9631982421875023">
+    <classShape Id="e83f99b7-82e1-4500-85fb-ed24f73135af" absoluteBounds="8.75, 1.375, 2, 1.9631982421875023">
       <DataClassMoniker Name="/GaymerLINQDataContext/PrivateMessage" />
       <nestedChildShapes>
-        <elementListCompartment Id="2183bbf8-5462-4aed-a8e9-52050401a9fd" absoluteBounds="8.765, 1.3350000000000009, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="2183bbf8-5462-4aed-a8e9-52050401a9fd" absoluteBounds="8.765, 1.8350000000000009, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
     <classShape Id="fe421cc0-4cb6-4801-b934-c6baed501e7b" absoluteBounds="2.375, 9.875, 2, 1.1939925130208344">
@@ -146,10 +146,10 @@
         <elementListCompartment Id="b80a9a4b-4af2-435f-ba21-59cac5cc17ca" absoluteBounds="0.76500000000000012, 6.8350000000000009, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="00c6b22b-72f0-430a-93eb-043fd6784401" absoluteBounds="11.875, 3.25, 2, 1.5785953776041666">
+    <classShape Id="00c6b22b-72f0-430a-93eb-043fd6784401" absoluteBounds="11.75, 3.25, 2, 1.5785953776041666">
       <DataClassMoniker Name="/GaymerLINQDataContext/UserInfo" />
       <nestedChildShapes>
-        <elementListCompartment Id="afbecd07-52e5-44d6-b1a6-90018fa8d278" absoluteBounds="11.89, 3.7100000000000009, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="afbecd07-52e5-44d6-b1a6-90018fa8d278" absoluteBounds="11.765, 3.7100000000000009, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
     <classShape Id="0cfad2d5-c95e-4b6e-8ceb-2d67d93fc222" absoluteBounds="11.75, 0.625, 2, 1.1939925130208344">
@@ -214,28 +214,28 @@
         <classShapeMoniker Id="664fb5e1-f12e-47e5-ac83-38043facc479" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(4.375 : 13.9439925130208); (4.625 : 14.5)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(4.375 : 13.9439925130208); (4.625 : 14.5)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/GaymerLINQDataContext/Permission/Permission_PermissionInContent" />
       <nodes>
         <classShapeMoniker Id="163471b6-6757-4681-867a-df842e2bd2b8" />
         <classShapeMoniker Id="664fb5e1-f12e-47e5-ac83-38043facc479" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(4.375 : 12.75); (4.875 : 12.4439925130208)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(4.375 : 12.75); (4.875 : 12.4439925130208)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/GaymerLINQDataContext/Permission/Permission_PermissionToRole" />
       <nodes>
         <classShapeMoniker Id="163471b6-6757-4681-867a-df842e2bd2b8" />
         <classShapeMoniker Id="ab418abc-d5f0-4ed3-baa3-3c831dd3bb5b" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(4.375 : 9.875); (4.875 : 9.6362939453125)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(4.375 : 9.875); (4.875 : 9.6362939453125)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/GaymerLINQDataContext/Role/Role_UserInRole" />
       <nodes>
         <classShapeMoniker Id="fe421cc0-4cb6-4801-b934-c6baed501e7b" />
         <classShapeMoniker Id="ccda9444-7c82-45fb-ac00-2281cb732961" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(4.375 : 11.0689925130208); (4.875 : 11.25)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(4.375 : 11.0689925130208); (4.875 : 11.25)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/GaymerLINQDataContext/Role/Role_PermissionToRole" />
       <nodes>
         <classShapeMoniker Id="fe421cc0-4cb6-4801-b934-c6baed501e7b" />
@@ -249,21 +249,21 @@
         <classShapeMoniker Id="a509720f-e351-4c24-aeae-1630cb4274d1" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(18 : 11.7219962565104); (16.875 : 11.7219962565104)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(18 : 11.7219962565104); (16.875 : 11.7219962565104)]" fixedFrom="NotFixed" fixedTo="Algorithm">
       <AssociationMoniker Name="/GaymerLINQDataContext/Tag/Tag_TagOnComment" />
       <nodes>
         <classShapeMoniker Id="fd817558-4c83-4f5f-9399-aa716ba04a4d" />
         <classShapeMoniker Id="a509720f-e351-4c24-aeae-1630cb4274d1" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(10.1562525 : 12.2708968098958); (10.1562525 : 13.8181469726563); (14.875 : 13.8181469726563)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(10.1562525 : 12.2708968098958); (10.1562525 : 13.8181469726563); (14.875 : 13.8181469726563)]" fixedFrom="NotFixed" fixedTo="Algorithm">
       <AssociationMoniker Name="/GaymerLINQDataContext/DynamicContent/DynamicContent_TagOnDynamicContent" />
       <nodes>
         <classShapeMoniker Id="d26e7a98-3000-4ca6-bebf-3ff00c981b4d" />
         <classShapeMoniker Id="06f8c488-8260-48d1-95ba-fc36bb5fdb06" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(18.34375 : 12.3189925130208); (18.34375 : 13.15625); (16.875 : 13.15625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(18.34375 : 12.3189925130208); (18.34375 : 13.15625); (16.875 : 13.15625)]" fixedFrom="NotFixed" fixedTo="Algorithm">
       <AssociationMoniker Name="/GaymerLINQDataContext/Tag/Tag_TagOnDynamicContent" />
       <nodes>
         <classShapeMoniker Id="fd817558-4c83-4f5f-9399-aa716ba04a4d" />
@@ -277,7 +277,7 @@
         <classShapeMoniker Id="1e6d1874-17b0-4ce4-915c-a331f845c7a5" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(19.0625 : 11.125); (19.0625 : 6.8862939453125)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(19.0625 : 11.125); (19.0625 : 6.8862939453125)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/GaymerLINQDataContext/Tag/Tag_TagOnStaticContent" />
       <nodes>
         <classShapeMoniker Id="fd817558-4c83-4f5f-9399-aa716ba04a4d" />
@@ -312,7 +312,7 @@
         <classShapeMoniker Id="ccda9444-7c82-45fb-ac00-2281cb732961" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(9.75 : 5.625); (9.75 : 3.91429768880208); (9.27083333333333 : 3.91429768880208 : JumpStart); (9.10416666666667 : 3.91429768880208 : JumpEnd); (7.625 : 3.91429768880208)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(9.16510197437721 : 5.625); (9.16510197437721 : 4.02089730989583); (7.625 : 4.02089730989583)]" fixedFrom="Caller" fixedTo="Algorithm">
       <AssociationMoniker Name="/GaymerLINQDataContext/User/User_ContactInfo" />
       <nodes>
         <classShapeMoniker Id="eb5e1d97-5ff2-430c-b804-a6c1a1fd5b68" />
@@ -326,7 +326,7 @@
         <classShapeMoniker Id="d26e7a98-3000-4ca6-bebf-3ff00c981b4d" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(8.75 : 6.19314697265625); (6.75 : 6.19314697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(8.75 : 6.19314697265625); (6.75 : 6.19314697265625)]" fixedFrom="NotFixed" fixedTo="Algorithm">
       <AssociationMoniker Name="/GaymerLINQDataContext/User/User_Friend" />
       <nodes>
         <classShapeMoniker Id="eb5e1d97-5ff2-430c-b804-a6c1a1fd5b68" />
@@ -340,21 +340,21 @@
         <classShapeMoniker Id="e21e670a-8138-4d9d-89ae-4fec4418e3d2" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(10.3125 : 5.625); (10.3125 : 2.8381982421875)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(10.0200509871886 : 5.625); (10.0200509871886 : 3.3381982421875)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/GaymerLINQDataContext/User/User_PrivateMessage" />
       <nodes>
         <classShapeMoniker Id="eb5e1d97-5ff2-430c-b804-a6c1a1fd5b68" />
         <classShapeMoniker Id="e83f99b7-82e1-4500-85fb-ed24f73135af" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(9.1875 : 5.625); (9.1875 : 2.8381982421875)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(9.59257648078291 : 5.625); (9.59257648078291 : 3.3381982421875)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/GaymerLINQDataContext/User/User_PrivateMessage1" />
       <nodes>
         <classShapeMoniker Id="eb5e1d97-5ff2-430c-b804-a6c1a1fd5b68" />
         <classShapeMoniker Id="e83f99b7-82e1-4500-85fb-ed24f73135af" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(10.75 : 6.19794840494792); (15.375 : 6.19794840494792)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(10.75 : 6.19794840494792); (15.375 : 6.19794840494792)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/GaymerLINQDataContext/User/User_StaticContent" />
       <nodes>
         <classShapeMoniker Id="eb5e1d97-5ff2-430c-b804-a6c1a1fd5b68" />
@@ -368,14 +368,14 @@
         <classShapeMoniker Id="eb5e1d97-5ff2-430c-b804-a6c1a1fd5b68" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(10.03125 : 5.625); (10.03125 : 4.37144653320312); (10.2291666666667 : 4.37144653320312 : JumpStart); (10.3958333333333 : 4.37144653320312 : JumpEnd); (11.875 : 4.37144653320312)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(10.5383456214948 : 5.625); (10.5383456214948 : 4.08339730989583); (11.75 : 4.08339730989583)]" fixedFrom="Caller" fixedTo="Algorithm">
       <AssociationMoniker Name="/GaymerLINQDataContext/User/User_UserInfo" />
       <nodes>
         <classShapeMoniker Id="eb5e1d97-5ff2-430c-b804-a6c1a1fd5b68" />
         <classShapeMoniker Id="00c6b22b-72f0-430a-93eb-043fd6784401" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(12.8125 : 1.81899251302083); (12.8125 : 3.25)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(12.75 : 1.81899251302083); (12.75 : 3.25)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/GaymerLINQDataContext/UserInfoType/UserInfoType_UserInfo" />
       <nodes>
         <classShapeMoniker Id="0cfad2d5-c95e-4b6e-8ceb-2d67d93fc222" />

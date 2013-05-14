@@ -9,7 +9,6 @@ using System.Data;
 
 using System.Data.SqlClient;
 
-using Gaymer.Classes;
 
 public partial class CMS_Default : System.Web.UI.Page
 {

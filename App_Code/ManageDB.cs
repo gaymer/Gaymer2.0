@@ -152,14 +152,13 @@ using System.Data.SqlClient;
 
 
             DataTable dt = query(@"
-            SELECT       Role.Role
-            FROM         UserInRole 
-                         INNER JOIN
-                         Role ON UserInRole.inRoleID = " + roleId + @"
-                         INNER JOIN
-                         [User] ON UserInRole.inUserID = [User].UID AND [User].UID = " + userId + @"
-            ORDER BY [User].UID
-        ");
+                SELECT       Role.Role
+                FROM         UserInRole 
+                             INNER JOIN
+                             Role ON UserInRole.inRoleID = " + roleId + @"
+                             INNER JOIN
+                             [User] ON UserInRole.inUserID = [User].UID AND [User].UID = " + userId + @"
+                ");
 
             returnValue = (dt.Rows.Count < 1) ? false : true;
 
