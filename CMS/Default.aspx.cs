@@ -15,6 +15,7 @@ public partial class CMS_Default : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
 
+        GenericContent content = new GenericContent(typeof(SimpleText));
         
         string defaultUserID = "1";
         string defaultRoleID = "1";
