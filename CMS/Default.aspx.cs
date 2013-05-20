@@ -23,6 +23,10 @@ public partial class CMS_Default : System.Web.UI.Page
         Output.Text += contentA.controller.Value + "<br />";
         //Output.Text += contentB.controller.Value + "<br />";
         //Output.Text += contentC.controller.Value + "<br />";
+
+        GenericContent content = GenericContent.getContent(1);
+
+        Output.Text += content.ToString() + "<br />";
         
         string defaultUserID = "1";
         string defaultRoleID = "1";
