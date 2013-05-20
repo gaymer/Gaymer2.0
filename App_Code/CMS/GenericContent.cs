@@ -37,10 +37,10 @@ public class GenericContent
         if (dt==null)
             return null;
 
-        int contentType = (int)dt.Rows[0].ItemArray[1];
-        DateTime createTime = (DateTime)dt.Rows[0].ItemArray[2];
-        DateTime updateTime = (DateTime)dt.Rows[0].ItemArray[3];
-        int author = (int)dt.Rows[0].ItemArray[4];
+        int contentType = (int)dt.Rows[0]["ContentType"];
+        DateTime createTime = (DateTime)dt.Rows[0]["CreateTime"];
+        DateTime updateTime = (DateTime)dt.Rows[0]["UpdateTime"];
+        int author = (int)dt.Rows[0]["Author"];
 
 
         return new GenericContent(contentId, contentType, createTime, updateTime, author);
