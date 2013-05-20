@@ -15,9 +15,9 @@ public partial class CMS_Default : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
 
-        GenericContent<ComplexText> contentA = new GenericContent<ComplexText>(typeof(ComplexText));
-     //   GenericContent<ComplexText> contentB = new GenericContent<ComplexText>(typeof(SimpleText));
-       // GenericContent<ComplexText2> contentC = new GenericContent<ComplexText2>(typeof(ComplexText2));
+        GenericContent contentA = new GenericContent(typeof(SimpleText));
+        //GenericContent contentB = new GenericContent(typeof(ComplexText));
+        //GenericContent contentC = new GenericContent(typeof(ComplexText2));
 
         Output.Text += "<br />";
         Output.Text += contentA.controller.Value + "<br />";
