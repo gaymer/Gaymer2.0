@@ -60,7 +60,7 @@
       <Column Name="Name" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
       <Association Name="DynamicContentType_DynamicContent" Member="DynamicContents" ThisKey="DynamicContentTypeId" OtherKey="ContentType" Type="DynamicContent" />
       <Association Name="DynamicContentType_ElementInContent" Member="ElementInContent" ThisKey="DynamicContentTypeId" OtherKey="ContentTypeId" Type="ElementInContent" Cardinality="One" />
-      <Association Name="DynamicContentType_PermissionInContent" Member="PermissionInContents" ThisKey="DynamicContentTypeId" OtherKey="ContentTypeId" Type="PermissionInContent" />
+      <Association Name="DynamicContentType_Permission" Member="Permissions" ThisKey="DynamicContentTypeId" OtherKey="ContentTypeId" Type="Permission" />
     </Type>
   </Table>
   <Table Name="dbo.ElementInContent" Member="ElementInContents">
@@ -99,22 +99,6 @@
       <Column Name="Label" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="CodePath" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
       <Association Name="InputElement_ElementInContent" Member="ElementInContents" ThisKey="InputElementId" OtherKey="InputElementId" Type="ElementInContent" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Permission" Member="Permissions">
-    <Type Name="Permission">
-      <Column Name="PermissionId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Label" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Association Name="Permission_PermissionInContent" Member="PermissionInContent" ThisKey="PermissionId" OtherKey="PermissionId" Type="PermissionInContent" Cardinality="One" />
-      <Association Name="Permission_PermissionToRole" Member="PermissionToRoles" ThisKey="PermissionId" OtherKey="PermissionId" Type="PermissionToRole" />
-    </Type>
-  </Table>
-  <Table Name="dbo.PermissionInContent" Member="PermissionInContents">
-    <Type Name="PermissionInContent">
-      <Column Name="PermissionId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="ContentTypeId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="DynamicContentType_PermissionInContent" Member="DynamicContentType" ThisKey="ContentTypeId" OtherKey="DynamicContentTypeId" Type="DynamicContentType" IsForeignKey="true" />
-      <Association Name="Permission_PermissionInContent" Member="Permission" ThisKey="PermissionId" OtherKey="PermissionId" Type="Permission" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.PrivateMessage" Member="PrivateMessages">
@@ -252,8 +236,8 @@
       <Column Name="relationId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="PermissionId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="RoleId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="Permission_PermissionToRole" Member="Permission" ThisKey="PermissionId" OtherKey="PermissionId" Type="Permission" IsForeignKey="true" />
       <Association Name="Role_PermissionToRole" Member="Role" ThisKey="RoleId" OtherKey="RoleID" Type="Role" IsForeignKey="true" />
+      <Association Name="Permission_PermissionToRole" Member="Permission" ThisKey="PermissionId" OtherKey="PermissionId" Type="Permission" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.UserRelation" Member="UserRelations">
@@ -264,6 +248,15 @@
       <Column Name="RelationType" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="User_UserRelation" Member="User" ThisKey="RelatedUserId" OtherKey="UID" Type="User" IsForeignKey="true" />
       <Association Name="User_UserRelation1" Member="User1" ThisKey="UserId" OtherKey="UID" Type="User" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Permission" Member="Permissions">
+    <Type Name="Permission">
+      <Column Name="PermissionId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Label" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ContentTypeId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Permission_PermissionToRole" Member="PermissionToRoles" ThisKey="PermissionId" OtherKey="PermissionId" Type="PermissionToRole" />
+      <Association Name="DynamicContentType_Permission" Member="DynamicContentType" ThisKey="ContentTypeId" OtherKey="DynamicContentTypeId" Type="DynamicContentType" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>
