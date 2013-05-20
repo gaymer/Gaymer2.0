@@ -117,6 +117,7 @@ public partial class User : INotifyPropertyChanging, INotifyPropertyChanged
 	private EntityRef<UserRole> _UserRole;
 	
 	private EntityRef<UserAbout> _UserAbout;
+
 	
     #region Extensibility Method Definitions
     partial void OnLoaded();

@@ -6,8 +6,7 @@
         {
             width:50%; 
             float:left;
-        }
-        
+        }   
 
 fieldset
 {
@@ -56,7 +55,7 @@ fieldset
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
-        <div class="SplitHolder" style="background:#94deff;">
+        <div class="SplitHolder" style="background:#EFFFDF;">
             <h1>Login</h1>
                 <asp:TextBox ID="LogUsernameBox" runat="server"></asp:TextBox>
                 <asp:Label ID="LogUsernameTxt" runat="server" Text="User Name"></asp:Label>
@@ -66,7 +65,7 @@ fieldset
             <br />
                 <asp:Button ID="LogInBtn" runat="server" OnClick="LogInBtn_Click" Text="Log in" />
         </div>
-        <div class="SplitHolder" style="background:#94ff6a;">
+        <div class="SplitHolder" style="background:#EFFFDF;">
             <h1>Registrering</h1>
             
    <fieldset>
