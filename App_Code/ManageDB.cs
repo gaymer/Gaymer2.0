@@ -129,7 +129,7 @@ using System.Data.SqlClient;
         /// <param name="parameterList">Pass a Dictionary of parameters to use in SQL-string. Will be added through the SqlCommand.Parameters.Add()-method</param>
         /// <param name="readOnly">The returned DataTable will be read-only or not. Default value is true</param>
         /// <returns></returns>
-        private static DataTable query(string sqlString, Dictionary<string, object> parameterList, bool readOnly = true, bool debug = false)
+        public static DataTable query(string sqlString, Dictionary<string, object> parameterList=null, bool readOnly = true, bool debug = false)
         {
             if (sqlString == string.Empty) return null;
 
@@ -186,7 +186,7 @@ using System.Data.SqlClient;
         /// <param name="sqlString">The SQL</param>
         /// <param name="parameterList">Pass a List of SqlParameters to use in SQL-string. Will be added through the SqlCommand.Parameters.Add()-method</param>
         /// <returns></returns>
-        static public int nonQuery(string sqlString, Dictionary<string, object> parameterList, bool debug = false)
+        static public int nonQuery(string sqlString, Dictionary<string, object> parameterList=null, bool debug = false)
         {
             if (sqlString == "") return 0;
 
@@ -256,20 +256,20 @@ using System.Data.SqlClient;
             return returnValue;
         }
 
-        public class ost : Dictionary<string,object>
-        {
-            public List<int> myList { get; set; }
+        //public class ost : Dictionary<string,object>
+        //{
+        //    public List<int> myList { get; set; }
 
-            public ost()
-            {
+        //    public ost()
+        //    {
 
-            }
-            public void increase(int value)
-            {
-                myList.Add(value);
+        //    }
+        //    public void increase(int value)
+        //    {
+        //        myList.Add(value);
 
-            }
-        }
+        //    }
+        //}
 
 
     }
