@@ -21,4 +21,9 @@ public class SimpleText
     {
         ph.Controls.Add(new Control());
     }
+
+    public override Control getControl()
+    {
+        throw new NotImplementedException();
+    }
 }

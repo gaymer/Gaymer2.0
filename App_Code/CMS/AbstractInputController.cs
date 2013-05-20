@@ -14,6 +14,8 @@ public abstract class AbstractInputController
     public String Value { get; set; }
     
     public abstract void insertEdit(PlaceHolder ph);
+
+    public abstract Control getControl();
     
 
 	public AbstractInputController()
