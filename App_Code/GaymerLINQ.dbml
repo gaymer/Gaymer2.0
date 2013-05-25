@@ -1,20 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="gaymerdb" Class="GaymerLINQDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
   <Connection Mode="WebSettings" ConnectionString="Data Source=mssql1.cloudsites.gearhost.com;Initial Catalog=gaymerdb;Persist Security Info=True;User ID=gaymerdb" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="gaymerdbConnectionString" Provider="System.Data.SqlClient" />
-  <Table Name="dbo.Comment" Member="Comments">
-    <Type Name="Comment">
-      <Column Name="CommentId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Post" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Author" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="CreateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="UpdateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="Title" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="Text" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
-      <Association Name="Comment_ForumThread" Member="ForumThreads" ThisKey="CommentId" OtherKey="CommentId" Type="ForumThread" />
-      <Association Name="Comment_TagOnComment" Member="TagOnComments" ThisKey="CommentId" OtherKey="CommentId" Type="TagOnComment" />
-      <Association Name="DynamicContent_Comment" Member="DynamicContent" ThisKey="Post" OtherKey="DynamicContentId" Type="DynamicContent" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
-      <Association Name="User_Comment" Member="User" ThisKey="Author" OtherKey="UID" Type="User" IsForeignKey="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.UserInRole" Member="UserInRoles">
     <Type Name="UserInRole">
       <Column Name="UserRole" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -48,8 +33,8 @@
       <Column Name="CreateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="UpdateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="Author" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="DynamicContent_Comment" Member="Comments" ThisKey="DynamicContentId" OtherKey="Post" Type="Comment" />
       <Association Name="DynamicContent_TagOnDynamicContent" Member="TagOnDynamicContents" ThisKey="DynamicContentId" OtherKey="DynamicContentId" Type="TagOnDynamicContent" />
+      <Association Name="DynamicContent_Comment" Member="Comments" ThisKey="DynamicContentId" OtherKey="Post_DynamicContentID" Type="Comment" />
       <Association Name="DynamicContentType_DynamicContent" Member="DynamicContentType" ThisKey="ContentType" OtherKey="DynamicContentTypeId" Type="DynamicContentType" IsForeignKey="true" />
       <Association Name="User_DynamicContent" Member="User" ThisKey="Author" OtherKey="UID" Type="User" IsForeignKey="true" />
     </Type>
@@ -88,8 +73,8 @@
       <Column Name="Text" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
       <Column Name="CommentId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="ForumId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="Comment_ForumThread" Member="Comment" ThisKey="CommentId" OtherKey="CommentId" Type="Comment" IsForeignKey="true" />
       <Association Name="Forum_ForumThread" Member="Forum" ThisKey="ForumId" OtherKey="ForumId" Type="Forum" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="Comment_ForumThread" Member="Comment" ThisKey="CommentId" OtherKey="CommentId" Type="Comment" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.InputElement" Member="InputElements">
@@ -148,8 +133,8 @@
       <Column Name="TagOnCommentId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="TagId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="CommentId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="Comment_TagOnComment" Member="Comment" ThisKey="CommentId" OtherKey="CommentId" Type="Comment" IsForeignKey="true" />
       <Association Name="Tag_TagOnComment" Member="Tag" ThisKey="TagId" OtherKey="TagId" Type="Tag" IsForeignKey="true" />
+      <Association Name="Comment_TagOnComment" Member="Comment" ThisKey="CommentId" OtherKey="CommentId" Type="Comment" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.TagOnDynamicContent" Member="TagOnDynamicContents">
@@ -190,7 +175,6 @@
       <Column Name="RoleID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="LoginSession" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
       <Column Name="Salt" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-      <Association Name="User_Comment" Member="Comments" ThisKey="UID" OtherKey="Author" Type="Comment" />
       <Association Name="User_UserInRole" Member="UserInRoles" ThisKey="UID" OtherKey="inUserID" Type="UserInRole" />
       <Association Name="User_ContactInfo" Member="ContactInfos" ThisKey="UID" OtherKey="User" Type="ContactInfo" />
       <Association Name="User_DynamicContent" Member="DynamicContents" ThisKey="UID" OtherKey="Author" Type="DynamicContent" />
@@ -200,6 +184,7 @@
       <Association Name="User_UserInfo" Member="UserInfos" ThisKey="UID" OtherKey="User" Type="UserInfo" />
       <Association Name="User_UserRelation" Member="UserRelations" ThisKey="UID" OtherKey="RelatedUserId" Type="UserRelation" />
       <Association Name="User_UserRelation1" Member="UserRelations1" ThisKey="UID" OtherKey="UserId" Type="UserRelation" />
+      <Association Name="User_Comment" Member="Comments" ThisKey="UID" OtherKey="AuthorID" Type="Comment" />
       <Association Name="UserAbout_User" Member="UserAbout" ThisKey="AbID" OtherKey="AbID" Type="UserAbout" IsForeignKey="true" />
     </Type>
   </Table>
@@ -257,6 +242,25 @@
       <Column Name="ContentTypeId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="Permission_PermissionToRole" Member="PermissionToRoles" ThisKey="PermissionId" OtherKey="PermissionId" Type="PermissionToRole" />
       <Association Name="DynamicContentType_Permission" Member="DynamicContentType" ThisKey="ContentTypeId" OtherKey="DynamicContentTypeId" Type="DynamicContentType" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Comment" Member="Comments">
+    <Type Name="Comment">
+      <Column Name="CommentId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Post_DynamicContentID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="AuthorID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CreateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="UpdateTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Title" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Text" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="CommentOnCommentID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Hidden" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="Comment_ForumThread" Member="ForumThreads" ThisKey="CommentId" OtherKey="CommentId" Type="ForumThread" />
+      <Association Name="Comment_TagOnComment" Member="TagOnComments" ThisKey="CommentId" OtherKey="CommentId" Type="TagOnComment" />
+      <Association Name="Comment_Comment" Member="Comments" ThisKey="CommentId" OtherKey="CommentOnCommentID" Type="Comment" />
+      <Association Name="Comment_Comment" Member="Comment1" ThisKey="CommentOnCommentID" OtherKey="CommentId" Type="Comment" IsForeignKey="true" />
+      <Association Name="DynamicContent_Comment" Member="DynamicContent" ThisKey="Post_DynamicContentID" OtherKey="DynamicContentId" Type="DynamicContent" IsForeignKey="true" DeleteRule="CASCADE" />
+      <Association Name="User_Comment" Member="User" ThisKey="AuthorID" OtherKey="UID" Type="User" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>
