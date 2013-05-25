@@ -36,10 +36,12 @@ public partial class User_Normal : System.Web.UI.UserControl
         //                 {
         //                     URole = b.Role
         //                 }).FirstOrDefault();
+        //lblRolle.Text = rolle.URole;
 
+        
         Username.Text = user.Uname;
         //lblRolle.Text = rolle.URole; 
-
+        
         MyAvatar.ImageUrl = "~Style/Avatar/" + user.Avatar;
         MyAvatar.AlternateText = user.Uname + " Avatar";
 

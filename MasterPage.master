@@ -14,7 +14,7 @@
         <ajaxToolkit:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server"></ajaxToolkit:ToolkitScriptManager>
         <div class="MainPageHolder">
         <div class="MainHeader">
-            <h1>Topp</h1>
+              <asp:Image ID="Topp" runat="server" Height="115px" Width="1272px" ImageUrl="~/Style/Images/GaymerHead.gif" />
             <asp:Button ID="LogOutBtn"  runat="server" Text="Log Out" OnClick="LogOut_Click" />
         </div>
         <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">

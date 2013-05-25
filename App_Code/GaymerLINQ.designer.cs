@@ -3767,6 +3767,7 @@ public partial class User : INotifyPropertyChanging, INotifyPropertyChanged
 	private EntitySet<Comment> _Comments;
 	
 	private EntityRef<UserAbout> _UserAbout;
+
 	
     #region Extensibility Method Definitions
     partial void OnLoaded();

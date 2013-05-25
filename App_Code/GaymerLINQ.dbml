@@ -188,6 +188,11 @@
       <Association Name="UserAbout_User" Member="UserAbout" ThisKey="AbID" OtherKey="AbID" Type="UserAbout" IsForeignKey="true" />
     </Type>
   </Table>
+      <Column Name="RoleID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Role" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="Role_UserInRole" Member="UserInRoles" ThisKey="RoleID" OtherKey="inRoleID" Type="UserInRole" />
+    </Type>
+  </Table>
   <Table Name="dbo.UserAbout" Member="UserAbouts">
     <Type Name="UserAbout">
       <Column Name="AbID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
