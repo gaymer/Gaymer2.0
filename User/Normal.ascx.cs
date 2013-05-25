@@ -40,6 +40,7 @@ public partial class User_Normal : System.Web.UI.UserControl
 
         
         Username.Text = user.Uname;
+        //lblRolle.Text = rolle.URole; 
         
         MyAvatar.ImageUrl = "~Style/Avatar/" + user.Avatar;
         MyAvatar.AlternateText = user.Uname + " Avatar";
