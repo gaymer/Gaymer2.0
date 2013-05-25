@@ -4,7 +4,7 @@
     <style>
         .SplitHolder
         {
-            width:31%; 
+            width:100%; 
             float:left;
         }   
 
@@ -54,8 +54,11 @@ fieldset
     }
     </style>
 </asp:Content>
+
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server"> 
-    <div class="SplitHolder" style="background:#EFFFDF; height: 356px;">
+    <input type ="Button" id="LogToggelbtn"  value="Logg inn" onclick="Toggel('LoginDiv')" />
+
+    <div class="SplitHolder" id="LoginDiv" style="background:#EFFFDF; visibility:hidden; height: 302px;">
             <h1>Login</h1>
                 <asp:TextBox ID="LogUsernameBox" runat="server"></asp:TextBox>
                 <asp:Label ID="LogUsernameTxt" runat="server" Text="User Name"></asp:Label>
@@ -68,5 +71,4 @@ fieldset
         <p>eller</p>
             <asp:Button ID="Regbtn" runat="server" OnClick="Regbtn_Click" Text="Registrer deg" />
         </div>
-       
 </asp:Content>
