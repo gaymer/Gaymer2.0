@@ -130,9 +130,4 @@ public partial class User_Register : System.Web.UI.Page
             }
         }
     }
-
-    protected void Homebtn_Click(object sender, ImageClickEventArgs e)
-    {
-        Response.Redirect("/StartPage.aspx");
-    }
 }

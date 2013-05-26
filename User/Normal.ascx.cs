@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Data;
 
 public partial class User_Normal : System.Web.UI.UserControl
 {
@@ -19,6 +20,7 @@ public partial class User_Normal : System.Web.UI.UserControl
                     where a.UID == login.GetUserID()
                     select new
                     {
+                        Uid = a.UID,
                         Uname = a.Username,   
                         Role = a.RoleID,
                         Firstname = a.UserAbout.FirstName,
@@ -30,19 +32,27 @@ public partial class User_Normal : System.Web.UI.UserControl
                         Living = ""
                     }).FirstOrDefault();
 
-        //var rolle = (from b in db.UserRoles        // Henter ut brukerens rolle fra databasen. 
-        //             where b.RoleID == user.Role
-        //             select new
-        //                 {
-        //                     URole = b.Role
-        //                 }).FirstOrDefault();
-        //lblRolle.Text = rolle.URole;
+        // Henter ut brukerens rolle fra databasen. 
 
-        
+        var userRole = (from UserInRoles in db.UserInRoles
+                        where UserInRoles.UserRole == user.Role  //Finner "rett" bruker i UserInRole. 
+                     select new
+                         {
+                             URole = UserInRoles.inRoleID
+
+                         }).FirstOrDefault();
+
+        var rolle = (from Roles in db.Roles
+                     where Roles.RoleID == userRole.URole
+                     select new
+                     {
+                         BrukerRolle = Roles.Role1
+                     }).FirstOrDefault();
+
+        lblRolle.Text = rolle.BrukerRolle;        
         Username.Text = user.Uname;
-        //lblRolle.Text = rolle.URole; 
         
-        MyAvatar.ImageUrl = "~Style/Avatar/" + user.Avatar;
+        //MyAvatar.ImageUrl = "~Style/Avatar/" + user.Avatar;
         MyAvatar.AlternateText = user.Uname + " Avatar";
 
         AboutMeTxt.Text = user.AboutMe;
@@ -55,6 +65,25 @@ public partial class User_Normal : System.Web.UI.UserControl
         {
             AdminPanel.Visible = true; 
         }
+
+
+        //Finne alle venner/relasjoner
+
+        Dictionary<String, object> parameter = new Dictionary<string, object>();
+        parameter.Add("@UserID", login.GetUserID());
+        
+        DataTable dt = ManageDB.query(@"
+            SELECT [User].Username
+            FROM [User],UserRelation
+            WHERE UserRelation.UserId = @UserID
+                AND [User].UID = UserRelation.RelatedUserId
+            ",parameter,debug:true);
+
+        FriendView.DataSource = dt;
+        FriendView.DataBind();
+
+
+
     }
     private int AgeYr(DateTime? Bdate)
     {
@@ -80,4 +109,5 @@ public partial class User_Normal : System.Web.UI.UserControl
             return now.Year - date.Year + arteller;
         }
     }
+
 }

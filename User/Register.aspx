@@ -3,7 +3,6 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
-    <asp:ImageButton ID="Homebtn" runat="server" Height="65px" ImageUrl="~/Style/Images/mariobtn.gif" Width="78px" ImageAlign="Right" OnClick="Homebtn_Click"/> 
     <div class="SplitHolder" style="background:#EFFFDF;">
             <h1>Registrering</h1>
                      
