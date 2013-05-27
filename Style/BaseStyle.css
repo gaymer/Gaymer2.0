@@ -1,9 +1,12 @@
-﻿body {
+﻿body
+{
+    font-family:Arial;
     margin: 0;
     text-wrap: normal;
-    background:#001400 url('/Style/Images/GaymerGradientBG_2.png');
+    background: #001400 url('/Style/Images/GaymerGradientBG_2.png');
     background-repeat: repeat-x;
 }
+
 .MainPageHolder
 {
     overflow: hidden;
@@ -13,46 +16,71 @@
 
 .MainHeader
 {
-    background:#EFFFDF;
+    background: #EFFFDF;
     width: 100%;
     float: left;
 }
 /* Base Style */
 .ButtonBase
 {
-    /*Ikke ferdig*/
+    /*Grunn design for knapper*/
     -webkit-border-bottom-left-radius: 3px;
--webkit-border-bottom-right-radius: 3px;
--webkit-border-radius: 3px;
--webkit-border-top-left-radius: 3px;
--webkit-border-top-right-radius: 3px;
--webkit-box-shadow: rgba(255, 255, 255, 0.149) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.251) 0px 1px 1px 0px;
-background: linear-gradient(to bottom, #3291C8 0px, #2F88BC 100%);
-border-radius: 3px;
-box-shadow: rgba(255, 255, 255, 0.149) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.251) 0px 1px 1px 0px;
-color: #EEEEEE;
-display:inline-block;
-margin: 5px;
-padding: 5px;
-text-shadow: rgba(0, 0, 0, 0.400) 0px 1px 0px;
+    -webkit-border-bottom-right-radius: 3px;
+    -webkit-border-radius: 3px;
+    -webkit-border-top-left-radius: 3px;
+    -webkit-border-top-right-radius: 3px;
+    -webkit-box-shadow: rgba(255, 255, 255, 0.149) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.251) 0px 1px 1px 0px;
+    background: linear-gradient(to bottom, #3291C8 0px, #2F88BC 100%);
+    border-radius: 3px;
+    border: 1px solid;
+    box-shadow: rgba(255, 255, 255, 0.149) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.251) 0px 1px 1px 0px;
+    color: #EEEEEE;
+    display: inline-block;
+    margin: 5px;
+    padding: 5px;
+    text-shadow: rgba(0, 0, 0, 0.400) 0px 1px 0px;
 }
+
     .ButtonBase:hover
     {
-
+        background: linear-gradient(to bottom, #2F88BC 0px, #3291C8 100%);
     }
+
+    .ButtonBase:active
+    {
+        border: 1px inset;
+    }
+
 /* Wall */
 .WallInput
 {
-    height: 100px; 
-    width: 500px
+    height: 100px;
+    width: 500px;
 }
+
 .WallElement
 {
-    border:1px solid black; 
-    margin:10px 5px;
-    width:495px;
+    background: #fff;
+    border: 1px solid black;
+    margin: 10px 5px;
+    width: 495px;
 }
+
 .WallAlternating
 {
-    background:#eee; 
+    background: #ddd;
+}
+
+.WallEditTextBox
+{
+    resize: vertical;
+    outline: none;
+    width: 100%;
+    padding: 5px;
+    border: none;
+    height: 75px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    margin-bottom: -5px;
 }

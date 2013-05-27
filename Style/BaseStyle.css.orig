@@ -1,0 +1,61 @@
+﻿body {
+    margin: 0;
+    text-wrap: normal;
+<<<<<<< HEAD
+    font-family:Arial;
+=======
+    background:#001400;
+>>>>>>> 73824f6bba76d1aa1b8bb51bdc4c0e537002ad18
+}
+.MainPageHolder
+{
+    overflow: hidden;
+    margin: 0 auto;
+    width: 90%;
+}
+
+.MainHeader
+{
+    background:#EFFFDF;
+    width: 100%;
+    float: left;
+}
+/* Base Style */
+.ButtonBase
+{
+    /*Ikke ferdig*/
+    -webkit-border-bottom-left-radius: 3px;
+-webkit-border-bottom-right-radius: 3px;
+-webkit-border-radius: 3px;
+-webkit-border-top-left-radius: 3px;
+-webkit-border-top-right-radius: 3px;
+-webkit-box-shadow: rgba(255, 255, 255, 0.149) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.251) 0px 1px 1px 0px;
+background: linear-gradient(to bottom, #3291C8 0px, #2F88BC 100%);
+border-radius: 3px;
+box-shadow: rgba(255, 255, 255, 0.149) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.251) 0px 1px 1px 0px;
+color: #EEEEEE;
+display:inline-block;
+margin: 5px;
+padding: 5px;
+text-shadow: rgba(0, 0, 0, 0.400) 0px 1px 0px;
+}
+    .ButtonBase:hover
+    {
+
+    }
+/* Wall */
+.WallInput
+{
+    height: 100px; 
+    width: 500px
+}
+.WallElement
+{
+    border:1px solid black; 
+    margin:10px 5px;
+    width:495px;
+}
+.WallAlternating
+{
+    background:#eee; 
+}
