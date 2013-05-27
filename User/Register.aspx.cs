@@ -56,7 +56,8 @@ public partial class User_Register : System.Web.UI.Page
 
                 UserInRole uir = new UserInRole();
                 uir.inRoleID = 2;
-                uir.inUserID = use.UID;
+
+                use.UserInRoles.Add(uir);
 
                 db.Users.InsertOnSubmit(use);
                 db.UserInRoles.InsertOnSubmit(uir);
