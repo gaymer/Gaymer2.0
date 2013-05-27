@@ -19,23 +19,26 @@ public partial class Test : System.Web.UI.Page
         GaymerLINQDataContext db = new GaymerLINQDataContext();
         LoginLib login = new LoginLib();
         string input = Input.Text;
-        int UserID = login.GetUserID();
-
-        Comment com = new Comment();
-        com.AuthorID = UserID;
-        com.CreateTime = DateTime.Now;
-        com.Text = input;
-        com.Hidden = false;
-
-        db.Comments.InsertOnSubmit(com);
-
-        try
+        if (input != "")
         {
-            db.SubmitChanges();
-            BindWall();
-        }
-        catch
-        {
+            int UserID = login.GetUserID();
+
+            Comment com = new Comment();
+            com.AuthorID = UserID;
+            com.CreateTime = DateTime.Now;
+            com.Text = input;
+            com.Hidden = false;
+
+            db.Comments.InsertOnSubmit(com);
+
+            try
+            {
+                db.SubmitChanges();
+                BindWall();
+            }
+            catch
+            {
+            }
         }
     }
     private void BindWall()
@@ -108,5 +111,28 @@ public partial class Test : System.Web.UI.Page
         TextBox EditBox = (TextBox)item.FindControl("EditBox");
 
         EditBox.Text = WallContent.FirstOrDefault(p => p.CommentID == (int)Wall.DataKeys[e.NewEditIndex].Value).Comment;
+    }
+    protected void Wall_ItemDeleting(object sender, ListViewDeleteEventArgs e)
+    {
+        GaymerLINQDataContext db = new GaymerLINQDataContext();
+        LoginLib login = new LoginLib();
+
+        db.Comments.Where(a => a.CommentId == (int)Wall.DataKeys[e.ItemIndex].Value).First().Hidden = true;
+        try { db.SubmitChanges(); }
+        catch { }
+
+        int UID = login.GetUserID();
+        var WallContent = from a in db.Comments
+                          where a.AuthorID == login.GetUserID() && !a.Hidden && a.CommentId != (int)Wall.DataKeys[e.ItemIndex].Value
+                          orderby a.CommentId descending
+                          select new
+                          {
+                              CommentID = a.CommentId,
+                              Username = a.User.Username,
+                              CreatedTime = a.UpdateTime.HasValue ? "Updated: " + a.UpdateTime.Value.ToString() : "Created:" + a.CreateTime,
+                              Comment = a.Text
+                          };
+        Wall.DataSource = WallContent;
+        Wall.DataBind();
     }
 }

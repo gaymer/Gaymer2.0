@@ -56,7 +56,7 @@ fieldset
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server"> 
-    <input type ="Button" id="LogToggelbtn"  value="Logg inn" onclick="Toggel('LoginDiv')" />
+    <input type ="Button" id="LogToggelbtn" class="ButtonBase" value="Logg inn" onclick="Toggel('LoginDiv')" />
 
     <div class="SplitHolder" id="LoginDiv" style="background:#EFFFDF; visibility:hidden; height: 302px;">
         
