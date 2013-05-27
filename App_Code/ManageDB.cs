@@ -207,11 +207,20 @@ using System.Data.SqlClient;
             return (numberOfPermissions > 0);
         }
 
+
+        /// <summary>
+        /// Returns a List of types T from a query returning a SINGLE column.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="sql">SQL-string</param>
+        /// <param name="parameters">Dictionary of string,object of parameters</param>
+        /// <param name="debug">When false the query will not throw exceptions</param>
+        /// <returns>Returns a List of types T from a query returning a SINGLE column, or null if more than one column</returns>
         public static List<T> GetSingleColumnResultAsList<T>(string sql, Dictionary<string, object> parameters = null, bool debug = false)
         {
             DataTable dt = query(sql, parameters, debug);
 
-            if (dt.Columns.Count > 1) return null;
+            if (dt==null || dt.Columns.Count > 1) return null;
 
             return (from DataRow row in dt.Rows select (T) row[0]).ToList(); // LINQ-ekvivalent for koden under (R#-hjelp)
 
