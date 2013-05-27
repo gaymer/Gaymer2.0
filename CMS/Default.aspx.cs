@@ -48,5 +48,5 @@ public partial class CMS_Default : System.Web.UI.Page
     //    }
     //    Output.Text = NumberOfAddedRows + " rader lagt til i tabellen.";
 
-    //}
+    }
 }
