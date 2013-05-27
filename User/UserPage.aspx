@@ -7,7 +7,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
         <ContentTemplate>
-            <asp:Button ID="ModifySelf" runat="server" Text="Modify" OnClick="ModifySelf_Click" />
+            <asp:Button CssClass="ButtonBase" ID="ModifySelf" runat="server" Text="Modify" OnClick="ModifySelf_Click" />
             <uc1:Modify Visible="false" runat="server" ID="Modify" />
             <uc1:Normal runat="server" ID="Normal" />
        

@@ -15,10 +15,10 @@
                 <asp:TextBox ID="LogPasswordBox" runat="server" TextMode="Password"></asp:TextBox>
                 <asp:Label ID="LogPasswordTxt" runat="server" Text="Password"></asp:Label>
             <br />
-                <asp:Button ID="LogInBtn" runat="server" OnClick="LogInBtn_Click" Text="Log in" />
+                <asp:Button CssClass="ButtonBase" ID="LogInBtn" runat="server" OnClick="LogInBtn_Click" Text="Log in" />
             <asp:Label ID="ErrorMessage" runat="server" ></asp:Label></ContentTemplate></asp:UpdatePanel>
             <br />
         <p>eller</p>
-            <asp:Button ID="Regbtn" runat="server" OnClick="Regbtn_Click" Text="Registrer deg" />
+            <asp:Button CssClass="ButtonBase" ID="Regbtn" runat="server" OnClick="Regbtn_Click" Text="Registrer deg" />
         </div>
 </asp:Content>
