@@ -21,7 +21,7 @@ public class GenericContent
 
     static Type defaultGenericContentType = typeof(SimpleText);
 
-    public AbstractInputController controller;
+    public List<AbstractInputController> ControllerList = new List<AbstractInputController>();
 
     public static GenericContent getContent(int contentId)
     {
@@ -34,7 +34,7 @@ public class GenericContent
                 WHERE DynamicContentId=@ContentId
             ", parameterList);
 
-        if (dt==null)
+        if (dt==null || dt.Rows.Count<1)
             return null;
 
         int contentType = (int)dt.Rows[0]["ContentType"];
@@ -55,17 +55,39 @@ public class GenericContent
         this.Author = author;
     }
 
+    void UpdateControllerList()
+    {
+        Dictionary<string, object> parameterList = new Dictionary<string, object>();
+        parameterList.Add("ContentId", ContentId);
+
+        DataTable dt = ManageDB.query(@"
+                SELECT * 
+                FROM DynamicContent 
+                WHERE DynamicContentId=@ContentId
+            ", parameterList);
+
+        if (dt == null)
+            return;
+
+        int contentType = (int)dt.Rows[0]["ContentType"];
+        DateTime createTime = (DateTime)dt.Rows[0]["CreateTime"];
+        DateTime updateTime = (DateTime)dt.Rows[0]["UpdateTime"];
+        int author = (int)dt.Rows[0]["Author"];
+    }
 
 
 
 
 	public GenericContent(Type type=null)
     {
+        AbstractInputController newController;
 
         if (type == null || !type.IsSubclassOf(typeof(AbstractInputController)))
-            this.controller = (AbstractInputController)System.Activator.CreateInstance(defaultGenericContentType);
+            newController = (AbstractInputController)System.Activator.CreateInstance(defaultGenericContentType);
         else
-            this.controller = (AbstractInputController)System.Activator.CreateInstance(type);
+            newController = (AbstractInputController)System.Activator.CreateInstance(type);
+
+        this.ControllerList.Add(newController);
 
 	}
 }
