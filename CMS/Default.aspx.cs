@@ -37,8 +37,8 @@ public partial class CMS_Default : System.Web.UI.Page
 
         userId = (!Int32.TryParse(userId, out userIdInt) || userId == "" || userId == null) ? defaultUserID : userId;
         roleId = (!Int32.TryParse(roleId, out roleIdInt) || roleId == "" || roleId == null) ? defaultRoleID : roleId;
-
-        if (ManageDB.userHasRole(roleIdInt, userIdInt))
+        
+        if (ManageDB.UserHasRole(roleIdInt, userIdInt))
         {
             Output.Text += "Brukeren har rollen.";
         }
