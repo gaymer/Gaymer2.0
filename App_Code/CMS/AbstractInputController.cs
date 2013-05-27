@@ -19,6 +19,7 @@ public abstract class AbstractInputController
     
 
 	public AbstractInputController()
+
 	{
         Value = "BaseClass";
 	}

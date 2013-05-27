@@ -20,32 +20,32 @@ public partial class CMS_Default : System.Web.UI.Page
         //GenericContent contentC = new GenericContent(typeof(ComplexText2));
 
         Output.Text += "<br />";
-        Output.Text += contentA.controller.Value + "<br />";
+        Output.Text += contentA.ControllerList[0].Value.ToString() + "<br />";
         //Output.Text += contentB.controller.Value + "<br />";
         //Output.Text += contentC.controller.Value + "<br />";
 
         GenericContent content = GenericContent.getContent(1);
 
-        Output.Text += content.ToString() + "<br />";
+        Output.Text += (content!=null)? content.ToString() + "<br />": "";
         
-        string defaultUserID = "1";
-        string defaultRoleID = "1";
+        const string defaultUserID = "1";
+        const string defaultRoleID = "1";
         string userId = Request["userId"];
         string roleId = Request["roleId"];
         int userIdInt, roleIdInt;
 
 
-        userId = (!Int32.TryParse(userId, out userIdInt) || userId == "" || userId == null) ? defaultUserID : userId;
-        roleId = (!Int32.TryParse(roleId, out roleIdInt) || roleId == "" || roleId == null) ? defaultRoleID : roleId;
+        userId = (!Int32.TryParse(userId, out userIdInt) || string.IsNullOrEmpty(userId)) ? defaultUserID : userId;
+        roleId = (!Int32.TryParse(roleId, out roleIdInt) || string.IsNullOrEmpty(roleId)) ? defaultRoleID : roleId;
 
-    //    if (ManageDB.UserHasRole(roleIdInt, userIdInt)) 
-    //    {
-    //        Output.Text += "Brukeren har rollen.";
-    //    }
-    //    else
-    //    {
-    //        Output.Text += "Brukeren har ikke rollen.";
-    //    }
+        if (ManageDB.UserHasRole(roleIdInt, userIdInt))
+        {
+            Output.Text += "Brukeren har rollen.";
+        }
+        else
+        {
+            Output.Text += "Brukeren har ikke rollen.";
+        }
     //    Output.Text = NumberOfAddedRows + " rader lagt til i tabellen.";
 
     }
