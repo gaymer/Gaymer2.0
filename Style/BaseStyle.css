@@ -48,11 +48,25 @@ text-shadow: rgba(0, 0, 0, 0.400) 0px 1px 0px;
 }
 .WallElement
 {
+    background:#fff; 
     border:1px solid black; 
     margin:10px 5px;
     width:495px;
 }
 .WallAlternating
 {
-    background:#eee; 
+    background:#ddd; 
+}
+.WallEditTextBox
+{
+    resize:vertical;
+    outline: none;
+    width: 100%;
+    padding: 10px;
+    border: none;
+    height: 75px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    margin-bottom: -5px;
 }

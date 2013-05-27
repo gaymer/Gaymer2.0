@@ -27,6 +27,7 @@ public partial class _StartPage : System.Web.UI.Page
         else
         {
             // Ikke logget inn prøv igjen
+            ErrorMessage.Text = "Feil brukernavn eller passord.";
         }
 
     }

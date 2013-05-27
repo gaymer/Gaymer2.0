@@ -59,6 +59,8 @@ fieldset
     <input type ="Button" id="LogToggelbtn"  value="Logg inn" onclick="Toggel('LoginDiv')" />
 
     <div class="SplitHolder" id="LoginDiv" style="background:#EFFFDF; visibility:hidden; height: 302px;">
+        
+        <asp:UpdatePanel ID="UpdatePanel1" runat="server"><ContentTemplate>
             <h1>Login</h1>
                 <asp:TextBox ID="LogUsernameBox" runat="server"></asp:TextBox>
                 <asp:Label ID="LogUsernameTxt" runat="server" Text="User Name"></asp:Label>
@@ -67,6 +69,7 @@ fieldset
                 <asp:Label ID="LogPasswordTxt" runat="server" Text="Password"></asp:Label>
             <br />
                 <asp:Button ID="LogInBtn" runat="server" OnClick="LogInBtn_Click" Text="Log in" />
+            <asp:Label ID="ErrorMessage" runat="server" ></asp:Label></ContentTemplate></asp:UpdatePanel>
             <br />
         <p>eller</p>
             <asp:Button ID="Regbtn" runat="server" OnClick="Regbtn_Click" Text="Registrer deg" />

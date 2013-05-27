@@ -47,11 +47,66 @@ public partial class Test : System.Web.UI.Page
                           orderby a.CommentId descending
                           select new
                           {
+                              CommentID = a.CommentId,
                               Username = a.User.Username,
                               CreatedTime = a.UpdateTime.HasValue ? "Updated: " + a.UpdateTime.Value.ToString() : "Created:" + a.CreateTime,
                               Comment = a.Text
                           };
         Wall.DataSource = WallContent;
         Wall.DataBind();
+    }
+    protected void Wall_ItemCanceling(object sender, ListViewCancelEventArgs e)
+    {
+        Wall.EditIndex = -1;
+        BindWall();
+    }
+    protected void Wall_ItemUpdating(object sender, ListViewUpdateEventArgs e)
+    {
+        GaymerLINQDataContext db = new GaymerLINQDataContext();
+        LoginLib login = new LoginLib();
+        ListViewItem item = Wall.Items[e.ItemIndex];
+        string UpdateContent = ((TextBox)item.FindControl("EditBox")).Text.ToString();
+        Wall.EditIndex = -1;
+
+        db.Comments.Where(a => a.CommentId == (int)Wall.DataKeys[e.ItemIndex].Value).First().Text = UpdateContent;
+        try { db.SubmitChanges(); }
+        catch { }
+
+        int UID = login.GetUserID();
+        var WallContent = from a in db.Comments
+                          where a.AuthorID == login.GetUserID() && !a.Hidden
+                          orderby a.CommentId descending
+                          select new
+                          {
+                              CommentID = a.CommentId,
+                              Username = a.User.Username,
+                              CreatedTime = a.UpdateTime.HasValue ? "Updated: " + a.UpdateTime.Value.ToString() : "Created:" + a.CreateTime,
+                              Comment = a.CommentId == (int)Wall.DataKeys[e.ItemIndex].Value ?UpdateContent: a.Text
+                          };
+        Wall.DataSource = WallContent;
+        Wall.DataBind();
+    }
+    protected void Wall_ItemEditing(object sender, ListViewEditEventArgs e)
+    {
+        Wall.EditIndex = e.NewEditIndex;
+        GaymerLINQDataContext db = new GaymerLINQDataContext();
+        LoginLib login = new LoginLib();
+        int UID = login.GetUserID();
+        var WallContent = from a in db.Comments
+                          where a.AuthorID == login.GetUserID() && !a.Hidden
+                          orderby a.CommentId descending
+                          select new
+                          {
+                              CommentID = a.CommentId,
+                              Username = a.User.Username,
+                              CreatedTime = a.UpdateTime.HasValue ? "Updated: " + a.UpdateTime.Value.ToString() : "Created:" + a.CreateTime,
+                              Comment = a.Text
+                          };
+        Wall.DataSource = WallContent;
+        Wall.DataBind();
+        ListViewItem item = Wall.Items[e.NewEditIndex];
+        TextBox EditBox = (TextBox)item.FindControl("EditBox");
+
+        EditBox.Text = WallContent.FirstOrDefault(p => p.CommentID == (int)Wall.DataKeys[e.NewEditIndex].Value).Comment;
     }
 }
