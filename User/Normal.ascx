@@ -2,13 +2,14 @@
 
 <asp:Panel ID="MasterPanel" runat="server" BackColor="#EFFFDF" HorizontalAlign ="Center">
     <h2><asp:Label ID="Username" runat="server"></asp:Label>&nbsp;(<asp:Label ID="lblRolle" runat="server"></asp:Label>)</h2>
+    
     <asp:Panel ID="AdminPanel" runat="server" Height="167px" style="margin-top: 0px" Width="568px" Visible="False" HorizontalAlign="Center">
         <br />
         <asp:Button ID="btnAdmin" runat="server" Text="Admin. brukere" Height="30px" Width="125px" />
-        <br />
-        <br />
+        
 </asp:Panel>
- <br />
+ 
+    <br />
  <asp:Image ID="MyAvatar" ImageURL="/Style/Images/mario.JPG" runat="server" Height="139px" Width="143px" />
     <asp:Label ID="AboutMeTxt" runat="server" Text="Om Meg tekst"></asp:Label>
     <br />
@@ -38,7 +39,7 @@
         <asp:GridView ID="FriendView" runat="server" AutoGenerateColumns="False" CellPadding="4" ForeColor="#333333" GridLines="Horizontal" Height="73px" Width="184px" HorizontalAlign="Center" >
             <AlternatingRowStyle BackColor="#E3EAEB" />
             <Columns>
-                <asp:Hyperlinkfield DataTextField="Username" HeaderText="Venner" DataNavigateUrlFields="Username" datanavigateurlformatstring="~/User/Friends.aspx?Username={0}" />
+                <asp:Hyperlinkfield DataTextField="Username" HeaderText="Venner" DataNavigateUrlFields="UID" datanavigateurlformatstring="~/User/UserPage.aspx?UserId={0}" />
             </Columns>
             <EditRowStyle BackColor="#7C6F57" />
             <FooterStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />

@@ -10,7 +10,8 @@
             <asp:Button ID="ModifySelf" runat="server" Text="Modify" OnClick="ModifySelf_Click" />
             <uc1:Modify Visible="false" runat="server" ID="Modify" />
             <uc1:Normal runat="server" ID="Normal" />
-        </ContentTemplate>
+       
+             </ContentTemplate>
     </asp:UpdatePanel>
 </asp:Content>
 

@@ -53,9 +53,12 @@ public partial class User_Register : System.Web.UI.Page
 
                 use.Salt = salt;
                 use.Password = hash;
-                use.RoleID = 2;
+
+                UserInRole uir = new UserInRole();
+                uir.inRoleID = 2;
 
                 db.Users.InsertOnSubmit(use);
+                db.UserInRoles.InsertOnSubmit(uir);
 
                 try
                 {
