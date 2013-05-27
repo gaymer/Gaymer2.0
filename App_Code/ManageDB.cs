@@ -206,6 +206,25 @@ using System.Data.SqlClient;
 
             return (numberOfPermissions > 0);
         }
+
+        public static List<T> GetSingleColumnResultAsList<T>(string sql, Dictionary<string, object> parameters = null, bool debug = false)
+        {
+            DataTable dt = query(sql, parameters, debug);
+
+            if (dt.Columns.Count > 1) return null;
+
+            return (from DataRow row in dt.Rows select (T) row[0]).ToList(); // LINQ-ekvivalent for koden under (R#-hjelp)
+
+
+            //var retList = new List<T>();
+
+            //foreach (DataRow row in dt.Rows)
+            //{
+            //    retList.Add((T)row[0]);
+            //}
+
+            //return retList;
+        }
     }
 
 
