@@ -38,7 +38,7 @@
         <asp:GridView ID="FriendView" runat="server" AutoGenerateColumns="False" CellPadding="4" ForeColor="#333333" GridLines="Horizontal" Height="73px" Width="184px" HorizontalAlign="Center" >
             <AlternatingRowStyle BackColor="#E3EAEB" />
             <Columns>
-                <asp:BoundField DataField="Username" HeaderText="Venner" SortExpression="Username" />
+                <asp:Hyperlinkfield DataTextField="Username" HeaderText="Venner" DataNavigateUrlFields="Username" datanavigateurlformatstring="~/User/Friends.aspx?Username={0}" />
             </Columns>
             <EditRowStyle BackColor="#7C6F57" />
             <FooterStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
