@@ -38,15 +38,15 @@ public partial class CMS_Default : System.Web.UI.Page
         userId = (!Int32.TryParse(userId, out userIdInt) || string.IsNullOrEmpty(userId)) ? defaultUserID : userId;
         roleId = (!Int32.TryParse(roleId, out roleIdInt) || string.IsNullOrEmpty(roleId)) ? defaultRoleID : roleId;
 
-        if (ManageDB.UserHasRole(roleIdInt, userIdInt))
-        {
-            Output.Text += "Brukeren har rollen.";
-        }
-        else
-        {
-            Output.Text += "Brukeren har ikke rollen.";
-        }
-        //Output.Text = numberOfAddedRows + " rader lagt til i tabellen.";
+    //    if (ManageDB.UserHasRole(roleIdInt, userIdInt)) 
+    //    {
+    //        Output.Text += "Brukeren har rollen.";
+    //    }
+    //    else
+    //    {
+    //        Output.Text += "Brukeren har ikke rollen.";
+    //    }
+    //    Output.Text = NumberOfAddedRows + " rader lagt til i tabellen.";
 
-    }
+    //}
 }

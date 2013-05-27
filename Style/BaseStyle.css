@@ -1,7 +1,8 @@
 ﻿body {
     margin: 0;
     text-wrap: normal;
-    background:#001400;
+    background:#001400 url('/Style/Images/GaymerGradientBG.png');
+    background-repeat: repeat-x;
 }
 .MainPageHolder
 {

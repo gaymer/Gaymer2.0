@@ -18,7 +18,7 @@ public partial class User_Avatar : System.Web.UI.Page
             if (this.Fileuploade.HasFile)
             {
                 this.Fileuploade.SaveAs(Server.MapPath("~") + "Style/Images/" + this.Fileuploade.FileName);
-                AvatarImg.ImageUrl = Server.MapPath("~") +"Style/Images/" + this.Fileuploade.FileName;
+                AvatarImg.ImageUrl = Server.MapPath("~") + "Style/Images/" + this.Fileuploade.FileName;
                 
             }
             else
@@ -28,7 +28,7 @@ public partial class User_Avatar : System.Web.UI.Page
         {
             throw new Exception(exc.Message);
         }
-        // Server.MapPath("App_Data") t
+        
     }
     
 }
