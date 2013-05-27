@@ -30,7 +30,7 @@ public partial class User_Modify : System.Web.UI.UserControl
 
         Username.Text = user.Uname;
 
-        MyAvatar.ImageUrl = "~Style/Avatar/" + user.Avatar;
+        //MyAvatar.ImageUrl = "~Style/Avatar/" + user.Avatar;
         MyAvatar.AlternateText = user.Uname + " Avatar";
 
         AboutMeTxt.Text = user.AboutMe;
@@ -125,5 +125,10 @@ public partial class User_Modify : System.Web.UI.UserControl
             return false;
         else
             return true;
+    }
+
+    protected void RedAvatarbtn_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("/user/Avatar.aspx");
     }
 }
