@@ -14,40 +14,23 @@ public partial class User_Avatar : System.Web.UI.Page
     }
     protected void avatarbtn_Click(object sender, EventArgs e)
     {
+        if (this.Fileuploade.HasFile)
+        {
 
-        Dictionary<string,object> parameters = new Dictionary<string,object>();
-        parameters.Add("@ImgBody",ConvertImageToByteArray(this.Fileuploade));
-        int i = ManageDB.nonQuery("UPDATE [User] SET Avatar =@ImgBody",parameters);
+            LoginLib Log = new LoginLib();
+            Dictionary<string, object> parameters = new Dictionary<string, object>();
+            parameters.Add("@ImgBody", ConvertImageToByteArray(this.Fileuploade));
+            parameters.Add("@UID", Log.GetUserID());
+            int i = ManageDB.nonQuery("UPDATE [User] SET Avatar =@ImgBody WHERE UID= @UID", parameters);
 
-        if(i!=0)
+            if (i != 0)
+            {
                 errorlbl.Text += "Bilde";
-        else
+                AvatarImg.ImageUrl = "/User/ViewAvatar.aspx?uid=" + Log.GetUserID();
+            }
+            else
                 errorlbl.Text += "Fil ikke lastet opp";
-
-
-
-        //GaymerLINQDataContext db = new GaymerLINQDataContext();
-        //User use = new User();
-        //System.Text.UTF8Encoding encoding = new System.Text.UTF8Encoding();
-
-        //try
-        //{
-        //    if (this.Fileuploade.HasFile)
-        //    {
-        //        this.Fileuploade.SaveAs(Server.MapPath("~") + "Style/Images/" + this.Fileuploade.FileName);
-        //        AvatarImg.ImageUrl = "/Style/Images/" + this.Fileuploade.FileName;
-        //        use.Avatar = new System.Data.Linq.Binary(encoding.GetBytes("/Style/Images/" + this.Fileuploade.FileName));
-        //        db.Users.InsertOnSubmit(use); 
-        //    }
-        //    else
-        //        errorlbl.Text += "Fil ikke lastet opp";
-        //}
-        //catch(Exception exc)
-        //{
-        //    throw new Exception(exc.Message);
-        //}
-        //db.Dispose();
-        
+        }
     }
 
     protected void tilbake_Click(object sender, EventArgs e)
@@ -71,3 +54,24 @@ public partial class User_Avatar : System.Web.UI.Page
         }
     }
 }
+//GaymerLINQDataContext db = new GaymerLINQDataContext();
+//User use = new User();
+//System.Text.UTF8Encoding encoding = new System.Text.UTF8Encoding();
+
+//try
+//{
+//    if (this.Fileuploade.HasFile)
+//    {
+//        this.Fileuploade.SaveAs(Server.MapPath("~") + "Style/Images/" + this.Fileuploade.FileName);
+//        AvatarImg.ImageUrl = "/Style/Images/" + this.Fileuploade.FileName;
+//        use.Avatar = new System.Data.Linq.Binary(encoding.GetBytes("/Style/Images/" + this.Fileuploade.FileName));
+//        db.Users.InsertOnSubmit(use); 
+//    }
+//    else
+//        errorlbl.Text += "Fil ikke lastet opp";
+//}
+//catch(Exception exc)
+//{
+//    throw new Exception(exc.Message);
+//}
+//db.Dispose();

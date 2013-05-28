@@ -1,0 +1,38 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="MasterPage" %>
+
+<!DOCTYPE html>
+
+<html itemscope="itemscope" itemtype="http://schema.org/WebPage">
+<head runat="server">
+<<<<<<< HEAD
+    <title>Gaymer</title>
+=======
+    <title>Gaymer.no</title>
+>>>>>>> b90d4b61c88df1c1d9d3defa0e2d4bd8b3a3a66e
+    <link rel="stylesheet" href="Style/BaseStyle.css" type="text/css" />
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <ajaxToolkit:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server"></ajaxToolkit:ToolkitScriptManager>
+        <div class="MainPageHolder">
+        <div class="MainHeader">
+            <h1>Topp</h1>
+            <asp:Button ID="LogOutBtn"  runat="server" Text="Log Out" OnClick="LogOut_Click" />
+        </div>
+        <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
+        </asp:ContentPlaceHolder>
+        <asp:ContentPlaceHolder id="DebugOutput" runat="server">
+        </asp:ContentPlaceHolder>
+    </div>
+    </form>
+
+    <script>
+    <%--Maintain position on partial rendering--%>
+        window.scrollTo = function (x, y) {
+            return true;
+        }
+    </script>
+</body>
+</html>

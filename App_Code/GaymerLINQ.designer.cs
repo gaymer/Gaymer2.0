@@ -5679,7 +5679,7 @@ public partial class User : INotifyPropertyChanging, INotifyPropertyChanged
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Avatar", DbType="VarBinary(MAX)", UpdateCheck=UpdateCheck.Never)]
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Avatar", DbType="VarBinary(MAX)", CanBeNull=true, UpdateCheck=UpdateCheck.Never)]
 	public System.Data.Linq.Binary Avatar
 	{
 		get
