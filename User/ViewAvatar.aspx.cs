@@ -38,7 +38,7 @@ public partial class User_ViewAvatar : System.Web.UI.Page
             }
             catch (ArgumentException aex)
             {
-                throw new Exception("The file received from the Map Server is not a valid jpeg image", aex);
+                //throw new Exception("The file received from the Map Server is not a valid jpeg image", aex);
             }
         }
     }

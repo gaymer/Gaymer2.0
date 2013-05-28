@@ -17,7 +17,7 @@
         <asp:GridView ID="sokResult" runat="server" AutoGenerateColumns="false" HorizontalAlign="Center" CellPadding="4" ForeColor="#333333" GridLines="None">
             <AlternatingRowStyle BackColor="White" />
             <Columns>
-                <asp:Hyperlinkfield DataTextField="Username" HeaderText="Medlemmer" DataNavigateUrlFields="Username" datanavigateurlformatstring="~/User/UserPage.aspx?Username={0}" />
+                <asp:Hyperlinkfield DataTextField="Username" HeaderText="Medlemmer" DataNavigateUrlFields="Username" datanavigateurlformatstring="~/User/UserPage.aspx?UserId={0}" />
             </Columns>
             <EditRowStyle BackColor="#7C6F57" />
             <FooterStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
