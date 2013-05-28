@@ -12,31 +12,25 @@ public class ComplexText
     : AbstractInputController
 {
 
-    public ComplexText()
+    public ComplexText(int i)
+        : base(i)
     {
         base.InputElementName = "ComplexText";
     }
 
-
-    public override void AddEdit(Panel panel)
+    public override void AddEdit(Panel panel, int contentId)
     {
         throw new NotImplementedException();
     }
 
-    public override void AddDisplay(Panel panel)
+    public override void AddDisplay(Panel panel, int contentId)
+    {
+        throw new NotImplementedException();
+    }
+
+    public override void SaveInput(Panel panel, int contentId)
     {
         throw new NotImplementedException();
     }
 }
 
-
-public class ComplexText2
-    : ComplexText
-{
-
-    public ComplexText2()
-    {
-        base.InputElementName = "ComplexText2";
-    }
-
-}

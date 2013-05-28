@@ -6,6 +6,8 @@ using System.Web;
 using System.Data;
 
 using System.Reflection;
+using System.Web.UI;
+using System.Web.UI.WebControls;
 
 /// <summary>
 /// Summary description for GenericContent
@@ -20,6 +22,9 @@ public class GenericContent
     public DateTime UpdateTime { get; private set; }
 
     static Type defaultGenericContentType = typeof(SimpleText);
+
+    public List<int> InputElementTypeList;
+    public List<int> InputElementDataList;
 
     public List<AbstractInputController> ControllerList = new List<AbstractInputController>();
 
@@ -57,7 +62,7 @@ public class GenericContent
         var parameters = new Dictionary<string, object>();
         parameters.Add("@ContentTypeId",contentType);
 
-        List<int> inputList = ManageDB.GetSingleColumnResultAsList<int>(@"
+        this.InputElementTypeList = ManageDB.GetSingleColumnResultAsList<int>(@"
             SELECT       ie.InputElementId
             FROM         DynamicContentType AS dct INNER JOIN
                          ElementInContent AS eic ON dct.DynamicContentTypeId = eic.ContentTypeId INNER JOIN
@@ -66,7 +71,22 @@ public class GenericContent
         ", parameters);
 
 
+        this.InputElementDataList = ManageDB.GetSingleColumnResultAsList<int>(@"
+            SELECT       idt.ElementInContentId
+            FROM         DynamicContentType dct, @InputDataTable idt, ElementInContent eic
+            WHERE        dct.DynamicContentTypeId = eic.ContentTypeId
+                AND      idt.ElementInContentId = eic.InputElementId
+                AND      idt.ContentId = @ContentId
+            ORDER BY     eic.Weight
+        ", parameters);
 
+
+
+    }
+
+    public static void AddHtmlToPanel(string htmlString, Panel panel)
+    {
+        if (panel != null) panel.Controls.Add(new LiteralControl(htmlString));
     }
 
 }

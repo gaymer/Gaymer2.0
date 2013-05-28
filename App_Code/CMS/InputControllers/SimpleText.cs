@@ -14,20 +14,33 @@ public class SimpleText
     private TextBox tbValue { set; get; }
     private TextBox tbLabel { set; get; }
 
-    public SimpleText()
-        : base()
+    public SimpleText(int i)
+        : base(i)
     {
         base.InputElementName = "SimpleText";
         tbValue = new TextBox();
         tbLabel = new TextBox();
     }
 
-    public override void AddEdit(Panel panel)
+    public override void AddEdit(Panel panel, int contentId)
+    {
+        GenericContent.AddHtmlToPanel("<div>", panel);
+        GenericContent.AddHtmlToPanel("SimpleLabel: ", panel);
+        panel.Controls.Add(tbLabel);
+
+        GenericContent.AddHtmlToPanel("<br />", panel);
+
+        GenericContent.AddHtmlToPanel("SimpleValue: ", panel);
+        panel.Controls.Add(tbValue);
+        GenericContent.AddHtmlToPanel("</div>", panel);
+    }
+
+    public override void AddDisplay(Panel panel, int contentId)
     {
         throw new NotImplementedException();
     }
 
-    public override void AddDisplay(Panel panel)
+    public override void SaveInput(Panel panel, int contentId)
     {
         throw new NotImplementedException();
     }

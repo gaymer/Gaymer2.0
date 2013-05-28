@@ -12,15 +12,23 @@ public abstract class AbstractInputController
 {
 
     public String InputElementName { get; protected set; }
+    public int InputDataId { get; protected set; }
 
 
-    public abstract void AddEdit(Panel panel);
-    public abstract void AddDisplay(Panel panel);
+    public abstract void AddEdit(Panel panel, int contentId);
+    public abstract void AddDisplay(Panel panel, int contentId);
+    public abstract void SaveInput(Panel panel, int contentId);
 
 
-    protected AbstractInputController()
+    public void AddCreate(Panel panel)
+    {
+        AddEdit(panel, -1);
+    }
 
-	{
+
+    protected AbstractInputController(int id)
+    {
+        InputDataId = id;
         InputElementName = "BaseClass";
 	}
 }
