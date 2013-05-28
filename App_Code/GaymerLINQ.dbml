@@ -5,8 +5,8 @@
       <Column Name="UserRole" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="inUserID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="inRoleID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="User_UserInRole" Member="User" ThisKey="inUserID" OtherKey="UID" Type="User" IsForeignKey="true" />
       <Association Name="Role_UserInRole" Member="Role" ThisKey="inRoleID" OtherKey="RoleID" Type="Role" IsForeignKey="true" />
+      <Association Name="User_UserInRole" Member="User" ThisKey="inUserID" OtherKey="UID" Type="User" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.ContactInfo" Member="ContactInfos">
@@ -35,8 +35,8 @@
       <Column Name="Author" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="DynamicContent_TagOnDynamicContent" Member="TagOnDynamicContents" ThisKey="DynamicContentId" OtherKey="DynamicContentId" Type="TagOnDynamicContent" />
       <Association Name="DynamicContent_Comment" Member="Comments" ThisKey="DynamicContentId" OtherKey="Post_DynamicContentID" Type="Comment" />
-      <Association Name="User_DynamicContent" Member="User" ThisKey="Author" OtherKey="UID" Type="User" IsForeignKey="true" />
       <Association Name="DynamicContentType_DynamicContent" Member="DynamicContentType" ThisKey="DynamicContentId" OtherKey="DynamicContentTypeId" Type="DynamicContentType" IsForeignKey="true" />
+      <Association Name="User_DynamicContent" Member="User" ThisKey="Author" OtherKey="UID" Type="User" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.ElementInContent" Member="ElementInContents">
@@ -148,29 +148,6 @@
       <Association Name="Tag_TagRelation1" Member="Tag1" ThisKey="SuperTag" OtherKey="TagId" Type="Tag" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.[User]" Member="Users">
-    <Type Name="User">
-      <Column Name="UID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Username" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="Mail" Type="System.String" DbType="VarChar(75) NOT NULL" CanBeNull="false" />
-      <Column Name="Password" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
-      <Column Name="AbID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="RoleID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="LoginSession" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-      <Column Name="Salt" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-      <Association Name="User_UserInRole" Member="UserInRoles" ThisKey="UID" OtherKey="inUserID" Type="UserInRole" />
-      <Association Name="User_ContactInfo" Member="ContactInfos" ThisKey="UID" OtherKey="User" Type="ContactInfo" />
-      <Association Name="User_DynamicContent" Member="DynamicContents" ThisKey="UID" OtherKey="Author" Type="DynamicContent" />
-      <Association Name="User_PrivateMessage" Member="PrivateMessages" ThisKey="UID" OtherKey="From" Type="PrivateMessage" />
-      <Association Name="User_PrivateMessage1" Member="PrivateMessages1" ThisKey="UID" OtherKey="To" Type="PrivateMessage" />
-      <Association Name="User_StaticContent" Member="StaticContents" ThisKey="UID" OtherKey="Author" Type="StaticContent" />
-      <Association Name="User_UserInfo" Member="UserInfos" ThisKey="UID" OtherKey="User" Type="UserInfo" />
-      <Association Name="User_UserRelation" Member="UserRelations" ThisKey="UID" OtherKey="RelatedUserId" Type="UserRelation" />
-      <Association Name="User_UserRelation1" Member="UserRelations1" ThisKey="UID" OtherKey="UserId" Type="UserRelation" />
-      <Association Name="User_Comment" Member="Comments" ThisKey="UID" OtherKey="AuthorID" Type="Comment" />
-      <Association Name="UserAbout_User" Member="UserAbout" ThisKey="AbID" OtherKey="AbID" Type="UserAbout" IsForeignKey="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.UserAbout" Member="UserAbouts">
     <Type Name="UserAbout">
       <Column Name="AbID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -188,8 +165,8 @@
       <Column Name="InfoType" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="Text" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
       <Column Name="[User]" Member="User" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="User_UserInfo" Member="User1" ThisKey="User" OtherKey="UID" Type="User" IsForeignKey="true" />
       <Association Name="UserInfoType_UserInfo" Member="UserInfoType" ThisKey="InfoType" OtherKey="UserInfoTypeId" Type="UserInfoType" IsForeignKey="true" />
+      <Association Name="User_UserInfo" Member="User1" ThisKey="User" OtherKey="UID" Type="User" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.UserInfoType" Member="UserInfoTypes">
@@ -266,6 +243,29 @@
       <Column Name="Role" Member="Role1" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Association Name="Role_UserInRole" Member="UserInRoles" ThisKey="RoleID" OtherKey="inRoleID" Type="UserInRole" />
       <Association Name="Role_PermissionToRole" Member="PermissionToRoles" ThisKey="RoleID" OtherKey="RoleId" Type="PermissionToRole" />
+    </Type>
+  </Table>
+  <Table Name="dbo.[User]" Member="Users">
+    <Type Name="User">
+      <Column Name="UID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Username" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Mail" Type="System.String" DbType="VarChar(75) NOT NULL" CanBeNull="false" />
+      <Column Name="Password" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="AbID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="LoginSession" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Salt" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Avatar" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX)" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="User_UserInRole" Member="UserInRoles" ThisKey="UID" OtherKey="inUserID" Type="UserInRole" />
+      <Association Name="User_ContactInfo" Member="ContactInfos" ThisKey="UID" OtherKey="User" Type="ContactInfo" />
+      <Association Name="User_DynamicContent" Member="DynamicContents" ThisKey="UID" OtherKey="Author" Type="DynamicContent" />
+      <Association Name="User_PrivateMessage" Member="PrivateMessages" ThisKey="UID" OtherKey="From" Type="PrivateMessage" />
+      <Association Name="User_PrivateMessage1" Member="PrivateMessages1" ThisKey="UID" OtherKey="To" Type="PrivateMessage" />
+      <Association Name="User_StaticContent" Member="StaticContents" ThisKey="UID" OtherKey="Author" Type="StaticContent" />
+      <Association Name="User_UserInfo" Member="UserInfos" ThisKey="UID" OtherKey="User" Type="UserInfo" />
+      <Association Name="User_UserRelation" Member="UserRelations" ThisKey="UID" OtherKey="RelatedUserId" Type="UserRelation" />
+      <Association Name="User_UserRelation1" Member="UserRelations1" ThisKey="UID" OtherKey="UserId" Type="UserRelation" />
+      <Association Name="User_Comment" Member="Comments" ThisKey="UID" OtherKey="AuthorID" Type="Comment" />
+      <Association Name="UserAbout_User" Member="UserAbout" ThisKey="AbID" OtherKey="AbID" Type="UserAbout" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

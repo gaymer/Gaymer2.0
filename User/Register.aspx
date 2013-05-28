@@ -50,7 +50,7 @@
         </dl>
        <dl>
            <dt>
-               <asp:Button ID="RegisterBtn" runat="server" OnClick="RegisterBtn_Click" Text="Register" /></dt>
+               <asp:Button CssClass="ButtonBase" ID="RegisterBtn" runat="server" OnClick="RegisterBtn_Click" Text="Register" /></dt>
            <dd>
                <asp:Label ID="RegError" runat="server"></asp:Label>
            </dd>

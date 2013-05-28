@@ -9,10 +9,11 @@ public partial class Brukerside : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        LoginLib login = new LoginLib();
+
         if (!IsPostBack)
         {
             //Full Callback
-            LoginLib login = new LoginLib();
             if (!login.IsUserLoggedIn())
             {
                 Response.Redirect("/StartPage.aspx");
@@ -25,6 +26,16 @@ public partial class Brukerside : System.Web.UI.Page
         else
         {
             //Async Callback
+        }
+         
+        int qUserId;
+        string userIdString = Request.QueryString["UserId"];
+        Int32.TryParse(userIdString, out qUserId);
+
+        ModifySelf.Visible = false;
+        if (ManageDB.UserHasPermission("Gaymer_EditUser", login.GetUserID()) || login.GetUserID() != qUserId)
+        {
+            ModifySelf.Visible = true;
         }
         
     }

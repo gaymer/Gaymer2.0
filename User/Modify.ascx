@@ -4,7 +4,7 @@
     <h2><asp:Label ID="Username" runat="server"></asp:Label></h2>
 
     <asp:Image ID="MyAvatar" runat="server" Height="155px" Width="162px" />
-    <asp:Button ID="RedAvatarbtn" runat="server" Text="Rediger avatar" OnClick="RedAvatarbtn_Click" />
+    <asp:Button CssClass="ButtonBase" ID="RedAvatarbtn" runat="server" Text="Rediger avatar" OnClick="RedAvatarbtn_Click" />
 <h3>Om meg</h3>
         <asp:TextBox ID="AboutMeTxt" runat="server" TextMode="MultiLine" Width="300" Height="150"></asp:TextBox>
     <br />
