@@ -8,7 +8,7 @@
             <div>
                 <asp:TextBox CssClass="WallInput" ID="Input" TextMode="MultiLine" runat="server"></asp:TextBox>
                 <br />
-                <asp:Button ID="SubmitBtn" runat="server" CssClass="ButtonBase" Text="Save Comment" OnClick="SubmitBtn_Click" />
+                <asp:Button CssClass="ButtonBase" ID="SubmitBtn" runat="server"  Text="Save Comment" OnClick="SubmitBtn_Click" />
             </div>
             <div>
                 <asp:ListView ID="Wall" DataKeyNames="CommentID" OnItemDeleting="Wall_ItemDeleting" OnItemCanceling="Wall_ItemCanceling" OnItemUpdating="Wall_ItemUpdating" OnItemEditing="Wall_ItemEditing" runat="server">
@@ -21,8 +21,8 @@
                                 <%#Eval("Username") %>
                                 <br />
                                 <%#Eval("CreatedTime") %>
-                                <asp:Button ID="editBtn" runat="server" CssClass="ButtonBase" CommandName="Edit" Text="Edit" />
-                                <asp:Button ID="DeleteBtn" runat="server" CssClass="ButtonBase" CommandName="Delete" Text="Delete" />
+                                <asp:Button CssClass="ButtonBase" ID="editBtn" runat="server"  CommandName="Edit" Text="Edit" />
+                                <asp:Button CssClass="ButtonBase" ID="DeleteBtn" runat="server"  CommandName="Delete" Text="Delete" />
                             </div>
                             <div style="padding: 5px;">
                             <asp:Label ID="Comment" runat="server">
@@ -36,8 +36,8 @@
                                 <%#Eval("Username") %>
                                 <br />
                                 <%#Eval("CreatedTime") %>
-                                <asp:Button ID="editBtn" runat="server" CssClass="ButtonBase" CommandName="Edit" Text="Edit" />
-                                <asp:Button ID="DeleteBtn" runat="server" CssClass="ButtonBase" CommandName="Delete" Text="Delete" />
+                                <asp:Button CssClass="ButtonBase" ID="editBtn" runat="server"  CommandName="Edit" Text="Edit" />
+                                <asp:Button CssClass="ButtonBase" ID="DeleteBtn" runat="server"  CommandName="Delete" Text="Delete" />
                             </div>
                             <div style="padding: 5px;">
                             <asp:Label ID="Comment" runat="server">
@@ -51,8 +51,8 @@
                                 <%#Eval("Username") %>
                                 <br />
                                 <%#Eval("CreatedTime") %>
-                                <asp:Button ID="CancelBtn" CssClass="ButtonBase" runat="server" CommandName="Cancel" Text="Cancel" />
-                                <asp:Button ID="Updatetn" CssClass="ButtonBase" runat="server" CommandName="Update" Text="Save" />
+                                <asp:Button CssClass="ButtonBase" ID="CancelBtn"  runat="server" CommandName="Cancel" Text="Cancel" />
+                                <asp:Button CssClass="ButtonBase" ID="Updatetn"  runat="server" CommandName="Update" Text="Save" />
                             </div>
                             <div style="">
                                 <asp:TextBox ID="EditBox" CssClass="WallEditTextBox" runat="server" TextMode="MultiLine"></asp:TextBox>

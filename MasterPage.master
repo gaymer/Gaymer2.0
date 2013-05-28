@@ -17,7 +17,7 @@
         <div class="MainHeader">
             <a href="/">
               <asp:Image ID="Topp" runat="server" Height="115px" Width="1272px" ImageUrl="~/Style/Images/GaymerHead.gif" /></a>
-            <asp:Button ID="LogOutBtn"  CssClass="ButtonBase" runat="server" Text="Log Out" OnClick="LogOut_Click" />
+            <asp:Button CssClass="ButtonBase" ID="LogOutBtn"   runat="server" Text="Log Out" OnClick="LogOut_Click" />
         </div>
         <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
         </asp:ContentPlaceHolder>

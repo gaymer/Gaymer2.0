@@ -43,10 +43,15 @@ public partial class Test : System.Web.UI.Page
     }
     private void BindWall()
     {
-        GaymerLINQDataContext db = new GaymerLINQDataContext();
         LoginLib login = new LoginLib();
+        int UserID = Convert.ToInt32(Request.QueryString["ID"]);
+        if (UserID == null)
+        {
+            UserID = login.GetUserID();
+        }
+        GaymerLINQDataContext db = new GaymerLINQDataContext();
         var WallContent = from a in db.Comments
-                          where a.AuthorID == login.GetUserID() && !a.Hidden
+                          where a.AuthorID == UserID && !a.Hidden
                           orderby a.CommentId descending
                           select new
                           {
@@ -75,9 +80,13 @@ public partial class Test : System.Web.UI.Page
         try { db.SubmitChanges(); }
         catch { }
 
-        int UID = login.GetUserID();
+        int UserID = Convert.ToInt32(Request.QueryString["ID"]);
+        if (UserID == null)
+        {
+            UserID = login.GetUserID();
+        }
         var WallContent = from a in db.Comments
-                          where a.AuthorID == login.GetUserID() && !a.Hidden
+                          where a.AuthorID == UserID && !a.Hidden
                           orderby a.CommentId descending
                           select new
                           {
@@ -94,9 +103,13 @@ public partial class Test : System.Web.UI.Page
         Wall.EditIndex = e.NewEditIndex;
         GaymerLINQDataContext db = new GaymerLINQDataContext();
         LoginLib login = new LoginLib();
-        int UID = login.GetUserID();
+        int UserID = Convert.ToInt32(Request.QueryString["ID"]);
+        if (UserID == null)
+        {
+            UserID = login.GetUserID();
+        }
         var WallContent = from a in db.Comments
-                          where a.AuthorID == login.GetUserID() && !a.Hidden
+                          where a.AuthorID == UserID && !a.Hidden
                           orderby a.CommentId descending
                           select new
                           {
@@ -121,9 +134,13 @@ public partial class Test : System.Web.UI.Page
         try { db.SubmitChanges(); }
         catch { }
 
-        int UID = login.GetUserID();
+        int UserID = Convert.ToInt32(Request.QueryString["ID"]);
+        if (UserID == null)
+        {
+            UserID = login.GetUserID();
+        }
         var WallContent = from a in db.Comments
-                          where a.AuthorID == login.GetUserID() && !a.Hidden && a.CommentId != (int)Wall.DataKeys[e.ItemIndex].Value
+                          where a.AuthorID == UserID && !a.Hidden && a.CommentId != (int)Wall.DataKeys[e.ItemIndex].Value
                           orderby a.CommentId descending
                           select new
                           {

@@ -5,7 +5,7 @@
     
     <asp:Panel ID="AdminPanel" runat="server" Height="167px" style="margin-top: 0px" Width="568px" Visible="False" HorizontalAlign="Center">
         <br />
-        <asp:Button ID="btnAdmin" runat="server" Text="Admin. brukere" Height="30px" Width="125px" />
+        <asp:Button CssClass="ButtonBase" ID="btnAdmin" runat="server" Text="Admin. brukere" Height="30px" Width="125px" />
         
 </asp:Panel>
  

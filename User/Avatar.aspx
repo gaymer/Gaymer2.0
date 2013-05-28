@@ -11,7 +11,7 @@
         <asp:FileUpload ID="Fileuploade" runat="server" Height="22px" Width="246px" />
         <br />
         <br />
-    <asp:Button ID="avatarbtn" runat="server" Text="Lagre Avatar" Height="24px" OnClick="avatarbtn_Click" Width="106px" />
+    <asp:Button CssClass="ButtonBase" ID="avatarbtn" runat="server" Text="Lagre Avatar" Height="24px" OnClick="avatarbtn_Click" Width="106px" />
     <br />
         <br />
         <asp:Label ID="errorlbl" runat="server" Text=""></asp:Label>
