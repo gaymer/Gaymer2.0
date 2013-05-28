@@ -8,6 +8,7 @@
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
         <ContentTemplate>
             <asp:Button CssClass="ButtonBase" ID="ModifySelf" runat="server" Text="Modify" OnClick="ModifySelf_Click" />
+            <asp:Label ID="MessageLbl" runat="server" Text="" />
             <uc1:Modify Visible="false" runat="server" ID="Modify" />
             <uc1:Normal runat="server" ID="Normal" />
        

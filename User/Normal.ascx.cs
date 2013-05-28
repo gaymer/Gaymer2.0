@@ -73,11 +73,6 @@ public partial class User_Normal : System.Web.UI.UserControl
             UserSexTxt.Text = user.Sex == null ? "Undefined" : user.Sex == true ? "Woman" : "Man";
             UserLivingPlaceTxt.Text = user.Living;
 
-            if (ManageDB.UserHasPermission("Gaymer_ShowPanel", login.GetUserID()))
-            {
-                AdminPanel.Visible = true;
-            }
-
             //Finne alle venner/relasjoner
 
             Dictionary<String, object> parameter = new Dictionary<string, object>();
@@ -118,6 +113,11 @@ public partial class User_Normal : System.Web.UI.UserControl
 
             return now.Year - date.Year + arteller;
         }
+    }
+
+    protected void finnVennerbtn_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("/User/vennesok.aspx");
     }
 
 }
