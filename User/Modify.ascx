@@ -1,6 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="Modify.ascx.cs" Inherits="User_Modify" %>
 
-<asp:Panel ID="MasterPanel" runat="server" BackColor="#EFFFDF">
+<asp:Panel ID="MasterPanel" runat="server">
     <h2><asp:Label ID="Username" runat="server"></asp:Label></h2>
 
     <asp:Image ID="MyAvatar" runat="server" Height="155px" Width="162px" />

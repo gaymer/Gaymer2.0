@@ -1,6 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="Normal.ascx.cs" Inherits="User_Normal" %>
 
-<asp:Panel ID="MasterPanel" runat="server" BackColor="#EFFFDF" HorizontalAlign ="Center">
+<asp:Panel ID="MasterPanel" runat="server" HorizontalAlign ="Center">
     <h2><asp:Label ID="Username" runat="server"></asp:Label>&nbsp;(<asp:Label ID="lblRolle" runat="server"></asp:Label>)</h2>
     
     <asp:Panel ID="AdminPanel" runat="server" Height="167px" style="margin-top: 0px" Width="568px" Visible="False" HorizontalAlign="Center">

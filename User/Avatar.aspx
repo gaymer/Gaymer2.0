@@ -3,7 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
-    <asp:Panel ID ="MasterPanel" runat="server" HorizontalAlign="Center" BackColor="#EFFFDF">
+    <asp:Panel ID ="MasterPanel" runat="server" HorizontalAlign="Center">
     
          <asp:Image ID="AvatarImg" runat="server" Height="245px" Width="226px" ImageAlign="Middle" OnDataBinding="avatarbtn_Click" OnLoad="avatarbtn_Click"/>
     <br />

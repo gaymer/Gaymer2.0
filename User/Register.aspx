@@ -3,7 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
-    <div class="SplitHolder" style="background:#EFFFDF;">
+    <div class="SplitHolder">
             <h1>Registrering</h1>
                      
    <fieldset>

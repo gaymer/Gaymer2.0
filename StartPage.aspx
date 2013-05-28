@@ -4,26 +4,8 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-    <input type="Button" id="LogToggelbtn" class="ButtonBase" value="Logg inn" onclick="Toggel('LoginDiv');" />
-    <div>
-        <asp:Menu ID="Menu" runat="server" CssClass="menu"
-            EnableViewState="false" IncludeStyleBlock="false"
-            Orientation="Horizontal">
-            <Items>
-                <asp:MenuItem NavigateUrl="~/Default.aspx" Text="Fremside" />
-                <asp:MenuItem Text="Rediger" Selectable="False" Value="Admin">
-                    <asp:MenuItem NavigateUrl="~/Online/Laerer/ListStudenter.aspx" Text="Studenter"
-                        Value="Studenter"></asp:MenuItem>
-                    <asp:MenuItem NavigateUrl="~/Online/Laerer/FagListe.aspx" Text="Fag"
-                        Value="Fag"></asp:MenuItem>
-                    <asp:MenuItem NavigateUrl="~/Online/Laerer/OppgaveListe.aspx" Text="Oppgaver"
-                        Value="Fag"></asp:MenuItem>
-                </asp:MenuItem>
-            </Items>
-        </asp:Menu>
-
-    </div>
-    <div class="SplitHolder" id="LoginDiv" style="background: #EFFFDF; visibility: hidden; height: 302px;">
+    <%--<input type="Button" id="LogToggelbtn" class="ButtonBase" value="Logg inn" onclick="Toggel('LoginDiv');" />--%>
+    <div class="SplitHolder" id="LoginDiv" style="visibility:hidden; height:302px;">
         <asp:UpdatePanel ID="UpdatePanel1" runat="server">
             <ContentTemplate>
                 <h1>Login</h1>

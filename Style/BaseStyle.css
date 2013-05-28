@@ -17,8 +17,15 @@
 .MainHeader
 {
     width: 100%;
-    float: left;
 }
+
+.BelowHeaderWrapper
+{
+    width: 100%;
+    background-color: #EFFFDF; 
+    /*background-color: #FF0000;*/
+}
+
 /* Base Style */
 .ButtonBase
 {
@@ -87,7 +94,7 @@
 /* BEGIN css for menyen */
 div.menu
 {
-    padding: 4px 0px 4px 8px;
+    padding: 0px 0px 0px 0px;
 }
 
 div.menu ul
