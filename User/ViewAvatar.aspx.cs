@@ -13,7 +13,6 @@ public partial class User_ViewAvatar : System.Web.UI.Page
 
     }
 
-    
     public override void ProcessRequest(HttpContext context)
     {
 
@@ -25,25 +24,17 @@ public partial class User_ViewAvatar : System.Web.UI.Page
             {
                 int uid = 0;
                 uid = Convert.ToInt32(context.Request.QueryString["uid"]);
-
                 byte[] byteArray = GetImageFromDB(uid);
 
                 if (byteArray == null)
                 {
-                    throw new Exception("N ULLLLLLLL NULLNUUUUULLLLLLLLULULULUL");
-                    //Response.Redirect("/?e=bytearrayisnull");
+                    return;
                 }
 
-                MemoryStream memoryStream = new MemoryStream(byteArray, false);
-                try
-                {
-                    System.Drawing.Image imgFromGB = System.Drawing.Image.FromStream(memoryStream);
-                    imgFromGB.Save(context.Response.OutputStream, System.Drawing.Imaging.ImageFormat.Jpeg);
-                }
-                catch (Exception e)
-                {
-                    throw new Exception("Mongomongomongomongooooo", e);
-                }
+                MemoryStream memoryStream = new MemoryStream(byteArray, false);            
+                System.Drawing.Image imgFromGB = System.Drawing.Image.FromStream(memoryStream);
+                imgFromGB.Save(context.Response.OutputStream, System.Drawing.Imaging.ImageFormat.Jpeg);
+               
             }
             catch (ArgumentException aex)
             {

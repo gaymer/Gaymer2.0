@@ -24,8 +24,7 @@ public partial class User_Avatar : System.Web.UI.Page
             int i = ManageDB.nonQuery("UPDATE [User] SET Avatar =@ImgBody WHERE UID= @UID", parameters);
 
             if (i != 0)
-            {
-                errorlbl.Text += "Bilde";
+            {            
                 AvatarImg.ImageUrl = "/User/ViewAvatar.aspx?uid=" + Log.GetUserID();
             }
             else

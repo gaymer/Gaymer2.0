@@ -30,7 +30,7 @@ public partial class User_Modify : System.Web.UI.UserControl
 
         Username.Text = user.Uname;
 
-        //MyAvatar.ImageUrl = 
+        MyAvatar.ImageUrl = "~/user/ViewAvatar.aspx?uid=" + login.GetUserID();
         MyAvatar.AlternateText = user.Uname + " Avatar";
 
         AboutMeTxt.Text = user.AboutMe;
