@@ -15,6 +15,8 @@ public partial class User_vennesok : System.Web.UI.Page
 
     public void finnvenner(string search)
     {
+        string userNameString = Request.QueryString["Username"];
+    
                 
         ManageDB db = new ManageDB();
         Dictionary<String, object> parameter = new Dictionary<string, object>();
@@ -23,8 +25,8 @@ public partial class User_vennesok : System.Web.UI.Page
         DataTable dt = ManageDB.query(@"
         SELECT [User].Username
         FROM [User]
-        WHERE [User].Username LIKE %@userNameSearch
-        ",parameter);
+        WHERE [User].Username LIKE @userNameSearch
+        ",parameter,debug:true);
 
         sokResult.DataSource = dt;
         sokResult.DataBind();

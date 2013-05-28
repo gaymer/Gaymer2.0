@@ -9,10 +9,16 @@
         <asp:Button ID="sokbtn" runat="server" Text="Søk" OnClick="sokbtn_Click"/>
         <br />
         <asp:Label ID="sokerrorlbl" runat="server"></asp:Label>
+        <br />
+        <br />
     </asp:Panel>
+    
     <asp:Panel ID="TablePanel" runat="server">
-        <asp:GridView ID="sokResult" runat="server" HorizontalAlign="Center" CellPadding="4" ForeColor="#333333" GridLines="None">
+        <asp:GridView ID="sokResult" runat="server" AutoGenerateColumns="false" HorizontalAlign="Center" CellPadding="4" ForeColor="#333333" GridLines="None">
             <AlternatingRowStyle BackColor="White" />
+            <Columns>
+                <asp:Hyperlinkfield DataTextField="Username" HeaderText="Medlemmer" DataNavigateUrlFields="Username" datanavigateurlformatstring="~/User/UserPage.aspx?Username={0}" />
+            </Columns>
             <EditRowStyle BackColor="#7C6F57" />
             <FooterStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
             <HeaderStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
