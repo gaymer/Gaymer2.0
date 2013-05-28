@@ -65,19 +65,20 @@ public class GenericContent
         this.InputElementTypeList = ManageDB.GetSingleColumnResultAsList<int>(@"
             SELECT       ie.InputElementId
             FROM         DynamicContentType AS dct INNER JOIN
-                         ElementInContent AS eic ON dct.DynamicContentTypeId = eic.ContentTypeId INNER JOIN
-                         InputElement AS ie ON eic.InputElementId = ie.InputElementId
+                             ElementInContent AS eic ON dct.DynamicContentTypeId = eic.ContentTypeId INNER JOIN
+                             InputElement AS ie ON eic.InputElementId = ie.InputElementId
             WHERE        (dct.DynamicContentTypeId = @ContentTypeId)
+            ORDER BY     eic.Weight
         ", parameters);
 
 
         this.InputElementDataList = ManageDB.GetSingleColumnResultAsList<int>(@"
-            SELECT       idt.ElementInContentId
-            FROM         DynamicContentType dct, @InputDataTable idt, ElementInContent eic
-            WHERE        dct.DynamicContentTypeId = eic.ContentTypeId
-                AND      idt.ElementInContentId = eic.InputElementId
-                AND      idt.ContentId = @ContentId
-            ORDER BY     eic.Weight
+            SELECT        idt.ElementInContentId
+            FROM          DynamicContentType AS dct INNER JOIN
+                              ElementInContent AS eic ON dct.DynamicContentTypeId = eic.ContentTypeId INNER JOIN
+                              InputDataSimpleText AS idt ON eic.Id = idt.ElementInContentId
+            WHERE         (idt.ContentId = 1)
+            ORDER BY      eic.Weight
         ", parameters);
 
 

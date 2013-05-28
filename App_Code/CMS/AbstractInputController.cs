@@ -11,7 +11,7 @@ using System.Web.UI.WebControls;
 public abstract class AbstractInputController
 {
 
-    public String InputElementName { get; protected set; }
+    public string InputElementName { get; protected set; }
     public int InputDataId { get; protected set; }
 
 
@@ -26,9 +26,9 @@ public abstract class AbstractInputController
     }
 
 
-    protected AbstractInputController(int id)
+    protected AbstractInputController(int contentId)
     {
-        InputDataId = id;
+        InputDataId = contentId;
         InputElementName = "BaseClass";
 	}
 }
