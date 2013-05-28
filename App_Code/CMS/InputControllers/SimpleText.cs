@@ -11,18 +11,23 @@ using System.Web.UI.WebControls;
 public class SimpleText
     : AbstractInputController
 {
+    private TextBox tbValue { set; get; }
+    private TextBox tbLabel { set; get; }
+
     public SimpleText()
         : base()
     {
-        base.Value = "SimpleText";
+        base.InputElementName = "SimpleText";
+        tbValue = new TextBox();
+        tbLabel = new TextBox();
     }
 
-    public override void insertEdit(PlaceHolder ph)
+    public override void AddEdit(Panel panel)
     {
-        ph.Controls.Add(new Control());
+        throw new NotImplementedException();
     }
 
-    public override Control getControl()
+    public override void AddDisplay(Panel panel)
     {
         throw new NotImplementedException();
     }

@@ -53,41 +53,20 @@ public class GenericContent
         this.CreateTime = createTime;
         this.UpdateTime = updateTime;
         this.Author = author;
+
+        var parameters = new Dictionary<string, object>();
+        parameters.Add("@ContentTypeId",contentType);
+
+        List<int> inputList = ManageDB.GetSingleColumnResultAsList<int>(@"
+            SELECT       ie.InputElementId
+            FROM         DynamicContentType AS dct INNER JOIN
+                         ElementInContent AS eic ON dct.DynamicContentTypeId = eic.ContentTypeId INNER JOIN
+                         InputElement AS ie ON eic.InputElementId = ie.InputElementId
+            WHERE        (dct.DynamicContentTypeId = @ContentTypeId)
+        ", parameters);
+
+
+
     }
 
-    void UpdateControllerList()
-    {
-        Dictionary<string, object> parameterList = new Dictionary<string, object>();
-        parameterList.Add("ContentId", ContentId);
-
-        DataTable dt = ManageDB.query(@"
-                SELECT * 
-                FROM DynamicContent 
-                WHERE DynamicContentId=@ContentId
-            ", parameterList);
-
-        if (dt == null)
-            return;
-
-        int contentType = (int)dt.Rows[0]["ContentType"];
-        DateTime createTime = (DateTime)dt.Rows[0]["CreateTime"];
-        DateTime updateTime = (DateTime)dt.Rows[0]["UpdateTime"];
-        int author = (int)dt.Rows[0]["Author"];
-    }
-
-
-
-
-	public GenericContent(Type type=null)
-    {
-        AbstractInputController newController;
-
-        if (type == null || !type.IsSubclassOf(typeof(AbstractInputController)))
-            newController = (AbstractInputController)System.Activator.CreateInstance(defaultGenericContentType);
-        else
-            newController = (AbstractInputController)System.Activator.CreateInstance(type);
-
-        this.ControllerList.Add(newController);
-
-	}
 }

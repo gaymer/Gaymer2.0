@@ -14,15 +14,16 @@ public class ComplexText
 
     public ComplexText()
     {
-        base.Value = "ComplexText";
+        base.InputElementName = "ComplexText";
     }
 
-    public override void insertEdit(System.Web.UI.WebControls.PlaceHolder ph)
+
+    public override void AddEdit(Panel panel)
     {
-        ph.Controls.Add(new Control());
+        throw new NotImplementedException();
     }
 
-    public override Control getControl()
+    public override void AddDisplay(Panel panel)
     {
         throw new NotImplementedException();
     }
@@ -35,16 +36,7 @@ public class ComplexText2
 
     public ComplexText2()
     {
-        base.Value = "ComplexText2";
+        base.InputElementName = "ComplexText2";
     }
 
-    public override void insertEdit(System.Web.UI.WebControls.PlaceHolder ph)
-    {
-        ph.Controls.Add(new Control());
-    }
-
-    public override Control getControl()
-    {
-        throw new NotImplementedException();
-    }
 }
