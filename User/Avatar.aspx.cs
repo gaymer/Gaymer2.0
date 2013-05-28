@@ -13,13 +13,20 @@ public partial class User_Avatar : System.Web.UI.Page
     }
     protected void avatarbtn_Click(object sender, EventArgs e)
     {
+        GaymerLINQDataContext db = new GaymerLINQDataContext();
+        User use = new User();
+        System.Text.UTF8Encoding encoding = new System.Text.UTF8Encoding();
+
         try
         {
             if (this.Fileuploade.HasFile)
             {
                 this.Fileuploade.SaveAs(Server.MapPath("~") + "Style/Images/" + this.Fileuploade.FileName);
                 AvatarImg.ImageUrl = "/Style/Images/" + this.Fileuploade.FileName;
-                
+                use.Avatar = new System.Data.Linq.Binary(encoding.GetBytes("/Style/Images/" + this.Fileuploade.FileName));
+                db.Users.InsertOnSubmit(use);
+
+               
             }
             else
                 errorlbl.Text += "Fil ikke lastet opp";
@@ -28,7 +35,15 @@ public partial class User_Avatar : System.Web.UI.Page
         {
             throw new Exception(exc.Message);
         }
+
+       
+        db.Dispose();
         
     }
-    
+
+    protected void tilbake_Click(object sender, EventArgs e)
+    {
+
+        Response.Redirect("/user/UserPage.aspx");
+    }
 }

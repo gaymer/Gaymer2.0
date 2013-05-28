@@ -5473,6 +5473,8 @@ public partial class User : INotifyPropertyChanging, INotifyPropertyChanged
 	
 	private string _Salt;
 	
+	private System.Data.Linq.Binary _Avatar;
+	
 	private EntitySet<UserInRole> _UserInRoles;
 	
 	private EntitySet<ContactInfo> _ContactInfos;
@@ -5513,6 +5515,8 @@ public partial class User : INotifyPropertyChanging, INotifyPropertyChanged
     partial void OnLoginSessionChanged();
     partial void OnSaltChanging(string value);
     partial void OnSaltChanged();
+    partial void OnAvatarChanging(System.Data.Linq.Binary value);
+    partial void OnAvatarChanged();
     #endregion
 	
 	public User()
@@ -5671,6 +5675,26 @@ public partial class User : INotifyPropertyChanging, INotifyPropertyChanged
 				this._Salt = value;
 				this.SendPropertyChanged("Salt");
 				this.OnSaltChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Avatar", DbType="VarBinary(MAX)", UpdateCheck=UpdateCheck.Never)]
+	public System.Data.Linq.Binary Avatar
+	{
+		get
+		{
+			return this._Avatar;
+		}
+		set
+		{
+			if ((this._Avatar != value))
+			{
+				this.OnAvatarChanging(value);
+				this.SendPropertyChanging();
+				this._Avatar = value;
+				this.SendPropertyChanged("Avatar");
+				this.OnAvatarChanged();
 			}
 		}
 	}

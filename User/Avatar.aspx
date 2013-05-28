@@ -15,7 +15,10 @@
     <br />
         <br />
         <asp:Label ID="errorlbl" runat="server" Text=""></asp:Label>
-        </asp:Panel>
+        <br />
+        <asp:Button ID="tilbake" runat="server" Text="Tilbake" OnClick="tilbake_Click" />
+
+    </asp:Panel>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="DebugOutput" Runat="Server">
 </asp:Content>
