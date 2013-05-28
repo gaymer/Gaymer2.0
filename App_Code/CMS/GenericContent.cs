@@ -18,8 +18,8 @@ public class GenericContent
     public int ContentId { get; private set; }
     public int ContentType { get; private set; }
     public int Author { get; private set; }
-    public DateTime CreateTime { get; private set; }
-    public DateTime UpdateTime { get; private set; }
+    public DateTime? CreateTime { get; private set; }
+    public DateTime? UpdateTime { get; private set; }
 
     static Type defaultGenericContentType = typeof(SimpleText);
 
@@ -42,16 +42,16 @@ public class GenericContent
         if (dt==null || dt.Rows.Count<1)
             return null;
 
-        int contentType = (int)dt.Rows[0]["ContentType"];
-        DateTime createTime = (DateTime)dt.Rows[0]["CreateTime"];
-        DateTime updateTime = (DateTime)dt.Rows[0]["UpdateTime"];
+        int contentType = (int) dt.Rows[0]["ContentType"];
+        DateTime? createTime = (dt.Rows[0]["CreateTime"] ?? (DateTime?)null) as DateTime?;
+        DateTime? updateTime = (dt.Rows[0]["UpdateTime"] ?? (DateTime?)null) as DateTime?;
         int author = (int)dt.Rows[0]["Author"];
 
 
         return new GenericContent(contentId, contentType, createTime, updateTime, author);
     }
 
-    public GenericContent(int contentId, int contentType, DateTime createTime, DateTime updateTime, int author)
+    public GenericContent(int contentId, int contentType, DateTime? createTime, DateTime? updateTime, int author)
     {
         this.ContentId = contentId;
         this.ContentType = contentType;
