@@ -12,39 +12,25 @@ public class ComplexText
     : AbstractInputController
 {
 
-    public ComplexText()
+    public ComplexText(int i)
+        : base(i)
     {
-        base.Value = "ComplexText";
+        base.InputElementName = "ComplexText";
     }
 
-    public override void insertEdit(System.Web.UI.WebControls.PlaceHolder ph)
+    public override void AddEdit(Panel panel, int contentId)
     {
-        ph.Controls.Add(new Control());
+        throw new NotImplementedException();
     }
 
-    public override Control getControl()
+    public override void AddDisplay(Panel panel, int contentId)
+    {
+        throw new NotImplementedException();
+    }
+
+    public override void SaveInput(Panel panel, int contentId)
     {
         throw new NotImplementedException();
     }
 }
 
-
-public class ComplexText2
-    : ComplexText
-{
-
-    public ComplexText2()
-    {
-        base.Value = "ComplexText2";
-    }
-
-    public override void insertEdit(System.Web.UI.WebControls.PlaceHolder ph)
-    {
-        ph.Controls.Add(new Control());
-    }
-
-    public override Control getControl()
-    {
-        throw new NotImplementedException();
-    }
-}

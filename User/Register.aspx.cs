@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data.SqlClient;
+using System.Security.Cryptography;
 
 public partial class User_Register : System.Web.UI.Page
 {
@@ -46,10 +47,10 @@ public partial class User_Register : System.Web.UI.Page
                 use.Mail = Email;
 
                 Random rand = new Random();
-                string salt = rand.Next(10000, 99999).ToString();
+                string salt = rand.Next().ToString();
                 byte[] bytee = System.Text.Encoding.Default.GetBytes(Password + salt);
-
-                string hash = Convert.ToBase64String(new System.Security.Cryptography.SHA1CryptoServiceProvider().ComputeHash(bytee));
+                byte[] byteHash = new SHA1CryptoServiceProvider().ComputeHash(bytee);
+                string hash = Convert.ToBase64String(byteHash);
 
                 use.Salt = salt;
                 use.Password = hash;

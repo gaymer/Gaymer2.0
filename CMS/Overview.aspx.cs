@@ -31,6 +31,9 @@ public partial class CMS_Overview : System.Web.UI.Page
                 case "inputelement":
                     FillInputElements();
                     break;
+                case "inputs":
+                    FillInputDataElements();
+                    break;
                 default:
                     FillDefault();
                     break;
@@ -44,6 +47,18 @@ public partial class CMS_Overview : System.Web.UI.Page
 
         gvOverview.DataBind();
         lblNumberOfRows.Text = gvOverview.Rows.Count.ToString() + " rader:";
+    }
+
+    private void FillInputDataElements()
+    {
+        gvOverview.DataSource = ManageDB.query(@"
+            SELECT        idt.ElementInContentId, idt.Value, idt.Label
+            FROM          DynamicContentType AS dct INNER JOIN
+                              ElementInContent AS eic ON dct.DynamicContentTypeId = eic.ContentTypeId INNER JOIN
+                              InputDataSimpleText AS idt ON eic.Id = idt.ElementInContentId
+            ORDER BY eic.Weight
+        ", debug: true);
+
     }
 
 

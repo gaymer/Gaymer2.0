@@ -6,21 +6,29 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 
 /// <summary>
-/// Summary description for AbstractInputController
+/// Summary description for AbstractInputController 
 /// </summary>
 public abstract class AbstractInputController
 {
 
-    public String Value { get; set; }
-    
-    public abstract void insertEdit(PlaceHolder ph);
+    public string InputElementName { get; protected set; }
+    public int InputDataId { get; protected set; }
 
-    public abstract Control getControl();
-    
 
-	public AbstractInputController()
+    public abstract void AddEdit(Panel panel, int contentId);
+    public abstract void AddDisplay(Panel panel, int contentId);
+    public abstract void SaveInput(Panel panel, int contentId);
 
-	{
-        Value = "BaseClass";
+
+    public void AddCreate(Panel panel)
+    {
+        AddEdit(panel, -1);
+    }
+
+
+    protected AbstractInputController(int contentId)
+    {
+        InputDataId = contentId;
+        InputElementName = "BaseClass";
 	}
 }

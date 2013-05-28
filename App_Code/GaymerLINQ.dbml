@@ -254,6 +254,7 @@
       <Column Name="AbID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="LoginSession" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
       <Column Name="Salt" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Avatar" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX)" CanBeNull="true" UpdateCheck="Never" />
       <Association Name="User_UserInRole" Member="UserInRoles" ThisKey="UID" OtherKey="inUserID" Type="UserInRole" />
       <Association Name="User_ContactInfo" Member="ContactInfos" ThisKey="UID" OtherKey="User" Type="ContactInfo" />
       <Association Name="User_DynamicContent" Member="DynamicContents" ThisKey="UID" OtherKey="Author" Type="DynamicContent" />
