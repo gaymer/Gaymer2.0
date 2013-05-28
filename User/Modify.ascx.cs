@@ -21,7 +21,7 @@ public partial class User_Modify : System.Web.UI.UserControl
                         Uname = a.Username,
                         Firstname = a.UserAbout.FirstName,
                         Lastname = a.UserAbout.LastName,
-                        Avatar = "",
+                        Avatar = a.Avatar,
                         AboutMe = "",
                         Birthdate = a.UserAbout.Birthdate,
                         Sex = a.UserAbout.Gender,
@@ -30,7 +30,7 @@ public partial class User_Modify : System.Web.UI.UserControl
 
         Username.Text = user.Uname;
 
-        MyAvatar.ImageUrl = "~Style/Avatar/" + user.Avatar;
+        //MyAvatar.ImageUrl = 
         MyAvatar.AlternateText = user.Uname + " Avatar";
 
         AboutMeTxt.Text = user.AboutMe;
@@ -125,5 +125,10 @@ public partial class User_Modify : System.Web.UI.UserControl
             return false;
         else
             return true;
+    }
+
+    protected void RedAvatarbtn_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("/user/Avatar.aspx");
     }
 }

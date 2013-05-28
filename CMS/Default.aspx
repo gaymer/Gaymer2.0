@@ -6,5 +6,6 @@
    <asp:Label ID="Output" runat="server">Hei, hIeeeeee</asp:Label>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="DebugOutput" Runat="Server">
+    <asp:Panel ID="GenericContentPanel" runat="server"></asp:Panel>
 </asp:Content>
 

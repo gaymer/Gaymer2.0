@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Data;
 
 public partial class User_Normal : System.Web.UI.UserControl
 {
@@ -13,46 +14,86 @@ public partial class User_Normal : System.Web.UI.UserControl
     }
     public void FillData()
     {
-        GaymerLINQDataContext db = new GaymerLINQDataContext();
         LoginLib login = new LoginLib();
-        var user = (from a in db.Users
-                    where a.UID == login.GetUserID()
-                    select new
-                    {
-                        Uname = a.Username,   
-                        Role = a.RoleID,
-                        Firstname = a.UserAbout.FirstName,
-                        Lastname = a.UserAbout.LastName,
-                        Avatar = "",
-                        AboutMe = "",
-                        Birthdate = a.UserAbout.Birthdate,
-                        Sex = a.UserAbout.Gender,
-                        Living = ""
-                    }).FirstOrDefault();
 
-        var rolle = (from b in db.UserRoles        // Henter ut brukerens rolle fra databasen. 
-                     where b.RoleID == user.Role
-                     select new
+        string userIdString = Request.QueryString["UserId"];
+        int userID;
+        if (!Int32.TryParse(userIdString, out userID))
+        {
+            userID = login.GetUserID();
+        }
+
+
+        GaymerLINQDataContext db = new GaymerLINQDataContext();
+            
+            var user = (from a in db.Users
+                        where a.UID == userID
+                        select new
+                        {
+                            Uid = a.UID,
+                            Uname = a.Username,                        
+                            Firstname = a.UserAbout.FirstName,
+                            Lastname = a.UserAbout.LastName,
+                            Avatar = "",
+                            AboutMe = "",
+                            Birthdate = a.UserAbout.Birthdate,
+                            Sex = a.UserAbout.Gender,
+                            Living = ""
+                        }).FirstOrDefault();
+
+
+            // Henter ut brukerens rolle fra databasen. 
+
+            var userRole = (from UserInRoles in db.UserInRoles
+                            from Roles in db.Roles
+                            where UserInRoles.inUserID == user.Uid && UserInRoles.inRoleID == Roles.RoleID   //Finner "rett" bruker i UserInRole. 
+                            select new
+                            {
+                                URole = UserInRoles.inRoleID
+
+                            }).FirstOrDefault();
+
+            var rolle = (from Roles in db.Roles
+                         where Roles.RoleID == userRole.URole
+                         select new
                          {
-                             URole = b.Role
+                             BrukerRolle = Roles.Role1
                          }).FirstOrDefault();
 
-        Username.Text = user.Uname;
-        lblRolle.Text = rolle.URole; 
+            lblRolle.Text = rolle.BrukerRolle;
+            Username.Text = user.Uname;
 
-        MyAvatar.ImageUrl = "~Style/Avatar/" + user.Avatar;
-        MyAvatar.AlternateText = user.Uname + " Avatar";
+            MyAvatar.ImageUrl = user.Avatar;                                       //<-----(.)(.)
+            MyAvatar.AlternateText = user.Uname + " Avatar";
 
-        AboutMeTxt.Text = user.AboutMe;
+            AboutMeTxt.Text = user.AboutMe;
 
-        UsersNameTxt.Text = user.Firstname + " " + user.Lastname;
-        UserAgeTxt.Text = AgeYr(user.Birthdate).ToString();
-        UserSexTxt.Text = user.Sex == null ? "Undefined" : user.Sex == true ? "Woman" : "Man";
-        UserLivingPlaceTxt.Text = user.Living;
-        if (lblRolle.Text=="Administrator")
-        {
-            AdminPanel.Visible = true; 
-        }
+            UsersNameTxt.Text = user.Firstname + " " + user.Lastname;
+            UserAgeTxt.Text = AgeYr(user.Birthdate).ToString();
+            UserSexTxt.Text = user.Sex == null ? "Undefined" : user.Sex == true ? "Woman" : "Man";
+            UserLivingPlaceTxt.Text = user.Living;
+
+            if (ManageDB.UserHasPermission("Gaymer_ShowPanel", login.GetUserID()))
+            {
+                AdminPanel.Visible = true;
+            }
+
+            //Finne alle venner/relasjoner
+
+            Dictionary<String, object> parameter = new Dictionary<string, object>();
+            parameter.Add("@UserID", userID);
+
+            DataTable dt = ManageDB.query(@"
+            SELECT [User].Username, [User].UID
+            FROM [User],UserRelation
+            WHERE UserRelation.UserId = @UserID
+                AND [User].UID = UserRelation.RelatedUserId
+            ", parameter, debug: true);
+
+            FriendView.DataSource = dt;
+            FriendView.DataBind();
+
+
     }
     private int AgeYr(DateTime? Bdate)
     {
@@ -78,4 +119,5 @@ public partial class User_Normal : System.Web.UI.UserControl
             return now.Year - date.Year + arteller;
         }
     }
+
 }

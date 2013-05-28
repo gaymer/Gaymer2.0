@@ -7,65 +7,83 @@ using System.Web.UI.WebControls;
 
 using System.Data;
 
-using System;
-using System.Data;
 using System.Data.SqlClient;
 
-using Gaymer.Classes;
 
 public partial class CMS_Default : System.Web.UI.Page
 {
+
+    public void AddHTML(string htmlString)
+    {
+        if (GenericContentPanel != null) GenericContentPanel.Controls.Add(new LiteralControl(htmlString));
+    }
+
+    private void FailToLoad()
+    {
+        Response.Redirect("/CMS/Default.aspx?Content=1");
+    }
+
     protected void Page_Load(object sender, EventArgs e)
     {
-        // DataTable dt = Gaymer.Classes.ManageDB.query("SELECT * FROM User");
+        string qsContentIdString = Request.QueryString["content"];
+        qsContentIdString = string.IsNullOrEmpty(qsContentIdString)? null: qsContentIdString;
+        int contentId;
 
-        //Output.Text = "Det er " + dt.Rows.Count.ToString() + " brukere i databasen.";
-
-        Output.Text = "Det er brukere i databasen.";
-
-
-        string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["gaymerdbConnectionString"].ConnectionString;
-
-        // Provide the query string with a parameter placeholder.
-        string queryString = "SELECT UID, Username, Mail, Password FROM User";
-
-        // Specify the parameter value.
-        //int paramValue = 5;
-
-        // Create and open the connection in a using block. This
-        // ensures that all resources will be closed and disposed
-        // when the code exits.
-        using (SqlConnection connection =
-        new SqlConnection(connectionString))
+        if (!Int32.TryParse(qsContentIdString, out contentId))
         {
-            // Create the Command and Parameter objects.
-            SqlCommand command = new SqlCommand(queryString, connection);
-            //command.Parameters.AddWithValue("@pricePoint", paramValue);
-
-            // Open the connection in a try/catch block.
-            // Create and execute the DataReader, writing the result
-            // set to the console window.
-            try
-            {
-                connection.Open();
-                SqlDataReader reader = command.ExecuteReader();
-                //while (reader.Read())
-                //{
-                //    Output.Text = reader[0].ToString() + " " + reader[1].ToString() + " :: " + reader[2].ToString() + " #" + reader[3].ToString();
-                //}
-                //reader.Close();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Database error (Query): " + ex.ToString());
-            }
-            finally
-            {
-                connection.Close();
-            }
-
-
-
+            FailToLoad();
         }
+
+        GenericContent content = GenericContent.getContent(contentId);
+
+
+
+
+        AddHTML("Before content <br />");
+
+        if (content == null)
+        {
+            FailToLoad();
+        }
+        else
+        {
+            foreach (int inputElementId in content.InputElementTypeList) // Test for null implemented earlier in code
+            {
+                AbstractInputController myInput = getInputObject(inputElementId, contentId);
+                myInput.AddEdit(GenericContentPanel, contentId);
+            }
+        }
+
+        AddHTML("<br /> After content");
+
     }
+
+
+    private AbstractInputController getInputObject(int inputElementId, int contentId)
+    {
+        var parameters = new Dictionary<string, object>();
+        parameters.Add("@InputElementId", inputElementId);
+
+        string inputName = (ManageDB.GetSingleColumnResultAsList<string>(@"
+                SELECT      Name
+                FROM        InputElement
+                WHERE       InputElementId = @InputElementId
+            ", parameters, debug:true))[0];
+
+        if (string.IsNullOrEmpty(inputName))
+            return null;
+
+        switch (inputName)
+        {
+            case "simpletext":
+                return new SimpleText(contentId);
+                break;
+            default:
+                throw new Exception("/cms/default#A1");
+                break;
+        }
+
+        return null;
+    }
+
 }

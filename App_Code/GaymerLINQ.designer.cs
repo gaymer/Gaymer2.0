@@ -29,26 +29,95 @@ public partial class GaymerLINQDataContext : System.Data.Linq.DataContext
 	
   #region Extensibility Method Definitions
   partial void OnCreated();
-  partial void InsertUser(User instance);
-  partial void UpdateUser(User instance);
-  partial void DeleteUser(User instance);
-  partial void InsertUserRole(UserRole instance);
-  partial void UpdateUserRole(UserRole instance);
-  partial void DeleteUserRole(UserRole instance);
+  partial void InsertUserInRole(UserInRole instance);
+  partial void UpdateUserInRole(UserInRole instance);
+  partial void DeleteUserInRole(UserInRole instance);
+  partial void InsertContactInfo(ContactInfo instance);
+  partial void UpdateContactInfo(ContactInfo instance);
+  partial void DeleteContactInfo(ContactInfo instance);
+  partial void InsertContactInfoType(ContactInfoType instance);
+  partial void UpdateContactInfoType(ContactInfoType instance);
+  partial void DeleteContactInfoType(ContactInfoType instance);
+  partial void InsertDynamicContent(DynamicContent instance);
+  partial void UpdateDynamicContent(DynamicContent instance);
+  partial void DeleteDynamicContent(DynamicContent instance);
+  partial void InsertElementInContent(ElementInContent instance);
+  partial void UpdateElementInContent(ElementInContent instance);
+  partial void DeleteElementInContent(ElementInContent instance);
+  partial void InsertForum(Forum instance);
+  partial void UpdateForum(Forum instance);
+  partial void DeleteForum(Forum instance);
+  partial void InsertForumThread(ForumThread instance);
+  partial void UpdateForumThread(ForumThread instance);
+  partial void DeleteForumThread(ForumThread instance);
+  partial void InsertInputElement(InputElement instance);
+  partial void UpdateInputElement(InputElement instance);
+  partial void DeleteInputElement(InputElement instance);
+  partial void InsertPrivateMessage(PrivateMessage instance);
+  partial void UpdatePrivateMessage(PrivateMessage instance);
+  partial void DeletePrivateMessage(PrivateMessage instance);
+  partial void InsertStaticContent(StaticContent instance);
+  partial void UpdateStaticContent(StaticContent instance);
+  partial void DeleteStaticContent(StaticContent instance);
+  partial void InsertTag(Tag instance);
+  partial void UpdateTag(Tag instance);
+  partial void DeleteTag(Tag instance);
+  partial void InsertTagOnComment(TagOnComment instance);
+  partial void UpdateTagOnComment(TagOnComment instance);
+  partial void DeleteTagOnComment(TagOnComment instance);
+  partial void InsertTagOnDynamicContent(TagOnDynamicContent instance);
+  partial void UpdateTagOnDynamicContent(TagOnDynamicContent instance);
+  partial void DeleteTagOnDynamicContent(TagOnDynamicContent instance);
+  partial void InsertTagOnStaticContent(TagOnStaticContent instance);
+  partial void UpdateTagOnStaticContent(TagOnStaticContent instance);
+  partial void DeleteTagOnStaticContent(TagOnStaticContent instance);
+  partial void InsertTagRelation(TagRelation instance);
+  partial void UpdateTagRelation(TagRelation instance);
+  partial void DeleteTagRelation(TagRelation instance);
   partial void InsertUserAbout(UserAbout instance);
   partial void UpdateUserAbout(UserAbout instance);
   partial void DeleteUserAbout(UserAbout instance);
+  partial void InsertUserInfo(UserInfo instance);
+  partial void UpdateUserInfo(UserInfo instance);
+  partial void DeleteUserInfo(UserInfo instance);
+  partial void InsertUserInfoType(UserInfoType instance);
+  partial void UpdateUserInfoType(UserInfoType instance);
+  partial void DeleteUserInfoType(UserInfoType instance);
+  partial void InsertPermissionToRole(PermissionToRole instance);
+  partial void UpdatePermissionToRole(PermissionToRole instance);
+  partial void DeletePermissionToRole(PermissionToRole instance);
+  partial void InsertUserRelation(UserRelation instance);
+  partial void UpdateUserRelation(UserRelation instance);
+  partial void DeleteUserRelation(UserRelation instance);
+  partial void InsertPermission(Permission instance);
+  partial void UpdatePermission(Permission instance);
+  partial void DeletePermission(Permission instance);
+  partial void InsertComment(Comment instance);
+  partial void UpdateComment(Comment instance);
+  partial void DeleteComment(Comment instance);
+  partial void InsertDynamicContentType(DynamicContentType instance);
+  partial void UpdateDynamicContentType(DynamicContentType instance);
+  partial void DeleteDynamicContentType(DynamicContentType instance);
+  partial void InsertRole(Role instance);
+  partial void UpdateRole(Role instance);
+  partial void DeleteRole(Role instance);
+  partial void InsertUser(User instance);
+  partial void UpdateUser(User instance);
+  partial void DeleteUser(User instance);
   #endregion
+	
+	public GaymerLINQDataContext() : 
+			base(global::System.Configuration.ConfigurationManager.ConnectionStrings["gaymerdbConnectionString"].ConnectionString, mappingSource)
+	{
+		OnCreated();
+	}
 	
 	public GaymerLINQDataContext(string connection) : 
 			base(connection, mappingSource)
 	{
 		OnCreated();
 	}
-    public GaymerLINQDataContext()
-        : this(@"Data Source=mssql1.cloudsites.gearhost.com;Initial Catalog=gaymerdb;Persist Security Info=True;User ID=gaymerdb;Password=hSyOl042")
-    {
-    }
+	
 	public GaymerLINQDataContext(System.Data.IDbConnection connection) : 
 			base(connection, mappingSource)
 	{
@@ -67,19 +136,123 @@ public partial class GaymerLINQDataContext : System.Data.Linq.DataContext
 		OnCreated();
 	}
 	
-	public System.Data.Linq.Table<User> Users
+	public System.Data.Linq.Table<UserInRole> UserInRoles
 	{
 		get
 		{
-			return this.GetTable<User>();
+			return this.GetTable<UserInRole>();
 		}
 	}
 	
-	public System.Data.Linq.Table<UserRole> UserRoles
+	public System.Data.Linq.Table<ContactInfo> ContactInfos
 	{
 		get
 		{
-			return this.GetTable<UserRole>();
+			return this.GetTable<ContactInfo>();
+		}
+	}
+	
+	public System.Data.Linq.Table<ContactInfoType> ContactInfoTypes
+	{
+		get
+		{
+			return this.GetTable<ContactInfoType>();
+		}
+	}
+	
+	public System.Data.Linq.Table<DynamicContent> DynamicContents
+	{
+		get
+		{
+			return this.GetTable<DynamicContent>();
+		}
+	}
+	
+	public System.Data.Linq.Table<ElementInContent> ElementInContents
+	{
+		get
+		{
+			return this.GetTable<ElementInContent>();
+		}
+	}
+	
+	public System.Data.Linq.Table<Forum> Forums
+	{
+		get
+		{
+			return this.GetTable<Forum>();
+		}
+	}
+	
+	public System.Data.Linq.Table<ForumThread> ForumThreads
+	{
+		get
+		{
+			return this.GetTable<ForumThread>();
+		}
+	}
+	
+	public System.Data.Linq.Table<InputElement> InputElements
+	{
+		get
+		{
+			return this.GetTable<InputElement>();
+		}
+	}
+	
+	public System.Data.Linq.Table<PrivateMessage> PrivateMessages
+	{
+		get
+		{
+			return this.GetTable<PrivateMessage>();
+		}
+	}
+	
+	public System.Data.Linq.Table<StaticContent> StaticContents
+	{
+		get
+		{
+			return this.GetTable<StaticContent>();
+		}
+	}
+	
+	public System.Data.Linq.Table<Tag> Tags
+	{
+		get
+		{
+			return this.GetTable<Tag>();
+		}
+	}
+	
+	public System.Data.Linq.Table<TagOnComment> TagOnComments
+	{
+		get
+		{
+			return this.GetTable<TagOnComment>();
+		}
+	}
+	
+	public System.Data.Linq.Table<TagOnDynamicContent> TagOnDynamicContents
+	{
+		get
+		{
+			return this.GetTable<TagOnDynamicContent>();
+		}
+	}
+	
+	public System.Data.Linq.Table<TagOnStaticContent> TagOnStaticContents
+	{
+		get
+		{
+			return this.GetTable<TagOnStaticContent>();
+		}
+	}
+	
+	public System.Data.Linq.Table<TagRelation> TagRelations
+	{
+		get
+		{
+			return this.GetTable<TagRelation>();
 		}
 	}
 	
@@ -90,295 +263,247 @@ public partial class GaymerLINQDataContext : System.Data.Linq.DataContext
 			return this.GetTable<UserAbout>();
 		}
 	}
+	
+	public System.Data.Linq.Table<UserInfo> UserInfos
+	{
+		get
+		{
+			return this.GetTable<UserInfo>();
+		}
+	}
+	
+	public System.Data.Linq.Table<UserInfoType> UserInfoTypes
+	{
+		get
+		{
+			return this.GetTable<UserInfoType>();
+		}
+	}
+	
+	public System.Data.Linq.Table<PermissionToRole> PermissionToRoles
+	{
+		get
+		{
+			return this.GetTable<PermissionToRole>();
+		}
+	}
+	
+	public System.Data.Linq.Table<UserRelation> UserRelations
+	{
+		get
+		{
+			return this.GetTable<UserRelation>();
+		}
+	}
+	
+	public System.Data.Linq.Table<Permission> Permissions
+	{
+		get
+		{
+			return this.GetTable<Permission>();
+		}
+	}
+	
+	public System.Data.Linq.Table<Comment> Comments
+	{
+		get
+		{
+			return this.GetTable<Comment>();
+		}
+	}
+	
+	public System.Data.Linq.Table<DynamicContentType> DynamicContentTypes
+	{
+		get
+		{
+			return this.GetTable<DynamicContentType>();
+		}
+	}
+	
+	public System.Data.Linq.Table<Role> Roles
+	{
+		get
+		{
+			return this.GetTable<Role>();
+		}
+	}
+	
+	public System.Data.Linq.Table<User> Users
+	{
+		get
+		{
+			return this.GetTable<User>();
+		}
+	}
 }
 
-[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.[User]")]
-public partial class User : INotifyPropertyChanging, INotifyPropertyChanged
+[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.UserInRole")]
+public partial class UserInRole : INotifyPropertyChanging, INotifyPropertyChanged
 {
 	
 	private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 	
-	private int _UID;
+	private int _UserRole;
 	
-	private string _Username;
+	private int _inUserID;
 	
-	private string _Mail;
+	private int _inRoleID;
 	
-	private string _Password;
+	private EntityRef<Role> _Role;
 	
-	private System.Nullable<int> _AbID;
-	
-	private int _RoleID;
-	
-	private string _LoginSession;
-	
-	private string _Salt;
-	
-	private EntityRef<UserRole> _UserRole;
-	
-	private EntityRef<UserAbout> _UserAbout;
+	private EntityRef<User> _User;
 	
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnUIDChanging(int value);
-    partial void OnUIDChanged();
-    partial void OnUsernameChanging(string value);
-    partial void OnUsernameChanged();
-    partial void OnMailChanging(string value);
-    partial void OnMailChanged();
-    partial void OnPasswordChanging(string value);
-    partial void OnPasswordChanged();
-    partial void OnAbIDChanging(System.Nullable<int> value);
-    partial void OnAbIDChanged();
-    partial void OnRoleIDChanging(int value);
-    partial void OnRoleIDChanged();
-    partial void OnLoginSessionChanging(string value);
-    partial void OnLoginSessionChanged();
-    partial void OnSaltChanging(string value);
-    partial void OnSaltChanged();
+    partial void OnUserRoleChanging(int value);
+    partial void OnUserRoleChanged();
+    partial void OninUserIDChanging(int value);
+    partial void OninUserIDChanged();
+    partial void OninRoleIDChanging(int value);
+    partial void OninRoleIDChanged();
     #endregion
 	
-	public User()
+	public UserInRole()
 	{
-		this._UserRole = default(EntityRef<UserRole>);
-		this._UserAbout = default(EntityRef<UserAbout>);
+		this._Role = default(EntityRef<Role>);
+		this._User = default(EntityRef<User>);
 		OnCreated();
 	}
 	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-	public int UID
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserRole", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+	public int UserRole
 	{
 		get
 		{
-			return this._UID;
+			return this._UserRole;
 		}
 		set
 		{
-			if ((this._UID != value))
+			if ((this._UserRole != value))
 			{
-				this.OnUIDChanging(value);
+				this.OnUserRoleChanging(value);
 				this.SendPropertyChanging();
-				this._UID = value;
-				this.SendPropertyChanged("UID");
-				this.OnUIDChanged();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Username", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-	public string Username
-	{
-		get
-		{
-			return this._Username;
-		}
-		set
-		{
-			if ((this._Username != value))
-			{
-				this.OnUsernameChanging(value);
-				this.SendPropertyChanging();
-				this._Username = value;
-				this.SendPropertyChanged("Username");
-				this.OnUsernameChanged();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Mail", DbType="VarChar(75) NOT NULL", CanBeNull=false)]
-	public string Mail
-	{
-		get
-		{
-			return this._Mail;
-		}
-		set
-		{
-			if ((this._Mail != value))
-			{
-				this.OnMailChanging(value);
-				this.SendPropertyChanging();
-				this._Mail = value;
-				this.SendPropertyChanged("Mail");
-				this.OnMailChanged();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Password", DbType="VarChar(MAX) NOT NULL", CanBeNull=false)]
-	public string Password
-	{
-		get
-		{
-			return this._Password;
-		}
-		set
-		{
-			if ((this._Password != value))
-			{
-				this.OnPasswordChanging(value);
-				this.SendPropertyChanging();
-				this._Password = value;
-				this.SendPropertyChanged("Password");
-				this.OnPasswordChanged();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AbID", DbType="Int")]
-	public System.Nullable<int> AbID
-	{
-		get
-		{
-			return this._AbID;
-		}
-		set
-		{
-			if ((this._AbID != value))
-			{
-				if (this._UserAbout.HasLoadedOrAssignedValue)
-				{
-					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-				}
-				this.OnAbIDChanging(value);
-				this.SendPropertyChanging();
-				this._AbID = value;
-				this.SendPropertyChanged("AbID");
-				this.OnAbIDChanged();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RoleID", DbType="Int NOT NULL")]
-	public int RoleID
-	{
-		get
-		{
-			return this._RoleID;
-		}
-		set
-		{
-			if ((this._RoleID != value))
-			{
-				if (this._UserRole.HasLoadedOrAssignedValue)
-				{
-					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-				}
-				this.OnRoleIDChanging(value);
-				this.SendPropertyChanging();
-				this._RoleID = value;
-				this.SendPropertyChanged("RoleID");
-				this.OnRoleIDChanged();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LoginSession", DbType="VarChar(MAX)")]
-	public string LoginSession
-	{
-		get
-		{
-			return this._LoginSession;
-		}
-		set
-		{
-			if ((this._LoginSession != value))
-			{
-				this.OnLoginSessionChanging(value);
-				this.SendPropertyChanging();
-				this._LoginSession = value;
-				this.SendPropertyChanged("LoginSession");
-				this.OnLoginSessionChanged();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Salt", DbType="VarChar(MAX)")]
-	public string Salt
-	{
-		get
-		{
-			return this._Salt;
-		}
-		set
-		{
-			if ((this._Salt != value))
-			{
-				this.OnSaltChanging(value);
-				this.SendPropertyChanging();
-				this._Salt = value;
-				this.SendPropertyChanged("Salt");
-				this.OnSaltChanged();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UserRole_User", Storage="_UserRole", ThisKey="RoleID", OtherKey="RoleID", IsForeignKey=true)]
-	public UserRole UserRole
-	{
-		get
-		{
-			return this._UserRole.Entity;
-		}
-		set
-		{
-			UserRole previousValue = this._UserRole.Entity;
-			if (((previousValue != value) 
-						|| (this._UserRole.HasLoadedOrAssignedValue == false)))
-			{
-				this.SendPropertyChanging();
-				if ((previousValue != null))
-				{
-					this._UserRole.Entity = null;
-					previousValue.Users.Remove(this);
-				}
-				this._UserRole.Entity = value;
-				if ((value != null))
-				{
-					value.Users.Add(this);
-					this._RoleID = value.RoleID;
-				}
-				else
-				{
-					this._RoleID = default(int);
-				}
+				this._UserRole = value;
 				this.SendPropertyChanged("UserRole");
+				this.OnUserRoleChanged();
 			}
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UserAbout_User", Storage="_UserAbout", ThisKey="AbID", OtherKey="AbID", IsForeignKey=true)]
-	public UserAbout UserAbout
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_inUserID", DbType="Int NOT NULL")]
+	public int inUserID
 	{
 		get
 		{
-			return this._UserAbout.Entity;
+			return this._inUserID;
 		}
 		set
 		{
-			UserAbout previousValue = this._UserAbout.Entity;
+			if ((this._inUserID != value))
+			{
+				if (this._User.HasLoadedOrAssignedValue)
+				{
+					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+				}
+				this.OninUserIDChanging(value);
+				this.SendPropertyChanging();
+				this._inUserID = value;
+				this.SendPropertyChanged("inUserID");
+				this.OninUserIDChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_inRoleID", DbType="Int NOT NULL")]
+	public int inRoleID
+	{
+		get
+		{
+			return this._inRoleID;
+		}
+		set
+		{
+			if ((this._inRoleID != value))
+			{
+				if (this._Role.HasLoadedOrAssignedValue)
+				{
+					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+				}
+				this.OninRoleIDChanging(value);
+				this.SendPropertyChanging();
+				this._inRoleID = value;
+				this.SendPropertyChanged("inRoleID");
+				this.OninRoleIDChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Role_UserInRole", Storage="_Role", ThisKey="inRoleID", OtherKey="RoleID", IsForeignKey=true)]
+	public Role Role
+	{
+		get
+		{
+			return this._Role.Entity;
+		}
+		set
+		{
+			Role previousValue = this._Role.Entity;
 			if (((previousValue != value) 
-						|| (this._UserAbout.HasLoadedOrAssignedValue == false)))
+						|| (this._Role.HasLoadedOrAssignedValue == false)))
 			{
 				this.SendPropertyChanging();
 				if ((previousValue != null))
 				{
-					this._UserAbout.Entity = null;
-					previousValue.Users.Remove(this);
+					this._Role.Entity = null;
+					previousValue.UserInRoles.Remove(this);
 				}
-				this._UserAbout.Entity = value;
+				this._Role.Entity = value;
 				if ((value != null))
 				{
-					value.Users.Add(this);
-					this._AbID = value.AbID;
+					value.UserInRoles.Add(this);
+					this._inRoleID = value.RoleID;
 				}
 				else
 				{
-					this._AbID = default(Nullable<int>);
+					this._inRoleID = default(int);
 				}
-				this.SendPropertyChanged("UserAbout");
+				this.SendPropertyChanged("Role");
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_UserInRole", Storage="_User", ThisKey="inUserID", OtherKey="UID", IsForeignKey=true)]
+	public User User
+	{
+		get
+		{
+			return this._User.Entity;
+		}
+		set
+		{
+			User previousValue = this._User.Entity;
+			if (((previousValue != value) 
+						|| (this._User.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._User.Entity = null;
+					previousValue.UserInRoles.Remove(this);
+				}
+				this._User.Entity = value;
+				if ((value != null))
+				{
+					value.UserInRoles.Add(this);
+					this._inUserID = value.UID;
+				}
+				else
+				{
+					this._inUserID = default(int);
+				}
+				this.SendPropertyChanged("User");
 			}
 		}
 	}
@@ -404,84 +529,296 @@ public partial class User : INotifyPropertyChanging, INotifyPropertyChanged
 	}
 }
 
-[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.UserRole")]
-public partial class UserRole : INotifyPropertyChanging, INotifyPropertyChanged
+[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ContactInfo")]
+public partial class ContactInfo : INotifyPropertyChanging, INotifyPropertyChanged
 {
 	
 	private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 	
-	private int _RoleID;
+	private int _ContactInfoId;
 	
-	private string _Role;
+	private int _ContactInfoType;
 	
-	private EntitySet<User> _Users;
+	private string _ContactName;
+	
+	private int _User;
+	
+	private EntityRef<ContactInfoType> _ContactInfoType1;
+	
+	private EntityRef<User> _User1;
 	
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnRoleIDChanging(int value);
-    partial void OnRoleIDChanged();
-    partial void OnRoleChanging(string value);
-    partial void OnRoleChanged();
+    partial void OnContactInfoIdChanging(int value);
+    partial void OnContactInfoIdChanged();
+    partial void OnContactInfoTypeChanging(int value);
+    partial void OnContactInfoTypeChanged();
+    partial void OnContactNameChanging(string value);
+    partial void OnContactNameChanged();
+    partial void OnUserChanging(int value);
+    partial void OnUserChanged();
     #endregion
 	
-	public UserRole()
+	public ContactInfo()
 	{
-		this._Users = new EntitySet<User>(new Action<User>(this.attach_Users), new Action<User>(this.detach_Users));
+		this._ContactInfoType1 = default(EntityRef<ContactInfoType>);
+		this._User1 = default(EntityRef<User>);
 		OnCreated();
 	}
 	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RoleID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-	public int RoleID
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ContactInfoId", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+	public int ContactInfoId
 	{
 		get
 		{
-			return this._RoleID;
+			return this._ContactInfoId;
 		}
 		set
 		{
-			if ((this._RoleID != value))
+			if ((this._ContactInfoId != value))
 			{
-				this.OnRoleIDChanging(value);
+				this.OnContactInfoIdChanging(value);
 				this.SendPropertyChanging();
-				this._RoleID = value;
-				this.SendPropertyChanged("RoleID");
-				this.OnRoleIDChanged();
+				this._ContactInfoId = value;
+				this.SendPropertyChanged("ContactInfoId");
+				this.OnContactInfoIdChanged();
 			}
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Role", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-	public string Role
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ContactInfoType", DbType="Int NOT NULL")]
+	public int ContactInfoType
 	{
 		get
 		{
-			return this._Role;
+			return this._ContactInfoType;
 		}
 		set
 		{
-			if ((this._Role != value))
+			if ((this._ContactInfoType != value))
 			{
-				this.OnRoleChanging(value);
+				if (this._ContactInfoType1.HasLoadedOrAssignedValue)
+				{
+					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+				}
+				this.OnContactInfoTypeChanging(value);
 				this.SendPropertyChanging();
-				this._Role = value;
-				this.SendPropertyChanged("Role");
-				this.OnRoleChanged();
+				this._ContactInfoType = value;
+				this.SendPropertyChanged("ContactInfoType");
+				this.OnContactInfoTypeChanged();
 			}
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UserRole_User", Storage="_Users", ThisKey="RoleID", OtherKey="RoleID")]
-	public EntitySet<User> Users
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ContactName", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
+	public string ContactName
 	{
 		get
 		{
-			return this._Users;
+			return this._ContactName;
 		}
 		set
 		{
-			this._Users.Assign(value);
+			if ((this._ContactName != value))
+			{
+				this.OnContactNameChanging(value);
+				this.SendPropertyChanging();
+				this._ContactName = value;
+				this.SendPropertyChanged("ContactName");
+				this.OnContactNameChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[User]", Storage="_User", DbType="Int NOT NULL")]
+	public int User
+	{
+		get
+		{
+			return this._User;
+		}
+		set
+		{
+			if ((this._User != value))
+			{
+				this.OnUserChanging(value);
+				this.SendPropertyChanging();
+				this._User = value;
+				this.SendPropertyChanged("User");
+				this.OnUserChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ContactInfoType_ContactInfo", Storage="_ContactInfoType1", ThisKey="ContactInfoType", OtherKey="ContactInfoTypeId", IsForeignKey=true)]
+	public ContactInfoType ContactInfoType1
+	{
+		get
+		{
+			return this._ContactInfoType1.Entity;
+		}
+		set
+		{
+			ContactInfoType previousValue = this._ContactInfoType1.Entity;
+			if (((previousValue != value) 
+						|| (this._ContactInfoType1.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._ContactInfoType1.Entity = null;
+					previousValue.ContactInfos.Remove(this);
+				}
+				this._ContactInfoType1.Entity = value;
+				if ((value != null))
+				{
+					value.ContactInfos.Add(this);
+					this._ContactInfoType = value.ContactInfoTypeId;
+				}
+				else
+				{
+					this._ContactInfoType = default(int);
+				}
+				this.SendPropertyChanged("ContactInfoType1");
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_ContactInfo", Storage="_User1", ThisKey="User", OtherKey="UID", IsForeignKey=true)]
+	public User User1
+	{
+		get
+		{
+			return this._User1.Entity;
+		}
+		set
+		{
+			User previousValue = this._User1.Entity;
+			if (((previousValue != value) 
+						|| (this._User1.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._User1.Entity = null;
+					previousValue.ContactInfos.Remove(this);
+				}
+				this._User1.Entity = value;
+				if ((value != null))
+				{
+					value.ContactInfos.Add(this);
+					this._User = value.UID;
+				}
+				else
+				{
+					this._User = default(int);
+				}
+				this.SendPropertyChanged("User1");
+			}
+		}
+	}
+	
+	public event PropertyChangingEventHandler PropertyChanging;
+	
+	public event PropertyChangedEventHandler PropertyChanged;
+	
+	protected virtual void SendPropertyChanging()
+	{
+		if ((this.PropertyChanging != null))
+		{
+			this.PropertyChanging(this, emptyChangingEventArgs);
+		}
+	}
+	
+	protected virtual void SendPropertyChanged(String propertyName)
+	{
+		if ((this.PropertyChanged != null))
+		{
+			this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+		}
+	}
+}
+
+[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ContactInfoType")]
+public partial class ContactInfoType : INotifyPropertyChanging, INotifyPropertyChanged
+{
+	
+	private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+	
+	private int _ContactInfoTypeId;
+	
+	private string _Label;
+	
+	private EntitySet<ContactInfo> _ContactInfos;
+	
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnContactInfoTypeIdChanging(int value);
+    partial void OnContactInfoTypeIdChanged();
+    partial void OnLabelChanging(string value);
+    partial void OnLabelChanged();
+    #endregion
+	
+	public ContactInfoType()
+	{
+		this._ContactInfos = new EntitySet<ContactInfo>(new Action<ContactInfo>(this.attach_ContactInfos), new Action<ContactInfo>(this.detach_ContactInfos));
+		OnCreated();
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ContactInfoTypeId", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+	public int ContactInfoTypeId
+	{
+		get
+		{
+			return this._ContactInfoTypeId;
+		}
+		set
+		{
+			if ((this._ContactInfoTypeId != value))
+			{
+				this.OnContactInfoTypeIdChanging(value);
+				this.SendPropertyChanging();
+				this._ContactInfoTypeId = value;
+				this.SendPropertyChanged("ContactInfoTypeId");
+				this.OnContactInfoTypeIdChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Label", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+	public string Label
+	{
+		get
+		{
+			return this._Label;
+		}
+		set
+		{
+			if ((this._Label != value))
+			{
+				this.OnLabelChanging(value);
+				this.SendPropertyChanging();
+				this._Label = value;
+				this.SendPropertyChanged("Label");
+				this.OnLabelChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ContactInfoType_ContactInfo", Storage="_ContactInfos", ThisKey="ContactInfoTypeId", OtherKey="ContactInfoType")]
+	public EntitySet<ContactInfo> ContactInfos
+	{
+		get
+		{
+			return this._ContactInfos;
+		}
+		set
+		{
+			this._ContactInfos.Assign(value);
 		}
 	}
 	
@@ -505,16 +842,2569 @@ public partial class UserRole : INotifyPropertyChanging, INotifyPropertyChanged
 		}
 	}
 	
-	private void attach_Users(User entity)
+	private void attach_ContactInfos(ContactInfo entity)
 	{
 		this.SendPropertyChanging();
-		entity.UserRole = this;
+		entity.ContactInfoType1 = this;
 	}
 	
-	private void detach_Users(User entity)
+	private void detach_ContactInfos(ContactInfo entity)
 	{
 		this.SendPropertyChanging();
-		entity.UserRole = null;
+		entity.ContactInfoType1 = null;
+	}
+}
+
+[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.DynamicContent")]
+public partial class DynamicContent : INotifyPropertyChanging, INotifyPropertyChanged
+{
+	
+	private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+	
+	private int _DynamicContentId;
+	
+	private int _ContentType;
+	
+	private System.DateTime _CreateTime;
+	
+	private System.DateTime _UpdateTime;
+	
+	private int _Author;
+	
+	private EntitySet<TagOnDynamicContent> _TagOnDynamicContents;
+	
+	private EntitySet<Comment> _Comments;
+	
+	private EntityRef<DynamicContentType> _DynamicContentType;
+	
+	private EntityRef<User> _User;
+	
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnDynamicContentIdChanging(int value);
+    partial void OnDynamicContentIdChanged();
+    partial void OnContentTypeChanging(int value);
+    partial void OnContentTypeChanged();
+    partial void OnCreateTimeChanging(System.DateTime value);
+    partial void OnCreateTimeChanged();
+    partial void OnUpdateTimeChanging(System.DateTime value);
+    partial void OnUpdateTimeChanged();
+    partial void OnAuthorChanging(int value);
+    partial void OnAuthorChanged();
+    #endregion
+	
+	public DynamicContent()
+	{
+		this._TagOnDynamicContents = new EntitySet<TagOnDynamicContent>(new Action<TagOnDynamicContent>(this.attach_TagOnDynamicContents), new Action<TagOnDynamicContent>(this.detach_TagOnDynamicContents));
+		this._Comments = new EntitySet<Comment>(new Action<Comment>(this.attach_Comments), new Action<Comment>(this.detach_Comments));
+		this._DynamicContentType = default(EntityRef<DynamicContentType>);
+		this._User = default(EntityRef<User>);
+		OnCreated();
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DynamicContentId", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+	public int DynamicContentId
+	{
+		get
+		{
+			return this._DynamicContentId;
+		}
+		set
+		{
+			if ((this._DynamicContentId != value))
+			{
+				if (this._DynamicContentType.HasLoadedOrAssignedValue)
+				{
+					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+				}
+				this.OnDynamicContentIdChanging(value);
+				this.SendPropertyChanging();
+				this._DynamicContentId = value;
+				this.SendPropertyChanged("DynamicContentId");
+				this.OnDynamicContentIdChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ContentType", DbType="Int NOT NULL")]
+	public int ContentType
+	{
+		get
+		{
+			return this._ContentType;
+		}
+		set
+		{
+			if ((this._ContentType != value))
+			{
+				this.OnContentTypeChanging(value);
+				this.SendPropertyChanging();
+				this._ContentType = value;
+				this.SendPropertyChanged("ContentType");
+				this.OnContentTypeChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreateTime", DbType="DateTime NOT NULL")]
+	public System.DateTime CreateTime
+	{
+		get
+		{
+			return this._CreateTime;
+		}
+		set
+		{
+			if ((this._CreateTime != value))
+			{
+				this.OnCreateTimeChanging(value);
+				this.SendPropertyChanging();
+				this._CreateTime = value;
+				this.SendPropertyChanged("CreateTime");
+				this.OnCreateTimeChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UpdateTime", DbType="DateTime NOT NULL")]
+	public System.DateTime UpdateTime
+	{
+		get
+		{
+			return this._UpdateTime;
+		}
+		set
+		{
+			if ((this._UpdateTime != value))
+			{
+				this.OnUpdateTimeChanging(value);
+				this.SendPropertyChanging();
+				this._UpdateTime = value;
+				this.SendPropertyChanged("UpdateTime");
+				this.OnUpdateTimeChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Author", DbType="Int NOT NULL")]
+	public int Author
+	{
+		get
+		{
+			return this._Author;
+		}
+		set
+		{
+			if ((this._Author != value))
+			{
+				if (this._User.HasLoadedOrAssignedValue)
+				{
+					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+				}
+				this.OnAuthorChanging(value);
+				this.SendPropertyChanging();
+				this._Author = value;
+				this.SendPropertyChanged("Author");
+				this.OnAuthorChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="DynamicContent_TagOnDynamicContent", Storage="_TagOnDynamicContents", ThisKey="DynamicContentId", OtherKey="DynamicContentId")]
+	public EntitySet<TagOnDynamicContent> TagOnDynamicContents
+	{
+		get
+		{
+			return this._TagOnDynamicContents;
+		}
+		set
+		{
+			this._TagOnDynamicContents.Assign(value);
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="DynamicContent_Comment", Storage="_Comments", ThisKey="DynamicContentId", OtherKey="Post_DynamicContentID")]
+	public EntitySet<Comment> Comments
+	{
+		get
+		{
+			return this._Comments;
+		}
+		set
+		{
+			this._Comments.Assign(value);
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="DynamicContentType_DynamicContent", Storage="_DynamicContentType", ThisKey="DynamicContentId", OtherKey="DynamicContentTypeId", IsForeignKey=true)]
+	public DynamicContentType DynamicContentType
+	{
+		get
+		{
+			return this._DynamicContentType.Entity;
+		}
+		set
+		{
+			DynamicContentType previousValue = this._DynamicContentType.Entity;
+			if (((previousValue != value) 
+						|| (this._DynamicContentType.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._DynamicContentType.Entity = null;
+					previousValue.DynamicContent = null;
+				}
+				this._DynamicContentType.Entity = value;
+				if ((value != null))
+				{
+					value.DynamicContent = this;
+					this._DynamicContentId = value.DynamicContentTypeId;
+				}
+				else
+				{
+					this._DynamicContentId = default(int);
+				}
+				this.SendPropertyChanged("DynamicContentType");
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_DynamicContent", Storage="_User", ThisKey="Author", OtherKey="UID", IsForeignKey=true)]
+	public User User
+	{
+		get
+		{
+			return this._User.Entity;
+		}
+		set
+		{
+			User previousValue = this._User.Entity;
+			if (((previousValue != value) 
+						|| (this._User.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._User.Entity = null;
+					previousValue.DynamicContents.Remove(this);
+				}
+				this._User.Entity = value;
+				if ((value != null))
+				{
+					value.DynamicContents.Add(this);
+					this._Author = value.UID;
+				}
+				else
+				{
+					this._Author = default(int);
+				}
+				this.SendPropertyChanged("User");
+			}
+		}
+	}
+	
+	public event PropertyChangingEventHandler PropertyChanging;
+	
+	public event PropertyChangedEventHandler PropertyChanged;
+	
+	protected virtual void SendPropertyChanging()
+	{
+		if ((this.PropertyChanging != null))
+		{
+			this.PropertyChanging(this, emptyChangingEventArgs);
+		}
+	}
+	
+	protected virtual void SendPropertyChanged(String propertyName)
+	{
+		if ((this.PropertyChanged != null))
+		{
+			this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+		}
+	}
+	
+	private void attach_TagOnDynamicContents(TagOnDynamicContent entity)
+	{
+		this.SendPropertyChanging();
+		entity.DynamicContent = this;
+	}
+	
+	private void detach_TagOnDynamicContents(TagOnDynamicContent entity)
+	{
+		this.SendPropertyChanging();
+		entity.DynamicContent = null;
+	}
+	
+	private void attach_Comments(Comment entity)
+	{
+		this.SendPropertyChanging();
+		entity.DynamicContent = this;
+	}
+	
+	private void detach_Comments(Comment entity)
+	{
+		this.SendPropertyChanging();
+		entity.DynamicContent = null;
+	}
+}
+
+[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ElementInContent")]
+public partial class ElementInContent : INotifyPropertyChanging, INotifyPropertyChanged
+{
+	
+	private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+	
+	private int _ContentTypeId;
+	
+	private int _InputElementId;
+	
+	private int _Weight;
+	
+	private string _CSSclass;
+	
+	private string _HelpText;
+	
+	private EntityRef<InputElement> _InputElement;
+	
+	private EntityRef<DynamicContentType> _DynamicContentType;
+	
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnContentTypeIdChanging(int value);
+    partial void OnContentTypeIdChanged();
+    partial void OnInputElementIdChanging(int value);
+    partial void OnInputElementIdChanged();
+    partial void OnWeightChanging(int value);
+    partial void OnWeightChanged();
+    partial void OnCSSclassChanging(string value);
+    partial void OnCSSclassChanged();
+    partial void OnHelpTextChanging(string value);
+    partial void OnHelpTextChanged();
+    #endregion
+	
+	public ElementInContent()
+	{
+		this._InputElement = default(EntityRef<InputElement>);
+		this._DynamicContentType = default(EntityRef<DynamicContentType>);
+		OnCreated();
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ContentTypeId", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+	public int ContentTypeId
+	{
+		get
+		{
+			return this._ContentTypeId;
+		}
+		set
+		{
+			if ((this._ContentTypeId != value))
+			{
+				if (this._DynamicContentType.HasLoadedOrAssignedValue)
+				{
+					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+				}
+				this.OnContentTypeIdChanging(value);
+				this.SendPropertyChanging();
+				this._ContentTypeId = value;
+				this.SendPropertyChanged("ContentTypeId");
+				this.OnContentTypeIdChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_InputElementId", DbType="Int NOT NULL")]
+	public int InputElementId
+	{
+		get
+		{
+			return this._InputElementId;
+		}
+		set
+		{
+			if ((this._InputElementId != value))
+			{
+				if (this._InputElement.HasLoadedOrAssignedValue)
+				{
+					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+				}
+				this.OnInputElementIdChanging(value);
+				this.SendPropertyChanging();
+				this._InputElementId = value;
+				this.SendPropertyChanged("InputElementId");
+				this.OnInputElementIdChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Weight", DbType="Int NOT NULL")]
+	public int Weight
+	{
+		get
+		{
+			return this._Weight;
+		}
+		set
+		{
+			if ((this._Weight != value))
+			{
+				this.OnWeightChanging(value);
+				this.SendPropertyChanging();
+				this._Weight = value;
+				this.SendPropertyChanged("Weight");
+				this.OnWeightChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CSSclass", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+	public string CSSclass
+	{
+		get
+		{
+			return this._CSSclass;
+		}
+		set
+		{
+			if ((this._CSSclass != value))
+			{
+				this.OnCSSclassChanging(value);
+				this.SendPropertyChanging();
+				this._CSSclass = value;
+				this.SendPropertyChanged("CSSclass");
+				this.OnCSSclassChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HelpText", DbType="Text", UpdateCheck=UpdateCheck.Never)]
+	public string HelpText
+	{
+		get
+		{
+			return this._HelpText;
+		}
+		set
+		{
+			if ((this._HelpText != value))
+			{
+				this.OnHelpTextChanging(value);
+				this.SendPropertyChanging();
+				this._HelpText = value;
+				this.SendPropertyChanged("HelpText");
+				this.OnHelpTextChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="InputElement_ElementInContent", Storage="_InputElement", ThisKey="InputElementId", OtherKey="InputElementId", IsForeignKey=true)]
+	public InputElement InputElement
+	{
+		get
+		{
+			return this._InputElement.Entity;
+		}
+		set
+		{
+			InputElement previousValue = this._InputElement.Entity;
+			if (((previousValue != value) 
+						|| (this._InputElement.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._InputElement.Entity = null;
+					previousValue.ElementInContents.Remove(this);
+				}
+				this._InputElement.Entity = value;
+				if ((value != null))
+				{
+					value.ElementInContents.Add(this);
+					this._InputElementId = value.InputElementId;
+				}
+				else
+				{
+					this._InputElementId = default(int);
+				}
+				this.SendPropertyChanged("InputElement");
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="DynamicContentType_ElementInContent", Storage="_DynamicContentType", ThisKey="ContentTypeId", OtherKey="DynamicContentTypeId", IsForeignKey=true)]
+	public DynamicContentType DynamicContentType
+	{
+		get
+		{
+			return this._DynamicContentType.Entity;
+		}
+		set
+		{
+			DynamicContentType previousValue = this._DynamicContentType.Entity;
+			if (((previousValue != value) 
+						|| (this._DynamicContentType.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._DynamicContentType.Entity = null;
+					previousValue.ElementInContent = null;
+				}
+				this._DynamicContentType.Entity = value;
+				if ((value != null))
+				{
+					value.ElementInContent = this;
+					this._ContentTypeId = value.DynamicContentTypeId;
+				}
+				else
+				{
+					this._ContentTypeId = default(int);
+				}
+				this.SendPropertyChanged("DynamicContentType");
+			}
+		}
+	}
+	
+	public event PropertyChangingEventHandler PropertyChanging;
+	
+	public event PropertyChangedEventHandler PropertyChanged;
+	
+	protected virtual void SendPropertyChanging()
+	{
+		if ((this.PropertyChanging != null))
+		{
+			this.PropertyChanging(this, emptyChangingEventArgs);
+		}
+	}
+	
+	protected virtual void SendPropertyChanged(String propertyName)
+	{
+		if ((this.PropertyChanged != null))
+		{
+			this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+		}
+	}
+}
+
+[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Forum")]
+public partial class Forum : INotifyPropertyChanging, INotifyPropertyChanged
+{
+	
+	private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+	
+	private int _ForumId;
+	
+	private string _Label;
+	
+	private EntitySet<ForumThread> _ForumThreads;
+	
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnForumIdChanging(int value);
+    partial void OnForumIdChanged();
+    partial void OnLabelChanging(string value);
+    partial void OnLabelChanged();
+    #endregion
+	
+	public Forum()
+	{
+		this._ForumThreads = new EntitySet<ForumThread>(new Action<ForumThread>(this.attach_ForumThreads), new Action<ForumThread>(this.detach_ForumThreads));
+		OnCreated();
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ForumId", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+	public int ForumId
+	{
+		get
+		{
+			return this._ForumId;
+		}
+		set
+		{
+			if ((this._ForumId != value))
+			{
+				this.OnForumIdChanging(value);
+				this.SendPropertyChanging();
+				this._ForumId = value;
+				this.SendPropertyChanged("ForumId");
+				this.OnForumIdChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Label", DbType="Text NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+	public string Label
+	{
+		get
+		{
+			return this._Label;
+		}
+		set
+		{
+			if ((this._Label != value))
+			{
+				this.OnLabelChanging(value);
+				this.SendPropertyChanging();
+				this._Label = value;
+				this.SendPropertyChanged("Label");
+				this.OnLabelChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Forum_ForumThread", Storage="_ForumThreads", ThisKey="ForumId", OtherKey="ForumId")]
+	public EntitySet<ForumThread> ForumThreads
+	{
+		get
+		{
+			return this._ForumThreads;
+		}
+		set
+		{
+			this._ForumThreads.Assign(value);
+		}
+	}
+	
+	public event PropertyChangingEventHandler PropertyChanging;
+	
+	public event PropertyChangedEventHandler PropertyChanged;
+	
+	protected virtual void SendPropertyChanging()
+	{
+		if ((this.PropertyChanging != null))
+		{
+			this.PropertyChanging(this, emptyChangingEventArgs);
+		}
+	}
+	
+	protected virtual void SendPropertyChanged(String propertyName)
+	{
+		if ((this.PropertyChanged != null))
+		{
+			this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+		}
+	}
+	
+	private void attach_ForumThreads(ForumThread entity)
+	{
+		this.SendPropertyChanging();
+		entity.Forum = this;
+	}
+	
+	private void detach_ForumThreads(ForumThread entity)
+	{
+		this.SendPropertyChanging();
+		entity.Forum = null;
+	}
+}
+
+[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ForumThread")]
+public partial class ForumThread : INotifyPropertyChanging, INotifyPropertyChanged
+{
+	
+	private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+	
+	private int _ForumThreadPostId;
+	
+	private int _ForumThreadId;
+	
+	private string _Text;
+	
+	private int _CommentId;
+	
+	private int _ForumId;
+	
+	private EntityRef<Forum> _Forum;
+	
+	private EntityRef<Comment> _Comment;
+	
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnForumThreadPostIdChanging(int value);
+    partial void OnForumThreadPostIdChanged();
+    partial void OnForumThreadIdChanging(int value);
+    partial void OnForumThreadIdChanged();
+    partial void OnTextChanging(string value);
+    partial void OnTextChanged();
+    partial void OnCommentIdChanging(int value);
+    partial void OnCommentIdChanged();
+    partial void OnForumIdChanging(int value);
+    partial void OnForumIdChanged();
+    #endregion
+	
+	public ForumThread()
+	{
+		this._Forum = default(EntityRef<Forum>);
+		this._Comment = default(EntityRef<Comment>);
+		OnCreated();
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ForumThreadPostId", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+	public int ForumThreadPostId
+	{
+		get
+		{
+			return this._ForumThreadPostId;
+		}
+		set
+		{
+			if ((this._ForumThreadPostId != value))
+			{
+				this.OnForumThreadPostIdChanging(value);
+				this.SendPropertyChanging();
+				this._ForumThreadPostId = value;
+				this.SendPropertyChanged("ForumThreadPostId");
+				this.OnForumThreadPostIdChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ForumThreadId", DbType="Int NOT NULL")]
+	public int ForumThreadId
+	{
+		get
+		{
+			return this._ForumThreadId;
+		}
+		set
+		{
+			if ((this._ForumThreadId != value))
+			{
+				this.OnForumThreadIdChanging(value);
+				this.SendPropertyChanging();
+				this._ForumThreadId = value;
+				this.SendPropertyChanged("ForumThreadId");
+				this.OnForumThreadIdChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Text", DbType="Text NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+	public string Text
+	{
+		get
+		{
+			return this._Text;
+		}
+		set
+		{
+			if ((this._Text != value))
+			{
+				this.OnTextChanging(value);
+				this.SendPropertyChanging();
+				this._Text = value;
+				this.SendPropertyChanged("Text");
+				this.OnTextChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CommentId", DbType="Int NOT NULL")]
+	public int CommentId
+	{
+		get
+		{
+			return this._CommentId;
+		}
+		set
+		{
+			if ((this._CommentId != value))
+			{
+				if (this._Comment.HasLoadedOrAssignedValue)
+				{
+					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+				}
+				this.OnCommentIdChanging(value);
+				this.SendPropertyChanging();
+				this._CommentId = value;
+				this.SendPropertyChanged("CommentId");
+				this.OnCommentIdChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ForumId", DbType="Int NOT NULL")]
+	public int ForumId
+	{
+		get
+		{
+			return this._ForumId;
+		}
+		set
+		{
+			if ((this._ForumId != value))
+			{
+				if (this._Forum.HasLoadedOrAssignedValue)
+				{
+					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+				}
+				this.OnForumIdChanging(value);
+				this.SendPropertyChanging();
+				this._ForumId = value;
+				this.SendPropertyChanged("ForumId");
+				this.OnForumIdChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Forum_ForumThread", Storage="_Forum", ThisKey="ForumId", OtherKey="ForumId", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
+	public Forum Forum
+	{
+		get
+		{
+			return this._Forum.Entity;
+		}
+		set
+		{
+			Forum previousValue = this._Forum.Entity;
+			if (((previousValue != value) 
+						|| (this._Forum.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._Forum.Entity = null;
+					previousValue.ForumThreads.Remove(this);
+				}
+				this._Forum.Entity = value;
+				if ((value != null))
+				{
+					value.ForumThreads.Add(this);
+					this._ForumId = value.ForumId;
+				}
+				else
+				{
+					this._ForumId = default(int);
+				}
+				this.SendPropertyChanged("Forum");
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Comment_ForumThread", Storage="_Comment", ThisKey="CommentId", OtherKey="CommentId", IsForeignKey=true)]
+	public Comment Comment
+	{
+		get
+		{
+			return this._Comment.Entity;
+		}
+		set
+		{
+			Comment previousValue = this._Comment.Entity;
+			if (((previousValue != value) 
+						|| (this._Comment.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._Comment.Entity = null;
+					previousValue.ForumThreads.Remove(this);
+				}
+				this._Comment.Entity = value;
+				if ((value != null))
+				{
+					value.ForumThreads.Add(this);
+					this._CommentId = value.CommentId;
+				}
+				else
+				{
+					this._CommentId = default(int);
+				}
+				this.SendPropertyChanged("Comment");
+			}
+		}
+	}
+	
+	public event PropertyChangingEventHandler PropertyChanging;
+	
+	public event PropertyChangedEventHandler PropertyChanged;
+	
+	protected virtual void SendPropertyChanging()
+	{
+		if ((this.PropertyChanging != null))
+		{
+			this.PropertyChanging(this, emptyChangingEventArgs);
+		}
+	}
+	
+	protected virtual void SendPropertyChanged(String propertyName)
+	{
+		if ((this.PropertyChanged != null))
+		{
+			this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+		}
+	}
+}
+
+[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.InputElement")]
+public partial class InputElement : INotifyPropertyChanging, INotifyPropertyChanged
+{
+	
+	private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+	
+	private int _InputElementId;
+	
+	private string _Name;
+	
+	private string _Label;
+	
+	private string _CodePath;
+	
+	private EntitySet<ElementInContent> _ElementInContents;
+	
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnInputElementIdChanging(int value);
+    partial void OnInputElementIdChanged();
+    partial void OnNameChanging(string value);
+    partial void OnNameChanged();
+    partial void OnLabelChanging(string value);
+    partial void OnLabelChanged();
+    partial void OnCodePathChanging(string value);
+    partial void OnCodePathChanged();
+    #endregion
+	
+	public InputElement()
+	{
+		this._ElementInContents = new EntitySet<ElementInContent>(new Action<ElementInContent>(this.attach_ElementInContents), new Action<ElementInContent>(this.detach_ElementInContents));
+		OnCreated();
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_InputElementId", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+	public int InputElementId
+	{
+		get
+		{
+			return this._InputElementId;
+		}
+		set
+		{
+			if ((this._InputElementId != value))
+			{
+				this.OnInputElementIdChanging(value);
+				this.SendPropertyChanging();
+				this._InputElementId = value;
+				this.SendPropertyChanged("InputElementId");
+				this.OnInputElementIdChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+	public string Name
+	{
+		get
+		{
+			return this._Name;
+		}
+		set
+		{
+			if ((this._Name != value))
+			{
+				this.OnNameChanging(value);
+				this.SendPropertyChanging();
+				this._Name = value;
+				this.SendPropertyChanged("Name");
+				this.OnNameChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Label", DbType="Text", UpdateCheck=UpdateCheck.Never)]
+	public string Label
+	{
+		get
+		{
+			return this._Label;
+		}
+		set
+		{
+			if ((this._Label != value))
+			{
+				this.OnLabelChanging(value);
+				this.SendPropertyChanging();
+				this._Label = value;
+				this.SendPropertyChanged("Label");
+				this.OnLabelChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CodePath", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
+	public string CodePath
+	{
+		get
+		{
+			return this._CodePath;
+		}
+		set
+		{
+			if ((this._CodePath != value))
+			{
+				this.OnCodePathChanging(value);
+				this.SendPropertyChanging();
+				this._CodePath = value;
+				this.SendPropertyChanged("CodePath");
+				this.OnCodePathChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="InputElement_ElementInContent", Storage="_ElementInContents", ThisKey="InputElementId", OtherKey="InputElementId")]
+	public EntitySet<ElementInContent> ElementInContents
+	{
+		get
+		{
+			return this._ElementInContents;
+		}
+		set
+		{
+			this._ElementInContents.Assign(value);
+		}
+	}
+	
+	public event PropertyChangingEventHandler PropertyChanging;
+	
+	public event PropertyChangedEventHandler PropertyChanged;
+	
+	protected virtual void SendPropertyChanging()
+	{
+		if ((this.PropertyChanging != null))
+		{
+			this.PropertyChanging(this, emptyChangingEventArgs);
+		}
+	}
+	
+	protected virtual void SendPropertyChanged(String propertyName)
+	{
+		if ((this.PropertyChanged != null))
+		{
+			this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+		}
+	}
+	
+	private void attach_ElementInContents(ElementInContent entity)
+	{
+		this.SendPropertyChanging();
+		entity.InputElement = this;
+	}
+	
+	private void detach_ElementInContents(ElementInContent entity)
+	{
+		this.SendPropertyChanging();
+		entity.InputElement = null;
+	}
+}
+
+[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.PrivateMessage")]
+public partial class PrivateMessage : INotifyPropertyChanging, INotifyPropertyChanged
+{
+	
+	private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+	
+	private int _PMessageId;
+	
+	private int _To;
+	
+	private int _From;
+	
+	private bool _Read;
+	
+	private string _Text;
+	
+	private System.DateTime _Time;
+	
+	private EntityRef<User> _User;
+	
+	private EntityRef<User> _User1;
+	
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnPMessageIdChanging(int value);
+    partial void OnPMessageIdChanged();
+    partial void OnToChanging(int value);
+    partial void OnToChanged();
+    partial void OnFromChanging(int value);
+    partial void OnFromChanged();
+    partial void OnReadChanging(bool value);
+    partial void OnReadChanged();
+    partial void OnTextChanging(string value);
+    partial void OnTextChanged();
+    partial void OnTimeChanging(System.DateTime value);
+    partial void OnTimeChanged();
+    #endregion
+	
+	public PrivateMessage()
+	{
+		this._User = default(EntityRef<User>);
+		this._User1 = default(EntityRef<User>);
+		OnCreated();
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PMessageId", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+	public int PMessageId
+	{
+		get
+		{
+			return this._PMessageId;
+		}
+		set
+		{
+			if ((this._PMessageId != value))
+			{
+				this.OnPMessageIdChanging(value);
+				this.SendPropertyChanging();
+				this._PMessageId = value;
+				this.SendPropertyChanged("PMessageId");
+				this.OnPMessageIdChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[To]", Storage="_To", DbType="Int NOT NULL")]
+	public int To
+	{
+		get
+		{
+			return this._To;
+		}
+		set
+		{
+			if ((this._To != value))
+			{
+				this.OnToChanging(value);
+				this.SendPropertyChanging();
+				this._To = value;
+				this.SendPropertyChanged("To");
+				this.OnToChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[From]", Storage="_From", DbType="Int NOT NULL")]
+	public int From
+	{
+		get
+		{
+			return this._From;
+		}
+		set
+		{
+			if ((this._From != value))
+			{
+				this.OnFromChanging(value);
+				this.SendPropertyChanging();
+				this._From = value;
+				this.SendPropertyChanged("From");
+				this.OnFromChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[Read]", Storage="_Read", DbType="Bit NOT NULL")]
+	public bool Read
+	{
+		get
+		{
+			return this._Read;
+		}
+		set
+		{
+			if ((this._Read != value))
+			{
+				this.OnReadChanging(value);
+				this.SendPropertyChanging();
+				this._Read = value;
+				this.SendPropertyChanged("Read");
+				this.OnReadChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Text", DbType="Text NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+	public string Text
+	{
+		get
+		{
+			return this._Text;
+		}
+		set
+		{
+			if ((this._Text != value))
+			{
+				this.OnTextChanging(value);
+				this.SendPropertyChanging();
+				this._Text = value;
+				this.SendPropertyChanged("Text");
+				this.OnTextChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Time", DbType="DateTime NOT NULL")]
+	public System.DateTime Time
+	{
+		get
+		{
+			return this._Time;
+		}
+		set
+		{
+			if ((this._Time != value))
+			{
+				this.OnTimeChanging(value);
+				this.SendPropertyChanging();
+				this._Time = value;
+				this.SendPropertyChanged("Time");
+				this.OnTimeChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_PrivateMessage", Storage="_User", ThisKey="From", OtherKey="UID", IsForeignKey=true)]
+	public User User
+	{
+		get
+		{
+			return this._User.Entity;
+		}
+		set
+		{
+			User previousValue = this._User.Entity;
+			if (((previousValue != value) 
+						|| (this._User.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._User.Entity = null;
+					previousValue.PrivateMessages.Remove(this);
+				}
+				this._User.Entity = value;
+				if ((value != null))
+				{
+					value.PrivateMessages.Add(this);
+					this._From = value.UID;
+				}
+				else
+				{
+					this._From = default(int);
+				}
+				this.SendPropertyChanged("User");
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_PrivateMessage1", Storage="_User1", ThisKey="To", OtherKey="UID", IsForeignKey=true)]
+	public User User1
+	{
+		get
+		{
+			return this._User1.Entity;
+		}
+		set
+		{
+			User previousValue = this._User1.Entity;
+			if (((previousValue != value) 
+						|| (this._User1.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._User1.Entity = null;
+					previousValue.PrivateMessages1.Remove(this);
+				}
+				this._User1.Entity = value;
+				if ((value != null))
+				{
+					value.PrivateMessages1.Add(this);
+					this._To = value.UID;
+				}
+				else
+				{
+					this._To = default(int);
+				}
+				this.SendPropertyChanged("User1");
+			}
+		}
+	}
+	
+	public event PropertyChangingEventHandler PropertyChanging;
+	
+	public event PropertyChangedEventHandler PropertyChanged;
+	
+	protected virtual void SendPropertyChanging()
+	{
+		if ((this.PropertyChanging != null))
+		{
+			this.PropertyChanging(this, emptyChangingEventArgs);
+		}
+	}
+	
+	protected virtual void SendPropertyChanged(String propertyName)
+	{
+		if ((this.PropertyChanged != null))
+		{
+			this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+		}
+	}
+}
+
+[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.StaticContent")]
+public partial class StaticContent : INotifyPropertyChanging, INotifyPropertyChanged
+{
+	
+	private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+	
+	private int _StaticContentId;
+	
+	private System.DateTime _CreateTime;
+	
+	private System.DateTime _UpdateTime;
+	
+	private int _Author;
+	
+	private string _Content;
+	
+	private EntitySet<TagOnStaticContent> _TagOnStaticContents;
+	
+	private EntityRef<User> _User;
+	
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnStaticContentIdChanging(int value);
+    partial void OnStaticContentIdChanged();
+    partial void OnCreateTimeChanging(System.DateTime value);
+    partial void OnCreateTimeChanged();
+    partial void OnUpdateTimeChanging(System.DateTime value);
+    partial void OnUpdateTimeChanged();
+    partial void OnAuthorChanging(int value);
+    partial void OnAuthorChanged();
+    partial void OnContentChanging(string value);
+    partial void OnContentChanged();
+    #endregion
+	
+	public StaticContent()
+	{
+		this._TagOnStaticContents = new EntitySet<TagOnStaticContent>(new Action<TagOnStaticContent>(this.attach_TagOnStaticContents), new Action<TagOnStaticContent>(this.detach_TagOnStaticContents));
+		this._User = default(EntityRef<User>);
+		OnCreated();
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StaticContentId", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+	public int StaticContentId
+	{
+		get
+		{
+			return this._StaticContentId;
+		}
+		set
+		{
+			if ((this._StaticContentId != value))
+			{
+				this.OnStaticContentIdChanging(value);
+				this.SendPropertyChanging();
+				this._StaticContentId = value;
+				this.SendPropertyChanged("StaticContentId");
+				this.OnStaticContentIdChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreateTime", DbType="DateTime NOT NULL")]
+	public System.DateTime CreateTime
+	{
+		get
+		{
+			return this._CreateTime;
+		}
+		set
+		{
+			if ((this._CreateTime != value))
+			{
+				this.OnCreateTimeChanging(value);
+				this.SendPropertyChanging();
+				this._CreateTime = value;
+				this.SendPropertyChanged("CreateTime");
+				this.OnCreateTimeChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UpdateTime", DbType="DateTime NOT NULL")]
+	public System.DateTime UpdateTime
+	{
+		get
+		{
+			return this._UpdateTime;
+		}
+		set
+		{
+			if ((this._UpdateTime != value))
+			{
+				this.OnUpdateTimeChanging(value);
+				this.SendPropertyChanging();
+				this._UpdateTime = value;
+				this.SendPropertyChanged("UpdateTime");
+				this.OnUpdateTimeChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Author", DbType="Int NOT NULL")]
+	public int Author
+	{
+		get
+		{
+			return this._Author;
+		}
+		set
+		{
+			if ((this._Author != value))
+			{
+				if (this._User.HasLoadedOrAssignedValue)
+				{
+					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+				}
+				this.OnAuthorChanging(value);
+				this.SendPropertyChanging();
+				this._Author = value;
+				this.SendPropertyChanged("Author");
+				this.OnAuthorChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Content", DbType="Text NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+	public string Content
+	{
+		get
+		{
+			return this._Content;
+		}
+		set
+		{
+			if ((this._Content != value))
+			{
+				this.OnContentChanging(value);
+				this.SendPropertyChanging();
+				this._Content = value;
+				this.SendPropertyChanged("Content");
+				this.OnContentChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="StaticContent_TagOnStaticContent", Storage="_TagOnStaticContents", ThisKey="StaticContentId", OtherKey="StaticContentId")]
+	public EntitySet<TagOnStaticContent> TagOnStaticContents
+	{
+		get
+		{
+			return this._TagOnStaticContents;
+		}
+		set
+		{
+			this._TagOnStaticContents.Assign(value);
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_StaticContent", Storage="_User", ThisKey="Author", OtherKey="UID", IsForeignKey=true)]
+	public User User
+	{
+		get
+		{
+			return this._User.Entity;
+		}
+		set
+		{
+			User previousValue = this._User.Entity;
+			if (((previousValue != value) 
+						|| (this._User.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._User.Entity = null;
+					previousValue.StaticContents.Remove(this);
+				}
+				this._User.Entity = value;
+				if ((value != null))
+				{
+					value.StaticContents.Add(this);
+					this._Author = value.UID;
+				}
+				else
+				{
+					this._Author = default(int);
+				}
+				this.SendPropertyChanged("User");
+			}
+		}
+	}
+	
+	public event PropertyChangingEventHandler PropertyChanging;
+	
+	public event PropertyChangedEventHandler PropertyChanged;
+	
+	protected virtual void SendPropertyChanging()
+	{
+		if ((this.PropertyChanging != null))
+		{
+			this.PropertyChanging(this, emptyChangingEventArgs);
+		}
+	}
+	
+	protected virtual void SendPropertyChanged(String propertyName)
+	{
+		if ((this.PropertyChanged != null))
+		{
+			this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+		}
+	}
+	
+	private void attach_TagOnStaticContents(TagOnStaticContent entity)
+	{
+		this.SendPropertyChanging();
+		entity.StaticContent = this;
+	}
+	
+	private void detach_TagOnStaticContents(TagOnStaticContent entity)
+	{
+		this.SendPropertyChanging();
+		entity.StaticContent = null;
+	}
+}
+
+[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Tag")]
+public partial class Tag : INotifyPropertyChanging, INotifyPropertyChanged
+{
+	
+	private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+	
+	private int _TagId;
+	
+	private string _Text;
+	
+	private EntitySet<TagOnComment> _TagOnComments;
+	
+	private EntitySet<TagOnDynamicContent> _TagOnDynamicContents;
+	
+	private EntitySet<TagOnStaticContent> _TagOnStaticContents;
+	
+	private EntitySet<TagRelation> _TagRelations;
+	
+	private EntitySet<TagRelation> _TagRelations1;
+	
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnTagIdChanging(int value);
+    partial void OnTagIdChanged();
+    partial void OnTextChanging(string value);
+    partial void OnTextChanged();
+    #endregion
+	
+	public Tag()
+	{
+		this._TagOnComments = new EntitySet<TagOnComment>(new Action<TagOnComment>(this.attach_TagOnComments), new Action<TagOnComment>(this.detach_TagOnComments));
+		this._TagOnDynamicContents = new EntitySet<TagOnDynamicContent>(new Action<TagOnDynamicContent>(this.attach_TagOnDynamicContents), new Action<TagOnDynamicContent>(this.detach_TagOnDynamicContents));
+		this._TagOnStaticContents = new EntitySet<TagOnStaticContent>(new Action<TagOnStaticContent>(this.attach_TagOnStaticContents), new Action<TagOnStaticContent>(this.detach_TagOnStaticContents));
+		this._TagRelations = new EntitySet<TagRelation>(new Action<TagRelation>(this.attach_TagRelations), new Action<TagRelation>(this.detach_TagRelations));
+		this._TagRelations1 = new EntitySet<TagRelation>(new Action<TagRelation>(this.attach_TagRelations1), new Action<TagRelation>(this.detach_TagRelations1));
+		OnCreated();
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TagId", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+	public int TagId
+	{
+		get
+		{
+			return this._TagId;
+		}
+		set
+		{
+			if ((this._TagId != value))
+			{
+				this.OnTagIdChanging(value);
+				this.SendPropertyChanging();
+				this._TagId = value;
+				this.SendPropertyChanged("TagId");
+				this.OnTagIdChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Text", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
+	public string Text
+	{
+		get
+		{
+			return this._Text;
+		}
+		set
+		{
+			if ((this._Text != value))
+			{
+				this.OnTextChanging(value);
+				this.SendPropertyChanging();
+				this._Text = value;
+				this.SendPropertyChanged("Text");
+				this.OnTextChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Tag_TagOnComment", Storage="_TagOnComments", ThisKey="TagId", OtherKey="TagId")]
+	public EntitySet<TagOnComment> TagOnComments
+	{
+		get
+		{
+			return this._TagOnComments;
+		}
+		set
+		{
+			this._TagOnComments.Assign(value);
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Tag_TagOnDynamicContent", Storage="_TagOnDynamicContents", ThisKey="TagId", OtherKey="TagId")]
+	public EntitySet<TagOnDynamicContent> TagOnDynamicContents
+	{
+		get
+		{
+			return this._TagOnDynamicContents;
+		}
+		set
+		{
+			this._TagOnDynamicContents.Assign(value);
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Tag_TagOnStaticContent", Storage="_TagOnStaticContents", ThisKey="TagId", OtherKey="TagId")]
+	public EntitySet<TagOnStaticContent> TagOnStaticContents
+	{
+		get
+		{
+			return this._TagOnStaticContents;
+		}
+		set
+		{
+			this._TagOnStaticContents.Assign(value);
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Tag_TagRelation", Storage="_TagRelations", ThisKey="TagId", OtherKey="SubTag")]
+	public EntitySet<TagRelation> TagRelations
+	{
+		get
+		{
+			return this._TagRelations;
+		}
+		set
+		{
+			this._TagRelations.Assign(value);
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Tag_TagRelation1", Storage="_TagRelations1", ThisKey="TagId", OtherKey="SuperTag")]
+	public EntitySet<TagRelation> TagRelations1
+	{
+		get
+		{
+			return this._TagRelations1;
+		}
+		set
+		{
+			this._TagRelations1.Assign(value);
+		}
+	}
+	
+	public event PropertyChangingEventHandler PropertyChanging;
+	
+	public event PropertyChangedEventHandler PropertyChanged;
+	
+	protected virtual void SendPropertyChanging()
+	{
+		if ((this.PropertyChanging != null))
+		{
+			this.PropertyChanging(this, emptyChangingEventArgs);
+		}
+	}
+	
+	protected virtual void SendPropertyChanged(String propertyName)
+	{
+		if ((this.PropertyChanged != null))
+		{
+			this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+		}
+	}
+	
+	private void attach_TagOnComments(TagOnComment entity)
+	{
+		this.SendPropertyChanging();
+		entity.Tag = this;
+	}
+	
+	private void detach_TagOnComments(TagOnComment entity)
+	{
+		this.SendPropertyChanging();
+		entity.Tag = null;
+	}
+	
+	private void attach_TagOnDynamicContents(TagOnDynamicContent entity)
+	{
+		this.SendPropertyChanging();
+		entity.Tag = this;
+	}
+	
+	private void detach_TagOnDynamicContents(TagOnDynamicContent entity)
+	{
+		this.SendPropertyChanging();
+		entity.Tag = null;
+	}
+	
+	private void attach_TagOnStaticContents(TagOnStaticContent entity)
+	{
+		this.SendPropertyChanging();
+		entity.Tag = this;
+	}
+	
+	private void detach_TagOnStaticContents(TagOnStaticContent entity)
+	{
+		this.SendPropertyChanging();
+		entity.Tag = null;
+	}
+	
+	private void attach_TagRelations(TagRelation entity)
+	{
+		this.SendPropertyChanging();
+		entity.Tag = this;
+	}
+	
+	private void detach_TagRelations(TagRelation entity)
+	{
+		this.SendPropertyChanging();
+		entity.Tag = null;
+	}
+	
+	private void attach_TagRelations1(TagRelation entity)
+	{
+		this.SendPropertyChanging();
+		entity.Tag1 = this;
+	}
+	
+	private void detach_TagRelations1(TagRelation entity)
+	{
+		this.SendPropertyChanging();
+		entity.Tag1 = null;
+	}
+}
+
+[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TagOnComment")]
+public partial class TagOnComment : INotifyPropertyChanging, INotifyPropertyChanged
+{
+	
+	private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+	
+	private int _TagOnCommentId;
+	
+	private int _TagId;
+	
+	private int _CommentId;
+	
+	private EntityRef<Tag> _Tag;
+	
+	private EntityRef<Comment> _Comment;
+	
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnTagOnCommentIdChanging(int value);
+    partial void OnTagOnCommentIdChanged();
+    partial void OnTagIdChanging(int value);
+    partial void OnTagIdChanged();
+    partial void OnCommentIdChanging(int value);
+    partial void OnCommentIdChanged();
+    #endregion
+	
+	public TagOnComment()
+	{
+		this._Tag = default(EntityRef<Tag>);
+		this._Comment = default(EntityRef<Comment>);
+		OnCreated();
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TagOnCommentId", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+	public int TagOnCommentId
+	{
+		get
+		{
+			return this._TagOnCommentId;
+		}
+		set
+		{
+			if ((this._TagOnCommentId != value))
+			{
+				this.OnTagOnCommentIdChanging(value);
+				this.SendPropertyChanging();
+				this._TagOnCommentId = value;
+				this.SendPropertyChanged("TagOnCommentId");
+				this.OnTagOnCommentIdChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TagId", DbType="Int NOT NULL")]
+	public int TagId
+	{
+		get
+		{
+			return this._TagId;
+		}
+		set
+		{
+			if ((this._TagId != value))
+			{
+				if (this._Tag.HasLoadedOrAssignedValue)
+				{
+					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+				}
+				this.OnTagIdChanging(value);
+				this.SendPropertyChanging();
+				this._TagId = value;
+				this.SendPropertyChanged("TagId");
+				this.OnTagIdChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CommentId", DbType="Int NOT NULL")]
+	public int CommentId
+	{
+		get
+		{
+			return this._CommentId;
+		}
+		set
+		{
+			if ((this._CommentId != value))
+			{
+				if (this._Comment.HasLoadedOrAssignedValue)
+				{
+					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+				}
+				this.OnCommentIdChanging(value);
+				this.SendPropertyChanging();
+				this._CommentId = value;
+				this.SendPropertyChanged("CommentId");
+				this.OnCommentIdChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Tag_TagOnComment", Storage="_Tag", ThisKey="TagId", OtherKey="TagId", IsForeignKey=true)]
+	public Tag Tag
+	{
+		get
+		{
+			return this._Tag.Entity;
+		}
+		set
+		{
+			Tag previousValue = this._Tag.Entity;
+			if (((previousValue != value) 
+						|| (this._Tag.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._Tag.Entity = null;
+					previousValue.TagOnComments.Remove(this);
+				}
+				this._Tag.Entity = value;
+				if ((value != null))
+				{
+					value.TagOnComments.Add(this);
+					this._TagId = value.TagId;
+				}
+				else
+				{
+					this._TagId = default(int);
+				}
+				this.SendPropertyChanged("Tag");
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Comment_TagOnComment", Storage="_Comment", ThisKey="CommentId", OtherKey="CommentId", IsForeignKey=true)]
+	public Comment Comment
+	{
+		get
+		{
+			return this._Comment.Entity;
+		}
+		set
+		{
+			Comment previousValue = this._Comment.Entity;
+			if (((previousValue != value) 
+						|| (this._Comment.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._Comment.Entity = null;
+					previousValue.TagOnComments.Remove(this);
+				}
+				this._Comment.Entity = value;
+				if ((value != null))
+				{
+					value.TagOnComments.Add(this);
+					this._CommentId = value.CommentId;
+				}
+				else
+				{
+					this._CommentId = default(int);
+				}
+				this.SendPropertyChanged("Comment");
+			}
+		}
+	}
+	
+	public event PropertyChangingEventHandler PropertyChanging;
+	
+	public event PropertyChangedEventHandler PropertyChanged;
+	
+	protected virtual void SendPropertyChanging()
+	{
+		if ((this.PropertyChanging != null))
+		{
+			this.PropertyChanging(this, emptyChangingEventArgs);
+		}
+	}
+	
+	protected virtual void SendPropertyChanged(String propertyName)
+	{
+		if ((this.PropertyChanged != null))
+		{
+			this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+		}
+	}
+}
+
+[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TagOnDynamicContent")]
+public partial class TagOnDynamicContent : INotifyPropertyChanging, INotifyPropertyChanged
+{
+	
+	private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+	
+	private int _TagOnDynamicContentId;
+	
+	private int _TagId;
+	
+	private int _DynamicContentId;
+	
+	private EntityRef<DynamicContent> _DynamicContent;
+	
+	private EntityRef<Tag> _Tag;
+	
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnTagOnDynamicContentIdChanging(int value);
+    partial void OnTagOnDynamicContentIdChanged();
+    partial void OnTagIdChanging(int value);
+    partial void OnTagIdChanged();
+    partial void OnDynamicContentIdChanging(int value);
+    partial void OnDynamicContentIdChanged();
+    #endregion
+	
+	public TagOnDynamicContent()
+	{
+		this._DynamicContent = default(EntityRef<DynamicContent>);
+		this._Tag = default(EntityRef<Tag>);
+		OnCreated();
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TagOnDynamicContentId", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+	public int TagOnDynamicContentId
+	{
+		get
+		{
+			return this._TagOnDynamicContentId;
+		}
+		set
+		{
+			if ((this._TagOnDynamicContentId != value))
+			{
+				this.OnTagOnDynamicContentIdChanging(value);
+				this.SendPropertyChanging();
+				this._TagOnDynamicContentId = value;
+				this.SendPropertyChanged("TagOnDynamicContentId");
+				this.OnTagOnDynamicContentIdChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TagId", DbType="Int NOT NULL")]
+	public int TagId
+	{
+		get
+		{
+			return this._TagId;
+		}
+		set
+		{
+			if ((this._TagId != value))
+			{
+				if (this._Tag.HasLoadedOrAssignedValue)
+				{
+					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+				}
+				this.OnTagIdChanging(value);
+				this.SendPropertyChanging();
+				this._TagId = value;
+				this.SendPropertyChanged("TagId");
+				this.OnTagIdChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DynamicContentId", DbType="Int NOT NULL")]
+	public int DynamicContentId
+	{
+		get
+		{
+			return this._DynamicContentId;
+		}
+		set
+		{
+			if ((this._DynamicContentId != value))
+			{
+				if (this._DynamicContent.HasLoadedOrAssignedValue)
+				{
+					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+				}
+				this.OnDynamicContentIdChanging(value);
+				this.SendPropertyChanging();
+				this._DynamicContentId = value;
+				this.SendPropertyChanged("DynamicContentId");
+				this.OnDynamicContentIdChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="DynamicContent_TagOnDynamicContent", Storage="_DynamicContent", ThisKey="DynamicContentId", OtherKey="DynamicContentId", IsForeignKey=true)]
+	public DynamicContent DynamicContent
+	{
+		get
+		{
+			return this._DynamicContent.Entity;
+		}
+		set
+		{
+			DynamicContent previousValue = this._DynamicContent.Entity;
+			if (((previousValue != value) 
+						|| (this._DynamicContent.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._DynamicContent.Entity = null;
+					previousValue.TagOnDynamicContents.Remove(this);
+				}
+				this._DynamicContent.Entity = value;
+				if ((value != null))
+				{
+					value.TagOnDynamicContents.Add(this);
+					this._DynamicContentId = value.DynamicContentId;
+				}
+				else
+				{
+					this._DynamicContentId = default(int);
+				}
+				this.SendPropertyChanged("DynamicContent");
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Tag_TagOnDynamicContent", Storage="_Tag", ThisKey="TagId", OtherKey="TagId", IsForeignKey=true)]
+	public Tag Tag
+	{
+		get
+		{
+			return this._Tag.Entity;
+		}
+		set
+		{
+			Tag previousValue = this._Tag.Entity;
+			if (((previousValue != value) 
+						|| (this._Tag.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._Tag.Entity = null;
+					previousValue.TagOnDynamicContents.Remove(this);
+				}
+				this._Tag.Entity = value;
+				if ((value != null))
+				{
+					value.TagOnDynamicContents.Add(this);
+					this._TagId = value.TagId;
+				}
+				else
+				{
+					this._TagId = default(int);
+				}
+				this.SendPropertyChanged("Tag");
+			}
+		}
+	}
+	
+	public event PropertyChangingEventHandler PropertyChanging;
+	
+	public event PropertyChangedEventHandler PropertyChanged;
+	
+	protected virtual void SendPropertyChanging()
+	{
+		if ((this.PropertyChanging != null))
+		{
+			this.PropertyChanging(this, emptyChangingEventArgs);
+		}
+	}
+	
+	protected virtual void SendPropertyChanged(String propertyName)
+	{
+		if ((this.PropertyChanged != null))
+		{
+			this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+		}
+	}
+}
+
+[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TagOnStaticContent")]
+public partial class TagOnStaticContent : INotifyPropertyChanging, INotifyPropertyChanged
+{
+	
+	private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+	
+	private int _TagOnStaticContentId;
+	
+	private int _TagId;
+	
+	private int _StaticContentId;
+	
+	private EntityRef<StaticContent> _StaticContent;
+	
+	private EntityRef<Tag> _Tag;
+	
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnTagOnStaticContentIdChanging(int value);
+    partial void OnTagOnStaticContentIdChanged();
+    partial void OnTagIdChanging(int value);
+    partial void OnTagIdChanged();
+    partial void OnStaticContentIdChanging(int value);
+    partial void OnStaticContentIdChanged();
+    #endregion
+	
+	public TagOnStaticContent()
+	{
+		this._StaticContent = default(EntityRef<StaticContent>);
+		this._Tag = default(EntityRef<Tag>);
+		OnCreated();
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TagOnStaticContentId", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+	public int TagOnStaticContentId
+	{
+		get
+		{
+			return this._TagOnStaticContentId;
+		}
+		set
+		{
+			if ((this._TagOnStaticContentId != value))
+			{
+				this.OnTagOnStaticContentIdChanging(value);
+				this.SendPropertyChanging();
+				this._TagOnStaticContentId = value;
+				this.SendPropertyChanged("TagOnStaticContentId");
+				this.OnTagOnStaticContentIdChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TagId", DbType="Int NOT NULL")]
+	public int TagId
+	{
+		get
+		{
+			return this._TagId;
+		}
+		set
+		{
+			if ((this._TagId != value))
+			{
+				if (this._Tag.HasLoadedOrAssignedValue)
+				{
+					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+				}
+				this.OnTagIdChanging(value);
+				this.SendPropertyChanging();
+				this._TagId = value;
+				this.SendPropertyChanged("TagId");
+				this.OnTagIdChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StaticContentId", DbType="Int NOT NULL")]
+	public int StaticContentId
+	{
+		get
+		{
+			return this._StaticContentId;
+		}
+		set
+		{
+			if ((this._StaticContentId != value))
+			{
+				if (this._StaticContent.HasLoadedOrAssignedValue)
+				{
+					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+				}
+				this.OnStaticContentIdChanging(value);
+				this.SendPropertyChanging();
+				this._StaticContentId = value;
+				this.SendPropertyChanged("StaticContentId");
+				this.OnStaticContentIdChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="StaticContent_TagOnStaticContent", Storage="_StaticContent", ThisKey="StaticContentId", OtherKey="StaticContentId", IsForeignKey=true)]
+	public StaticContent StaticContent
+	{
+		get
+		{
+			return this._StaticContent.Entity;
+		}
+		set
+		{
+			StaticContent previousValue = this._StaticContent.Entity;
+			if (((previousValue != value) 
+						|| (this._StaticContent.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._StaticContent.Entity = null;
+					previousValue.TagOnStaticContents.Remove(this);
+				}
+				this._StaticContent.Entity = value;
+				if ((value != null))
+				{
+					value.TagOnStaticContents.Add(this);
+					this._StaticContentId = value.StaticContentId;
+				}
+				else
+				{
+					this._StaticContentId = default(int);
+				}
+				this.SendPropertyChanged("StaticContent");
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Tag_TagOnStaticContent", Storage="_Tag", ThisKey="TagId", OtherKey="TagId", IsForeignKey=true)]
+	public Tag Tag
+	{
+		get
+		{
+			return this._Tag.Entity;
+		}
+		set
+		{
+			Tag previousValue = this._Tag.Entity;
+			if (((previousValue != value) 
+						|| (this._Tag.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._Tag.Entity = null;
+					previousValue.TagOnStaticContents.Remove(this);
+				}
+				this._Tag.Entity = value;
+				if ((value != null))
+				{
+					value.TagOnStaticContents.Add(this);
+					this._TagId = value.TagId;
+				}
+				else
+				{
+					this._TagId = default(int);
+				}
+				this.SendPropertyChanged("Tag");
+			}
+		}
+	}
+	
+	public event PropertyChangingEventHandler PropertyChanging;
+	
+	public event PropertyChangedEventHandler PropertyChanged;
+	
+	protected virtual void SendPropertyChanging()
+	{
+		if ((this.PropertyChanging != null))
+		{
+			this.PropertyChanging(this, emptyChangingEventArgs);
+		}
+	}
+	
+	protected virtual void SendPropertyChanged(String propertyName)
+	{
+		if ((this.PropertyChanged != null))
+		{
+			this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+		}
+	}
+}
+
+[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TagRelation")]
+public partial class TagRelation : INotifyPropertyChanging, INotifyPropertyChanged
+{
+	
+	private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+	
+	private int _TagRelationId;
+	
+	private int _SuperTag;
+	
+	private int _SubTag;
+	
+	private int _Relation;
+	
+	private EntityRef<Tag> _Tag;
+	
+	private EntityRef<Tag> _Tag1;
+	
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnTagRelationIdChanging(int value);
+    partial void OnTagRelationIdChanged();
+    partial void OnSuperTagChanging(int value);
+    partial void OnSuperTagChanged();
+    partial void OnSubTagChanging(int value);
+    partial void OnSubTagChanged();
+    partial void OnRelationChanging(int value);
+    partial void OnRelationChanged();
+    #endregion
+	
+	public TagRelation()
+	{
+		this._Tag = default(EntityRef<Tag>);
+		this._Tag1 = default(EntityRef<Tag>);
+		OnCreated();
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TagRelationId", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+	public int TagRelationId
+	{
+		get
+		{
+			return this._TagRelationId;
+		}
+		set
+		{
+			if ((this._TagRelationId != value))
+			{
+				this.OnTagRelationIdChanging(value);
+				this.SendPropertyChanging();
+				this._TagRelationId = value;
+				this.SendPropertyChanged("TagRelationId");
+				this.OnTagRelationIdChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SuperTag", DbType="Int NOT NULL")]
+	public int SuperTag
+	{
+		get
+		{
+			return this._SuperTag;
+		}
+		set
+		{
+			if ((this._SuperTag != value))
+			{
+				if (this._Tag1.HasLoadedOrAssignedValue)
+				{
+					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+				}
+				this.OnSuperTagChanging(value);
+				this.SendPropertyChanging();
+				this._SuperTag = value;
+				this.SendPropertyChanged("SuperTag");
+				this.OnSuperTagChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SubTag", DbType="Int NOT NULL")]
+	public int SubTag
+	{
+		get
+		{
+			return this._SubTag;
+		}
+		set
+		{
+			if ((this._SubTag != value))
+			{
+				if (this._Tag.HasLoadedOrAssignedValue)
+				{
+					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+				}
+				this.OnSubTagChanging(value);
+				this.SendPropertyChanging();
+				this._SubTag = value;
+				this.SendPropertyChanged("SubTag");
+				this.OnSubTagChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Relation", DbType="Int NOT NULL")]
+	public int Relation
+	{
+		get
+		{
+			return this._Relation;
+		}
+		set
+		{
+			if ((this._Relation != value))
+			{
+				this.OnRelationChanging(value);
+				this.SendPropertyChanging();
+				this._Relation = value;
+				this.SendPropertyChanged("Relation");
+				this.OnRelationChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Tag_TagRelation", Storage="_Tag", ThisKey="SubTag", OtherKey="TagId", IsForeignKey=true)]
+	public Tag Tag
+	{
+		get
+		{
+			return this._Tag.Entity;
+		}
+		set
+		{
+			Tag previousValue = this._Tag.Entity;
+			if (((previousValue != value) 
+						|| (this._Tag.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._Tag.Entity = null;
+					previousValue.TagRelations.Remove(this);
+				}
+				this._Tag.Entity = value;
+				if ((value != null))
+				{
+					value.TagRelations.Add(this);
+					this._SubTag = value.TagId;
+				}
+				else
+				{
+					this._SubTag = default(int);
+				}
+				this.SendPropertyChanged("Tag");
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Tag_TagRelation1", Storage="_Tag1", ThisKey="SuperTag", OtherKey="TagId", IsForeignKey=true)]
+	public Tag Tag1
+	{
+		get
+		{
+			return this._Tag1.Entity;
+		}
+		set
+		{
+			Tag previousValue = this._Tag1.Entity;
+			if (((previousValue != value) 
+						|| (this._Tag1.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._Tag1.Entity = null;
+					previousValue.TagRelations1.Remove(this);
+				}
+				this._Tag1.Entity = value;
+				if ((value != null))
+				{
+					value.TagRelations1.Add(this);
+					this._SuperTag = value.TagId;
+				}
+				else
+				{
+					this._SuperTag = default(int);
+				}
+				this.SendPropertyChanged("Tag1");
+			}
+		}
+	}
+	
+	public event PropertyChangingEventHandler PropertyChanging;
+	
+	public event PropertyChangedEventHandler PropertyChanged;
+	
+	protected virtual void SendPropertyChanging()
+	{
+		if ((this.PropertyChanging != null))
+		{
+			this.PropertyChanging(this, emptyChangingEventArgs);
+		}
+	}
+	
+	protected virtual void SendPropertyChanged(String propertyName)
+	{
+		if ((this.PropertyChanged != null))
+		{
+			this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+		}
 	}
 }
 
@@ -725,6 +3615,2392 @@ public partial class UserAbout : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		this.SendPropertyChanging();
 		entity.UserAbout = null;
+	}
+}
+
+[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.UserInfo")]
+public partial class UserInfo : INotifyPropertyChanging, INotifyPropertyChanged
+{
+	
+	private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+	
+	private int _UserInfoId;
+	
+	private int _InfoType;
+	
+	private string _Text;
+	
+	private int _User;
+	
+	private EntityRef<UserInfoType> _UserInfoType;
+	
+	private EntityRef<User> _User1;
+	
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnUserInfoIdChanging(int value);
+    partial void OnUserInfoIdChanged();
+    partial void OnInfoTypeChanging(int value);
+    partial void OnInfoTypeChanged();
+    partial void OnTextChanging(string value);
+    partial void OnTextChanged();
+    partial void OnUserChanging(int value);
+    partial void OnUserChanged();
+    #endregion
+	
+	public UserInfo()
+	{
+		this._UserInfoType = default(EntityRef<UserInfoType>);
+		this._User1 = default(EntityRef<User>);
+		OnCreated();
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserInfoId", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+	public int UserInfoId
+	{
+		get
+		{
+			return this._UserInfoId;
+		}
+		set
+		{
+			if ((this._UserInfoId != value))
+			{
+				this.OnUserInfoIdChanging(value);
+				this.SendPropertyChanging();
+				this._UserInfoId = value;
+				this.SendPropertyChanged("UserInfoId");
+				this.OnUserInfoIdChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_InfoType", DbType="Int NOT NULL")]
+	public int InfoType
+	{
+		get
+		{
+			return this._InfoType;
+		}
+		set
+		{
+			if ((this._InfoType != value))
+			{
+				if (this._UserInfoType.HasLoadedOrAssignedValue)
+				{
+					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+				}
+				this.OnInfoTypeChanging(value);
+				this.SendPropertyChanging();
+				this._InfoType = value;
+				this.SendPropertyChanged("InfoType");
+				this.OnInfoTypeChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Text", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
+	public string Text
+	{
+		get
+		{
+			return this._Text;
+		}
+		set
+		{
+			if ((this._Text != value))
+			{
+				this.OnTextChanging(value);
+				this.SendPropertyChanging();
+				this._Text = value;
+				this.SendPropertyChanged("Text");
+				this.OnTextChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[User]", Storage="_User", DbType="Int NOT NULL")]
+	public int User
+	{
+		get
+		{
+			return this._User;
+		}
+		set
+		{
+			if ((this._User != value))
+			{
+				this.OnUserChanging(value);
+				this.SendPropertyChanging();
+				this._User = value;
+				this.SendPropertyChanged("User");
+				this.OnUserChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UserInfoType_UserInfo", Storage="_UserInfoType", ThisKey="InfoType", OtherKey="UserInfoTypeId", IsForeignKey=true)]
+	public UserInfoType UserInfoType
+	{
+		get
+		{
+			return this._UserInfoType.Entity;
+		}
+		set
+		{
+			UserInfoType previousValue = this._UserInfoType.Entity;
+			if (((previousValue != value) 
+						|| (this._UserInfoType.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._UserInfoType.Entity = null;
+					previousValue.UserInfos.Remove(this);
+				}
+				this._UserInfoType.Entity = value;
+				if ((value != null))
+				{
+					value.UserInfos.Add(this);
+					this._InfoType = value.UserInfoTypeId;
+				}
+				else
+				{
+					this._InfoType = default(int);
+				}
+				this.SendPropertyChanged("UserInfoType");
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_UserInfo", Storage="_User1", ThisKey="User", OtherKey="UID", IsForeignKey=true)]
+	public User User1
+	{
+		get
+		{
+			return this._User1.Entity;
+		}
+		set
+		{
+			User previousValue = this._User1.Entity;
+			if (((previousValue != value) 
+						|| (this._User1.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._User1.Entity = null;
+					previousValue.UserInfos.Remove(this);
+				}
+				this._User1.Entity = value;
+				if ((value != null))
+				{
+					value.UserInfos.Add(this);
+					this._User = value.UID;
+				}
+				else
+				{
+					this._User = default(int);
+				}
+				this.SendPropertyChanged("User1");
+			}
+		}
+	}
+	
+	public event PropertyChangingEventHandler PropertyChanging;
+	
+	public event PropertyChangedEventHandler PropertyChanged;
+	
+	protected virtual void SendPropertyChanging()
+	{
+		if ((this.PropertyChanging != null))
+		{
+			this.PropertyChanging(this, emptyChangingEventArgs);
+		}
+	}
+	
+	protected virtual void SendPropertyChanged(String propertyName)
+	{
+		if ((this.PropertyChanged != null))
+		{
+			this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+		}
+	}
+}
+
+[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.UserInfoType")]
+public partial class UserInfoType : INotifyPropertyChanging, INotifyPropertyChanged
+{
+	
+	private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+	
+	private int _UserInfoTypeId;
+	
+	private string _Label;
+	
+	private EntitySet<UserInfo> _UserInfos;
+	
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnUserInfoTypeIdChanging(int value);
+    partial void OnUserInfoTypeIdChanged();
+    partial void OnLabelChanging(string value);
+    partial void OnLabelChanged();
+    #endregion
+	
+	public UserInfoType()
+	{
+		this._UserInfos = new EntitySet<UserInfo>(new Action<UserInfo>(this.attach_UserInfos), new Action<UserInfo>(this.detach_UserInfos));
+		OnCreated();
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserInfoTypeId", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+	public int UserInfoTypeId
+	{
+		get
+		{
+			return this._UserInfoTypeId;
+		}
+		set
+		{
+			if ((this._UserInfoTypeId != value))
+			{
+				this.OnUserInfoTypeIdChanging(value);
+				this.SendPropertyChanging();
+				this._UserInfoTypeId = value;
+				this.SendPropertyChanged("UserInfoTypeId");
+				this.OnUserInfoTypeIdChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Label", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+	public string Label
+	{
+		get
+		{
+			return this._Label;
+		}
+		set
+		{
+			if ((this._Label != value))
+			{
+				this.OnLabelChanging(value);
+				this.SendPropertyChanging();
+				this._Label = value;
+				this.SendPropertyChanged("Label");
+				this.OnLabelChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UserInfoType_UserInfo", Storage="_UserInfos", ThisKey="UserInfoTypeId", OtherKey="InfoType")]
+	public EntitySet<UserInfo> UserInfos
+	{
+		get
+		{
+			return this._UserInfos;
+		}
+		set
+		{
+			this._UserInfos.Assign(value);
+		}
+	}
+	
+	public event PropertyChangingEventHandler PropertyChanging;
+	
+	public event PropertyChangedEventHandler PropertyChanged;
+	
+	protected virtual void SendPropertyChanging()
+	{
+		if ((this.PropertyChanging != null))
+		{
+			this.PropertyChanging(this, emptyChangingEventArgs);
+		}
+	}
+	
+	protected virtual void SendPropertyChanged(String propertyName)
+	{
+		if ((this.PropertyChanged != null))
+		{
+			this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+		}
+	}
+	
+	private void attach_UserInfos(UserInfo entity)
+	{
+		this.SendPropertyChanging();
+		entity.UserInfoType = this;
+	}
+	
+	private void detach_UserInfos(UserInfo entity)
+	{
+		this.SendPropertyChanging();
+		entity.UserInfoType = null;
+	}
+}
+
+[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.PermissionToRole")]
+public partial class PermissionToRole : INotifyPropertyChanging, INotifyPropertyChanged
+{
+	
+	private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+	
+	private int _relationId;
+	
+	private int _PermissionId;
+	
+	private int _RoleId;
+	
+	private EntityRef<Permission> _Permission;
+	
+	private EntityRef<Role> _Role;
+	
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnrelationIdChanging(int value);
+    partial void OnrelationIdChanged();
+    partial void OnPermissionIdChanging(int value);
+    partial void OnPermissionIdChanged();
+    partial void OnRoleIdChanging(int value);
+    partial void OnRoleIdChanged();
+    #endregion
+	
+	public PermissionToRole()
+	{
+		this._Permission = default(EntityRef<Permission>);
+		this._Role = default(EntityRef<Role>);
+		OnCreated();
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_relationId", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+	public int relationId
+	{
+		get
+		{
+			return this._relationId;
+		}
+		set
+		{
+			if ((this._relationId != value))
+			{
+				this.OnrelationIdChanging(value);
+				this.SendPropertyChanging();
+				this._relationId = value;
+				this.SendPropertyChanged("relationId");
+				this.OnrelationIdChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PermissionId", DbType="Int NOT NULL")]
+	public int PermissionId
+	{
+		get
+		{
+			return this._PermissionId;
+		}
+		set
+		{
+			if ((this._PermissionId != value))
+			{
+				if (this._Permission.HasLoadedOrAssignedValue)
+				{
+					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+				}
+				this.OnPermissionIdChanging(value);
+				this.SendPropertyChanging();
+				this._PermissionId = value;
+				this.SendPropertyChanged("PermissionId");
+				this.OnPermissionIdChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RoleId", DbType="Int NOT NULL")]
+	public int RoleId
+	{
+		get
+		{
+			return this._RoleId;
+		}
+		set
+		{
+			if ((this._RoleId != value))
+			{
+				if (this._Role.HasLoadedOrAssignedValue)
+				{
+					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+				}
+				this.OnRoleIdChanging(value);
+				this.SendPropertyChanging();
+				this._RoleId = value;
+				this.SendPropertyChanged("RoleId");
+				this.OnRoleIdChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Permission_PermissionToRole", Storage="_Permission", ThisKey="PermissionId", OtherKey="PermissionId", IsForeignKey=true)]
+	public Permission Permission
+	{
+		get
+		{
+			return this._Permission.Entity;
+		}
+		set
+		{
+			Permission previousValue = this._Permission.Entity;
+			if (((previousValue != value) 
+						|| (this._Permission.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._Permission.Entity = null;
+					previousValue.PermissionToRoles.Remove(this);
+				}
+				this._Permission.Entity = value;
+				if ((value != null))
+				{
+					value.PermissionToRoles.Add(this);
+					this._PermissionId = value.PermissionId;
+				}
+				else
+				{
+					this._PermissionId = default(int);
+				}
+				this.SendPropertyChanged("Permission");
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Role_PermissionToRole", Storage="_Role", ThisKey="RoleId", OtherKey="RoleID", IsForeignKey=true)]
+	public Role Role
+	{
+		get
+		{
+			return this._Role.Entity;
+		}
+		set
+		{
+			Role previousValue = this._Role.Entity;
+			if (((previousValue != value) 
+						|| (this._Role.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._Role.Entity = null;
+					previousValue.PermissionToRoles.Remove(this);
+				}
+				this._Role.Entity = value;
+				if ((value != null))
+				{
+					value.PermissionToRoles.Add(this);
+					this._RoleId = value.RoleID;
+				}
+				else
+				{
+					this._RoleId = default(int);
+				}
+				this.SendPropertyChanged("Role");
+			}
+		}
+	}
+	
+	public event PropertyChangingEventHandler PropertyChanging;
+	
+	public event PropertyChangedEventHandler PropertyChanged;
+	
+	protected virtual void SendPropertyChanging()
+	{
+		if ((this.PropertyChanging != null))
+		{
+			this.PropertyChanging(this, emptyChangingEventArgs);
+		}
+	}
+	
+	protected virtual void SendPropertyChanged(String propertyName)
+	{
+		if ((this.PropertyChanged != null))
+		{
+			this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+		}
+	}
+}
+
+[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.UserRelation")]
+public partial class UserRelation : INotifyPropertyChanging, INotifyPropertyChanged
+{
+	
+	private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+	
+	private int _RelationId;
+	
+	private int _UserId;
+	
+	private int _RelatedUserId;
+	
+	private System.Nullable<int> _RelationType;
+	
+	private EntityRef<User> _User;
+	
+	private EntityRef<User> _User1;
+	
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnRelationIdChanging(int value);
+    partial void OnRelationIdChanged();
+    partial void OnUserIdChanging(int value);
+    partial void OnUserIdChanged();
+    partial void OnRelatedUserIdChanging(int value);
+    partial void OnRelatedUserIdChanged();
+    partial void OnRelationTypeChanging(System.Nullable<int> value);
+    partial void OnRelationTypeChanged();
+    #endregion
+	
+	public UserRelation()
+	{
+		this._User = default(EntityRef<User>);
+		this._User1 = default(EntityRef<User>);
+		OnCreated();
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RelationId", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+	public int RelationId
+	{
+		get
+		{
+			return this._RelationId;
+		}
+		set
+		{
+			if ((this._RelationId != value))
+			{
+				this.OnRelationIdChanging(value);
+				this.SendPropertyChanging();
+				this._RelationId = value;
+				this.SendPropertyChanged("RelationId");
+				this.OnRelationIdChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserId", DbType="Int NOT NULL")]
+	public int UserId
+	{
+		get
+		{
+			return this._UserId;
+		}
+		set
+		{
+			if ((this._UserId != value))
+			{
+				if (this._User1.HasLoadedOrAssignedValue)
+				{
+					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+				}
+				this.OnUserIdChanging(value);
+				this.SendPropertyChanging();
+				this._UserId = value;
+				this.SendPropertyChanged("UserId");
+				this.OnUserIdChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RelatedUserId", DbType="Int NOT NULL")]
+	public int RelatedUserId
+	{
+		get
+		{
+			return this._RelatedUserId;
+		}
+		set
+		{
+			if ((this._RelatedUserId != value))
+			{
+				if (this._User.HasLoadedOrAssignedValue)
+				{
+					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+				}
+				this.OnRelatedUserIdChanging(value);
+				this.SendPropertyChanging();
+				this._RelatedUserId = value;
+				this.SendPropertyChanged("RelatedUserId");
+				this.OnRelatedUserIdChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RelationType", DbType="Int")]
+	public System.Nullable<int> RelationType
+	{
+		get
+		{
+			return this._RelationType;
+		}
+		set
+		{
+			if ((this._RelationType != value))
+			{
+				this.OnRelationTypeChanging(value);
+				this.SendPropertyChanging();
+				this._RelationType = value;
+				this.SendPropertyChanged("RelationType");
+				this.OnRelationTypeChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_UserRelation", Storage="_User", ThisKey="RelatedUserId", OtherKey="UID", IsForeignKey=true)]
+	public User User
+	{
+		get
+		{
+			return this._User.Entity;
+		}
+		set
+		{
+			User previousValue = this._User.Entity;
+			if (((previousValue != value) 
+						|| (this._User.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._User.Entity = null;
+					previousValue.UserRelations.Remove(this);
+				}
+				this._User.Entity = value;
+				if ((value != null))
+				{
+					value.UserRelations.Add(this);
+					this._RelatedUserId = value.UID;
+				}
+				else
+				{
+					this._RelatedUserId = default(int);
+				}
+				this.SendPropertyChanged("User");
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_UserRelation1", Storage="_User1", ThisKey="UserId", OtherKey="UID", IsForeignKey=true)]
+	public User User1
+	{
+		get
+		{
+			return this._User1.Entity;
+		}
+		set
+		{
+			User previousValue = this._User1.Entity;
+			if (((previousValue != value) 
+						|| (this._User1.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._User1.Entity = null;
+					previousValue.UserRelations1.Remove(this);
+				}
+				this._User1.Entity = value;
+				if ((value != null))
+				{
+					value.UserRelations1.Add(this);
+					this._UserId = value.UID;
+				}
+				else
+				{
+					this._UserId = default(int);
+				}
+				this.SendPropertyChanged("User1");
+			}
+		}
+	}
+	
+	public event PropertyChangingEventHandler PropertyChanging;
+	
+	public event PropertyChangedEventHandler PropertyChanged;
+	
+	protected virtual void SendPropertyChanging()
+	{
+		if ((this.PropertyChanging != null))
+		{
+			this.PropertyChanging(this, emptyChangingEventArgs);
+		}
+	}
+	
+	protected virtual void SendPropertyChanged(String propertyName)
+	{
+		if ((this.PropertyChanged != null))
+		{
+			this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+		}
+	}
+}
+
+[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Permission")]
+public partial class Permission : INotifyPropertyChanging, INotifyPropertyChanged
+{
+	
+	private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+	
+	private int _PermissionId;
+	
+	private string _Label;
+	
+	private System.Nullable<int> _ContentTypeId;
+	
+	private string _ContentTypeString;
+	
+	private string _PermissionUniqueString;
+	
+	private EntitySet<PermissionToRole> _PermissionToRoles;
+	
+	private EntityRef<DynamicContentType> _DynamicContentType;
+	
+	private EntityRef<DynamicContentType> _DynamicContentType1;
+	
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnPermissionIdChanging(int value);
+    partial void OnPermissionIdChanged();
+    partial void OnLabelChanging(string value);
+    partial void OnLabelChanged();
+    partial void OnContentTypeIdChanging(System.Nullable<int> value);
+    partial void OnContentTypeIdChanged();
+    partial void OnContentTypeStringChanging(string value);
+    partial void OnContentTypeStringChanged();
+    partial void OnPermissionUniqueStringChanging(string value);
+    partial void OnPermissionUniqueStringChanged();
+    #endregion
+	
+	public Permission()
+	{
+		this._PermissionToRoles = new EntitySet<PermissionToRole>(new Action<PermissionToRole>(this.attach_PermissionToRoles), new Action<PermissionToRole>(this.detach_PermissionToRoles));
+		this._DynamicContentType = default(EntityRef<DynamicContentType>);
+		this._DynamicContentType1 = default(EntityRef<DynamicContentType>);
+		OnCreated();
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PermissionId", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+	public int PermissionId
+	{
+		get
+		{
+			return this._PermissionId;
+		}
+		set
+		{
+			if ((this._PermissionId != value))
+			{
+				this.OnPermissionIdChanging(value);
+				this.SendPropertyChanging();
+				this._PermissionId = value;
+				this.SendPropertyChanged("PermissionId");
+				this.OnPermissionIdChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Label", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+	public string Label
+	{
+		get
+		{
+			return this._Label;
+		}
+		set
+		{
+			if ((this._Label != value))
+			{
+				this.OnLabelChanging(value);
+				this.SendPropertyChanging();
+				this._Label = value;
+				this.SendPropertyChanged("Label");
+				this.OnLabelChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ContentTypeId", DbType="Int")]
+	public System.Nullable<int> ContentTypeId
+	{
+		get
+		{
+			return this._ContentTypeId;
+		}
+		set
+		{
+			if ((this._ContentTypeId != value))
+			{
+				if (this._DynamicContentType.HasLoadedOrAssignedValue)
+				{
+					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+				}
+				this.OnContentTypeIdChanging(value);
+				this.SendPropertyChanging();
+				this._ContentTypeId = value;
+				this.SendPropertyChanged("ContentTypeId");
+				this.OnContentTypeIdChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ContentTypeString", DbType="NVarChar(50)")]
+	public string ContentTypeString
+	{
+		get
+		{
+			return this._ContentTypeString;
+		}
+		set
+		{
+			if ((this._ContentTypeString != value))
+			{
+				if (this._DynamicContentType1.HasLoadedOrAssignedValue)
+				{
+					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+				}
+				this.OnContentTypeStringChanging(value);
+				this.SendPropertyChanging();
+				this._ContentTypeString = value;
+				this.SendPropertyChanged("ContentTypeString");
+				this.OnContentTypeStringChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PermissionUniqueString", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+	public string PermissionUniqueString
+	{
+		get
+		{
+			return this._PermissionUniqueString;
+		}
+		set
+		{
+			if ((this._PermissionUniqueString != value))
+			{
+				this.OnPermissionUniqueStringChanging(value);
+				this.SendPropertyChanging();
+				this._PermissionUniqueString = value;
+				this.SendPropertyChanged("PermissionUniqueString");
+				this.OnPermissionUniqueStringChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Permission_PermissionToRole", Storage="_PermissionToRoles", ThisKey="PermissionId", OtherKey="PermissionId")]
+	public EntitySet<PermissionToRole> PermissionToRoles
+	{
+		get
+		{
+			return this._PermissionToRoles;
+		}
+		set
+		{
+			this._PermissionToRoles.Assign(value);
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="DynamicContentType_Permission", Storage="_DynamicContentType", ThisKey="ContentTypeId", OtherKey="DynamicContentTypeId", IsForeignKey=true)]
+	public DynamicContentType DynamicContentType
+	{
+		get
+		{
+			return this._DynamicContentType.Entity;
+		}
+		set
+		{
+			DynamicContentType previousValue = this._DynamicContentType.Entity;
+			if (((previousValue != value) 
+						|| (this._DynamicContentType.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._DynamicContentType.Entity = null;
+					previousValue.Permissions.Remove(this);
+				}
+				this._DynamicContentType.Entity = value;
+				if ((value != null))
+				{
+					value.Permissions.Add(this);
+					this._ContentTypeId = value.DynamicContentTypeId;
+				}
+				else
+				{
+					this._ContentTypeId = default(Nullable<int>);
+				}
+				this.SendPropertyChanged("DynamicContentType");
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="DynamicContentType_Permission1", Storage="_DynamicContentType1", ThisKey="ContentTypeString", OtherKey="UniqueLabel", IsForeignKey=true)]
+	public DynamicContentType DynamicContentType1
+	{
+		get
+		{
+			return this._DynamicContentType1.Entity;
+		}
+		set
+		{
+			DynamicContentType previousValue = this._DynamicContentType1.Entity;
+			if (((previousValue != value) 
+						|| (this._DynamicContentType1.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._DynamicContentType1.Entity = null;
+					previousValue.Permissions1.Remove(this);
+				}
+				this._DynamicContentType1.Entity = value;
+				if ((value != null))
+				{
+					value.Permissions1.Add(this);
+					this._ContentTypeString = value.UniqueLabel;
+				}
+				else
+				{
+					this._ContentTypeString = default(string);
+				}
+				this.SendPropertyChanged("DynamicContentType1");
+			}
+		}
+	}
+	
+	public event PropertyChangingEventHandler PropertyChanging;
+	
+	public event PropertyChangedEventHandler PropertyChanged;
+	
+	protected virtual void SendPropertyChanging()
+	{
+		if ((this.PropertyChanging != null))
+		{
+			this.PropertyChanging(this, emptyChangingEventArgs);
+		}
+	}
+	
+	protected virtual void SendPropertyChanged(String propertyName)
+	{
+		if ((this.PropertyChanged != null))
+		{
+			this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+		}
+	}
+	
+	private void attach_PermissionToRoles(PermissionToRole entity)
+	{
+		this.SendPropertyChanging();
+		entity.Permission = this;
+	}
+	
+	private void detach_PermissionToRoles(PermissionToRole entity)
+	{
+		this.SendPropertyChanging();
+		entity.Permission = null;
+	}
+}
+
+[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Comment")]
+public partial class Comment : INotifyPropertyChanging, INotifyPropertyChanged
+{
+	
+	private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+	
+	private int _CommentId;
+	
+	private System.Nullable<int> _Post_DynamicContentID;
+	
+	private int _AuthorID;
+	
+	private System.DateTime _CreateTime;
+	
+	private System.Nullable<System.DateTime> _UpdateTime;
+	
+	private string _Title;
+	
+	private string _Text;
+	
+	private System.Nullable<int> _CommentOnCommentID;
+	
+	private bool _Hidden;
+	
+	private EntitySet<ForumThread> _ForumThreads;
+	
+	private EntitySet<TagOnComment> _TagOnComments;
+	
+	private EntitySet<Comment> _Comments;
+	
+	private EntityRef<Comment> _Comment1;
+	
+	private EntityRef<DynamicContent> _DynamicContent;
+	
+	private EntityRef<User> _User;
+	
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnCommentIdChanging(int value);
+    partial void OnCommentIdChanged();
+    partial void OnPost_DynamicContentIDChanging(System.Nullable<int> value);
+    partial void OnPost_DynamicContentIDChanged();
+    partial void OnAuthorIDChanging(int value);
+    partial void OnAuthorIDChanged();
+    partial void OnCreateTimeChanging(System.DateTime value);
+    partial void OnCreateTimeChanged();
+    partial void OnUpdateTimeChanging(System.Nullable<System.DateTime> value);
+    partial void OnUpdateTimeChanged();
+    partial void OnTitleChanging(string value);
+    partial void OnTitleChanged();
+    partial void OnTextChanging(string value);
+    partial void OnTextChanged();
+    partial void OnCommentOnCommentIDChanging(System.Nullable<int> value);
+    partial void OnCommentOnCommentIDChanged();
+    partial void OnHiddenChanging(bool value);
+    partial void OnHiddenChanged();
+    #endregion
+	
+	public Comment()
+	{
+		this._ForumThreads = new EntitySet<ForumThread>(new Action<ForumThread>(this.attach_ForumThreads), new Action<ForumThread>(this.detach_ForumThreads));
+		this._TagOnComments = new EntitySet<TagOnComment>(new Action<TagOnComment>(this.attach_TagOnComments), new Action<TagOnComment>(this.detach_TagOnComments));
+		this._Comments = new EntitySet<Comment>(new Action<Comment>(this.attach_Comments), new Action<Comment>(this.detach_Comments));
+		this._Comment1 = default(EntityRef<Comment>);
+		this._DynamicContent = default(EntityRef<DynamicContent>);
+		this._User = default(EntityRef<User>);
+		OnCreated();
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CommentId", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+	public int CommentId
+	{
+		get
+		{
+			return this._CommentId;
+		}
+		set
+		{
+			if ((this._CommentId != value))
+			{
+				this.OnCommentIdChanging(value);
+				this.SendPropertyChanging();
+				this._CommentId = value;
+				this.SendPropertyChanged("CommentId");
+				this.OnCommentIdChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Post_DynamicContentID", DbType="Int")]
+	public System.Nullable<int> Post_DynamicContentID
+	{
+		get
+		{
+			return this._Post_DynamicContentID;
+		}
+		set
+		{
+			if ((this._Post_DynamicContentID != value))
+			{
+				if (this._DynamicContent.HasLoadedOrAssignedValue)
+				{
+					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+				}
+				this.OnPost_DynamicContentIDChanging(value);
+				this.SendPropertyChanging();
+				this._Post_DynamicContentID = value;
+				this.SendPropertyChanged("Post_DynamicContentID");
+				this.OnPost_DynamicContentIDChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AuthorID", DbType="Int NOT NULL")]
+	public int AuthorID
+	{
+		get
+		{
+			return this._AuthorID;
+		}
+		set
+		{
+			if ((this._AuthorID != value))
+			{
+				if (this._User.HasLoadedOrAssignedValue)
+				{
+					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+				}
+				this.OnAuthorIDChanging(value);
+				this.SendPropertyChanging();
+				this._AuthorID = value;
+				this.SendPropertyChanged("AuthorID");
+				this.OnAuthorIDChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreateTime", DbType="DateTime NOT NULL")]
+	public System.DateTime CreateTime
+	{
+		get
+		{
+			return this._CreateTime;
+		}
+		set
+		{
+			if ((this._CreateTime != value))
+			{
+				this.OnCreateTimeChanging(value);
+				this.SendPropertyChanging();
+				this._CreateTime = value;
+				this.SendPropertyChanged("CreateTime");
+				this.OnCreateTimeChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UpdateTime", DbType="DateTime")]
+	public System.Nullable<System.DateTime> UpdateTime
+	{
+		get
+		{
+			return this._UpdateTime;
+		}
+		set
+		{
+			if ((this._UpdateTime != value))
+			{
+				this.OnUpdateTimeChanging(value);
+				this.SendPropertyChanging();
+				this._UpdateTime = value;
+				this.SendPropertyChanged("UpdateTime");
+				this.OnUpdateTimeChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Title", DbType="NVarChar(50)")]
+	public string Title
+	{
+		get
+		{
+			return this._Title;
+		}
+		set
+		{
+			if ((this._Title != value))
+			{
+				this.OnTitleChanging(value);
+				this.SendPropertyChanging();
+				this._Title = value;
+				this.SendPropertyChanged("Title");
+				this.OnTitleChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Text", DbType="Text NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+	public string Text
+	{
+		get
+		{
+			return this._Text;
+		}
+		set
+		{
+			if ((this._Text != value))
+			{
+				this.OnTextChanging(value);
+				this.SendPropertyChanging();
+				this._Text = value;
+				this.SendPropertyChanged("Text");
+				this.OnTextChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CommentOnCommentID", DbType="Int")]
+	public System.Nullable<int> CommentOnCommentID
+	{
+		get
+		{
+			return this._CommentOnCommentID;
+		}
+		set
+		{
+			if ((this._CommentOnCommentID != value))
+			{
+				if (this._Comment1.HasLoadedOrAssignedValue)
+				{
+					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+				}
+				this.OnCommentOnCommentIDChanging(value);
+				this.SendPropertyChanging();
+				this._CommentOnCommentID = value;
+				this.SendPropertyChanged("CommentOnCommentID");
+				this.OnCommentOnCommentIDChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Hidden", DbType="Bit NOT NULL")]
+	public bool Hidden
+	{
+		get
+		{
+			return this._Hidden;
+		}
+		set
+		{
+			if ((this._Hidden != value))
+			{
+				this.OnHiddenChanging(value);
+				this.SendPropertyChanging();
+				this._Hidden = value;
+				this.SendPropertyChanged("Hidden");
+				this.OnHiddenChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Comment_ForumThread", Storage="_ForumThreads", ThisKey="CommentId", OtherKey="CommentId")]
+	public EntitySet<ForumThread> ForumThreads
+	{
+		get
+		{
+			return this._ForumThreads;
+		}
+		set
+		{
+			this._ForumThreads.Assign(value);
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Comment_TagOnComment", Storage="_TagOnComments", ThisKey="CommentId", OtherKey="CommentId")]
+	public EntitySet<TagOnComment> TagOnComments
+	{
+		get
+		{
+			return this._TagOnComments;
+		}
+		set
+		{
+			this._TagOnComments.Assign(value);
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Comment_Comment", Storage="_Comments", ThisKey="CommentId", OtherKey="CommentOnCommentID")]
+	public EntitySet<Comment> Comments
+	{
+		get
+		{
+			return this._Comments;
+		}
+		set
+		{
+			this._Comments.Assign(value);
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Comment_Comment", Storage="_Comment1", ThisKey="CommentOnCommentID", OtherKey="CommentId", IsForeignKey=true)]
+	public Comment Comment1
+	{
+		get
+		{
+			return this._Comment1.Entity;
+		}
+		set
+		{
+			Comment previousValue = this._Comment1.Entity;
+			if (((previousValue != value) 
+						|| (this._Comment1.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._Comment1.Entity = null;
+					previousValue.Comments.Remove(this);
+				}
+				this._Comment1.Entity = value;
+				if ((value != null))
+				{
+					value.Comments.Add(this);
+					this._CommentOnCommentID = value.CommentId;
+				}
+				else
+				{
+					this._CommentOnCommentID = default(Nullable<int>);
+				}
+				this.SendPropertyChanged("Comment1");
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="DynamicContent_Comment", Storage="_DynamicContent", ThisKey="Post_DynamicContentID", OtherKey="DynamicContentId", IsForeignKey=true, DeleteRule="CASCADE")]
+	public DynamicContent DynamicContent
+	{
+		get
+		{
+			return this._DynamicContent.Entity;
+		}
+		set
+		{
+			DynamicContent previousValue = this._DynamicContent.Entity;
+			if (((previousValue != value) 
+						|| (this._DynamicContent.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._DynamicContent.Entity = null;
+					previousValue.Comments.Remove(this);
+				}
+				this._DynamicContent.Entity = value;
+				if ((value != null))
+				{
+					value.Comments.Add(this);
+					this._Post_DynamicContentID = value.DynamicContentId;
+				}
+				else
+				{
+					this._Post_DynamicContentID = default(Nullable<int>);
+				}
+				this.SendPropertyChanged("DynamicContent");
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Comment", Storage="_User", ThisKey="AuthorID", OtherKey="UID", IsForeignKey=true)]
+	public User User
+	{
+		get
+		{
+			return this._User.Entity;
+		}
+		set
+		{
+			User previousValue = this._User.Entity;
+			if (((previousValue != value) 
+						|| (this._User.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._User.Entity = null;
+					previousValue.Comments.Remove(this);
+				}
+				this._User.Entity = value;
+				if ((value != null))
+				{
+					value.Comments.Add(this);
+					this._AuthorID = value.UID;
+				}
+				else
+				{
+					this._AuthorID = default(int);
+				}
+				this.SendPropertyChanged("User");
+			}
+		}
+	}
+	
+	public event PropertyChangingEventHandler PropertyChanging;
+	
+	public event PropertyChangedEventHandler PropertyChanged;
+	
+	protected virtual void SendPropertyChanging()
+	{
+		if ((this.PropertyChanging != null))
+		{
+			this.PropertyChanging(this, emptyChangingEventArgs);
+		}
+	}
+	
+	protected virtual void SendPropertyChanged(String propertyName)
+	{
+		if ((this.PropertyChanged != null))
+		{
+			this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+		}
+	}
+	
+	private void attach_ForumThreads(ForumThread entity)
+	{
+		this.SendPropertyChanging();
+		entity.Comment = this;
+	}
+	
+	private void detach_ForumThreads(ForumThread entity)
+	{
+		this.SendPropertyChanging();
+		entity.Comment = null;
+	}
+	
+	private void attach_TagOnComments(TagOnComment entity)
+	{
+		this.SendPropertyChanging();
+		entity.Comment = this;
+	}
+	
+	private void detach_TagOnComments(TagOnComment entity)
+	{
+		this.SendPropertyChanging();
+		entity.Comment = null;
+	}
+	
+	private void attach_Comments(Comment entity)
+	{
+		this.SendPropertyChanging();
+		entity.Comment1 = this;
+	}
+	
+	private void detach_Comments(Comment entity)
+	{
+		this.SendPropertyChanging();
+		entity.Comment1 = null;
+	}
+}
+
+[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.DynamicContentType")]
+public partial class DynamicContentType : INotifyPropertyChanging, INotifyPropertyChanged
+{
+	
+	private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+	
+	private int _DynamicContentTypeId;
+	
+	private string _Name;
+	
+	private string _UniqueLabel;
+	
+	private EntityRef<DynamicContent> _DynamicContent;
+	
+	private EntityRef<ElementInContent> _ElementInContent;
+	
+	private EntitySet<Permission> _Permissions;
+	
+	private EntitySet<Permission> _Permissions1;
+	
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnDynamicContentTypeIdChanging(int value);
+    partial void OnDynamicContentTypeIdChanged();
+    partial void OnNameChanging(string value);
+    partial void OnNameChanged();
+    partial void OnUniqueLabelChanging(string value);
+    partial void OnUniqueLabelChanged();
+    #endregion
+	
+	public DynamicContentType()
+	{
+		this._DynamicContent = default(EntityRef<DynamicContent>);
+		this._ElementInContent = default(EntityRef<ElementInContent>);
+		this._Permissions = new EntitySet<Permission>(new Action<Permission>(this.attach_Permissions), new Action<Permission>(this.detach_Permissions));
+		this._Permissions1 = new EntitySet<Permission>(new Action<Permission>(this.attach_Permissions1), new Action<Permission>(this.detach_Permissions1));
+		OnCreated();
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DynamicContentTypeId", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+	public int DynamicContentTypeId
+	{
+		get
+		{
+			return this._DynamicContentTypeId;
+		}
+		set
+		{
+			if ((this._DynamicContentTypeId != value))
+			{
+				this.OnDynamicContentTypeIdChanging(value);
+				this.SendPropertyChanging();
+				this._DynamicContentTypeId = value;
+				this.SendPropertyChanged("DynamicContentTypeId");
+				this.OnDynamicContentTypeIdChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+	public string Name
+	{
+		get
+		{
+			return this._Name;
+		}
+		set
+		{
+			if ((this._Name != value))
+			{
+				this.OnNameChanging(value);
+				this.SendPropertyChanging();
+				this._Name = value;
+				this.SendPropertyChanged("Name");
+				this.OnNameChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UniqueLabel", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+	public string UniqueLabel
+	{
+		get
+		{
+			return this._UniqueLabel;
+		}
+		set
+		{
+			if ((this._UniqueLabel != value))
+			{
+				this.OnUniqueLabelChanging(value);
+				this.SendPropertyChanging();
+				this._UniqueLabel = value;
+				this.SendPropertyChanged("UniqueLabel");
+				this.OnUniqueLabelChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="DynamicContentType_DynamicContent", Storage="_DynamicContent", ThisKey="DynamicContentTypeId", OtherKey="DynamicContentId", IsUnique=true, IsForeignKey=false)]
+	public DynamicContent DynamicContent
+	{
+		get
+		{
+			return this._DynamicContent.Entity;
+		}
+		set
+		{
+			DynamicContent previousValue = this._DynamicContent.Entity;
+			if (((previousValue != value) 
+						|| (this._DynamicContent.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._DynamicContent.Entity = null;
+					previousValue.DynamicContentType = null;
+				}
+				this._DynamicContent.Entity = value;
+				if ((value != null))
+				{
+					value.DynamicContentType = this;
+				}
+				this.SendPropertyChanged("DynamicContent");
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="DynamicContentType_ElementInContent", Storage="_ElementInContent", ThisKey="DynamicContentTypeId", OtherKey="ContentTypeId", IsUnique=true, IsForeignKey=false)]
+	public ElementInContent ElementInContent
+	{
+		get
+		{
+			return this._ElementInContent.Entity;
+		}
+		set
+		{
+			ElementInContent previousValue = this._ElementInContent.Entity;
+			if (((previousValue != value) 
+						|| (this._ElementInContent.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._ElementInContent.Entity = null;
+					previousValue.DynamicContentType = null;
+				}
+				this._ElementInContent.Entity = value;
+				if ((value != null))
+				{
+					value.DynamicContentType = this;
+				}
+				this.SendPropertyChanged("ElementInContent");
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="DynamicContentType_Permission", Storage="_Permissions", ThisKey="DynamicContentTypeId", OtherKey="ContentTypeId")]
+	public EntitySet<Permission> Permissions
+	{
+		get
+		{
+			return this._Permissions;
+		}
+		set
+		{
+			this._Permissions.Assign(value);
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="DynamicContentType_Permission1", Storage="_Permissions1", ThisKey="UniqueLabel", OtherKey="ContentTypeString")]
+	public EntitySet<Permission> Permissions1
+	{
+		get
+		{
+			return this._Permissions1;
+		}
+		set
+		{
+			this._Permissions1.Assign(value);
+		}
+	}
+	
+	public event PropertyChangingEventHandler PropertyChanging;
+	
+	public event PropertyChangedEventHandler PropertyChanged;
+	
+	protected virtual void SendPropertyChanging()
+	{
+		if ((this.PropertyChanging != null))
+		{
+			this.PropertyChanging(this, emptyChangingEventArgs);
+		}
+	}
+	
+	protected virtual void SendPropertyChanged(String propertyName)
+	{
+		if ((this.PropertyChanged != null))
+		{
+			this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+		}
+	}
+	
+	private void attach_Permissions(Permission entity)
+	{
+		this.SendPropertyChanging();
+		entity.DynamicContentType = this;
+	}
+	
+	private void detach_Permissions(Permission entity)
+	{
+		this.SendPropertyChanging();
+		entity.DynamicContentType = null;
+	}
+	
+	private void attach_Permissions1(Permission entity)
+	{
+		this.SendPropertyChanging();
+		entity.DynamicContentType1 = this;
+	}
+	
+	private void detach_Permissions1(Permission entity)
+	{
+		this.SendPropertyChanging();
+		entity.DynamicContentType1 = null;
+	}
+}
+
+[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Role")]
+public partial class Role : INotifyPropertyChanging, INotifyPropertyChanged
+{
+	
+	private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+	
+	private int _RoleID;
+	
+	private string _Role1;
+	
+	private EntitySet<UserInRole> _UserInRoles;
+	
+	private EntitySet<PermissionToRole> _PermissionToRoles;
+	
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnRoleIDChanging(int value);
+    partial void OnRoleIDChanged();
+    partial void OnRole1Changing(string value);
+    partial void OnRole1Changed();
+    #endregion
+	
+	public Role()
+	{
+		this._UserInRoles = new EntitySet<UserInRole>(new Action<UserInRole>(this.attach_UserInRoles), new Action<UserInRole>(this.detach_UserInRoles));
+		this._PermissionToRoles = new EntitySet<PermissionToRole>(new Action<PermissionToRole>(this.attach_PermissionToRoles), new Action<PermissionToRole>(this.detach_PermissionToRoles));
+		OnCreated();
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RoleID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+	public int RoleID
+	{
+		get
+		{
+			return this._RoleID;
+		}
+		set
+		{
+			if ((this._RoleID != value))
+			{
+				this.OnRoleIDChanging(value);
+				this.SendPropertyChanging();
+				this._RoleID = value;
+				this.SendPropertyChanged("RoleID");
+				this.OnRoleIDChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Name="Role", Storage="_Role1", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+	public string Role1
+	{
+		get
+		{
+			return this._Role1;
+		}
+		set
+		{
+			if ((this._Role1 != value))
+			{
+				this.OnRole1Changing(value);
+				this.SendPropertyChanging();
+				this._Role1 = value;
+				this.SendPropertyChanged("Role1");
+				this.OnRole1Changed();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Role_UserInRole", Storage="_UserInRoles", ThisKey="RoleID", OtherKey="inRoleID")]
+	public EntitySet<UserInRole> UserInRoles
+	{
+		get
+		{
+			return this._UserInRoles;
+		}
+		set
+		{
+			this._UserInRoles.Assign(value);
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Role_PermissionToRole", Storage="_PermissionToRoles", ThisKey="RoleID", OtherKey="RoleId")]
+	public EntitySet<PermissionToRole> PermissionToRoles
+	{
+		get
+		{
+			return this._PermissionToRoles;
+		}
+		set
+		{
+			this._PermissionToRoles.Assign(value);
+		}
+	}
+	
+	public event PropertyChangingEventHandler PropertyChanging;
+	
+	public event PropertyChangedEventHandler PropertyChanged;
+	
+	protected virtual void SendPropertyChanging()
+	{
+		if ((this.PropertyChanging != null))
+		{
+			this.PropertyChanging(this, emptyChangingEventArgs);
+		}
+	}
+	
+	protected virtual void SendPropertyChanged(String propertyName)
+	{
+		if ((this.PropertyChanged != null))
+		{
+			this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+		}
+	}
+	
+	private void attach_UserInRoles(UserInRole entity)
+	{
+		this.SendPropertyChanging();
+		entity.Role = this;
+	}
+	
+	private void detach_UserInRoles(UserInRole entity)
+	{
+		this.SendPropertyChanging();
+		entity.Role = null;
+	}
+	
+	private void attach_PermissionToRoles(PermissionToRole entity)
+	{
+		this.SendPropertyChanging();
+		entity.Role = this;
+	}
+	
+	private void detach_PermissionToRoles(PermissionToRole entity)
+	{
+		this.SendPropertyChanging();
+		entity.Role = null;
+	}
+}
+
+[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.[User]")]
+public partial class User : INotifyPropertyChanging, INotifyPropertyChanged
+{
+	
+	private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+	
+	private int _UID;
+	
+	private string _Username;
+	
+	private string _Mail;
+	
+	private string _Password;
+	
+	private System.Nullable<int> _AbID;
+	
+	private string _LoginSession;
+	
+	private string _Salt;
+	
+	private System.Data.Linq.Binary _Avatar;
+	
+	private EntitySet<UserInRole> _UserInRoles;
+	
+	private EntitySet<ContactInfo> _ContactInfos;
+	
+	private EntitySet<DynamicContent> _DynamicContents;
+	
+	private EntitySet<PrivateMessage> _PrivateMessages;
+	
+	private EntitySet<PrivateMessage> _PrivateMessages1;
+	
+	private EntitySet<StaticContent> _StaticContents;
+	
+	private EntitySet<UserInfo> _UserInfos;
+	
+	private EntitySet<UserRelation> _UserRelations;
+	
+	private EntitySet<UserRelation> _UserRelations1;
+	
+	private EntitySet<Comment> _Comments;
+	
+	private EntityRef<UserAbout> _UserAbout;
+	
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnUIDChanging(int value);
+    partial void OnUIDChanged();
+    partial void OnUsernameChanging(string value);
+    partial void OnUsernameChanged();
+    partial void OnMailChanging(string value);
+    partial void OnMailChanged();
+    partial void OnPasswordChanging(string value);
+    partial void OnPasswordChanged();
+    partial void OnAbIDChanging(System.Nullable<int> value);
+    partial void OnAbIDChanged();
+    partial void OnLoginSessionChanging(string value);
+    partial void OnLoginSessionChanged();
+    partial void OnSaltChanging(string value);
+    partial void OnSaltChanged();
+    partial void OnAvatarChanging(System.Data.Linq.Binary value);
+    partial void OnAvatarChanged();
+    #endregion
+	
+	public User()
+	{
+		this._UserInRoles = new EntitySet<UserInRole>(new Action<UserInRole>(this.attach_UserInRoles), new Action<UserInRole>(this.detach_UserInRoles));
+		this._ContactInfos = new EntitySet<ContactInfo>(new Action<ContactInfo>(this.attach_ContactInfos), new Action<ContactInfo>(this.detach_ContactInfos));
+		this._DynamicContents = new EntitySet<DynamicContent>(new Action<DynamicContent>(this.attach_DynamicContents), new Action<DynamicContent>(this.detach_DynamicContents));
+		this._PrivateMessages = new EntitySet<PrivateMessage>(new Action<PrivateMessage>(this.attach_PrivateMessages), new Action<PrivateMessage>(this.detach_PrivateMessages));
+		this._PrivateMessages1 = new EntitySet<PrivateMessage>(new Action<PrivateMessage>(this.attach_PrivateMessages1), new Action<PrivateMessage>(this.detach_PrivateMessages1));
+		this._StaticContents = new EntitySet<StaticContent>(new Action<StaticContent>(this.attach_StaticContents), new Action<StaticContent>(this.detach_StaticContents));
+		this._UserInfos = new EntitySet<UserInfo>(new Action<UserInfo>(this.attach_UserInfos), new Action<UserInfo>(this.detach_UserInfos));
+		this._UserRelations = new EntitySet<UserRelation>(new Action<UserRelation>(this.attach_UserRelations), new Action<UserRelation>(this.detach_UserRelations));
+		this._UserRelations1 = new EntitySet<UserRelation>(new Action<UserRelation>(this.attach_UserRelations1), new Action<UserRelation>(this.detach_UserRelations1));
+		this._Comments = new EntitySet<Comment>(new Action<Comment>(this.attach_Comments), new Action<Comment>(this.detach_Comments));
+		this._UserAbout = default(EntityRef<UserAbout>);
+		OnCreated();
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+	public int UID
+	{
+		get
+		{
+			return this._UID;
+		}
+		set
+		{
+			if ((this._UID != value))
+			{
+				this.OnUIDChanging(value);
+				this.SendPropertyChanging();
+				this._UID = value;
+				this.SendPropertyChanged("UID");
+				this.OnUIDChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Username", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+	public string Username
+	{
+		get
+		{
+			return this._Username;
+		}
+		set
+		{
+			if ((this._Username != value))
+			{
+				this.OnUsernameChanging(value);
+				this.SendPropertyChanging();
+				this._Username = value;
+				this.SendPropertyChanged("Username");
+				this.OnUsernameChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Mail", DbType="VarChar(75) NOT NULL", CanBeNull=false)]
+	public string Mail
+	{
+		get
+		{
+			return this._Mail;
+		}
+		set
+		{
+			if ((this._Mail != value))
+			{
+				this.OnMailChanging(value);
+				this.SendPropertyChanging();
+				this._Mail = value;
+				this.SendPropertyChanged("Mail");
+				this.OnMailChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Password", DbType="VarChar(MAX) NOT NULL", CanBeNull=false)]
+	public string Password
+	{
+		get
+		{
+			return this._Password;
+		}
+		set
+		{
+			if ((this._Password != value))
+			{
+				this.OnPasswordChanging(value);
+				this.SendPropertyChanging();
+				this._Password = value;
+				this.SendPropertyChanged("Password");
+				this.OnPasswordChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AbID", DbType="Int")]
+	public System.Nullable<int> AbID
+	{
+		get
+		{
+			return this._AbID;
+		}
+		set
+		{
+			if ((this._AbID != value))
+			{
+				if (this._UserAbout.HasLoadedOrAssignedValue)
+				{
+					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+				}
+				this.OnAbIDChanging(value);
+				this.SendPropertyChanging();
+				this._AbID = value;
+				this.SendPropertyChanged("AbID");
+				this.OnAbIDChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LoginSession", DbType="VarChar(MAX)")]
+	public string LoginSession
+	{
+		get
+		{
+			return this._LoginSession;
+		}
+		set
+		{
+			if ((this._LoginSession != value))
+			{
+				this.OnLoginSessionChanging(value);
+				this.SendPropertyChanging();
+				this._LoginSession = value;
+				this.SendPropertyChanged("LoginSession");
+				this.OnLoginSessionChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Salt", DbType="VarChar(MAX)")]
+	public string Salt
+	{
+		get
+		{
+			return this._Salt;
+		}
+		set
+		{
+			if ((this._Salt != value))
+			{
+				this.OnSaltChanging(value);
+				this.SendPropertyChanging();
+				this._Salt = value;
+				this.SendPropertyChanged("Salt");
+				this.OnSaltChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Avatar", DbType="VarBinary(MAX)", UpdateCheck=UpdateCheck.Never)]
+	public System.Data.Linq.Binary Avatar
+	{
+		get
+		{
+			return this._Avatar;
+		}
+		set
+		{
+			if ((this._Avatar != value))
+			{
+				this.OnAvatarChanging(value);
+				this.SendPropertyChanging();
+				this._Avatar = value;
+				this.SendPropertyChanged("Avatar");
+				this.OnAvatarChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_UserInRole", Storage="_UserInRoles", ThisKey="UID", OtherKey="inUserID")]
+	public EntitySet<UserInRole> UserInRoles
+	{
+		get
+		{
+			return this._UserInRoles;
+		}
+		set
+		{
+			this._UserInRoles.Assign(value);
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_ContactInfo", Storage="_ContactInfos", ThisKey="UID", OtherKey="User")]
+	public EntitySet<ContactInfo> ContactInfos
+	{
+		get
+		{
+			return this._ContactInfos;
+		}
+		set
+		{
+			this._ContactInfos.Assign(value);
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_DynamicContent", Storage="_DynamicContents", ThisKey="UID", OtherKey="Author")]
+	public EntitySet<DynamicContent> DynamicContents
+	{
+		get
+		{
+			return this._DynamicContents;
+		}
+		set
+		{
+			this._DynamicContents.Assign(value);
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_PrivateMessage", Storage="_PrivateMessages", ThisKey="UID", OtherKey="From")]
+	public EntitySet<PrivateMessage> PrivateMessages
+	{
+		get
+		{
+			return this._PrivateMessages;
+		}
+		set
+		{
+			this._PrivateMessages.Assign(value);
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_PrivateMessage1", Storage="_PrivateMessages1", ThisKey="UID", OtherKey="To")]
+	public EntitySet<PrivateMessage> PrivateMessages1
+	{
+		get
+		{
+			return this._PrivateMessages1;
+		}
+		set
+		{
+			this._PrivateMessages1.Assign(value);
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_StaticContent", Storage="_StaticContents", ThisKey="UID", OtherKey="Author")]
+	public EntitySet<StaticContent> StaticContents
+	{
+		get
+		{
+			return this._StaticContents;
+		}
+		set
+		{
+			this._StaticContents.Assign(value);
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_UserInfo", Storage="_UserInfos", ThisKey="UID", OtherKey="User")]
+	public EntitySet<UserInfo> UserInfos
+	{
+		get
+		{
+			return this._UserInfos;
+		}
+		set
+		{
+			this._UserInfos.Assign(value);
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_UserRelation", Storage="_UserRelations", ThisKey="UID", OtherKey="RelatedUserId")]
+	public EntitySet<UserRelation> UserRelations
+	{
+		get
+		{
+			return this._UserRelations;
+		}
+		set
+		{
+			this._UserRelations.Assign(value);
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_UserRelation1", Storage="_UserRelations1", ThisKey="UID", OtherKey="UserId")]
+	public EntitySet<UserRelation> UserRelations1
+	{
+		get
+		{
+			return this._UserRelations1;
+		}
+		set
+		{
+			this._UserRelations1.Assign(value);
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Comment", Storage="_Comments", ThisKey="UID", OtherKey="AuthorID")]
+	public EntitySet<Comment> Comments
+	{
+		get
+		{
+			return this._Comments;
+		}
+		set
+		{
+			this._Comments.Assign(value);
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UserAbout_User", Storage="_UserAbout", ThisKey="AbID", OtherKey="AbID", IsForeignKey=true)]
+	public UserAbout UserAbout
+	{
+		get
+		{
+			return this._UserAbout.Entity;
+		}
+		set
+		{
+			UserAbout previousValue = this._UserAbout.Entity;
+			if (((previousValue != value) 
+						|| (this._UserAbout.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._UserAbout.Entity = null;
+					previousValue.Users.Remove(this);
+				}
+				this._UserAbout.Entity = value;
+				if ((value != null))
+				{
+					value.Users.Add(this);
+					this._AbID = value.AbID;
+				}
+				else
+				{
+					this._AbID = default(Nullable<int>);
+				}
+				this.SendPropertyChanged("UserAbout");
+			}
+		}
+	}
+	
+	public event PropertyChangingEventHandler PropertyChanging;
+	
+	public event PropertyChangedEventHandler PropertyChanged;
+	
+	protected virtual void SendPropertyChanging()
+	{
+		if ((this.PropertyChanging != null))
+		{
+			this.PropertyChanging(this, emptyChangingEventArgs);
+		}
+	}
+	
+	protected virtual void SendPropertyChanged(String propertyName)
+	{
+		if ((this.PropertyChanged != null))
+		{
+			this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+		}
+	}
+	
+	private void attach_UserInRoles(UserInRole entity)
+	{
+		this.SendPropertyChanging();
+		entity.User = this;
+	}
+	
+	private void detach_UserInRoles(UserInRole entity)
+	{
+		this.SendPropertyChanging();
+		entity.User = null;
+	}
+	
+	private void attach_ContactInfos(ContactInfo entity)
+	{
+		this.SendPropertyChanging();
+		entity.User1 = this;
+	}
+	
+	private void detach_ContactInfos(ContactInfo entity)
+	{
+		this.SendPropertyChanging();
+		entity.User1 = null;
+	}
+	
+	private void attach_DynamicContents(DynamicContent entity)
+	{
+		this.SendPropertyChanging();
+		entity.User = this;
+	}
+	
+	private void detach_DynamicContents(DynamicContent entity)
+	{
+		this.SendPropertyChanging();
+		entity.User = null;
+	}
+	
+	private void attach_PrivateMessages(PrivateMessage entity)
+	{
+		this.SendPropertyChanging();
+		entity.User = this;
+	}
+	
+	private void detach_PrivateMessages(PrivateMessage entity)
+	{
+		this.SendPropertyChanging();
+		entity.User = null;
+	}
+	
+	private void attach_PrivateMessages1(PrivateMessage entity)
+	{
+		this.SendPropertyChanging();
+		entity.User1 = this;
+	}
+	
+	private void detach_PrivateMessages1(PrivateMessage entity)
+	{
+		this.SendPropertyChanging();
+		entity.User1 = null;
+	}
+	
+	private void attach_StaticContents(StaticContent entity)
+	{
+		this.SendPropertyChanging();
+		entity.User = this;
+	}
+	
+	private void detach_StaticContents(StaticContent entity)
+	{
+		this.SendPropertyChanging();
+		entity.User = null;
+	}
+	
+	private void attach_UserInfos(UserInfo entity)
+	{
+		this.SendPropertyChanging();
+		entity.User1 = this;
+	}
+	
+	private void detach_UserInfos(UserInfo entity)
+	{
+		this.SendPropertyChanging();
+		entity.User1 = null;
+	}
+	
+	private void attach_UserRelations(UserRelation entity)
+	{
+		this.SendPropertyChanging();
+		entity.User = this;
+	}
+	
+	private void detach_UserRelations(UserRelation entity)
+	{
+		this.SendPropertyChanging();
+		entity.User = null;
+	}
+	
+	private void attach_UserRelations1(UserRelation entity)
+	{
+		this.SendPropertyChanging();
+		entity.User1 = this;
+	}
+	
+	private void detach_UserRelations1(UserRelation entity)
+	{
+		this.SendPropertyChanging();
+		entity.User1 = null;
+	}
+	
+	private void attach_Comments(Comment entity)
+	{
+		this.SendPropertyChanging();
+		entity.User = this;
+	}
+	
+	private void detach_Comments(Comment entity)
+	{
+		this.SendPropertyChanging();
+		entity.User = null;
 	}
 }
 #pragma warning restore 1591
