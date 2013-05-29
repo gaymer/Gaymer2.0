@@ -222,17 +222,25 @@ using System.Data.SqlClient;
 
             if (dt==null || dt.Columns.Count > 1) return null;
 
-            return (from DataRow row in dt.Rows select (T) row[0]).ToList(); // LINQ-ekvivalent for koden under (R#-hjelp)
+
+            //return (from DataRow row in dt.Rows select (T) row[0]).ToList(); // LINQ-ekvivalent for koden under (R#-hjelp)
 
 
-            //var retList = new List<T>();
+            var retList = new List<T>();
 
-            //foreach (DataRow row in dt.Rows)
-            //{
-            //    retList.Add((T)row[0]);
-            //}
+            foreach (DataRow row in dt.Rows)
+            {
+                try
+                {
+                    retList.Add((T)row[0]);
+                }
+                catch (InvalidCastException e)
+                {
+                    // Blalala
+                }
+            }
 
-            //return retList;
+            return retList;
         }
 
         public static T GetSingleValueFromQuery<T>(string sql, Dictionary<string, object> parameters = null, bool debug = false)
