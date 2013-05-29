@@ -12,10 +12,15 @@ public partial class User_Modify : System.Web.UI.UserControl
     }
     public void FillData()
     {
-        GaymerLINQDataContext db = new GaymerLINQDataContext();
         LoginLib login = new LoginLib();
+        int userID = Convert.ToInt32(Request.QueryString["UserId"]);
+        if (userID == 0)
+        {
+            userID = login.GetUserID();
+        }
+        GaymerLINQDataContext db = new GaymerLINQDataContext();
         var user = (from a in db.Users
-                    where a.UID == login.GetUserID()
+                    where a.UID == userID
                     select new
                     {
                         Uname = a.Username,
@@ -30,7 +35,7 @@ public partial class User_Modify : System.Web.UI.UserControl
 
         Username.Text = user.Uname;
 
-        MyAvatar.ImageUrl = "~/user/ViewAvatar.aspx?uid=" + login.GetUserID();
+        MyAvatar.ImageUrl = "~/user/ViewAvatar.aspx?uid=" + userID;
         MyAvatar.AlternateText = user.Uname + " Avatar";
 
         AboutMeTxt.Text = user.AboutMe;
@@ -68,9 +73,14 @@ public partial class User_Modify : System.Web.UI.UserControl
 
         GaymerLINQDataContext db = new GaymerLINQDataContext();
         LoginLib login = new LoginLib();
+        int userID = Convert.ToInt32(Request.QueryString["UserId"]);
+        if (userID == 0)
+        {
+            userID = login.GetUserID();
+        }
 
         var user = (from a in db.Users
-                   where a.UID == login.GetUserID()
+                    where a.UID == userID
                    select a).FirstOrDefault();
 
         
