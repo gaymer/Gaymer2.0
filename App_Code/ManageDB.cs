@@ -64,7 +64,7 @@ using System.Data.SqlClient;
                         sqlCommand.Parameters.AddWithValue(parameter.Key.StartsWith("@")? parameter.Key : "@" + parameter.Key, parameter.Value);
                     
                 }
-
+                
                 returnTable = new DataTable();
                 OpenConnection();
 
@@ -233,6 +233,15 @@ using System.Data.SqlClient;
             //}
 
             //return retList;
+        }
+
+        public static T GetSingleValueFromQuery<T>(string sql, Dictionary<string, object> parameters = null, bool debug = false)
+        {
+            DataTable dt = query(sql, parameters, debug);
+
+            if (dt == null || dt.Rows.Count < 1 || dt.Columns.Count < 1) return default(T); // return null
+
+            return (T)dt.Rows[0][0];
         }
     }
 
