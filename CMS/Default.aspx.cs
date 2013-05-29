@@ -12,12 +12,15 @@ using System.Data.SqlClient;
 
 public partial class CMS_Default : System.Web.UI.Page
 {
-
+    
     public void AddHTML(string htmlString)
     {
         if (GenericContentPanel != null) GenericContentPanel.Controls.Add(new LiteralControl(htmlString));
     }
 
+    /// <summary>
+    /// Redirects to a predestined location.
+    /// </summary>
     private void FailToLoad()
     {
         Response.Redirect("/CMS/Default.aspx?Content=1");
@@ -26,6 +29,10 @@ public partial class CMS_Default : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         string qsContentIdString = Request.QueryString["content"];
+        string qsEditString = Request.QueryString["edit"];
+
+        bool isEdit = (!string.IsNullOrEmpty(qsEditString) && qsEditString == "1");
+
         qsContentIdString = string.IsNullOrEmpty(qsContentIdString)? null: qsContentIdString;
         int contentId;
 
@@ -47,10 +54,13 @@ public partial class CMS_Default : System.Web.UI.Page
         }
         else
         {
-            foreach (int inputElementId in content.InputElementTypeList) // Test for null implemented earlier in code
+            for (int i = 0; i < content.InputElementDataList.Count; i++ )
             {
-                AbstractInputController myInput = getInputObject(inputElementId, contentId);
-                myInput.AddEdit(GenericContentPanel, contentId);
+                AbstractInputController myInput = getInputObject(content.InputElementTypeList[i], contentId);
+                if (isEdit)
+                    myInput.AddEdit(GenericContentPanel, contentId, content.InputElementDataList[i]);
+                else
+                    myInput.AddDisplay(GenericContentPanel, contentId, content.InputElementDataList[i]);
             }
         }
 

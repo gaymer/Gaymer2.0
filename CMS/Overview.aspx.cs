@@ -52,7 +52,7 @@ public partial class CMS_Overview : System.Web.UI.Page
     private void FillInputDataElements()
     {
         gvOverview.DataSource = ManageDB.query(@"
-            SELECT        idt.ElementInContentId, idt.Value, idt.Label
+            SELECT        idt.Id, idt.ElementInContentId, idt.Value, idt.Label
             FROM          DynamicContentType AS dct INNER JOIN
                               ElementInContent AS eic ON dct.DynamicContentTypeId = eic.ContentTypeId INNER JOIN
                               InputDataSimpleText AS idt ON eic.Id = idt.ElementInContentId
