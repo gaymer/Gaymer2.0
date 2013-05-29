@@ -25,6 +25,33 @@ public partial class MasterPage : System.Web.UI.MasterPage
             //LogOutBtn.Enabled = false;
         }
         rendreMenu(login);
+
+
+    }
+
+    public string GetGenericCssLinkHtmlString()
+    {
+
+        string contentIdString = Request.QueryString["content"];
+        int contentId;
+        const string noCss = null;
+
+        if (string.IsNullOrEmpty(contentIdString)) return noCss;
+        if (!Int32.TryParse(contentIdString, out contentId)) return noCss;
+
+        var parameter = new Dictionary<string, object> {{"@ContentId", contentId}};
+
+        string contentTypeId = "" + ManageDB.GetSingleValueFromQuery<int>(@"
+                SELECT ContentType
+                FROM   DynamicContent
+                WHERE  DynamicContentId=@ContentId
+            ", parameter);
+
+        if (string.IsNullOrEmpty(contentTypeId)) return noCss;
+
+
+
+        return "<link href=\"" + Page.ResolveUrl("~/cms/GenericCss.ashx?contenttype=" + contentTypeId) + "\" id=\"mpGenericCssLink\" rel=\"stylesheet\" type=\"text/css\" />";
     }
 
     private void rendreMenu(LoginLib login)
