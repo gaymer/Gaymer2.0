@@ -41,7 +41,7 @@ public partial class MasterPage : System.Web.UI.MasterPage
 
         var parameter = new Dictionary<string, object> {{"@ContentId", contentId}};
 
-        string contentTypeId = "" + ManageDB.GetSingleValueFromQuery<int>(@"
+        string contentTypeId = "" + ManageDB.GetFirstValueFromQuery<int>(@"
                 SELECT ContentType
                 FROM   DynamicContent
                 WHERE  DynamicContentId=@ContentId

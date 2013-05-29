@@ -18,7 +18,7 @@ public class GenericCssHandler : IHttpHandler {
         }
         
         var parameters = new Dictionary<string, object>{{"@DynamicContentId", dynamicContentId}};
-        string cssString = ManageDB.GetSingleValueFromQuery<string>(@"
+        string cssString = ManageDB.GetFirstValueFromQuery<string>(@"
                 SELECT  CssFileContent
                 FROM    DynamicContentType
                 WHERE   DynamicContentTypeId = @DynamicContentId
