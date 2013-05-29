@@ -52,9 +52,12 @@ public partial class User_ViewAvatar : System.Web.UI.Page
             SELECT avatar FROM [User] WHERE UID = @uid
         ", parameters, debug:true);
 
+        if (byteList == null) return null;
+
         if (byteList.Count < 0) return null;
 
-        if (byteList[0]==null) return null;
+
+        if (byteList[0] == null) return null;
 
         return byteList[0];
     }
