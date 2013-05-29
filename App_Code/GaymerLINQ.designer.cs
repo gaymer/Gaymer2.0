@@ -92,9 +92,6 @@ public partial class GaymerLINQDataContext : System.Data.Linq.DataContext
   partial void InsertPermission(Permission instance);
   partial void UpdatePermission(Permission instance);
   partial void DeletePermission(Permission instance);
-  partial void InsertComment(Comment instance);
-  partial void UpdateComment(Comment instance);
-  partial void DeleteComment(Comment instance);
   partial void InsertDynamicContentType(DynamicContentType instance);
   partial void UpdateDynamicContentType(DynamicContentType instance);
   partial void DeleteDynamicContentType(DynamicContentType instance);
@@ -104,6 +101,9 @@ public partial class GaymerLINQDataContext : System.Data.Linq.DataContext
   partial void InsertUser(User instance);
   partial void UpdateUser(User instance);
   partial void DeleteUser(User instance);
+  partial void InsertComment(Comment instance);
+  partial void UpdateComment(Comment instance);
+  partial void DeleteComment(Comment instance);
   #endregion
 	
 	public GaymerLINQDataContext() : 
@@ -304,14 +304,6 @@ public partial class GaymerLINQDataContext : System.Data.Linq.DataContext
 		}
 	}
 	
-	public System.Data.Linq.Table<Comment> Comments
-	{
-		get
-		{
-			return this.GetTable<Comment>();
-		}
-	}
-	
 	public System.Data.Linq.Table<DynamicContentType> DynamicContentTypes
 	{
 		get
@@ -333,6 +325,14 @@ public partial class GaymerLINQDataContext : System.Data.Linq.DataContext
 		get
 		{
 			return this.GetTable<User>();
+		}
+	}
+	
+	public System.Data.Linq.Table<Comment> Comments
+	{
+		get
+		{
+			return this.GetTable<Comment>();
 		}
 	}
 }
@@ -4620,467 +4620,6 @@ public partial class Permission : INotifyPropertyChanging, INotifyPropertyChange
 	}
 }
 
-[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Comment")]
-public partial class Comment : INotifyPropertyChanging, INotifyPropertyChanged
-{
-	
-	private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-	
-	private int _CommentId;
-	
-	private System.Nullable<int> _Post_DynamicContentID;
-	
-	private int _AuthorID;
-	
-	private System.DateTime _CreateTime;
-	
-	private System.Nullable<System.DateTime> _UpdateTime;
-	
-	private string _Title;
-	
-	private string _Text;
-	
-	private System.Nullable<int> _CommentOnCommentID;
-	
-	private bool _Hidden;
-	
-	private EntitySet<ForumThread> _ForumThreads;
-	
-	private EntitySet<TagOnComment> _TagOnComments;
-	
-	private EntitySet<Comment> _Comments;
-	
-	private EntityRef<Comment> _Comment1;
-	
-	private EntityRef<DynamicContent> _DynamicContent;
-	
-	private EntityRef<User> _User;
-	
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnCommentIdChanging(int value);
-    partial void OnCommentIdChanged();
-    partial void OnPost_DynamicContentIDChanging(System.Nullable<int> value);
-    partial void OnPost_DynamicContentIDChanged();
-    partial void OnAuthorIDChanging(int value);
-    partial void OnAuthorIDChanged();
-    partial void OnCreateTimeChanging(System.DateTime value);
-    partial void OnCreateTimeChanged();
-    partial void OnUpdateTimeChanging(System.Nullable<System.DateTime> value);
-    partial void OnUpdateTimeChanged();
-    partial void OnTitleChanging(string value);
-    partial void OnTitleChanged();
-    partial void OnTextChanging(string value);
-    partial void OnTextChanged();
-    partial void OnCommentOnCommentIDChanging(System.Nullable<int> value);
-    partial void OnCommentOnCommentIDChanged();
-    partial void OnHiddenChanging(bool value);
-    partial void OnHiddenChanged();
-    #endregion
-	
-	public Comment()
-	{
-		this._ForumThreads = new EntitySet<ForumThread>(new Action<ForumThread>(this.attach_ForumThreads), new Action<ForumThread>(this.detach_ForumThreads));
-		this._TagOnComments = new EntitySet<TagOnComment>(new Action<TagOnComment>(this.attach_TagOnComments), new Action<TagOnComment>(this.detach_TagOnComments));
-		this._Comments = new EntitySet<Comment>(new Action<Comment>(this.attach_Comments), new Action<Comment>(this.detach_Comments));
-		this._Comment1 = default(EntityRef<Comment>);
-		this._DynamicContent = default(EntityRef<DynamicContent>);
-		this._User = default(EntityRef<User>);
-		OnCreated();
-	}
-	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CommentId", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-	public int CommentId
-	{
-		get
-		{
-			return this._CommentId;
-		}
-		set
-		{
-			if ((this._CommentId != value))
-			{
-				this.OnCommentIdChanging(value);
-				this.SendPropertyChanging();
-				this._CommentId = value;
-				this.SendPropertyChanged("CommentId");
-				this.OnCommentIdChanged();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Post_DynamicContentID", DbType="Int")]
-	public System.Nullable<int> Post_DynamicContentID
-	{
-		get
-		{
-			return this._Post_DynamicContentID;
-		}
-		set
-		{
-			if ((this._Post_DynamicContentID != value))
-			{
-				if (this._DynamicContent.HasLoadedOrAssignedValue)
-				{
-					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-				}
-				this.OnPost_DynamicContentIDChanging(value);
-				this.SendPropertyChanging();
-				this._Post_DynamicContentID = value;
-				this.SendPropertyChanged("Post_DynamicContentID");
-				this.OnPost_DynamicContentIDChanged();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AuthorID", DbType="Int NOT NULL")]
-	public int AuthorID
-	{
-		get
-		{
-			return this._AuthorID;
-		}
-		set
-		{
-			if ((this._AuthorID != value))
-			{
-				if (this._User.HasLoadedOrAssignedValue)
-				{
-					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-				}
-				this.OnAuthorIDChanging(value);
-				this.SendPropertyChanging();
-				this._AuthorID = value;
-				this.SendPropertyChanged("AuthorID");
-				this.OnAuthorIDChanged();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreateTime", DbType="DateTime NOT NULL")]
-	public System.DateTime CreateTime
-	{
-		get
-		{
-			return this._CreateTime;
-		}
-		set
-		{
-			if ((this._CreateTime != value))
-			{
-				this.OnCreateTimeChanging(value);
-				this.SendPropertyChanging();
-				this._CreateTime = value;
-				this.SendPropertyChanged("CreateTime");
-				this.OnCreateTimeChanged();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UpdateTime", DbType="DateTime")]
-	public System.Nullable<System.DateTime> UpdateTime
-	{
-		get
-		{
-			return this._UpdateTime;
-		}
-		set
-		{
-			if ((this._UpdateTime != value))
-			{
-				this.OnUpdateTimeChanging(value);
-				this.SendPropertyChanging();
-				this._UpdateTime = value;
-				this.SendPropertyChanged("UpdateTime");
-				this.OnUpdateTimeChanged();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Title", DbType="NVarChar(50)")]
-	public string Title
-	{
-		get
-		{
-			return this._Title;
-		}
-		set
-		{
-			if ((this._Title != value))
-			{
-				this.OnTitleChanging(value);
-				this.SendPropertyChanging();
-				this._Title = value;
-				this.SendPropertyChanged("Title");
-				this.OnTitleChanged();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Text", DbType="Text NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
-	public string Text
-	{
-		get
-		{
-			return this._Text;
-		}
-		set
-		{
-			if ((this._Text != value))
-			{
-				this.OnTextChanging(value);
-				this.SendPropertyChanging();
-				this._Text = value;
-				this.SendPropertyChanged("Text");
-				this.OnTextChanged();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CommentOnCommentID", DbType="Int")]
-	public System.Nullable<int> CommentOnCommentID
-	{
-		get
-		{
-			return this._CommentOnCommentID;
-		}
-		set
-		{
-			if ((this._CommentOnCommentID != value))
-			{
-				if (this._Comment1.HasLoadedOrAssignedValue)
-				{
-					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-				}
-				this.OnCommentOnCommentIDChanging(value);
-				this.SendPropertyChanging();
-				this._CommentOnCommentID = value;
-				this.SendPropertyChanged("CommentOnCommentID");
-				this.OnCommentOnCommentIDChanged();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Hidden", DbType="Bit NOT NULL")]
-	public bool Hidden
-	{
-		get
-		{
-			return this._Hidden;
-		}
-		set
-		{
-			if ((this._Hidden != value))
-			{
-				this.OnHiddenChanging(value);
-				this.SendPropertyChanging();
-				this._Hidden = value;
-				this.SendPropertyChanged("Hidden");
-				this.OnHiddenChanged();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Comment_ForumThread", Storage="_ForumThreads", ThisKey="CommentId", OtherKey="CommentId")]
-	public EntitySet<ForumThread> ForumThreads
-	{
-		get
-		{
-			return this._ForumThreads;
-		}
-		set
-		{
-			this._ForumThreads.Assign(value);
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Comment_TagOnComment", Storage="_TagOnComments", ThisKey="CommentId", OtherKey="CommentId")]
-	public EntitySet<TagOnComment> TagOnComments
-	{
-		get
-		{
-			return this._TagOnComments;
-		}
-		set
-		{
-			this._TagOnComments.Assign(value);
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Comment_Comment", Storage="_Comments", ThisKey="CommentId", OtherKey="CommentOnCommentID")]
-	public EntitySet<Comment> Comments
-	{
-		get
-		{
-			return this._Comments;
-		}
-		set
-		{
-			this._Comments.Assign(value);
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Comment_Comment", Storage="_Comment1", ThisKey="CommentOnCommentID", OtherKey="CommentId", IsForeignKey=true)]
-	public Comment Comment1
-	{
-		get
-		{
-			return this._Comment1.Entity;
-		}
-		set
-		{
-			Comment previousValue = this._Comment1.Entity;
-			if (((previousValue != value) 
-						|| (this._Comment1.HasLoadedOrAssignedValue == false)))
-			{
-				this.SendPropertyChanging();
-				if ((previousValue != null))
-				{
-					this._Comment1.Entity = null;
-					previousValue.Comments.Remove(this);
-				}
-				this._Comment1.Entity = value;
-				if ((value != null))
-				{
-					value.Comments.Add(this);
-					this._CommentOnCommentID = value.CommentId;
-				}
-				else
-				{
-					this._CommentOnCommentID = default(Nullable<int>);
-				}
-				this.SendPropertyChanged("Comment1");
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="DynamicContent_Comment", Storage="_DynamicContent", ThisKey="Post_DynamicContentID", OtherKey="DynamicContentId", IsForeignKey=true, DeleteRule="CASCADE")]
-	public DynamicContent DynamicContent
-	{
-		get
-		{
-			return this._DynamicContent.Entity;
-		}
-		set
-		{
-			DynamicContent previousValue = this._DynamicContent.Entity;
-			if (((previousValue != value) 
-						|| (this._DynamicContent.HasLoadedOrAssignedValue == false)))
-			{
-				this.SendPropertyChanging();
-				if ((previousValue != null))
-				{
-					this._DynamicContent.Entity = null;
-					previousValue.Comments.Remove(this);
-				}
-				this._DynamicContent.Entity = value;
-				if ((value != null))
-				{
-					value.Comments.Add(this);
-					this._Post_DynamicContentID = value.DynamicContentId;
-				}
-				else
-				{
-					this._Post_DynamicContentID = default(Nullable<int>);
-				}
-				this.SendPropertyChanged("DynamicContent");
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Comment", Storage="_User", ThisKey="AuthorID", OtherKey="UID", IsForeignKey=true)]
-	public User User
-	{
-		get
-		{
-			return this._User.Entity;
-		}
-		set
-		{
-			User previousValue = this._User.Entity;
-			if (((previousValue != value) 
-						|| (this._User.HasLoadedOrAssignedValue == false)))
-			{
-				this.SendPropertyChanging();
-				if ((previousValue != null))
-				{
-					this._User.Entity = null;
-					previousValue.Comments.Remove(this);
-				}
-				this._User.Entity = value;
-				if ((value != null))
-				{
-					value.Comments.Add(this);
-					this._AuthorID = value.UID;
-				}
-				else
-				{
-					this._AuthorID = default(int);
-				}
-				this.SendPropertyChanged("User");
-			}
-		}
-	}
-	
-	public event PropertyChangingEventHandler PropertyChanging;
-	
-	public event PropertyChangedEventHandler PropertyChanged;
-	
-	protected virtual void SendPropertyChanging()
-	{
-		if ((this.PropertyChanging != null))
-		{
-			this.PropertyChanging(this, emptyChangingEventArgs);
-		}
-	}
-	
-	protected virtual void SendPropertyChanged(String propertyName)
-	{
-		if ((this.PropertyChanged != null))
-		{
-			this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-		}
-	}
-	
-	private void attach_ForumThreads(ForumThread entity)
-	{
-		this.SendPropertyChanging();
-		entity.Comment = this;
-	}
-	
-	private void detach_ForumThreads(ForumThread entity)
-	{
-		this.SendPropertyChanging();
-		entity.Comment = null;
-	}
-	
-	private void attach_TagOnComments(TagOnComment entity)
-	{
-		this.SendPropertyChanging();
-		entity.Comment = this;
-	}
-	
-	private void detach_TagOnComments(TagOnComment entity)
-	{
-		this.SendPropertyChanging();
-		entity.Comment = null;
-	}
-	
-	private void attach_Comments(Comment entity)
-	{
-		this.SendPropertyChanging();
-		entity.Comment1 = this;
-	}
-	
-	private void detach_Comments(Comment entity)
-	{
-		this.SendPropertyChanging();
-		entity.Comment1 = null;
-	}
-}
-
 [global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.DynamicContentType")]
 public partial class DynamicContentType : INotifyPropertyChanging, INotifyPropertyChanged
 {
@@ -5495,6 +5034,8 @@ public partial class User : INotifyPropertyChanging, INotifyPropertyChanged
 	
 	private EntitySet<Comment> _Comments;
 	
+	private EntitySet<Comment> _Comments1;
+	
 	private EntityRef<UserAbout> _UserAbout;
 	
     #region Extensibility Method Definitions
@@ -5531,6 +5072,7 @@ public partial class User : INotifyPropertyChanging, INotifyPropertyChanged
 		this._UserRelations = new EntitySet<UserRelation>(new Action<UserRelation>(this.attach_UserRelations), new Action<UserRelation>(this.detach_UserRelations));
 		this._UserRelations1 = new EntitySet<UserRelation>(new Action<UserRelation>(this.attach_UserRelations1), new Action<UserRelation>(this.detach_UserRelations1));
 		this._Comments = new EntitySet<Comment>(new Action<Comment>(this.attach_Comments), new Action<Comment>(this.detach_Comments));
+		this._Comments1 = new EntitySet<Comment>(new Action<Comment>(this.attach_Comments1), new Action<Comment>(this.detach_Comments1));
 		this._UserAbout = default(EntityRef<UserAbout>);
 		OnCreated();
 	}
@@ -5829,6 +5371,19 @@ public partial class User : INotifyPropertyChanging, INotifyPropertyChanged
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Comment1", Storage="_Comments1", ThisKey="UID", OtherKey="UserWallID")]
+	public EntitySet<Comment> Comments1
+	{
+		get
+		{
+			return this._Comments1;
+		}
+		set
+		{
+			this._Comments1.Assign(value);
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UserAbout_User", Storage="_UserAbout", ThisKey="AbID", OtherKey="AbID", IsForeignKey=true)]
 	public UserAbout UserAbout
 	{
@@ -6001,6 +5556,544 @@ public partial class User : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		this.SendPropertyChanging();
 		entity.User = null;
+	}
+	
+	private void attach_Comments1(Comment entity)
+	{
+		this.SendPropertyChanging();
+		entity.User1 = this;
+	}
+	
+	private void detach_Comments1(Comment entity)
+	{
+		this.SendPropertyChanging();
+		entity.User1 = null;
+	}
+}
+
+[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Comment")]
+public partial class Comment : INotifyPropertyChanging, INotifyPropertyChanged
+{
+	
+	private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+	
+	private int _CommentId;
+	
+	private System.Nullable<int> _Post_DynamicContentID;
+	
+	private int _AuthorID;
+	
+	private System.DateTime _CreateTime;
+	
+	private System.Nullable<System.DateTime> _UpdateTime;
+	
+	private string _Title;
+	
+	private string _Text;
+	
+	private System.Nullable<int> _CommentOnCommentID;
+	
+	private bool _Hidden;
+	
+	private System.Nullable<int> _UserWallID;
+	
+	private EntitySet<ForumThread> _ForumThreads;
+	
+	private EntitySet<TagOnComment> _TagOnComments;
+	
+	private EntitySet<Comment> _Comments;
+	
+	private EntityRef<Comment> _Comment1;
+	
+	private EntityRef<DynamicContent> _DynamicContent;
+	
+	private EntityRef<User> _User;
+	
+	private EntityRef<User> _User1;
+	
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnCommentIdChanging(int value);
+    partial void OnCommentIdChanged();
+    partial void OnPost_DynamicContentIDChanging(System.Nullable<int> value);
+    partial void OnPost_DynamicContentIDChanged();
+    partial void OnAuthorIDChanging(int value);
+    partial void OnAuthorIDChanged();
+    partial void OnCreateTimeChanging(System.DateTime value);
+    partial void OnCreateTimeChanged();
+    partial void OnUpdateTimeChanging(System.Nullable<System.DateTime> value);
+    partial void OnUpdateTimeChanged();
+    partial void OnTitleChanging(string value);
+    partial void OnTitleChanged();
+    partial void OnTextChanging(string value);
+    partial void OnTextChanged();
+    partial void OnCommentOnCommentIDChanging(System.Nullable<int> value);
+    partial void OnCommentOnCommentIDChanged();
+    partial void OnHiddenChanging(bool value);
+    partial void OnHiddenChanged();
+    partial void OnUserWallIDChanging(System.Nullable<int> value);
+    partial void OnUserWallIDChanged();
+    #endregion
+	
+	public Comment()
+	{
+		this._ForumThreads = new EntitySet<ForumThread>(new Action<ForumThread>(this.attach_ForumThreads), new Action<ForumThread>(this.detach_ForumThreads));
+		this._TagOnComments = new EntitySet<TagOnComment>(new Action<TagOnComment>(this.attach_TagOnComments), new Action<TagOnComment>(this.detach_TagOnComments));
+		this._Comments = new EntitySet<Comment>(new Action<Comment>(this.attach_Comments), new Action<Comment>(this.detach_Comments));
+		this._Comment1 = default(EntityRef<Comment>);
+		this._DynamicContent = default(EntityRef<DynamicContent>);
+		this._User = default(EntityRef<User>);
+		this._User1 = default(EntityRef<User>);
+		OnCreated();
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CommentId", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+	public int CommentId
+	{
+		get
+		{
+			return this._CommentId;
+		}
+		set
+		{
+			if ((this._CommentId != value))
+			{
+				this.OnCommentIdChanging(value);
+				this.SendPropertyChanging();
+				this._CommentId = value;
+				this.SendPropertyChanged("CommentId");
+				this.OnCommentIdChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Post_DynamicContentID", DbType="Int")]
+	public System.Nullable<int> Post_DynamicContentID
+	{
+		get
+		{
+			return this._Post_DynamicContentID;
+		}
+		set
+		{
+			if ((this._Post_DynamicContentID != value))
+			{
+				if (this._DynamicContent.HasLoadedOrAssignedValue)
+				{
+					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+				}
+				this.OnPost_DynamicContentIDChanging(value);
+				this.SendPropertyChanging();
+				this._Post_DynamicContentID = value;
+				this.SendPropertyChanged("Post_DynamicContentID");
+				this.OnPost_DynamicContentIDChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AuthorID", DbType="Int NOT NULL")]
+	public int AuthorID
+	{
+		get
+		{
+			return this._AuthorID;
+		}
+		set
+		{
+			if ((this._AuthorID != value))
+			{
+				if (this._User.HasLoadedOrAssignedValue)
+				{
+					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+				}
+				this.OnAuthorIDChanging(value);
+				this.SendPropertyChanging();
+				this._AuthorID = value;
+				this.SendPropertyChanged("AuthorID");
+				this.OnAuthorIDChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreateTime", DbType="DateTime NOT NULL")]
+	public System.DateTime CreateTime
+	{
+		get
+		{
+			return this._CreateTime;
+		}
+		set
+		{
+			if ((this._CreateTime != value))
+			{
+				this.OnCreateTimeChanging(value);
+				this.SendPropertyChanging();
+				this._CreateTime = value;
+				this.SendPropertyChanged("CreateTime");
+				this.OnCreateTimeChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UpdateTime", DbType="DateTime")]
+	public System.Nullable<System.DateTime> UpdateTime
+	{
+		get
+		{
+			return this._UpdateTime;
+		}
+		set
+		{
+			if ((this._UpdateTime != value))
+			{
+				this.OnUpdateTimeChanging(value);
+				this.SendPropertyChanging();
+				this._UpdateTime = value;
+				this.SendPropertyChanged("UpdateTime");
+				this.OnUpdateTimeChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Title", DbType="NVarChar(50)")]
+	public string Title
+	{
+		get
+		{
+			return this._Title;
+		}
+		set
+		{
+			if ((this._Title != value))
+			{
+				this.OnTitleChanging(value);
+				this.SendPropertyChanging();
+				this._Title = value;
+				this.SendPropertyChanged("Title");
+				this.OnTitleChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Text", DbType="Text NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+	public string Text
+	{
+		get
+		{
+			return this._Text;
+		}
+		set
+		{
+			if ((this._Text != value))
+			{
+				this.OnTextChanging(value);
+				this.SendPropertyChanging();
+				this._Text = value;
+				this.SendPropertyChanged("Text");
+				this.OnTextChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CommentOnCommentID", DbType="Int")]
+	public System.Nullable<int> CommentOnCommentID
+	{
+		get
+		{
+			return this._CommentOnCommentID;
+		}
+		set
+		{
+			if ((this._CommentOnCommentID != value))
+			{
+				if (this._Comment1.HasLoadedOrAssignedValue)
+				{
+					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+				}
+				this.OnCommentOnCommentIDChanging(value);
+				this.SendPropertyChanging();
+				this._CommentOnCommentID = value;
+				this.SendPropertyChanged("CommentOnCommentID");
+				this.OnCommentOnCommentIDChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Hidden", DbType="Bit NOT NULL")]
+	public bool Hidden
+	{
+		get
+		{
+			return this._Hidden;
+		}
+		set
+		{
+			if ((this._Hidden != value))
+			{
+				this.OnHiddenChanging(value);
+				this.SendPropertyChanging();
+				this._Hidden = value;
+				this.SendPropertyChanged("Hidden");
+				this.OnHiddenChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserWallID", DbType="Int")]
+	public System.Nullable<int> UserWallID
+	{
+		get
+		{
+			return this._UserWallID;
+		}
+		set
+		{
+			if ((this._UserWallID != value))
+			{
+				if (this._User1.HasLoadedOrAssignedValue)
+				{
+					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+				}
+				this.OnUserWallIDChanging(value);
+				this.SendPropertyChanging();
+				this._UserWallID = value;
+				this.SendPropertyChanged("UserWallID");
+				this.OnUserWallIDChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Comment_ForumThread", Storage="_ForumThreads", ThisKey="CommentId", OtherKey="CommentId")]
+	public EntitySet<ForumThread> ForumThreads
+	{
+		get
+		{
+			return this._ForumThreads;
+		}
+		set
+		{
+			this._ForumThreads.Assign(value);
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Comment_TagOnComment", Storage="_TagOnComments", ThisKey="CommentId", OtherKey="CommentId")]
+	public EntitySet<TagOnComment> TagOnComments
+	{
+		get
+		{
+			return this._TagOnComments;
+		}
+		set
+		{
+			this._TagOnComments.Assign(value);
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Comment_Comment", Storage="_Comments", ThisKey="CommentId", OtherKey="CommentOnCommentID")]
+	public EntitySet<Comment> Comments
+	{
+		get
+		{
+			return this._Comments;
+		}
+		set
+		{
+			this._Comments.Assign(value);
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Comment_Comment", Storage="_Comment1", ThisKey="CommentOnCommentID", OtherKey="CommentId", IsForeignKey=true)]
+	public Comment Comment1
+	{
+		get
+		{
+			return this._Comment1.Entity;
+		}
+		set
+		{
+			Comment previousValue = this._Comment1.Entity;
+			if (((previousValue != value) 
+						|| (this._Comment1.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._Comment1.Entity = null;
+					previousValue.Comments.Remove(this);
+				}
+				this._Comment1.Entity = value;
+				if ((value != null))
+				{
+					value.Comments.Add(this);
+					this._CommentOnCommentID = value.CommentId;
+				}
+				else
+				{
+					this._CommentOnCommentID = default(Nullable<int>);
+				}
+				this.SendPropertyChanged("Comment1");
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="DynamicContent_Comment", Storage="_DynamicContent", ThisKey="Post_DynamicContentID", OtherKey="DynamicContentId", IsForeignKey=true, DeleteRule="CASCADE")]
+	public DynamicContent DynamicContent
+	{
+		get
+		{
+			return this._DynamicContent.Entity;
+		}
+		set
+		{
+			DynamicContent previousValue = this._DynamicContent.Entity;
+			if (((previousValue != value) 
+						|| (this._DynamicContent.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._DynamicContent.Entity = null;
+					previousValue.Comments.Remove(this);
+				}
+				this._DynamicContent.Entity = value;
+				if ((value != null))
+				{
+					value.Comments.Add(this);
+					this._Post_DynamicContentID = value.DynamicContentId;
+				}
+				else
+				{
+					this._Post_DynamicContentID = default(Nullable<int>);
+				}
+				this.SendPropertyChanged("DynamicContent");
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Comment", Storage="_User", ThisKey="AuthorID", OtherKey="UID", IsForeignKey=true)]
+	public User User
+	{
+		get
+		{
+			return this._User.Entity;
+		}
+		set
+		{
+			User previousValue = this._User.Entity;
+			if (((previousValue != value) 
+						|| (this._User.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._User.Entity = null;
+					previousValue.Comments.Remove(this);
+				}
+				this._User.Entity = value;
+				if ((value != null))
+				{
+					value.Comments.Add(this);
+					this._AuthorID = value.UID;
+				}
+				else
+				{
+					this._AuthorID = default(int);
+				}
+				this.SendPropertyChanged("User");
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Comment1", Storage="_User1", ThisKey="UserWallID", OtherKey="UID", IsForeignKey=true)]
+	public User User1
+	{
+		get
+		{
+			return this._User1.Entity;
+		}
+		set
+		{
+			User previousValue = this._User1.Entity;
+			if (((previousValue != value) 
+						|| (this._User1.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._User1.Entity = null;
+					previousValue.Comments1.Remove(this);
+				}
+				this._User1.Entity = value;
+				if ((value != null))
+				{
+					value.Comments1.Add(this);
+					this._UserWallID = value.UID;
+				}
+				else
+				{
+					this._UserWallID = default(Nullable<int>);
+				}
+				this.SendPropertyChanged("User1");
+			}
+		}
+	}
+	
+	public event PropertyChangingEventHandler PropertyChanging;
+	
+	public event PropertyChangedEventHandler PropertyChanged;
+	
+	protected virtual void SendPropertyChanging()
+	{
+		if ((this.PropertyChanging != null))
+		{
+			this.PropertyChanging(this, emptyChangingEventArgs);
+		}
+	}
+	
+	protected virtual void SendPropertyChanged(String propertyName)
+	{
+		if ((this.PropertyChanged != null))
+		{
+			this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+		}
+	}
+	
+	private void attach_ForumThreads(ForumThread entity)
+	{
+		this.SendPropertyChanging();
+		entity.Comment = this;
+	}
+	
+	private void detach_ForumThreads(ForumThread entity)
+	{
+		this.SendPropertyChanging();
+		entity.Comment = null;
+	}
+	
+	private void attach_TagOnComments(TagOnComment entity)
+	{
+		this.SendPropertyChanging();
+		entity.Comment = this;
+	}
+	
+	private void detach_TagOnComments(TagOnComment entity)
+	{
+		this.SendPropertyChanging();
+		entity.Comment = null;
+	}
+	
+	private void attach_Comments(Comment entity)
+	{
+		this.SendPropertyChanging();
+		entity.Comment1 = this;
+	}
+	
+	private void detach_Comments(Comment entity)
+	{
+		this.SendPropertyChanging();
+		entity.Comment1 = null;
 	}
 }
 #pragma warning restore 1591
