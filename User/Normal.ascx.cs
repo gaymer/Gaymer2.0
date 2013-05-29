@@ -63,8 +63,11 @@ public partial class User_Normal : System.Web.UI.UserControl
             Username.Text = user.Uname;
 
 
-            //MyAvatar.ImageUrl = "~/Style/Images/mario.jpg"; // Hvis bruker ikke har satt et bilde 
-          
+            //if (user.Avatar == null)
+            //{
+            //    MyAvatar.ImageUrl = "~/Style/Images/mario.jpg"; // Hvis bruker ikke har satt et bilde 
+            //} 
+
             MyAvatar.ImageUrl = "~/user/ViewAvatar.aspx?uid=" + userID;                    
             MyAvatar.AlternateText = user.Uname + " Avatar";
 
