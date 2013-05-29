@@ -23,7 +23,6 @@ public partial class User_Normal : System.Web.UI.UserControl
             userID = login.GetUserID();
         }
 
-
         GaymerLINQDataContext db = new GaymerLINQDataContext();
             
             var user = (from a in db.Users
@@ -63,7 +62,10 @@ public partial class User_Normal : System.Web.UI.UserControl
             lblRolle.Text = rolle.BrukerRolle;
             Username.Text = user.Uname;
 
-            MyAvatar.ImageUrl = "~/user/ViewAvatar.aspx?uid=" + userID;                                     
+
+            //MyAvatar.ImageUrl = "~/Style/Images/mario.jpg"; // Hvis bruker ikke har satt et bilde 
+          
+            MyAvatar.ImageUrl = "~/user/ViewAvatar.aspx?uid=" + userID;                    
             MyAvatar.AlternateText = user.Uname + " Avatar";
 
             AboutMeTxt.Text = user.AboutMe;
@@ -87,8 +89,15 @@ public partial class User_Normal : System.Web.UI.UserControl
 
             FriendView.DataSource = dt;
             FriendView.DataBind();
+            
+            if (userID == login.GetUserID())
+                FriendRequestbtn.Visible = false;
 
+            //DataRow finnRad = dt.Rows.Find(userIdString);
 
+            //if (userID == login.GetUserID()||finnRad!=null)
+            //    FriendRequestbtn.Visible = false;
+          
     }
     private int AgeYr(DateTime? Bdate)
     {

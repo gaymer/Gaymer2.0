@@ -14,20 +14,24 @@ public partial class User_vennesok : System.Web.UI.Page
     }
 
     public void finnvenner(string search)
+<<<<<<< HEAD
     {
-        
+        string userNameString = Request.QueryString["Username"];
+
+=======
+    {     
+>>>>>>> dce498c4bf579644a4a9d2cd6256523fe75f6b19
         Dictionary<String, object> parameter = new Dictionary<string, object>();
         parameter.Add("@userNameSearch", "%" + search + "%");
 
         DataTable dt = ManageDB.query(@"
-            SELECT      [User].Username,[User].Avatar,[User].UID
+            SELECT      [User].Username
             FROM        [User]
             WHERE       [User].Username LIKE @userNameSearch
         ",parameter,debug:true);
 
         sokResult.DataSource = dt;
         sokResult.DataBind();
-
     }
 
     protected void sokbtn_Click(object sender, EventArgs e)
