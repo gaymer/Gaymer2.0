@@ -82,6 +82,14 @@ public partial class MasterPage : System.Web.UI.MasterPage
                 m.NavigateUrl = "~/Admin/Users.aspx";
                 rootAdminMenu.ChildItems.Add(m);
             }
+
+            if (ManageDB.UserHasPermission(Permissions.Gaymer_Manage_Content_Type, login.GetUserID()))
+            {
+                m = new MenuItem();
+                m.Text = "Content types";
+                m.NavigateUrl = "~/Admin/ListContentTypes.aspx";
+                rootAdminMenu.ChildItems.Add(m);
+            }
         }
 
     }
