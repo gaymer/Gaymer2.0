@@ -53,24 +53,3 @@ public partial class User_Avatar : System.Web.UI.Page
         }
     }
 }
-//GaymerLINQDataContext db = new GaymerLINQDataContext();
-//User use = new User();
-//System.Text.UTF8Encoding encoding = new System.Text.UTF8Encoding();
-
-//try
-//{
-//    if (this.Fileuploade.HasFile)
-//    {
-//        this.Fileuploade.SaveAs(Server.MapPath("~") + "Style/Images/" + this.Fileuploade.FileName);
-//        AvatarImg.ImageUrl = "/Style/Images/" + this.Fileuploade.FileName;
-//        use.Avatar = new System.Data.Linq.Binary(encoding.GetBytes("/Style/Images/" + this.Fileuploade.FileName));
-//        db.Users.InsertOnSubmit(use); 
-//    }
-//    else
-//        errorlbl.Text += "Fil ikke lastet opp";
-//}
-//catch(Exception exc)
-//{
-//    throw new Exception(exc.Message);
-//}
-//db.Dispose();

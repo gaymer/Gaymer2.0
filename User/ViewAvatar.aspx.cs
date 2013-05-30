@@ -38,7 +38,7 @@ public partial class User_ViewAvatar : System.Web.UI.Page
             }
             catch (ArgumentException aex)
             {
-                throw new Exception("The file received from the Map Server is not a valid jpeg image", aex);
+                //throw new Exception("The file received from the Map Server is not a valid jpeg image", aex);
             }
         }
     }
@@ -52,9 +52,12 @@ public partial class User_ViewAvatar : System.Web.UI.Page
             SELECT avatar FROM [User] WHERE UID = @uid
         ", parameters, debug:true);
 
+        if (byteList == null) return null;
+
         if (byteList.Count < 0) return null;
 
-        if (byteList[0]==null) return null;
+
+        if (byteList[0] == null) return null;
 
         return byteList[0];
     }

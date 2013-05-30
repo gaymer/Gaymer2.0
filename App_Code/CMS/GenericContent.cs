@@ -43,8 +43,8 @@ public class GenericContent
             return null;
 
         int contentType = (int) dt.Rows[0]["ContentType"];
-        DateTime? createTime = (dt.Rows[0]["CreateTime"] ?? (DateTime?)null) as DateTime?;
-        DateTime? updateTime = (dt.Rows[0]["UpdateTime"] ?? (DateTime?)null) as DateTime?;
+        DateTime? createTime = (dt.Rows[0]["CreateTime"]) as DateTime?;
+        DateTime? updateTime = (dt.Rows[0]["UpdateTime"]) as DateTime?;
         int author = (int)dt.Rows[0]["Author"];
 
 
@@ -73,7 +73,7 @@ public class GenericContent
 
 
         this.InputElementDataList = ManageDB.GetSingleColumnResultAsList<int>(@"
-            SELECT        idt.ElementInContentId
+            SELECT        idt.Id
             FROM          DynamicContentType AS dct INNER JOIN
                               ElementInContent AS eic ON dct.DynamicContentTypeId = eic.ContentTypeId INNER JOIN
                               InputDataSimpleText AS idt ON eic.Id = idt.ElementInContentId

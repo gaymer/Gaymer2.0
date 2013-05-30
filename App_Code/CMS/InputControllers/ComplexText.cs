@@ -18,12 +18,13 @@ public class ComplexText
         base.InputElementName = "ComplexText";
     }
 
-    public override void AddEdit(Panel panel, int contentId)
+
+    public override void AddEdit(Panel panel, int contentId, int inputDataId)
     {
         throw new NotImplementedException();
     }
 
-    public override void AddDisplay(Panel panel, int contentId)
+    public override void AddDisplay(Panel panel, int contentId, int inputDataId)
     {
         throw new NotImplementedException();
     }

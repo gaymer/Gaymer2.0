@@ -2,13 +2,7 @@
 
 <asp:Panel ID="MasterPanel" runat="server" HorizontalAlign ="Center">
     <h2><asp:Label ID="Username" runat="server"></asp:Label>&nbsp;(<asp:Label ID="lblRolle" runat="server"></asp:Label>)</h2>
-    
-    <asp:Panel ID="AdminPanel" runat="server" Height="167px" style="margin-top: 0px" Width="568px" Visible="False" HorizontalAlign="Center">
-        <br />
-        <asp:Button CssClass="ButtonBase" ID="btnAdmin" runat="server" Text="Admin. brukere" Height="30px" Width="125px" />
-        
-</asp:Panel>
- 
+     <asp:Button ID="FriendRequestbtn" runat="server" Text="+Legg til som venn" visible="true"/>
     <br />
  <asp:Image ID="MyAvatar" ImageURL="/Style/Images/mario.JPG" runat="server" Height="139px" Width="143px" />
     <asp:Label ID="AboutMeTxt" runat="server" Text="Om Meg tekst"></asp:Label>
@@ -39,7 +33,7 @@
         <asp:GridView ID="FriendView" runat="server" AutoGenerateColumns="False" CellPadding="4" ForeColor="#333333" GridLines="Horizontal" Height="73px" Width="184px" HorizontalAlign="Center" >
             <AlternatingRowStyle BackColor="#E3EAEB" />
             <Columns>
-                <asp:Hyperlinkfield DataTextField="Username" HeaderText="Venner" DataNavigateUrlFields="UID" datanavigateurlformatstring="~/User/UserPage.aspx?UserId={0}" />
+                <asp:Hyperlinkfield DataTextField="Username" HeaderText="Dine venner" DataNavigateUrlFields="UID" datanavigateurlformatstring="~/User/UserPage.aspx?UserId={0}" />
             </Columns>
             <EditRowStyle BackColor="#7C6F57" />
             <FooterStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
@@ -54,6 +48,8 @@
         </asp:GridView>
         <br />
         
+        <asp:Button ID="finnVennerbtn" Text="Finn venner" runat="server" OnClick="finnVennerbtn_Click" />
+
     </asp:Panel>
 
     </asp:Panel>

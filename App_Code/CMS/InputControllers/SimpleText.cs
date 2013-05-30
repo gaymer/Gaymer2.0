@@ -22,8 +22,36 @@ public class SimpleText
         tbLabel = new TextBox();
     }
 
-    public override void AddEdit(Panel panel, int contentId)
+
+    private string GetValueValue(int inputDataId)
     {
+        var param = new Dictionary<string, object> {{"@inputDataId", inputDataId}};
+        return ManageDB.GetSingleValueFromQuery<string>(@"
+                SELECT  Value
+                FROM    InputDataSimpleText
+                WHERE   id = @inputDataId
+            ", param, debug:true);
+    }
+
+    private string GetLabelValue(int inputDataId)
+    {
+        var param = new Dictionary<string, object> {{"@inputDataId", inputDataId}};
+        return ManageDB.GetSingleValueFromQuery<string>(@"
+                SELECT  Label
+                FROM    InputDataSimpleText
+                WHERE   id = @inputDataId
+            ", param, debug: true);
+    }
+
+
+    public override void AddEdit(Panel panel, int contentId, int inputDataId)
+    {
+        if (inputDataId > 0)    // If -1 the content is to be created and has no values in DB
+        {
+            tbLabel.Text = GetLabelValue(inputDataId);
+            tbValue.Text = GetValueValue(inputDataId);
+        }
+
         GenericContent.AddHtmlToPanel("<div>", panel);
         GenericContent.AddHtmlToPanel("SimpleLabel: ", panel);
         panel.Controls.Add(tbLabel);
@@ -35,9 +63,30 @@ public class SimpleText
         GenericContent.AddHtmlToPanel("</div>", panel);
     }
 
-    public override void AddDisplay(Panel panel, int contentId)
+    public override void AddDisplay(Panel panel, int contentId, int inputDataId)
     {
-        throw new NotImplementedException();
+        var p = new Dictionary<string, object> {{"@InputDataId", inputDataId}};
+        string CSSclassName = ManageDB.GetSingleValueFromQuery<string>(@"
+                SELECT      eic.CSSclass
+                FROM        ElementInContent AS eic INNER JOIN
+                            InputDataSimpleText AS idt ON eic.Id = idt.ElementInContentId
+                WHERE       (idt.id = @InputDataId)
+            ", p);
+
+        Label lblLabel = new Label();
+        lblLabel.CssClass = CSSclassName + "_label";
+        lblLabel.Text = GetLabelValue(inputDataId);
+
+        Label lblValue = new Label();
+        lblValue.CssClass = CSSclassName + "_value";
+        lblValue.Text = GetLabelValue(inputDataId);
+
+        GenericContent.AddHtmlToPanel("<div id=\"inputElementData_" + inputDataId + "\">", panel);
+        panel.Controls.Add(lblLabel);
+        GenericContent.AddHtmlToPanel("<br />", panel);
+        panel.Controls.Add(lblValue);
+        GenericContent.AddHtmlToPanel("</div>", panel);
+
     }
 
     public override void SaveInput(Panel panel, int contentId)
