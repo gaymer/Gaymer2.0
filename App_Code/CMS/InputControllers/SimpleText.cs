@@ -30,7 +30,7 @@ public class SimpleText
                 SELECT  Value
                 FROM    InputDataSimpleText
                 WHERE   id = @inputDataId
-            ", param, debug:true);
+            ", param, debug: true);
     }
 
     private string GetLabelValue(int inputDataId)
@@ -46,7 +46,7 @@ public class SimpleText
 
     public override void AddEdit(Panel panel, int contentId = -1, int inputDataId = -1)
     {
-        if (inputDataId > 0)    // If -1 the content is to be created and has no values in DB
+        if (inputDataId > 0) // If -1 the content is to be created and has no values in DB
         {
             tbLabel.Text = GetLabelValue(inputDataId);
             tbValue.Text = GetValueValue(inputDataId);
@@ -89,7 +89,12 @@ public class SimpleText
 
     }
 
-    public override void SaveInput(Panel panel, int contentId)
+    public override void SaveInputFromEdit(Panel panel, int contentId, int inputDataId)
+    {
+        throw new NotImplementedException();
+    }
+
+    public override void SaveInputFromCreate(Panel panel, int contentType)
     {
         throw new NotImplementedException();
     }

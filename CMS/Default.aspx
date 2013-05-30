@@ -6,5 +6,6 @@
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="DebugOutput" Runat="Server">
     <asp:Panel ID="GenericContentPanel" runat="server"></asp:Panel>
+    <asp:Button Text="Lagre" runat="server" ID="SaveContentButton" OnClick="SaveContent_Click" Visible="False"/>
 </asp:Content>
 
