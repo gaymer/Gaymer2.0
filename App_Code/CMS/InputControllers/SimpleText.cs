@@ -44,7 +44,7 @@ public class SimpleText
     }
 
 
-    public override void AddEdit(Panel panel, int contentId, int inputDataId)
+    public override void AddEdit(Panel panel, int contentId = -1, int inputDataId = -1)
     {
         if (inputDataId > 0)    // If -1 the content is to be created and has no values in DB
         {

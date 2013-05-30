@@ -8,7 +8,7 @@ using System.Web.UI.WebControls;
 /// <summary>
 /// Summary description for ComplexText
 /// </summary>
-public class ComplexText
+public abstract class ComplexText
     : AbstractInputController
 {
 
@@ -18,20 +18,5 @@ public class ComplexText
         base.InputElementName = "ComplexText";
     }
 
-
-    public override void AddEdit(Panel panel, int contentId, int inputDataId)
-    {
-        throw new NotImplementedException();
-    }
-
-    public override void AddDisplay(Panel panel, int contentId, int inputDataId)
-    {
-        throw new NotImplementedException();
-    }
-
-    public override void SaveInput(Panel panel, int contentId)
-    {
-        throw new NotImplementedException();
-    }
 }
 

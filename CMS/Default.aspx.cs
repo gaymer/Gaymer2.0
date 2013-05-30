@@ -20,7 +20,7 @@ public partial class CMS_Default : System.Web.UI.Page
 
     /// <summary>
     /// Redirects to a predestined location.
-    /// </summary>
+    /// </summary> 
     private void FailToLoad()
     {
         Response.Redirect("/CMS/Default.aspx?Content=1");
@@ -29,39 +29,56 @@ public partial class CMS_Default : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         string qsContentIdString = Request.QueryString["content"];
+        string qsContentTypeIdString = Request.QueryString["type"];
         string qsEditString = Request.QueryString["edit"];
+        string qsCreateString = Request.QueryString["create"];
 
         bool isEdit = (!string.IsNullOrEmpty(qsEditString) && qsEditString == "1");
+        bool isCreate = (!string.IsNullOrEmpty(qsCreateString) && qsCreateString == "1");
 
         qsContentIdString = string.IsNullOrEmpty(qsContentIdString) ? null : qsContentIdString;
+        qsContentTypeIdString = string.IsNullOrEmpty(qsContentTypeIdString) ? null : qsContentTypeIdString;
+        
         int contentId;
+        int contentTypeId;
 
-        if (!Int32.TryParse(qsContentIdString, out contentId))
+        GenericContent content = null;
+
+        if (Int32.TryParse(qsContentIdString, out contentId))                   // Display/Edit
+        {
+            content = GenericContent.GetContent(contentId);
+        } 
+        else if (Int32.TryParse(qsContentTypeIdString, out contentTypeId))      // Create
+        {
+            content = new GenericContent(contentTypeId);
+        }
+        else
         {
             FailToLoad();
         }
 
-        GenericContent content = GenericContent.getContent(contentId);
 
 
 
 
-        AddHTML("Before content <br />");
 
-        if (content == null) FailToLoad();
+        if (content == null && contentId>0) FailToLoad();
 
 
-        for (int i = 0; i < content.InputElementDataList.Count; i++)
+        AddHTML("// START GENERIC CONTENT: ");
+
+        for (int i = 0; i < content.InputElementTypeList.Count; i++)
         {
             AbstractInputController myInput = getInputObject(content.InputElementTypeList[i], contentId);
-            if (isEdit)
+            if (isCreate)
+                myInput.AddCreate(GenericContentPanel);
+            else if (isEdit)
                 myInput.AddEdit(GenericContentPanel, contentId, content.InputElementDataList[i]);
             else
                 myInput.AddDisplay(GenericContentPanel, contentId, content.InputElementDataList[i]);
         }
 
-
-        AddHTML("<br /> After content");
+        AddHTML("// END GENERIC CONTENT");
 
     }
 
