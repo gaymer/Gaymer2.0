@@ -12,16 +12,29 @@ public partial class User_Normal : System.Web.UI.UserControl
     {
 
     }
-    public void FillData()
-    {
-        LoginLib login = new LoginLib();
 
-        string userIdString = Request.QueryString["UserId"];
+    int getVisitedUserId()
+    {
+         string userIdString = Request.QueryString["UserId"];
         int userID;
         if (!Int32.TryParse(userIdString, out userID))
         {
+            return -1;
+        }
+        return userID;
+    }
+
+    public void FillData()
+    {
+        LoginLib login = new LoginLib();
+        
+        int userID = getVisitedUserId();
+
+        if (userID < 0)
+        {
             userID = login.GetUserID();
         }
+       
 
         GaymerLINQDataContext db = new GaymerLINQDataContext();
             
@@ -63,11 +76,6 @@ public partial class User_Normal : System.Web.UI.UserControl
             Username.Text = user.Uname;
 
 
-            //if (user.Avatar == null)
-            //{
-            //    MyAvatar.ImageUrl = "~/Style/Images/mario.jpg"; // Hvis bruker ikke har satt et bilde 
-            //} 
-
             MyAvatar.ImageUrl = "~/user/ViewAvatar.aspx?uid=" + userID;                    
             MyAvatar.AlternateText = user.Uname + " Avatar";
 
@@ -92,16 +100,30 @@ public partial class User_Normal : System.Web.UI.UserControl
 
             FriendView.DataSource = dt;
             FriendView.DataBind();
-            
-            if (userID == login.GetUserID())
+
+
+            if (userID == login.GetUserID() || isFriend(login.GetUserID(), userID))
                 FriendRequestbtn.Visible = false;
-
-            //DataRow finnRad = dt.Rows.Find(userIdString);
-
-            //if (userID == login.GetUserID()||finnRad!=null)
-            //    FriendRequestbtn.Visible = false;
-          
     }
+
+    private bool isFriend(int loggedInUserId, int visitedUserId)
+    {
+        var p = new Dictionary<string, object>();
+        p.Add("@UserId", loggedInUserId);
+        p.Add("@VisitUserId", visitedUserId);
+
+        DataTable dt = ManageDB.query(@"
+                SELECT  RelationId
+                FROM    UserRelation
+                WHERE   UserId = @UserId
+                 AND    RelatedUserId = @VisitUserId
+            ", p, debug:true);
+
+        return (dt.Rows.Count > 0);
+
+    }
+
+
     private int AgeYr(DateTime? Bdate)
     {
         if (Bdate == null)
@@ -127,9 +149,41 @@ public partial class User_Normal : System.Web.UI.UserControl
         }
     }
 
-    protected void finnVennerbtn_Click(object sender, EventArgs e)
+    protected void FriendRequestbtn_Click(object sender, EventArgs e)
     {
-        Response.Redirect("/User/vennesok.aspx");
+        SendRequest(getVisitedUserId());
+        FriendRequestbtn.Text = "Request sendt";
+        
     }
 
+    public void SendRequest(int userID)
+    {
+
+        if (userID < 0)
+        {
+            // FEIL
+        }
+
+        LoginLib login = new LoginLib();
+
+        int visitedUserId = -1;
+
+        if (userID != login.GetUserID())
+        {
+            visitedUserId = userID;
+        }
+        GaymerLINQDataContext db = new GaymerLINQDataContext();
+
+        var meldinger = (from pm in db.PrivateMessages
+                         where pm.From == login.GetUserID()
+                         select pm).FirstOrDefault();
+       
+
+        PrivateMessage pmeld = new PrivateMessage();
+
+        pmeld.From = login.GetUserID();
+        pmeld.To = visitedUserId;
+        pmeld.Text = "Friend request";
+        
+    }
 }

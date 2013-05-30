@@ -17,7 +17,7 @@
         <asp:GridView ID="sokResult" runat="server" AutoGenerateColumns="False" HorizontalAlign="Center" CellPadding="4" ForeColor="#333333" GridLines="Horizontal">
             <AlternatingRowStyle BackColor="#E3EAEB" />
              <Columns>  
-               <asp:ImageField DataImageUrlField="UID" DataImageUrlFormatString="~/user/ViewAvatar.aspx?uid={0}" Visible="true">
+               <asp:ImageField DataImageUrlField="UID" DataImageUrlFormatString="~/user/ViewAvatar.ashx?uid={0}" Visible="true">
                    <ControlStyle Height="200px" Width="180px" />
                  </asp:ImageField> 
              </Columns>

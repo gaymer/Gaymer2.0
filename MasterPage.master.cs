@@ -37,9 +37,24 @@ public partial class MasterPage : System.Web.UI.MasterPage
     {
         if (login.IsUserLoggedIn())
         {
+            MenuItem BrukerMenu = new MenuItem();
+            BrukerMenu.Text = "Bruker";
+            Menu.Items.Add(BrukerMenu);
+
+            MenuItem MeldUserMenu = new MenuItem();
+            MeldUserMenu.Text = "Meldinger";
+            MeldUserMenu.NavigateUrl = "~/User/Meldinger.aspx";
+
+            MenuItem BrukerSokMenu = new MenuItem();
+            BrukerSokMenu.Text = "Søk i brukere";
+            BrukerSokMenu.NavigateUrl = "~/User/vennesok.aspx";
+
             MenuItem rootUserMenu = new MenuItem();
             rootUserMenu.Text = "Logout";
             Menu.Items.Add(rootUserMenu);
+
+            BrukerMenu.ChildItems.Add(MeldUserMenu);
+            BrukerMenu.ChildItems.Add(BrukerSokMenu);
         }
         else 
         {

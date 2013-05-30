@@ -42,21 +42,21 @@ public partial class User_Register : System.Web.UI.Page
                              where a.Mail == Email
                              select a).FirstOrDefault();
 
-            //////NYE BRUKERE MÅ HA EN VERDI I AVATAR KOLONNEN//////
+            //NYE BRUKERE MÅ HA EN VERDI I AVATAR KOLONNEN
 
-            var NybrukerAvatar = (from a in db.Users
-                             select a).FirstOrDefault();
+            //var NybrukerAvatar = (from a in db.Users
+            //                 select a).FirstOrDefault();
 
-             var defAvatar = (from a in db.Users
-                                   where a.UID==5
-                             select a).FirstOrDefault();
+            // var defAvatar = (from a in db.Users
+            //                       where a.UID==5
+            //                 select a).FirstOrDefault();
 
-            if (NybrukerAvatar.Avatar == null)
-            {
-                NybrukerAvatar.Avatar = defAvatar.Avatar;              
-            }
+            //if (NybrukerAvatar.Avatar == null)
+            //{
+            //    NybrukerAvatar.Avatar = defAvatar.Avatar;              
+            //}
             
-            ////////
+            
             if (UsernameTest == null && EmailTest == null)
             {
                 //klar for registrering
