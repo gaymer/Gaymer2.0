@@ -243,7 +243,7 @@ using System.Data.SqlClient;
             return retList;
         }
 
-        public static T GetSingleValueFromQuery<T>(string sql, Dictionary<string, object> parameters = null, bool debug = false)
+        public static T GetFirstValueFromQuery<T>(string sql, Dictionary<string, object> parameters = null, bool debug = false)
         {
             DataTable dt = query(sql, parameters, debug);
 

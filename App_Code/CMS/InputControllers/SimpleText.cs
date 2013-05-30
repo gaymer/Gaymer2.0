@@ -26,7 +26,7 @@ public class SimpleText
     private string GetValueValue(int inputDataId)
     {
         var param = new Dictionary<string, object> {{"@inputDataId", inputDataId}};
-        return ManageDB.GetSingleValueFromQuery<string>(@"
+        return ManageDB.GetFirstValueFromQuery<string>(@"
                 SELECT  Value
                 FROM    InputDataSimpleText
                 WHERE   id = @inputDataId
@@ -36,7 +36,7 @@ public class SimpleText
     private string GetLabelValue(int inputDataId)
     {
         var param = new Dictionary<string, object> {{"@inputDataId", inputDataId}};
-        return ManageDB.GetSingleValueFromQuery<string>(@"
+        return ManageDB.GetFirstValueFromQuery<string>(@"
                 SELECT  Label
                 FROM    InputDataSimpleText
                 WHERE   id = @inputDataId
@@ -66,7 +66,7 @@ public class SimpleText
     public override void AddDisplay(Panel panel, int contentId, int inputDataId)
     {
         var p = new Dictionary<string, object> {{"@InputDataId", inputDataId}};
-        string CSSclassName = ManageDB.GetSingleValueFromQuery<string>(@"
+        string CSSclassName = ManageDB.GetFirstValueFromQuery<string>(@"
                 SELECT      eic.CSSclass
                 FROM        ElementInContent AS eic INNER JOIN
                             InputDataSimpleText AS idt ON eic.Id = idt.ElementInContentId

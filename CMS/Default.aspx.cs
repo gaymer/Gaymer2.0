@@ -12,7 +12,7 @@ using System.Data.SqlClient;
 
 public partial class CMS_Default : System.Web.UI.Page
 {
-    
+
     public void AddHTML(string htmlString)
     {
         if (GenericContentPanel != null) GenericContentPanel.Controls.Add(new LiteralControl(htmlString));
@@ -33,7 +33,7 @@ public partial class CMS_Default : System.Web.UI.Page
 
         bool isEdit = (!string.IsNullOrEmpty(qsEditString) && qsEditString == "1");
 
-        qsContentIdString = string.IsNullOrEmpty(qsContentIdString)? null: qsContentIdString;
+        qsContentIdString = string.IsNullOrEmpty(qsContentIdString) ? null : qsContentIdString;
         int contentId;
 
         if (!Int32.TryParse(qsContentIdString, out contentId))
@@ -48,21 +48,18 @@ public partial class CMS_Default : System.Web.UI.Page
 
         AddHTML("Before content <br />");
 
-        if (content == null)
+        if (content == null) FailToLoad();
+
+
+        for (int i = 0; i < content.InputElementDataList.Count; i++)
         {
-            FailToLoad();
+            AbstractInputController myInput = getInputObject(content.InputElementTypeList[i], contentId);
+            if (isEdit)
+                myInput.AddEdit(GenericContentPanel, contentId, content.InputElementDataList[i]);
+            else
+                myInput.AddDisplay(GenericContentPanel, contentId, content.InputElementDataList[i]);
         }
-        else
-        {
-            for (int i = 0; i < content.InputElementDataList.Count; i++ )
-            {
-                AbstractInputController myInput = getInputObject(content.InputElementTypeList[i], contentId);
-                if (isEdit)
-                    myInput.AddEdit(GenericContentPanel, contentId, content.InputElementDataList[i]);
-                else
-                    myInput.AddDisplay(GenericContentPanel, contentId, content.InputElementDataList[i]);
-            }
-        }
+
 
         AddHTML("<br /> After content");
 
@@ -78,7 +75,7 @@ public partial class CMS_Default : System.Web.UI.Page
                 SELECT      Name
                 FROM        InputElement
                 WHERE       InputElementId = @InputElementId
-            ", parameters, debug:true))[0];
+            ", parameters, debug: true))[0];
 
         if (string.IsNullOrEmpty(inputName))
             return null;
