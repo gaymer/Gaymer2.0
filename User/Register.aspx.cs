@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data.SqlClient;
 using System.Security.Cryptography;
+using System.IO;
 
 public partial class User_Register : System.Web.UI.Page
 {
@@ -13,6 +14,7 @@ public partial class User_Register : System.Web.UI.Page
     {
 
     }
+
         protected void RegisterBtn_Click(object sender, EventArgs e)
     {
         string Username = RegUsernameBox.Text;
@@ -20,6 +22,7 @@ public partial class User_Register : System.Web.UI.Page
         string REmail = RegREmailBox.Text;
         string Password = RegPasswordBox.Text;
         string RPassword = RegRPasswordBox.Text;
+        
         if (Email != REmail)
         {
             RegError.Text = "Email don't match";
@@ -37,8 +40,8 @@ public partial class User_Register : System.Web.UI.Page
                                 select a).FirstOrDefault();
             var EmailTest = (from a in db.Users
                              where a.Mail == Email
-                             select a).FirstOrDefault();
-
+                             select a).FirstOrDefault();            
+            
             if (UsernameTest == null && EmailTest == null)
             {
                 //klar for registrering
@@ -67,6 +70,7 @@ public partial class User_Register : System.Web.UI.Page
                 {
                     db.SubmitChanges();
                     RegError.Text = "You are now registered";
+                    Response.Redirect("/User/UserPage.aspx");
                 }
                 catch
                 {
@@ -90,7 +94,10 @@ public partial class User_Register : System.Web.UI.Page
 
             }
         }
+
+       
     }
+
     private void ReadUserLINQ()
     {
         GaymerLINQDataContext db = new GaymerLINQDataContext();

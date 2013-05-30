@@ -8,4 +8,4 @@
         document.getElementById(id).style.visibility = 'visible';
         //document.getElementById("LogToggelbtn").value = "Skjul";
     }
-    }
+}

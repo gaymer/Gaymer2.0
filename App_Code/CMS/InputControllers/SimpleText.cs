@@ -26,17 +26,17 @@ public class SimpleText
     private string GetValueValue(int inputDataId)
     {
         var param = new Dictionary<string, object> {{"@inputDataId", inputDataId}};
-        return ManageDB.GetSingleValueFromQuery<string>(@"
+        return ManageDB.GetFirstValueFromQuery<string>(@"
                 SELECT  Value
                 FROM    InputDataSimpleText
                 WHERE   id = @inputDataId
-            ", param, debug:true);
+            ", param, debug: true);
     }
 
     private string GetLabelValue(int inputDataId)
     {
         var param = new Dictionary<string, object> {{"@inputDataId", inputDataId}};
-        return ManageDB.GetSingleValueFromQuery<string>(@"
+        return ManageDB.GetFirstValueFromQuery<string>(@"
                 SELECT  Label
                 FROM    InputDataSimpleText
                 WHERE   id = @inputDataId
@@ -44,9 +44,9 @@ public class SimpleText
     }
 
 
-    public override void AddEdit(Panel panel, int contentId, int inputDataId)
+    public override void AddEdit(Panel panel, int contentId = -1, int inputDataId = -1)
     {
-        if (inputDataId > 0)    // If -1 the content is to be created and has no values in DB
+        if (inputDataId > 0) // If -1 the content is to be created and has no values in DB
         {
             tbLabel.Text = GetLabelValue(inputDataId);
             tbValue.Text = GetValueValue(inputDataId);
@@ -66,7 +66,7 @@ public class SimpleText
     public override void AddDisplay(Panel panel, int contentId, int inputDataId)
     {
         var p = new Dictionary<string, object> {{"@InputDataId", inputDataId}};
-        string CSSclassName = ManageDB.GetSingleValueFromQuery<string>(@"
+        string CSSclassName = ManageDB.GetFirstValueFromQuery<string>(@"
                 SELECT      eic.CSSclass
                 FROM        ElementInContent AS eic INNER JOIN
                             InputDataSimpleText AS idt ON eic.Id = idt.ElementInContentId
@@ -89,7 +89,12 @@ public class SimpleText
 
     }
 
-    public override void SaveInput(Panel panel, int contentId)
+    public override void SaveInputFromEdit(Panel panel, int contentId, int inputDataId)
+    {
+        throw new NotImplementedException();
+    }
+
+    public override void SaveInputFromCreate(Panel panel, int contentType)
     {
         throw new NotImplementedException();
     }

@@ -12,7 +12,7 @@ using System.Data.SqlClient;
 
 public partial class CMS_Default : System.Web.UI.Page
 {
-    
+
     public void AddHTML(string htmlString)
     {
         if (GenericContentPanel != null) GenericContentPanel.Controls.Add(new LiteralControl(htmlString));
@@ -20,7 +20,7 @@ public partial class CMS_Default : System.Web.UI.Page
 
     /// <summary>
     /// Redirects to a predestined location.
-    /// </summary>
+    /// </summary> 
     private void FailToLoad()
     {
         Response.Redirect("/CMS/Default.aspx?Content=1");
@@ -29,47 +29,73 @@ public partial class CMS_Default : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         string qsContentIdString = Request.QueryString["content"];
+        string qsContentTypeIdString = Request.QueryString["type"];
         string qsEditString = Request.QueryString["edit"];
+        string qsCreateString = Request.QueryString["create"];
 
         bool isEdit = (!string.IsNullOrEmpty(qsEditString) && qsEditString == "1");
+        bool isCreate = (!string.IsNullOrEmpty(qsCreateString) && qsCreateString == "1");
 
-        qsContentIdString = string.IsNullOrEmpty(qsContentIdString)? null: qsContentIdString;
+        qsContentIdString = string.IsNullOrEmpty(qsContentIdString) ? null : qsContentIdString;
+        qsContentTypeIdString = string.IsNullOrEmpty(qsContentTypeIdString) ? null : qsContentTypeIdString;
+
         int contentId;
+        int contentTypeId;
 
-        if (!Int32.TryParse(qsContentIdString, out contentId))
+        GenericContent content = null;
+
+        if (Int32.TryParse(qsContentIdString, out contentId))                   // Display/Edit
         {
-            FailToLoad();
+            content = GenericContent.GetContent(contentId);
         }
-
-        GenericContent content = GenericContent.getContent(contentId);
-
-
-
-
-        AddHTML("Before content <br />");
-
-        if (content == null)
+        else if (Int32.TryParse(qsContentTypeIdString, out contentTypeId))      // Create
         {
-            FailToLoad();
+            content = new GenericContent(contentTypeId);
         }
         else
         {
-            for (int i = 0; i < content.InputElementDataList.Count; i++ )
-            {
-                AbstractInputController myInput = getInputObject(content.InputElementTypeList[i], contentId);
-                if (isEdit)
-                    myInput.AddEdit(GenericContentPanel, contentId, content.InputElementDataList[i]);
-                else
-                    myInput.AddDisplay(GenericContentPanel, contentId, content.InputElementDataList[i]);
-            }
+            FailToLoad();
         }
 
-        AddHTML("<br /> After content");
+
+
+
+
+
+        if (content == null && contentId > 0) FailToLoad();
+
+
+        AddHTML("// START GENERIC CONTENT: ");
+
+        for (int i = 0; i < content.InputElementTypeList.Count; i++)
+        {
+            Panel addedPanel = new Panel();
+            AbstractInputController myInput = getInputObject(content.InputElementTypeList[i], contentId);
+            if (isEdit)
+            {
+                myInput.AddEdit(addedPanel, contentId, content.InputElementDataList[i]);
+                SaveContentButton.Visible = true;
+            }
+            else if (isCreate)
+            {
+                myInput.AddCreate(addedPanel);
+                SaveContentButton.Visible = true;
+            }
+            else
+            {
+                myInput.AddDisplay(addedPanel, contentId, content.InputElementDataList[i]);
+                SaveContentButton.Visible = false;
+            }
+
+            GenericContentPanel.Controls.Add(addedPanel);
+        }
+
+        AddHTML("// END GENERIC CONTENT");
 
     }
 
 
-    private AbstractInputController getInputObject(int inputElementId, int contentId)
+    private AbstractInputController getInputObject(int inputElementId, int contentId=-1)
     {
         var parameters = new Dictionary<string, object>();
         parameters.Add("@InputElementId", inputElementId);
@@ -78,8 +104,16 @@ public partial class CMS_Default : System.Web.UI.Page
                 SELECT      Name
                 FROM        InputElement
                 WHERE       InputElementId = @InputElementId
-            ", parameters, debug:true))[0];
+            ", parameters, debug: true))[0];
 
+        return getInputObject(inputName, contentId);
+
+
+        return null;
+    }
+
+    private AbstractInputController getInputObject(string inputName, int contentId)
+    {
         if (string.IsNullOrEmpty(inputName))
             return null;
 
@@ -92,8 +126,74 @@ public partial class CMS_Default : System.Web.UI.Page
                 throw new Exception("/cms/default#A1");
                 break;
         }
-
-        return null;
     }
 
+    protected void SaveContent_Click(object sender, EventArgs e)
+    {
+        bool isCreate   = (!string.IsNullOrEmpty(Request.QueryString["create"]) && Request.QueryString["create"] == "1");
+        bool isEdit     = (!string.IsNullOrEmpty(Request.QueryString["edit"]) && Request.QueryString["edit"] == "1");
+
+        if (isEdit)
+        {
+            int contentId;
+            if (!Int32.TryParse(Request.QueryString["content"], out contentId)) FailToLoad();
+
+            var p = new Dictionary<string, object>();
+            p.Add("@ContentId", contentId);
+            string sql = @"
+                    SELECT eic.InputElementId, ie.
+                    FROM ElementInContent eic, DynamicContent dct, InputElement ie
+                    WHERE eic.ContentTypeId = dct.ContentType
+                      AND dct.DynamicContentId = @ContentId
+                ";
+
+            List<int> dataList = ManageDB.GetSingleColumnResultAsList<int>(sql, p);
+
+          //  AbstractInputController input = 
+
+            int i = 0;
+
+            foreach (var c in GenericContentPanel.Controls)
+            {
+                if (c.GetType() == typeof(Panel))
+                {
+
+                    i++;
+                }
+            }
+
+
+        }
+
+        if (isCreate)
+        {
+            int contentTypeId;
+            if (!Int32.TryParse(Request.QueryString["type"], out contentTypeId)) FailToLoad();
+
+            var p = new Dictionary<string, object>();
+            p.Add("@contentTypeId", contentTypeId);
+            string sql = @"
+                    SELECT 
+                ";
+
+            List<int> dataList = ManageDB.GetSingleColumnResultAsList<int>(sql, p);
+
+
+
+
+            foreach (var c in GenericContentPanel.Controls)
+            {
+                if (c.GetType() == typeof(Panel))
+                {
+
+                }
+            }
+        }
+
+
+
+
+
+
+    }
 }

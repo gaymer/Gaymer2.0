@@ -64,13 +64,14 @@ public partial class MasterPage : System.Web.UI.MasterPage
     {
         if (login.IsUserLoggedIn())
         {
+<<<<<<< HEAD
             MenuItem BrukerMenu = new MenuItem();
             BrukerMenu.Text = "Bruker";
             Menu.Items.Add(BrukerMenu);
 
             MenuItem MeldUserMenu = new MenuItem();
             MeldUserMenu.Text = "Meldinger";
-            MeldUserMenu.NavigateUrl = "~/User/Meldinger2.aspx";
+            MeldUserMenu.NavigateUrl = "~/User/Meldinger.aspx";
 
             MenuItem BrukerSokMenu = new MenuItem();
             BrukerSokMenu.Text = "Søk i brukere";
@@ -82,6 +83,16 @@ public partial class MasterPage : System.Web.UI.MasterPage
 
             BrukerMenu.ChildItems.Add(MeldUserMenu);
             BrukerMenu.ChildItems.Add(BrukerSokMenu);
+=======
+            MenuItem ProfileMenuItem = new MenuItem();
+            ProfileMenuItem.Text = "Profil";
+            ProfileMenuItem.NavigateUrl = "~/User/UserPage.aspx";
+            Menu.Items.Add(ProfileMenuItem);
+
+            MenuItem LogoutMenuItem = new MenuItem();
+            LogoutMenuItem.Text = "Logout";
+            Menu.Items.Add(LogoutMenuItem);
+>>>>>>> 9072e5d68a4f439270a4d0fcf2dc35903ea10809
         }
         else 
         {
@@ -117,14 +128,6 @@ public partial class MasterPage : System.Web.UI.MasterPage
                 m = new MenuItem();
                 m.Text = "Users";
                 m.NavigateUrl = "~/Admin/Users.aspx";
-                rootAdminMenu.ChildItems.Add(m);
-            }
-
-            if (ManageDB.UserHasPermission(Permissions.Gaymer_Manage_Content_Type, login.GetUserID()))
-            {
-                m = new MenuItem();
-                m.Text = "Content types";
-                m.NavigateUrl = "~/Admin/ListContentTypes.aspx";
                 rootAdminMenu.ChildItems.Add(m);
             }
         }
