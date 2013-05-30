@@ -174,16 +174,38 @@ public partial class User_Normal : System.Web.UI.UserControl
         }
         GaymerLINQDataContext db = new GaymerLINQDataContext();
 
-        var meldinger = (from pm in db.PrivateMessages
-                         where pm.From == login.GetUserID()
-                         select pm).FirstOrDefault();
-       
-
+        //var meldinger = (from pm in db.PrivateMessages
+        //                 where pm.From == login.GetUserID()
+        //                 select pm).FirstOrDefault();
+   
         PrivateMessage pmeld = new PrivateMessage();
 
-        pmeld.From = login.GetUserID();
+        int userId= login.GetUserID();
         pmeld.To = visitedUserId;
         pmeld.Text = "Friend request";
+        DateTime Time = System.DateTime.Now;
+        pmeld.Read = false;
+
+        var p = new Dictionary<string, object>();
+        p.Add("@UserId", userId);
+        p.Add("@VisitUserId", visitedUserId);
+        p.Add("@Time",Time);
+
+        int nyrequest = ManageDB.nonQuery(@"
+        INSERT INTO PrivateMessage([From],[To],[Text],Time,[Read])
+        VALUES (@UserId,@VisitUserId,'Friend request',@Time,'False')",p,debug:true);
+
+       
+        //db.PrivateMessages.InsertOnSubmit(meldinger);
+       
+        //try
+        //{
+        //    db.SubmitChanges();
+        //}
+        //catch (Exception ab)
+        //{
+        //    Response.Redirect("UserPage.aspx?db_feil");
+        //}
         
     }
 }

@@ -8,10 +8,11 @@
         <asp:Panel ID="PVenstre" runat="server" HorizontalAlign="Left">
             <div style="float:left";>
           
-            <asp:GridView ID="MeldBrukere" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" Width="223px" AutoGenerateColumns="False" OnSelectedIndexChanged="MeldBrukere_SelectedIndexChanged">
+            <asp:GridView ID="MeldBrukere" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" Width="223px" AutoGenerateColumns="False" OnRowCommand="MeldBrukere_RowCommand" OnSelectedIndexChanged="MeldBrukere_SelectedIndexChanged">
                 <AlternatingRowStyle BackColor="#E3EAEB" />
                 <Columns>
-                    <asp:ButtonField Text="Username" DataTextField="Username" HeaderText="Brukere" />
+                    <asp:ButtonField Text="Username" DataTextField="Username" HeaderText="Brukere" CommandName="From_{0}" ButtonType="Button" />
+                    
                 </Columns>
                 <Columns>
                     <asp:BoundField HeaderText="Uleste Meldinger" DataField="Read" />
@@ -27,7 +28,6 @@
                 <SortedDescendingCellStyle BackColor="#D4DFE1" />
                 <SortedDescendingHeaderStyle BackColor="#15524A" />
             </asp:GridView>
-                <asp:Label ID="lbl" runat="server" Text=""></asp:Label>
                 </div>
         </asp:Panel>
 

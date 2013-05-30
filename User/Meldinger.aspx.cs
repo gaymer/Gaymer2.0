@@ -39,11 +39,32 @@ public partial class User_Meldinger : System.Web.UI.Page
     {
         //Viser meldinger fra valgt bruker 
 
+        LoginLib login = new LoginLib();
+        int useID = login.GetUserID();
+
+        Dictionary<String, object> parameter = new Dictionary<string, object>();
+        parameter.Add("@UserID", useID);
+
+        DataTable dt = ManageDB.query(@"
+        SELECT Text,Time,Read
+        FROM PrivateMessage
+        WHERE [From]=@UserID AND [To]=@klikkID", parameter, debug: true);
+
+        PrivateMessage pm = new PrivateMessage();
+
+        //if (pm.Text == "Friend request")
+        //{
+        //    MeldingerGV.
+        //}
         
     }
     protected void MeldBrukere_SelectedIndexChanged(object sender, EventArgs e)
     {
-        GridViewRow rad = MeldingerGV.SelectedRow;
+        throw new Exception("heihei"); 
         
+    }
+    protected void MeldBrukere_RowCommand(object sender, GridViewCommandEventArgs e)
+    {
+            throw new Exception("Wakakakakakakaaa" + e.CommandName); 
     }
 }

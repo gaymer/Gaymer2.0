@@ -68,7 +68,7 @@ using System.Data.SqlClient;
                 returnTable = new DataTable();
                 OpenConnection();
 
-                if (readOnly)   // DataTable's Load()-method adds read-only values: TODO: is this correct?
+                if (readOnly)   // DataTable's Load()-method adds read-only values: TODO: is this correct?nonquery
                 {
                     SqlDataReader reader = sqlCommand.ExecuteReader();
                     returnTable.Load(reader);       // Adds rows. Result: read-only
@@ -251,6 +251,7 @@ using System.Data.SqlClient;
 
             return (T)dt.Rows[0][0];
         }
+
     }
 
 
