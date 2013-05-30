@@ -16,9 +16,9 @@
         <ajaxToolkit:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server"></ajaxToolkit:ToolkitScriptManager>
         <div class="MainPageHolder">
             <div class="MainHeader">
-                <a href="/">
+                <%--<a href="/">--%>
                     <asp:Image ID="Topp" runat="server" Height="115px" Width="1272px" ImageUrl="~/Style/Images/GaymerHead.gif" />
-                </a>
+                <%--</a>--%>
                 <%--<asp:Button CssClass="ButtonBase" ID="LogOutBtn" runat="server" Text="Log Out" OnClick="LogOut_Click" />--%>
             </div>
             <div class="BelowHeaderWrapper">

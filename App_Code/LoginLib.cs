@@ -116,7 +116,7 @@ public class LoginLib : System.Web.UI.Page
         HttpContext.Current.Response.Cookies["GaymerLoginID"].Expires = DateTime.UtcNow;
     }
 
-    public bool requirePermission(string p)
+    public bool hasPermission(string p)
     {
         // TODO: Should have multiple permissions as input.
         return ManageDB.UserHasPermission(p, GetUserID());

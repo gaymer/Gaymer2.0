@@ -64,16 +64,21 @@ public partial class MasterPage : System.Web.UI.MasterPage
     {
         if (login.IsUserLoggedIn())
         {
-            MenuItem rootUserMenu = new MenuItem();
-            rootUserMenu.Text = "Logout";
-            Menu.Items.Add(rootUserMenu);
+            MenuItem ProfileMenuItem = new MenuItem();
+            ProfileMenuItem.Text = "Profil";
+            ProfileMenuItem.NavigateUrl = "~/User/UserPage.aspx";
+            Menu.Items.Add(ProfileMenuItem);
+
+            MenuItem LogoutMenuItem = new MenuItem();
+            LogoutMenuItem.Text = "Logout";
+            Menu.Items.Add(LogoutMenuItem);
         }
         else 
         {
-            MenuItem rootUserMenu = new MenuItem();
-            rootUserMenu.Text = "Login";
-            rootUserMenu.NavigateUrl = "javascript:Toggel('LoginDiv');";
-            Menu.Items.Add(rootUserMenu);
+            MenuItem ToggleLoginMenuItem = new MenuItem();
+            ToggleLoginMenuItem.Text = "Login";
+            ToggleLoginMenuItem.NavigateUrl = "javascript:Toggel('LoginDiv');";
+            Menu.Items.Add(ToggleLoginMenuItem);
         }
     }
 
