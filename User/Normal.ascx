@@ -2,7 +2,7 @@
 
 <asp:Panel ID="MasterPanel" runat="server" HorizontalAlign ="Center">
     <h2><asp:Label ID="Username" runat="server"></asp:Label>&nbsp;(<asp:Label ID="lblRolle" runat="server"></asp:Label>)</h2>
-     <asp:Button ID="FriendRequestbtn" runat="server" Text="+Legg til som venn" visible="true"/>
+    <asp:Button ID="FriendRequestbtn" runat="server" Text="+Legg til som venn" visible="true" OnClick="FriendRequestbtn_Click"/>
     <br />
  <asp:Image ID="MyAvatar" ImageURL="/Style/Images/mario.JPG" runat="server" Height="139px" Width="143px" />
     <asp:Label ID="AboutMeTxt" runat="server" Text="Om Meg tekst"></asp:Label>
@@ -48,8 +48,6 @@
         </asp:GridView>
         <br />
         
-        <asp:Button ID="finnVennerbtn" Text="Finn venner" runat="server" OnClick="finnVennerbtn_Click" />
-
     </asp:Panel>
 
     </asp:Panel>

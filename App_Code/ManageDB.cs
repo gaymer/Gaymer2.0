@@ -68,7 +68,7 @@ using System.Data.SqlClient;
                 returnTable = new DataTable();
                 OpenConnection();
 
-                if (readOnly)   // DataTable's Load()-method adds read-only values: TODO: is this correct?
+                if (readOnly)   // DataTable's Load()-method adds read-only values: TODO: is this correct?nonquery
                 {
                     SqlDataReader reader = sqlCommand.ExecuteReader();
                     returnTable.Load(reader);       // Adds rows. Result: read-only
@@ -222,17 +222,25 @@ using System.Data.SqlClient;
 
             if (dt==null || dt.Columns.Count > 1) return null;
 
-            return (from DataRow row in dt.Rows select (T) row[0]).ToList(); // LINQ-ekvivalent for koden under (R#-hjelp)
+
+            //return (from DataRow row in dt.Rows select (T) row[0]).ToList(); // LINQ-ekvivalent for koden under (R#-hjelp)
 
 
-            //var retList = new List<T>();
+            var retList = new List<T>();
 
-            //foreach (DataRow row in dt.Rows)
-            //{
-            //    retList.Add((T)row[0]);
-            //}
+            foreach (DataRow row in dt.Rows)
+            {
+                try
+                {
+                    retList.Add((T)row[0]);
+                }
+                catch (InvalidCastException e)
+                {
+                    // Blalala
+                }
+            }
 
-            //return retList;
+            return retList;
         }
 
         public static T GetFirstValueFromQuery<T>(string sql, Dictionary<string, object> parameters = null, bool debug = false)
@@ -253,6 +261,7 @@ using System.Data.SqlClient;
                 throw new Exception(e.Message);
             }
         }
+
     }
 
 
