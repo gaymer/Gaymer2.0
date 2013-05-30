@@ -14,13 +14,13 @@ public abstract class AbstractInputController
     public string InputElementName { get; protected set; }
     public int InputDataId { get; protected set; }
 
-    public abstract void AddEdit(Panel panel, int contentId, int inputDataId);
+    public abstract void AddEdit(Panel panel, int contentId=-1, int inputDataId=-1);
     public abstract void AddDisplay(Panel panel, int contentId, int inputDataId);
     public abstract void SaveInput(Panel panel, int contentId);
 
     public void AddCreate(Panel panel)
     {
-        AddEdit(panel, -1, -1);
+        AddEdit(panel);
     }
 
 
