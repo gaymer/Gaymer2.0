@@ -249,7 +249,17 @@ using System.Data.SqlClient;
 
             if (dt == null || dt.Rows.Count < 1 || dt.Columns.Count < 1) return default(T); // return null
 
-            return (T)dt.Rows[0][0];
+            if (dt.Rows[0][0] is DBNull) return default(T);
+
+            try
+            {
+                return (T)dt.Rows[0][0];
+            }
+            catch (InvalidCastException e)
+            {
+                
+                throw new Exception(e.Message);
+            }
         }
 
     }

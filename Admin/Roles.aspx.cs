@@ -37,10 +37,6 @@ public partial class Roles : System.Web.UI.Page
             throw new Exception("Value in RoleList (Dropdownlist) is not number? Why?");
         }
 
-        Label l = new Label();
-        l.Text = "<br />" + rid;
-        panel.Controls.Add(l);
-
         var dict = new Dictionary<string, object>();
         dict.Add("@rid", rid);
         string q = @"
@@ -52,33 +48,39 @@ public partial class Roles : System.Web.UI.Page
             ON Permission.PermissionId = PermissionToRole.PermissionId AND PermissionToRole.RoleId = @rid
             ORDER BY Permission.PermissionUniqueString";
 
-        l = new Label();
-        l.Text = "<br />" + rid + " - " + dict["@rid"] + " - " + IsPostBack.ToString();
-        panel.Controls.Add(l);
+        //l = new Label();
+        //l.Text = "<br />" + rid + " - " + dict["@rid"] + " - " + IsPostBack.ToString();
+        //panel.Controls.Add(l);
 
-        DataTable dt = new DataTable();
+        //DataTable dt = new DataTable();
 
-        SqlConnection _dbConnection = new SqlConnection();
-        _dbConnection.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["gaymerdbConnectionString"].ConnectionString;
-        _dbConnection.Open();
-        SqlCommand sqlCommand = new SqlCommand(q, _dbConnection);
-        sqlCommand.Parameters.Add("@rid", rid);
-        SqlDataReader reader = sqlCommand.ExecuteReader();
-        dt.Load(reader);       // Adds rows. Result: read-only
-        reader.Close();
+        //SqlConnection _dbConnection = new SqlConnection();
+        //_dbConnection.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["gaymerdbConnectionString"].ConnectionString;
+        //_dbConnection.Open();
+        //SqlCommand sqlCommand = new SqlCommand(q, _dbConnection);
+        //sqlCommand.Parameters.Add("@rid", rid);
+        //SqlDataReader reader = sqlCommand.ExecuteReader();
+        //dt.Load(reader);       // Adds rows. Result: read-only
+        //reader.Close();
 
-        return dt;
+        return ManageDB.query(q, dict, debug: true);
+    }
+
+    private LiteralControl br()
+    {
+        return new LiteralControl("<br />");
     }
 
     private void rendreNewView(DataTable dt)
     {
         CheckBox cb;
+        
         foreach (DataRow row in dt.Rows)
         {
             //<asp:CheckBox ID="CheckBox1" runat="server" />
             cb = new CheckBox();
             cb.ID = "pid_" + ((int)row["PermissionId"]).ToString() + "_" + RoleList.SelectedValue;
-            cb.Text = (string)row["Label"] + " (" + (string)row["PermissionUniqueString"] + ") " + IsPostBack.ToString() + " !!! " + ((bool)row["enabled"]).ToString();
+            cb.Text = (string)row["Label"] + " (" + (string)row["PermissionUniqueString"] + ")";
             if ((bool)row["enabled"])
             {
                 cb.Checked = true;
@@ -88,16 +90,14 @@ public partial class Roles : System.Web.UI.Page
                 cb.Checked = false;
             }
             panel.Controls.Add(cb);
-
-            Label l = new Label();
-            l.Text = "<br /> |||" + Request.Params["pid_" + ((int)row["PermissionId"]).ToString()] + "|||";
-            panel.Controls.Add(l);
+            panel.Controls.Add(br());
         }
 
         Button btnSave = new Button();
-        btnSave.Text = "Save " + RoleList.SelectedValue;
+        btnSave.Text = "Save";
         btnSave.Click += new EventHandler(this.Savebtn_Click);
         panel.Controls.Add(btnSave);
+        panel.Controls.Add(br());
     }
 
     protected void Savebtn_Click(object sender, EventArgs e)
@@ -111,7 +111,7 @@ public partial class Roles : System.Web.UI.Page
         int rid;
         if (!Int32.TryParse(RoleList.SelectedValue, out rid))
         {
-            Response.Redirect("~/RID", true);
+            Response.Redirect("~/", true);
         }
         dict.Add("@rid", rid);
         dict.Add("@pid", -1);
@@ -127,19 +127,14 @@ public partial class Roles : System.Web.UI.Page
         foreach (Control c in panel.Controls)
         {
 
-            if (c.GetType() != typeof(CheckBox))
-            {
-                q = "Next";
-                continue;
-            }
+            if (c.GetType() != typeof(CheckBox)) continue;
 
             if (((CheckBox)c).Checked)
             {
 
-                string s = c.ID.Split('_')[1];
-                if (!Int32.TryParse(s, out pid))
+                if (!Int32.TryParse(c.ID.Split('_')[1], out pid))
                 {
-                    Response.Redirect("~/CID/" + c.ID, true);
+                    Response.Redirect("~/", true);
                 }
                 dict["@pid"] = pid;
 
@@ -151,10 +146,6 @@ public partial class Roles : System.Web.UI.Page
                 }
             }
         }
-
-        Label l = new Label();
-        l.Text = "<br />" + q;
-        panel.Controls.Add(l);
     }
     protected void RoleList_SelectedIndexChanged(object sender, EventArgs e)
     {

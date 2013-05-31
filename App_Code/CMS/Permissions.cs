@@ -16,7 +16,8 @@ public class Permissions
     public const string Gaymer_Manage_Roles = "Gaymer_Manage_Roles";
     public const string Gaymer_ShowPanel = "Gaymer_ShowPanel";
     public const string Gaymer_View_Admin_Menu = "Gaymer_View_Admin_Menu";
-
+    public const string Gaymer_Manage_Content_Type = "Gaymer_Manage_Content_Type";
+    
     public Permissions()
 	{
 	}
